@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -131,13 +132,11 @@ public class VideoActivity extends AppCompatActivity {
 
 	private void beginUpload(String filePath) {
 		if (filePath == null) {
-			Toast.makeText(this, "Could not find the filepath of the selected file",
-					Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "Could not find the filepath of the selected file",Toast.LENGTH_LONG).show();
 			return;
 		}
 		String newFilePath = UserID +"/" +  theCurrentDate;
-		Toast.makeText(this, "The file is uploading, using the name: " + newFilePath,
-				Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "The file is uploading, using the name: " + newFilePath,Toast.LENGTH_LONG).show();
 		Log.d("uploading, using: " + newFilePath, "");
 		File file = new File(filePath);
 		TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, newFilePath,
@@ -151,6 +150,74 @@ public class VideoActivity extends AppCompatActivity {
          */
 		// observer.setTransferListener(new UploadListener());
 	}
+
+
+
+	public class encryptAsyncTask extends AsyncTask<String, Void, String> {
+
+
+		@Override
+		protected String doInBackground(String... params) {
+			String path = null;
+			try {
+				path = encryption.encrypt(UserID, params[0]);
+				//Toast.makeText(VideoActivity.this, "Encrypting.",  Toast.LENGTH_LONG).show();
+			} catch (IOException e) {
+				//Toast.makeText(VideoActivity.this, "Encrypting.1",  Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
+				//Toast.makeText(VideoActivity.this, "Encrypting.2",  Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			} catch (NoSuchPaddingException e) {
+				//Toast.makeText(VideoActivity.this, "Encrypting.3",  Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			} catch (InvalidKeyException e) {
+				//Toast.makeText(VideoActivity.this, "Encrypting.4",  Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			//Toast.makeText(VideoActivity.this, "File has been sucessfully uploaded! ", Toast.LENGTH_LONG).show();
+
+			return path;
+		}
+
+//
+
+		@Override
+		protected void onPostExecute(String path){
+
+			Toast.makeText(VideoActivity.this, "File has been sucessfully encrypted! ", Toast.LENGTH_LONG).show();
+
+			new uploadAsyncTask().execute(path);
+//			uploadAsynTask upload = new uploadAsynTask();
+//			upload.execute()
+
+		}
+	}
+
+	public class uploadAsyncTask extends AsyncTask<String, Void, Void>
+	{
+
+		@Override
+		protected Void doInBackground(String... params) {
+			beginUpload(params[0]);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			Toast.makeText(VideoActivity.this, "File has been sucessfully uploaded! ", Toast.LENGTH_LONG).show();
+		}
+
+		//		@Override
+//		protected void onPostExecute(Void... params){
+//			Toast.makeText(VideoActivity.this, "File has been sucessfully uploaded! ", Toast.LENGTH_LONG).show();
+//
+//
+//		}
+
+
+	}
+
 
 
 
@@ -287,24 +354,24 @@ public class VideoActivity extends AppCompatActivity {
 
 			  // TURN OFF WHILE TESTING ENCRYPTION!!
 
-			  //transferUtility = Util.getTransferUtility(this);
-
-			  try {
-				  encryption.encrypt(UserID, path);
-				  Toast.makeText(this, "Encrypting.",  Toast.LENGTH_LONG).show();
-			  } catch (IOException e) {
-				  Toast.makeText(this, "Encrypting.1",  Toast.LENGTH_LONG).show();
-				  e.printStackTrace();
-			  } catch (NoSuchAlgorithmException e) {
-				  Toast.makeText(this, "Encrypting.2",  Toast.LENGTH_LONG).show();
-				  e.printStackTrace();
-			  } catch (NoSuchPaddingException e) {
-				  Toast.makeText(this, "Encrypting.3",  Toast.LENGTH_LONG).show();
-				  e.printStackTrace();
-			  } catch (InvalidKeyException e) {
-				  Toast.makeText(this, "Encrypting.4",  Toast.LENGTH_LONG).show();
-				  e.printStackTrace();
-			  }
+			  transferUtility = Util.getTransferUtility(this);
+			  new encryptAsyncTask().execute(path);
+//			  try {
+//				  encryption.encrypt(UserID, path);
+//				  Toast.makeText(this, "Encrypting.",  Toast.LENGTH_LONG).show();
+//			  } catch (IOException e) {
+//				  Toast.makeText(this, "Encrypting.1",  Toast.LENGTH_LONG).show();
+//				  e.printStackTrace();
+//			  } catch (NoSuchAlgorithmException e) {
+//				  Toast.makeText(this, "Encrypting.2",  Toast.LENGTH_LONG).show();
+//				  e.printStackTrace();
+//			  } catch (NoSuchPaddingException e) {
+//				  Toast.makeText(this, "Encrypting.3",  Toast.LENGTH_LONG).show();
+//				  e.printStackTrace();
+//			  } catch (InvalidKeyException e) {
+//				  Toast.makeText(this, "Encrypting.4",  Toast.LENGTH_LONG).show();
+//				  e.printStackTrace();
+//			  }
 			  //beginUpload(path);
 		  } else if (resultCode == RESULT_CANCELED) {
 		    	Toast.makeText(this, "Video recording cancelled.",  Toast.LENGTH_LONG).show();

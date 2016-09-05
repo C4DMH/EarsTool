@@ -33,7 +33,7 @@ public class Encryption {
 
 
 
-    public void encrypt(String name, String path) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException{
+    public String encrypt(String name, String path) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException{
         //Toast.makeText(this,"Beginning encryption",  Toast.LENGTH_LONG).show();
         // Here you read the cleartext.
 
@@ -49,8 +49,7 @@ public class Encryption {
         FileInputStream fis = new FileInputStream(path);
         Log.d(TAG,"We are starting encrytopn 2!");
         // This stream write the encrypted text. This stream will be wrapped by another stream.
-        FileOutputStream fos = new FileOutputStream(final_path
-        );
+        FileOutputStream fos = new FileOutputStream(final_path);
         Log.d(TAG,"We are starting encrytopn 3!");
 
         // Length is 16 byte
@@ -71,6 +70,8 @@ public class Encryption {
         cos.flush();
         cos.close();
         fis.close();
+
+        return final_path;
     }
 
 
