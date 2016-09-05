@@ -1,0 +1,190 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.menny.android.anysoftkeyboard">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true"
+        tools:ignore="UnusedAttribute"/>
+    <!-- http://d.android.com/guide/practices/screens_support.html read about legacy. -->
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- REQUIRED FOR AMAZON S3 UPLOAD -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- ADDED FROM VIDEO DIARY -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="true" />
+
+
+    <!-- currently, only support touch and fake-touch devices -->
+    <uses-feature android:name="android.hardware.faketouch"/>
+    <uses-feature android:required="false" android:name="android.hardware.touchscreen"/>
+
+    <!-- used in QuickTextViewFactory -->
+    <uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip"/>
+
+    <application
+        android:name=".AnyApplication"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:backupAgent="com.anysoftkeyboard.backup.AnyBackupAgent"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_ask_launcher"
+        android:installLocation="internalOnly"
+        android:label="@string/ime_name"
+        android:restoreAnyVersion="true"
+        android:theme="@style/Theme.AskApp"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+
+        <!-- used to backup the settings and SQL to the cloud -->
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAILlrSpiqigog3iJt3BwYxzNXMUzqgGV_dJ1EPDQ"/>
+
+        <!-- this is the IME with the pointer to the settings ui (xml/method) -->
+        <service
+            android:name=".SoftKeyboard"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method"/>
+        </service>
+
+        <!-- ui activities                android:icon="@mipmap/ic_ask_launcher"           -->
+        <!-- settings ui activities -->
+        <!-- this is just a proxy activity, it does nothing but direct to the actual setting ativity
+        I use this, so I can 'disable' this activity at runtime, and so remove ASK from the launcher's icons -->
+        <activity
+            android:theme="@style/Theme.AskApp"
+            android:name="com.menny.android.anysoftkeyboard.LauncherSettingsActivity"
+
+            android:launchMode="singleTop"
+            android:label="@string/ime_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@style/Theme.AskApp"
+            android:name="com.anysoftkeyboard.ui.settings.MainSettingsActivity"
+            android:icon="@mipmap/ic_ask_launcher"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/ime_name">
+        </activity>
+
+        <activity
+            android:name="com.anysoftkeyboard.ui.tutorials.TestersNoticeActivity"
+            android:icon="@mipmap/ic_ask_launcher"
+            android:label="@string/testers_version"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AskApp.Popup">
+        </activity>
+        <!-- ui when a crash happens -->
+        <activity
+            android:theme="@style/Theme.AskApp.NoTitle"
+            android:name="com.anysoftkeyboard.ui.SendBugReportUiActivity"
+            android:icon="@mipmap/ic_ask_launcher"
+            android:label="@string/ime_name">
+        </activity>
+        <!-- for voice -->
+        <service android:name="com.google.android.voiceime.ServiceHelper"/>
+
+        <activity
+            android:name="com.google.android.voiceime.ActivityHelper"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:finishOnTaskLaunch="true"
+            android:documentLaunchMode="never"
+            android:clearTaskOnLaunch="true"
+            android:launchMode="singleInstance"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation"/>
+        <activity
+            android:name="com.anysoftkeyboard.ui.VoiceInputNotInstalledActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:icon="@mipmap/ic_ask_launcher"
+            android:label="@string/ime_name"/>
+
+        <!-- Logger UI -->
+        <activity
+            android:name="com.radicalninja.logger.ui.LoggerInfoActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- Logger upload task -->
+
+
+        <!-- ADDED FROM VIDEO DIARY -->
+
+        <activity
+            android:name="com.radicalninja.logger.MainActivity"
+            android:label="@string/app_name"
+            android:icon="@drawable/ic_launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+               <!-- <category android:name="android.intent.category.DEFAULT"/>-->
+
+               <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.radicalninja.logger.AlarmReceiver">
+
+            <intent-filter>
+                <action android:name="com.codepath.CUSTOM_INTENT">
+                </action>
+            </intent-filter>
+
+        </receiver>
+        <activity
+            android:name="com.radicalninja.logger.VideoActivity"
+            android:label="@string/title_activity_video"
+            android:parentActivityName="com.radicalninja.logger.MainActivity" >
+            <intent-filter>
+                <action android:name="com.radicalninja.logger.VideoActivity" />
+
+                <!--<category android:name="android.intent.category.DEFAULT" /> -->
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.radicalninja.logger.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.radicalninja.logger.AlarmActivity"
+            android:label="@string/title_activity_video"/>
+
+
+        <activity android:name="com.radicalninja.logger.CameraActivity"
+            android:label="CameraActivity"/>
+
+        <activity
+            android:name="com.radicalninja.logger.TakeVideoActivity"
+            android:label="@string/app_name" >
+
+        </activity>
+        <receiver android:name="com.radicalninja.logger.LogUploadTask" />
+        <!-- Amazon -->
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+    </application>
+
+</manifest>

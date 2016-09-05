@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion sdkCompileVersion
+    buildToolsVersion androidBuildTools
+
+    defaultConfig {
+        minSdkVersion sdkMinimumVersion
+        targetSdkVersion sdkTargetVersion
+        versionCode 1
+        versionName "1.0"
+        //right now, we do not want to expose the jni implementation
+        /*ndk {
+            moduleName "anysoftkey_next_word_jni"
+        }*/
+    }
+
+    //right now, we do not want to expose the jni implementation
+    sourceSets {
+        main {
+            jni.srcDirs = []
+        }
+    }
+}
+
+dependencies {
+    compile "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
+    compile "com.android.support:support-v4:$supportLibVersion"
+    compile project(':base')
+}

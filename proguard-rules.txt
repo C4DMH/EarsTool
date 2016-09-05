@@ -1,0 +1,73 @@
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in /Users/menny/dev/sdk/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}
+
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keepclassmembers public class * extends android.support.v4.app.Fragment {
+   <init>(...);
+}
+
+-keep class sun.misc.Unsafe { *; }
+## https://code.google.com/p/google-gson/source/browse/trunk/examples/android-proguard-example/proguard.cfg
+-keepattributes Signature
+
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+
+-keep class com.anysoftkeyboard.IndirectlyInstantiated
+-keepclasseswithmembernames @com.anysoftkeyboard.IndirectlyInstantiated interface *
+-keep @com.anysoftkeyboard.IndirectlyInstantiated class * {
+     <init>(...);
+}
+
+-keepclasseswithmembernames @com.anysoftkeyboard.IndirectlyInstantiated class * {
+     <init>(...);
+}
+
+#for crashlytics
+-keepattributes SourceFile,LineNumberTable,*Annotation*
+-keep public class * extends java.lang.Exception
+
+
+# Class names are needed in reflection
+-keepnames class com.amazonaws.**
+# Request handlers defined in request.handlers
+-keep class com.amazonaws.services.**.*Handler
+# The following are referenced but aren't required to run
+-dontwarn com.fasterxml.jackson.**
+-dontwarn org.apache.commons.logging.**
+# Android 6.0 release removes support for the Apache HTTP client
+-dontwarn org.apache.http.**
+# The SDK has several references of Apache HTTP client
+-dontwarn com.amazonaws.http.**
+-dontwarn com.amazonaws.metrics.**

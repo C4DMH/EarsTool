@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <integer name="maximum_instances_of_preview_popups">2</integer>
+    <integer name="words_editor_columns_count">1</integer>
+    <integer name="add_on_items_columns">2</integer>
+</resources>

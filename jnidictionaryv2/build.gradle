@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion sdkCompileVersion
+    buildToolsVersion androidBuildTools
+
+    defaultConfig {
+        minSdkVersion sdkMinimumVersion
+        targetSdkVersion sdkTargetVersion
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            moduleName "anysoftkey2_jni"
+        }
+    }
+}
+
+dependencies {
+    compile "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
+    compile project(':base')
+}

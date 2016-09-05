@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_logger_item" translatable="false">Administrative Info</string>
+    <string name="logger_ui_close" translatable="false">CLOSE</string>
+    <string name="logger_ui_device_id_label" translatable="false">DEVICE ID</string>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/device_id_label"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logger_ui_device_id_label"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:paddingBottom="12dp"
+        android:paddingTop="64dp"
+        android:textColor="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/device_id_value"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/device_id_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        tools:text="a1b2n3m4n5b6n"/>
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logger_ui_close"
+        android:id="@+id/device_id_button"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="64dp"
+        android:textSize="12sp"
+        android:layout_gravity="center_horizontal"/>
+
+</RelativeLayout>

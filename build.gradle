@@ -1,0 +1,352 @@
+import versionbuilder.VersionBuilder
+
+ext.androidBuildTools = '24.0.0'
+ext.supportLibVersion = '24.0.0'
+ext.AnySoftKeyboardApiVersion = '1.3.5'
+
+ext.sdkTargetVersion = 22
+ext.sdkCompileVersion = 23
+ext.sdkMinimumVersion = 14
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'io.fabric.tools:gradle:1.21.5'
+        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
+        classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
+        classpath 'com.github.AnySoftKeyboard.AnySoftKeyboardTools:makedictionary:c00bc22ab2f7561633bcb2d6879ea0740ccad633'
+        classpath 'com.github.AnySoftKeyboard.AnySoftKeyboardTools:generatewordslist:c00bc22ab2f7561633bcb2d6879ea0740ccad633'
+        //classpath files('english_dictionary/generatewordslist-1.0-SNAPSHOT.jar')
+        classpath 'org.jsoup:jsoup:1.9.1'
+        classpath 'com.github.gfx.ribbonizer:plugin:0.6.0'
+    }
+}
+
+apply plugin: "net.ltgt.errorprone"
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'com.github.triplet.play'
+apply plugin: 'pmd'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.gfx.ribbonizer'
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url "https://jitpack.io" }
+    }
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+def COUNT_MINOR_NORMALIZE = 140+50+38+167+930
+def versionBuilder = VersionBuilder.getVersionBuilder(1, 8, -COUNT_MINOR_NORMALIZE)
+
+version versionBuilder.buildVersionName()
+group 'net.evendanan'
+
+println "Building AnySoftKeyboard " + version + ", version-code "+versionBuilder.buildVersionNumber()
+
+android {
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+    }
+
+    compileSdkVersion sdkCompileVersion
+    buildToolsVersion androidBuildTools
+
+    defaultConfig {
+        applicationId 'com.menny.android.anysoftkeyboard'
+        versionCode versionBuilder.buildVersionNumber()
+        versionName project.version
+
+        minSdkVersion sdkMinimumVersion
+        targetSdkVersion sdkTargetVersion
+        //adding additional fields to the BuildConfig class.
+
+        def String support_email_address = 'sunny@radicalninja.com, liesel.hess@gmail.com'
+        println 'crash report email is: ' + support_email_address
+
+        buildConfigField "String", "CRASH_REPORT_EMAIL_ADDRESS", '"' + support_email_address + '"'
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // Logger's global configuration variables
+        def String str = "String"
+        buildConfigField(str, "UPLOAD_LOG_FILENAME", "\"log_uploads.log\"")
+        buildConfigField(str, "FALLBACK_LOG_DIRECTORY", "\"AnySoftKeyboardLogs\"")
+        buildConfigField(str, "RAW_LOG_FILENAME", "\"raw.log\"")
+        buildConfigField(str, "WORD_LOG_FILENAME", "\"buffered.log\"")
+        buildConfigField("int", "LOG_UPLOAD_INTERVAL_MINUTES", "120")
+        // Encryption
+        buildConfigField("byte[]", "LOG_CRYPTO_BYTES", project.log_crypto_bytes)
+        // Amazon S3 Upload credentials
+        buildConfigField(str, "AWS_POOL_ID", '"'+project.aws_pool_id+'"')
+        buildConfigField(str, "AWS_BUCKET_NAME", '"'+project.aws_bucket_name+'"')
+        buildConfigField(str, "AWS_POOL_REGION", '"'+project.aws_pool_region+'"')
+        buildConfigField(str, "AWS_BUCKET_REGION", '"'+project.aws_bucket_region+'"')
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    signingConfigs {
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        // TODO                                                             TODO
+        // TODO     Create new private keystore file for internal use.      TODO
+        // TODO                                                             TODO
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        release {
+            if (file("/tmp/anysoftkeyboard.keystore").exists()) {
+                storeFile file("/tmp/anysoftkeyboard.keystore")
+                storePassword System.getenv("ANYSOFTKEYBOARD_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("ANYSOFTKEYBOARD_KEYSTORE_ALIAS")
+                keyPassword System.getenv("ANYSOFTKEYBOARD_KEYSTORE_KEY_PASSWORD")
+                println "Using 'anysoftkeyboard.keystore' to release APK (with alias '${keyAlias}')."
+            } else {
+                println "Could not find 'anysoftkeyboard.keystore' file. Can not sign release APK."
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            debuggable false
+
+            minifyEnabled true
+            proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.txt'
+
+            ext.enableCrashlytics = false
+
+            buildConfigField("boolean", "TESTING_BUILD", "false")
+        }
+
+        debug {
+            zipAlignEnabled true
+            debuggable true
+            testCoverageEnabled true
+
+            useLibrary 'org.apache.http.legacy'
+
+            ext.enableCrashlytics = false
+            buildConfigField("boolean", "TESTING_BUILD", "true")
+        }
+
+        canary {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            debuggable false
+            
+            minifyEnabled true
+            proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.txt'
+
+            ext.enableCrashlytics = true
+            buildConfigField("boolean", "TESTING_BUILD", "true")
+        }
+    }
+
+    productFlavors {
+        def String key_use_upload = "USE_AUTO_UPLOAD"
+        def String key_use_encryption = "USE_ENCRYPTION"
+        def String key_use_sdcard = "USE_SDCARD"
+        def String key_log_words = "LOG_WORDS"
+        def String key_log_raw = "LOG_RAW"
+        def String key_log_debug_notifications = "DEBUG_NOTIFICATIONS"
+        def String key_log_word_sample_interval = "LOG_WORD_SAMPLE_INTERVAL"
+
+        def String num = "int"
+        def String bool = "boolean"
+        def String enabled = "true"
+        def String disabled = "false"
+
+        logDisabled {
+            buildConfigField(bool, key_use_upload, disabled)
+            buildConfigField(bool, key_use_encryption, disabled)
+            buildConfigField(bool, key_use_sdcard, disabled)
+            buildConfigField(bool, key_log_raw, disabled)
+            buildConfigField(bool, key_log_words, disabled)
+            buildConfigField(bool, key_log_debug_notifications, disabled)
+            buildConfigField(num, key_log_word_sample_interval, "0")
+        }
+
+        logDemo {
+            buildConfigField(bool, key_use_upload, disabled)
+            buildConfigField(bool, key_use_encryption, disabled)
+            buildConfigField(bool, key_use_sdcard, enabled)
+            buildConfigField(bool, key_log_raw, disabled)
+            buildConfigField(bool, key_log_words, enabled)
+            buildConfigField(bool, key_log_debug_notifications, enabled)
+            buildConfigField(num, key_log_word_sample_interval, "1")
+        }
+
+        logDemoEncrypted {
+            buildConfigField(bool, key_use_upload, enabled)
+            buildConfigField(bool, key_use_encryption, enabled)
+            buildConfigField(bool, key_use_sdcard, enabled)
+            buildConfigField(bool, key_log_raw, disabled)
+            buildConfigField(bool, key_log_words, enabled)
+            buildConfigField(bool, key_log_debug_notifications, enabled)
+            buildConfigField(num, key_log_word_sample_interval, "2")
+        }
+
+        logProduction {
+            buildConfigField(bool, key_use_upload, enabled)
+            buildConfigField(bool, key_use_encryption, enabled)
+            buildConfigField(bool, key_use_sdcard, disabled)
+            buildConfigField(bool, key_log_raw, disabled)
+            buildConfigField(bool, key_log_words, enabled)
+            buildConfigField(bool, key_log_debug_notifications, disabled)
+            buildConfigField(num, key_log_word_sample_interval, "3")
+        }
+    }
+}
+
+task jacocoTestReport(type: JacocoReport/*make sure you are running testDebug prior to calling this task*/) {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        csv.enabled = true
+    }
+
+    classDirectories = fileTree(
+            dir: "$buildDir/intermediates/classes/debug",
+            excludes: ['**/R*.class',
+                       '**/*$InjectAdapter.class',
+                       '**/*$ModuleAdapter.class',
+                       '**/*$ViewInjector*.class'
+            ])
+    sourceDirectories = files(["$buildDir/src/main/java"])
+    executionData = files("$buildDir/jacoco/testDebugUnitTest.exec")
+    // Bit hacky but fixes https://code.google.com/p/android/issues/detail?id=69174.
+    // We iterate through the compiled .class tree and rename $$ to $.
+    doFirst {
+        new File("$buildDir/intermediates/classes/").eachFileRecurse { file ->
+            if (file.name.contains('$$')) {
+                file.renameTo(file.path.replace('$$', '$'))
+            }
+        }
+    }
+}
+
+ribbonizer {
+    forcedVariantsNames "canary","debug"
+}
+
+configurations.errorprone {
+    resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.0.8'
+}
+
+play {
+    track = 'beta'
+    serviceAccountEmail = System.getenv("PUBLISH_APK_SERVICE_ACCOUNT_EMAIL")
+    pk12File = file('/tmp/apk_upload_key.p12')
+    uploadImages = false
+}
+
+task parseStateAssembly(type: com.anysoftkeyboard.tools.generatewordslist.GenerateWordsListTask) {
+    inputFile new File(project.getProjectDir(), "english_dictionary/NY_STATE_ASSEMBLY_TRANSCRIPT_20120621.txt")
+    outputWordsListFile new File(project.getProjectDir(), "english_dictionary/words_ny_state_assembly.xml")
+}
+
+task parseEnWikipediaManualOfStyle(type: com.anysoftkeyboard.tools.generatewordslist.GenerateWordsListTask) {
+    inputFile new File(project.getProjectDir(), "english_dictionary/Wikipedia_talk_Manual_of_Style.htm")
+    inputFileType = com.anysoftkeyboard.tools.generatewordslist.GenerateWordsListTask.InputFileType.Html
+    //Download the archive from https://dumps.wikimedia.org/other/static_html_dumps/current/simple/
+    outputWordsListFile new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_manual_of_style.xml")
+}
+
+task parseEnWikipediaJimboUser(type: com.anysoftkeyboard.tools.generatewordslist.GenerateWordsListTask) {
+    inputFile new File(project.getProjectDir(), "english_dictionary/Wikipedia_User_talk_Jimbo_Wales.htm")
+    inputFileType = com.anysoftkeyboard.tools.generatewordslist.GenerateWordsListTask.InputFileType.Html
+    //Download the archive from https://dumps.wikimedia.org/other/static_html_dumps/current/simple/
+    outputWordsListFile new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_jimbo.xml")
+}
+
+task parseEnWikipediaEnglishCivilWar(type: com.anysoftkeyboard.tools.generatewordslist.GenerateWordsListTask) {
+    inputFile new File(project.getProjectDir(), "english_dictionary/First_English_Civil_War_Wikipedia.htm")
+    inputFileType = com.anysoftkeyboard.tools.generatewordslist.GenerateWordsListTask.InputFileType.Html
+    //Download the archive from https://dumps.wikimedia.org/other/static_html_dumps/current/simple/
+    outputWordsListFile new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_civil_war.xml")
+}
+
+task mergeAllWordLists(type: com.anysoftkeyboard.tools.generatewordslist.MergeWordsListTask) {
+    dependsOn parseStateAssembly
+    dependsOn parseEnWikipediaManualOfStyle
+    dependsOn parseEnWikipediaJimboUser
+    dependsOn parseEnWikipediaEnglishCivilWar
+
+    inputWordsListFiles = [
+            new File(project.getProjectDir(), "english_dictionary/words.xml"),//legacy dictionary
+            new File(project.getProjectDir(), "english_dictionary/words_ny_state_assembly.xml"),
+            new File(project.getProjectDir(), "english_dictionary/popular_websites_words.xml"),//website I use most
+            new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_manual_of_style.xml"),
+            new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_civil_war.xml"),
+            new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_jimbo.xml")
+            ] as File[]
+    outputWordsListFile new File(project.getProjectDir(), "english_dictionary/words_merged.xml")
+    maxWordsInList 100000
+
+    wordsToDiscard = ['clubbing\'s', 'muggins\'s', 'olefin', 'cs\'s']
+}
+
+task makeEnglishDictionary(type: com.anysoftkeyboard.tools.makedictionary.MakeDictionaryTask) {
+    dependsOn mergeAllWordLists
+    inputWordsListFile new File(project.getProjectDir(), "english_dictionary/words_merged.xml")
+}
+
+dependencies {
+    compile project(':base')
+    compile project(':nextword')
+    compile project(':jnidictionaryv1')
+    compile project(':jnidictionaryv2')
+
+
+    compile "com.android.support:support-v13:24.1.1"
+
+    compile "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
+    compile 'com.github.menny:FrankenRobot:1.1.5'
+    compile "com.android.support:appcompat-v7:$supportLibVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibVersion"
+    compile "com.android.support:support-annotations:$supportLibVersion"
+    compile "com.android.support:palette-v7:$supportLibVersion"
+    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
+    compile ('com.github.menny.Chauffeur:permissions:37ea0668afc7a63c6ea36f318741fb291fb2a20c') {
+        exclude group: 'com.android.support'
+    }
+    compile fileTree(dir: 'libs', include: '*.jar')
+
+    compile 'com.amazonaws:aws-android-sdk-core:2.+'
+    compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
+    compile 'com.amazonaws:aws-android-sdk-s3:2.+'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.1'
+    testCompile 'org.robolectric:shadows-support-v4:3.1'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    canaryCompile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+}

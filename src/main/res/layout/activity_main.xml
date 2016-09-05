@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.codepath.examples.audiovideodemo.MainActivity" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
+
+        <!--<Button-->
+            <!--android:id="@+id/btnAudio"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:onClick="onAudio"-->
+            <!--android:text="Audio" />-->
+
+        <Button
+            android:id="@+id/btnVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onVideo"
+            android:text="Video Diary App" />
+
+        <Button
+            android:id="@+id/timePicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Alarm"
+            android:timePickerMode="spinner"
+            android:onClick="showTimePickerDialog" />
+
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="This is the second video button: videoButton"-->
+            <!--android:id="@+id/videoButton"-->
+            <!--style = "?android:attr/buttonStyleSmall"/>-->
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="This is the third video button: nextOne"-->
+            <!--android:id="@+id/nextOne"-->
+            <!--style = "?android:attr/buttonStyleSmall"/>-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="Audio and Video Playback and Capture"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Set Reminder"-->
+        <!--android:id="@+id/btnReminder"-->
+        <!--android:layout_below="@+id/linearLayout"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="56dp"-->
+        <!--android:onClick="setReminder" />-->
+
+</RelativeLayout>

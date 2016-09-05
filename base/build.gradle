@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion sdkCompileVersion
+    buildToolsVersion androidBuildTools
+
+    defaultConfig {
+        minSdkVersion sdkMinimumVersion
+        targetSdkVersion sdkTargetVersion
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+    compile 'com.getkeepsafe.relinker:relinker:1.2.1'
+    compile "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
+    compile "com.android.support:support-annotations:$supportLibVersion"
+}
