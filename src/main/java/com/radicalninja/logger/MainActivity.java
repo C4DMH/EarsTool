@@ -132,17 +132,17 @@ public class MainActivity extends FragmentActivity {
 
 		wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean alarmSet = wmbPreference.getBoolean("ALARMSET", true);
-		Toast.makeText(this, "THIS IS MAIN ACTIVIY, BEFORE (isfirstRun)", Toast.LENGTH_LONG).show();
-		Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "THIS IS MAIN ACTIVIY, BEFORE (isfirstRun)", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
 		if (alarmSet)
 		{
-			Toast.makeText(this, "THIS IS MAIN ACTIVIY, IN (isfirstRun)", Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "THIS IS MAIN ACTIVIY, IN (isfirstRun)", Toast.LENGTH_LONG).show();
 			// Code to run once
 			//startActivity(new Intent(this, LauncherSettingsActivity.class));
 
 			SharedPreferences.Editor editor = wmbPreference.edit();
 			editor.putBoolean("ALARMSET", false);
-			Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
 			editor.commit();
 			startAlarm();
 			//finish();

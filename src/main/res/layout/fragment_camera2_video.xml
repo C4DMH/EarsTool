@@ -17,12 +17,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.codepath.examples.audiovideodemo.AutoFitTextureView
+   <!--<com.codepath.examples.audiovideodemo.AutoFitTextureView -->
+    <com.radicalninja.logger.AutoFitTextureView
         android:id="@+id/texture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
 
 
 
