@@ -9,4 +9,11 @@
         android:title="@string/action_settings"
         app:showAsAction="never"/>
 
+
+    <item
+        android:id="@+id/keyboard_settings"
+        android:orderInCategory="100"
+        android:title="Keyboard Settings"
+        app:showAsAction="never"/>
+
 </menu>

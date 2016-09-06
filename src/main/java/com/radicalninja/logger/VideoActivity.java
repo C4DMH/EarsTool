@@ -155,12 +155,14 @@ public class VideoActivity extends AppCompatActivity {
 
 	public class encryptAsyncTask extends AsyncTask<String, Void, String> {
 
+		String idAndDate = UserID +"_" +  theCurrentDate;
+
 
 		@Override
 		protected String doInBackground(String... params) {
 			String path = null;
 			try {
-				path = encryption.encrypt(UserID, params[0]);
+				path = encryption.encrypt(idAndDate, params[0]);
 				//Toast.makeText(VideoActivity.this, "Encrypting.",  Toast.LENGTH_LONG).show();
 			} catch (IOException e) {
 				//Toast.makeText(VideoActivity.this, "Encrypting.1",  Toast.LENGTH_LONG).show();
@@ -339,12 +341,10 @@ public class VideoActivity extends AppCompatActivity {
 				  //VideoView mVideoView = (VideoView) findViewById(R.id.video_view);
 			  //mVideoView.setVideoURI(videoUri);
 			  Toast.makeText(this, "Video has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
-			  Toast.makeText(this, "Video has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
-			  Toast.makeText(this, "Video has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
+
 
 			  Toast.makeText(this, "Path used to find encrypted file is :\n" + path, Toast.LENGTH_LONG).show();
-			  Toast.makeText(this, "Path used to find encrypted file is :\n" + path, Toast.LENGTH_LONG).show();
-			  Toast.makeText(this, "Path used to find encrypted file is :\n" + path, Toast.LENGTH_LONG).show();
+
 
 
 			  //mVideoView.setMediaController(new MediaController(this));

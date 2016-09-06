@@ -91,6 +91,19 @@
             android:layout_gravity="center_horizontal"/>
 
         <TextView
+            style="@style/Ask.Text.Normal"
+            android:id="@+id/textView"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Go to Video Diary"
+            android:drawableLeft="@drawable/video2"
+            android:drawableStart="@drawable/video2"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:drawablePadding="4dp"
+            android:onClick="startVideoApp"/>
+
+        <TextView
             android:id="@+id/open_settings_view"
             style="@style/Ask.Text.Normal"
             android:layout_width="wrap_content"

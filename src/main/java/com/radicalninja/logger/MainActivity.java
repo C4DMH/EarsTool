@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.anysoftkeyboard.AnySoftKeyboard;
 import com.menny.android.anysoftkeyboard.LauncherSettingsActivity;
 import com.menny.android.anysoftkeyboard.R;
 
@@ -132,6 +133,7 @@ public class MainActivity extends FragmentActivity {
 		wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean alarmSet = wmbPreference.getBoolean("ALARMSET", true);
 		Toast.makeText(this, "THIS IS MAIN ACTIVIY, BEFORE (isfirstRun)", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
 		if (alarmSet)
 		{
 			Toast.makeText(this, "THIS IS MAIN ACTIVIY, IN (isfirstRun)", Toast.LENGTH_LONG).show();
@@ -140,6 +142,7 @@ public class MainActivity extends FragmentActivity {
 
 			SharedPreferences.Editor editor = wmbPreference.edit();
 			editor.putBoolean("ALARMSET", false);
+			Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
 			editor.commit();
 			startAlarm();
 			//finish();
@@ -239,6 +242,7 @@ public class MainActivity extends FragmentActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			//AnySoftKeyboard.launchsettings();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

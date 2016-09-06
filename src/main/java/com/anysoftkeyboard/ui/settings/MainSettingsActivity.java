@@ -45,6 +45,7 @@ import com.anysoftkeyboard.theme.KeyboardTheme;
 import com.anysoftkeyboard.theme.KeyboardThemeFactory;
 import com.menny.android.anysoftkeyboard.AnyApplication;
 import com.menny.android.anysoftkeyboard.R;
+import com.radicalninja.logger.MainActivity;
 import com.radicalninja.logger.ui.LoggerInfoActivity;
 
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
@@ -104,6 +105,9 @@ public class MainSettingsActivity extends PermissionsFragmentChauffeurActivity {
 
         AnyApplication.getConfig().addChangedListener(menuExtraUpdaterOnConfigChange);
     }
+
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -331,5 +335,15 @@ public class MainSettingsActivity extends PermissionsFragmentChauffeurActivity {
 
             }
         });
+    }
+
+    public void startVideoApp(View view) {
+
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+
     }
 }

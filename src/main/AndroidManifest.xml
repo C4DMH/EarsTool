@@ -36,7 +36,7 @@
 
     <application
         android:name=".AnyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:fullBackupContent="true"
         android:backupAgent="com.anysoftkeyboard.backup.AnyBackupAgent"
         android:hardwareAccelerated="true"
@@ -136,7 +136,7 @@
         <activity
             android:name="com.radicalninja.logger.MainActivity"
             android:label="@string/app_name"
-            android:icon="@drawable/ic_launcher">
+            android:icon="@drawable/video">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                <!-- <category android:name="android.intent.category.DEFAULT"/>-->

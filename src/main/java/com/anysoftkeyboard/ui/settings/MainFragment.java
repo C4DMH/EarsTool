@@ -31,6 +31,7 @@ import com.anysoftkeyboard.ui.tutorials.ChangeLogFragment;
 import com.anysoftkeyboard.utils.Log;
 import com.menny.android.anysoftkeyboard.BuildConfig;
 import com.menny.android.anysoftkeyboard.R;
+import com.radicalninja.logger.MainActivity;
 
 import net.evendanan.chauffeur.lib.FragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
@@ -56,6 +57,8 @@ public class MainFragment extends Fragment {
         clickHere.setMovementMethod(LinkMovementMethod.getInstance());
         clickHere.setText(sb);
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.view.View;
 
 import com.menny.android.anysoftkeyboard.BuildConfig;
 
@@ -117,4 +118,6 @@ public class ActivityHelper extends Activity {
         mServiceBridge.notifyResult(this, result);
         finish();
     }
+
+
 }

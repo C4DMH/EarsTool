@@ -261,12 +261,17 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardKeyboardSwitchedLis
 
 
 
+
+
     @Override
     public void onCreate() {
         super.onCreate();
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+
+        // THIS IS CAUSE APP TO GO STRAIGHT TO VIDEO DIARY AFTER INSTALL!!!
+
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
 
         //startActivity(new Intent(this, VideoActivity.class));
 //        Toast.makeText(this, "THIS IS AnySoftKeyBoard" +
