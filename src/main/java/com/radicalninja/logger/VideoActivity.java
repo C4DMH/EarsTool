@@ -1,5 +1,7 @@
 package com.radicalninja.logger;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -344,6 +346,39 @@ public class VideoActivity extends AppCompatActivity {
 
 
 			  Toast.makeText(this, "Path used to find encrypted file is :\n" + path, Toast.LENGTH_LONG).show();
+
+
+
+
+			  //TRY CANCEL PENDING INTENT HERE:
+
+			  AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+
+
+			  Intent intentReminder = new Intent(this, AlarmReceiver2.class);
+
+			  //Intent intent = new Intent(this, Notification_reciever.class);
+
+			  PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intentReminder, 0);
+			  //PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+			  // cal.add(Calendar.SECOND, 5);
+			  //alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+			  //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
+			  //alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
+			  alarmIntent.cancel();
+			  alarmMgr.cancel(alarmIntent);
+			  Toast.makeText(this, "We have cancelled the repeating every 15 alarm!", Toast.LENGTH_LONG).show();
+
+			  // END TRY CANCEL PENDING INTENT HERE!
+
+
+
+
+
+
+			  //MainActivity.endRepeatingAlarm = true;
 
 
 

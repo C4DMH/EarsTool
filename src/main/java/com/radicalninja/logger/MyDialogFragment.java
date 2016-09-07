@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.View;
+
+import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Created by gwicks on 9/08/2016.
@@ -14,6 +17,26 @@ public class MyDialogFragment extends DialogFragment {
     private String messageToDisplay = "THis is the message to dispalt";
 
 
+
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View v = inflater.inflate(R.layout.fragment_dialog, container, false);
+//        View tv = v.findViewById(R.id.text);
+//        ((TextView)tv).setText("Dialog #" + mNum + ": using style "
+//        );
+//
+//        // Watch for button clicks.
+//        Button button = (Button)v.findViewById(R.id.show);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // When button is clicked, call up to owning activity.
+//                ((FragmentDialog)getActivity()).showDialog();
+//            }
+//        });
+//
+//        return v;
+//    }
 
 
     @Override
@@ -71,24 +94,6 @@ public class MyDialogFragment extends DialogFragment {
 //        setStyle(style, theme);
 //    }
 //
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View v = inflater.inflate(R.layout.fragment_dialog, container, false);
-//        View tv = v.findViewById(R.id.text);
-//        ((TextView)tv).setText("Dialog #" + mNum + ": using style "
-//                );
-//
-//        // Watch for button clicks.
-//        Button button = (Button)v.findViewById(R.id.show);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                // When button is clicked, call up to owning activity.
-//                ((FragmentDialog)getActivity()).showDialog();
-//            }
-//        });
-//
-//        return v;
-//    }
+
 
 }
