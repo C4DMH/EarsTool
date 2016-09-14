@@ -40,6 +40,7 @@ class AwsUtil {
     private static void init() {
         initCredentialsProvider();
         initUserId();
+       Log.d("AWS", "This is AWS in init");
     }
 
     private static void initCredentialsProvider() {

@@ -14,7 +14,7 @@
 
 
 
-    <string name="app_name" translatable="false">AudioVideoDemo</string>
+    <string name="app_name" translatable="false">Video Diary</string>
     <string name="hello_world" translatable="false">Hello world!</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="title_activity_audio" translatable="false">AudioActivity</string>

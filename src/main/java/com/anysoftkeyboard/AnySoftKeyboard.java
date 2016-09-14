@@ -274,9 +274,9 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardKeyboardSwitchedLis
 //        startActivity(intent);
 
         //startActivity(new Intent(this, VideoActivity.class));
-//        Toast.makeText(this, "THIS IS AnySoftKeyBoard" +
-//                        " onCreateView",
-//                Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "THIS IS AnySoftKeyBoard" +
+                        " onCreateView",
+                Toast.LENGTH_LONG).show();
 //        Toast.makeText(this, "THIS IS AnySoftKeyBoard" +
 //                        " onCreateView",
 //                Toast.LENGTH_LONG).show();

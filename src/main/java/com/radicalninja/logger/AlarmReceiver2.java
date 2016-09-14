@@ -29,6 +29,8 @@ public class AlarmReceiver2 extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+
         Calendar now = GregorianCalendar.getInstance();
         int dayOfWeek = now.get(Calendar.DATE);
         if(dayOfWeek != 50 && dayOfWeek != 70) {
@@ -38,6 +40,7 @@ public class AlarmReceiver2 extends BroadcastReceiver {
                             .setContentTitle("VIDEO DIARY")
                             .setAutoCancel(true)
                             .setContentText("Did you think you could get out of it that easily!!")
+
                             .setSound(uri);
 
             Intent resultIntent = new Intent(context, VideoActivity.class);

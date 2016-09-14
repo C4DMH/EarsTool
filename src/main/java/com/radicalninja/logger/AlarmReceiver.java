@@ -31,6 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                             .setContentTitle("VIDEO DIARY")
                             .setAutoCancel(true)
                             .setContentText("Don't forget to do your Video Diary Today!!")
+                            .setOngoing(true)
                             .setSound(uri);
 
             Intent resultIntent = new Intent(context, VideoActivity.class);
@@ -45,6 +46,53 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 }
+
+//public class AlarmReceiver extends BroadcastReceiver {
+//
+//    Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//
+//
+//
+//    @Override
+//    public void onReceive(Context context, Intent intent) {
+//        Calendar now = GregorianCalendar.getInstance();
+//        int dayOfWeek = now.get(Calendar.DATE);
+//        if(dayOfWeek != 50 && dayOfWeek != 70) {
+//            Notification.Builder mBuilder =
+//                    new Notification.Builder(context)
+//                            .setSmallIcon(R.drawable.video)
+//                            .setContentTitle("VIDEO DIARY")
+//                            .setAutoCancel(true)
+//                            .setContentText("Don't forget to do your Video Diary Today!!")
+//                            .setOngoing(true)
+//                            .setSound(uri);
+//
+//            int requestID = (int) System.currentTimeMillis();
+//
+////            Intent resultIntent = new Intent(context, VideoActivity.class);
+////            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+////            stackBuilder.addParentStack(AlarmActivity.class);
+////            stackBuilder.addNextIntent(resultIntent);
+////            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+////            mBuilder.setContentIntent(resultPendingIntent);
+////            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+////            Notification notification = mBuilder.build();
+////            notification.flags = Notification.FLAG_NO_CLEAR;
+////            mNotificationManager.notify(0, notification);
+//
+//
+//            Intent resultIntent = new Intent(context, VideoActivity.class);
+//            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+//            stackBuilder.addParentStack(AlarmActivity.class);
+//            stackBuilder.addNextIntent(resultIntent);
+//            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//            mBuilder.setContentIntent(resultPendingIntent);
+//            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//            mNotificationManager.notify(requestID, mBuilder.build());
+//
+//        }
+//    }
+//}
 
 //import android.content.BroadcastReceiver;
 //import android.content.Context;

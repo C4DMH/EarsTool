@@ -57,7 +57,7 @@ public class MainActivity extends FragmentActivity {
 	public Button nextOne;
 	private TimePicker timePicker1;
 	private PendingIntent alarmIntent;
-	public PendingIntent alarmIntent2;
+	//public PendingIntent alarmIntent2;
 	public static boolean alarmIsSet = false;
 	public int timeHour;
 	public int timeMinute;
@@ -100,9 +100,13 @@ public class MainActivity extends FragmentActivity {
 
 
 
-	public void startAlarm(){
-		Calendar cal = Calendar.getInstance();
 
+
+	public void startAlarm(){
+
+
+
+		Calendar cal = Calendar.getInstance();
 		long when = cal.getTimeInMillis();
 		String timey = Long.toString(when);
 		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
@@ -110,28 +114,61 @@ public class MainActivity extends FragmentActivity {
 		System.out.println("The time changed into nice format is: " + theTime);
 		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
 
-		int hour = 13;
-		int minute = 20;
 		Log.d("the time is: ", when+" ");
 		//Log.d(theTime);
+
 		cal.setTimeInMillis(System.currentTimeMillis());
 		//cal.clear();
-		cal.set(Calendar.HOUR_OF_DAY, 21);
-		cal.set(Calendar.MINUTE, 00);
+		cal.set(Calendar.HOUR_OF_DAY, 12);
+		cal.set(Calendar.MINUTE, 30);
+
 		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
 		Intent intent = new Intent(this, AlarmReceiver.class);
 		//Intent intent = new Intent(this, Notification_reciever.class);
 		alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-
 		//PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		// cal.add(Calendar.SECOND, 5);
 		//alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
 		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
 		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, when, 1000 * 60 * 1, alarmIntent);
-		Toast.makeText(this, "WE HAVE SET THE ALARM", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "WE HAVE SET THE ALARM", Toast.LENGTH_LONG).show();
 		alarmIsSet = true;
+
+
+
+//		Calendar cal = Calendar.getInstance();
+//
+//		long when = cal.getTimeInMillis();
+//		String timey = Long.toString(when);
+//		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
+//		theCurrentDate = theTime;
+//		System.out.println("The time changed into nice format is: " + theTime);
+//		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
+//
+//		int hour = 11;
+//		int minute = 20;
+//		Log.d("the time is: ", when+" ");
+//		//Log.d(theTime);
+//		cal.setTimeInMillis(System.currentTimeMillis());
+//		//cal.clear();
+//		cal.set(Calendar.HOUR_OF_DAY, 11);
+//		cal.set(Calendar.MINUTE, 25);
+//		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//
+//		Intent intent = new Intent(this, AlarmReceiver.class);
+//		//Intent intent = new Intent(this, Notification_reciever.class);
+//		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//
+//		//PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//		// cal.add(Calendar.SECOND, 5);
+//		//alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+//		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
+//		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+//		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, when, 1000 * 60 * 1, alarmIntent);
+//		Toast.makeText(this, "WE HAVE SET THE ALARM", Toast.LENGTH_LONG).show();
+//		alarmIsSet = true;
 	}
 
 
@@ -152,12 +189,12 @@ public class MainActivity extends FragmentActivity {
 		//Log.d(theTime);
 		cal.setTimeInMillis(System.currentTimeMillis());
 		//cal.clear();
-		cal.set(Calendar.HOUR_OF_DAY, 21);
-		cal.set(Calendar.MINUTE, 15);
+		cal.set(Calendar.HOUR_OF_DAY, 22);
+		cal.set(Calendar.MINUTE, 40);
 
 		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(this, AlarmReceiver2.class);
-		alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
 		//PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		// cal.add(Calendar.SECOND, 5);
@@ -180,7 +217,7 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		//startAlarm();
+		startAlarm();
 
 
 
@@ -197,13 +234,13 @@ public class MainActivity extends FragmentActivity {
 			//Toast.makeText(this, "THIS IS MAIN ACTIVIY, IN (isfirstRun)", Toast.LENGTH_LONG).show();
 			// Code to run once
 			//startActivity(new Intent(this, LauncherSettingsActivity.class));
-
+			//startAlarm();
 			SharedPreferences.Editor editor = wmbPreference.edit();
 			editor.putBoolean("ALARMSET", false);
 			//Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
 			editor.commit();
-			startAlarm();
-			startAlarm2();
+			//startAlarm();
+			//startAlarm2();
 			//finish();
 		}
 //		else{
@@ -225,7 +262,7 @@ public class MainActivity extends FragmentActivity {
 			gps = new GPSTracker(this);
 			latitude = gps.getLatitude();
 			longitude = gps.getLongitude();
-			Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
 
 
 			if (geoCoder != null) {
@@ -333,7 +370,11 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
 
-
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		startService(new Intent(this, MainActivity.class));
+	}
 }
 
 

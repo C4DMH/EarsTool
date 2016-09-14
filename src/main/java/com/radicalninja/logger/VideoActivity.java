@@ -1,6 +1,7 @@
 package com.radicalninja.logger;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,7 @@ public class VideoActivity extends AppCompatActivity {
 	String MY_BUCKET = "adaptvideos";
 	String fileLocation = "something_goes_here";
 	String OBJECT_KEY = "nameOfTheFile, once storeed on S3";
+	public final String TAG = "Encrypt";
 
 	private TransferUtility transferUtility;
 
@@ -60,6 +62,8 @@ public class VideoActivity extends AppCompatActivity {
 	private final static int REQUEST_RESULT_IMAGE = 1;
 	private final static int REQUEST_RESULT_VIDEO = 7;
 	public Encryption encryption;
+	public static boolean dialogShown = false;
+
 
 
 	//public String deviceID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -104,6 +108,14 @@ public class VideoActivity extends AppCompatActivity {
 //		// Create and show the dialog.
 //		DialogFragment newFragment = MyDialogFragment.newInstance(mStackLevel);
 //		newFragment.show(ft, "dialog");
+	}
+
+	void showDialog2() {
+		MyDialogFragmentThree myDialogFragment = new MyDialogFragmentThree();
+		myDialogFragment.show(getFragmentManager(), "WARNING");
+
+
+
 	}
 
 
@@ -164,6 +176,7 @@ public class VideoActivity extends AppCompatActivity {
 		protected String doInBackground(String... params) {
 			String path = null;
 			try {
+				com.anysoftkeyboard.utils.Log.d(TAG,"We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
 				path = encryption.encrypt(idAndDate, params[0]);
 				//Toast.makeText(VideoActivity.this, "Encrypting.",  Toast.LENGTH_LONG).show();
 			} catch (IOException e) {
@@ -203,6 +216,8 @@ public class VideoActivity extends AppCompatActivity {
 
 		@Override
 		protected Void doInBackground(String... params) {
+			com.anysoftkeyboard.utils.Log.d(TAG,"We are starting encrytopn 5 - In upload task" +
+					" ");
 			beginUpload(params[0]);
 			return null;
 		}
@@ -210,6 +225,9 @@ public class VideoActivity extends AppCompatActivity {
 		@Override
 		protected void onPostExecute(Void aVoid) {
 			Toast.makeText(VideoActivity.this, "File has been sucessfully uploaded! ", Toast.LENGTH_LONG).show();
+			com.anysoftkeyboard.utils.Log.d(TAG,"We are starting encrytopn 5 - Upload finishedk" +
+					" ");
+			showDialog2();
 		}
 
 		//		@Override
@@ -271,10 +289,22 @@ public class VideoActivity extends AppCompatActivity {
 
 		UserID = getSecureId(this);
 		setContentView(R.layout.activity_video);
-        initiatePopupWindow();
-		Toast.makeText(this, "User ID = " + UserID, Toast.LENGTH_LONG).show();
+        //initiatePopupWindow();
+
 		setTheDate();
-		showDialog();
+		//showDialog();
+
+
+
+//		if(!dialogShown)
+//		{
+//			Toast.makeText(this, "User ID = " + UserID, Toast.LENGTH_LONG).show();
+//			showDialog2();
+//			dialogShown = true;
+//
+//		}
+
+		//showDialog2();
 		encryption = new Encryption();
 
 
@@ -345,31 +375,25 @@ public class VideoActivity extends AppCompatActivity {
 			  Toast.makeText(this, "Video has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
 
 
-			  Toast.makeText(this, "Path used to find encrypted file is :\n" + path, Toast.LENGTH_LONG).show();
+			  //Toast.makeText(this, "Path used to find encrypted file is :\n" + path, Toast.LENGTH_LONG).show();
 
 
 
 
 			  //TRY CANCEL PENDING INTENT HERE:
 
-			  AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+			  //AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//			  Intent intentReminder = new Intent(this, AlarmReceiver2.class);
+//			  PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intentReminder, 0);
+//			  alarmIntent.cancel();
+//			  alarmMgr.cancel(alarmIntent);
 
 
+			  // NEW TRY
+			  //NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+			  //notificationManager.cancel(1);
 
-			  Intent intentReminder = new Intent(this, AlarmReceiver2.class);
-
-			  //Intent intent = new Intent(this, Notification_reciever.class);
-
-			  PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intentReminder, 0);
-			  //PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-			  // cal.add(Calendar.SECOND, 5);
-			  //alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
-			  //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
-			  //alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-
-			  alarmIntent.cancel();
-			  alarmMgr.cancel(alarmIntent);
-			  Toast.makeText(this, "We have cancelled the repeating every 15 alarm!", Toast.LENGTH_LONG).show();
+			  //Toast.makeText(this, "We have cancelled the repeating every 15 alarm!", Toast.LENGTH_LONG).show();
 
 			  // END TRY CANCEL PENDING INTENT HERE!
 
@@ -434,6 +458,12 @@ public class VideoActivity extends AppCompatActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		startService(new Intent(this, MainActivity.class));
 	}
 
 }

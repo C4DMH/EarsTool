@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.menny.android.anysoftkeyboard.BuildConfig;
@@ -16,6 +17,8 @@ import java.io.File;
 import java.util.List;
 
 public class LogUploadTask extends BroadcastReceiver {
+
+
 
     private static final String TAG = LogUploadTask.class.getSimpleName();
     private static final long FIRST_TASK_DELAY_MILLIS = 30000;  // 30 seconds
@@ -30,16 +33,26 @@ public class LogUploadTask extends BroadcastReceiver {
 
     @SuppressWarnings("PointlessBooleanExpression")
     static void registerTasks(final Context context) {
+        Log.d("LogUploadtask", "This is LogUplaodTask in registerTasks 1");
+
+        int upload_interval = BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES;
+        Log.d("LogUploadtask", "Upload interval minutes in registerTasks = " + upload_interval);
+
+
+
         if (BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES < 1 || !BuildConfig.USE_AUTO_UPLOAD) {
             return;
         }
+
         Log.d(TAG, String.format("Registering repeating upload tasks. Runs every %d minutes.",
                         BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES));
+        Log.d("LogUploadtask", "This is LogUplaodTask in registerTasks 2");
         final long interval = getTaskInterval();
         final long delay = getFirstTaskDelay();
         final AlarmManager alarmManager =
                 (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         final Intent intent = new Intent(context, LogUploadTask.class);
+        Log.d("LogUploadtask", "This is LogUplaodTask in registerTasks 3");
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, delay, interval, pendingIntent);
     }
@@ -56,6 +69,7 @@ public class LogUploadTask extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "Executing log upload task.");
+        Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right before awsutil");
         final LogManager logManager = LogManager.getInstance();
         final List<File> files = logManager.getExportFiles();
         AwsUtil.uploadFilesToBucket(files, true, logUploadCallback);
@@ -63,7 +77,9 @@ public class LogUploadTask extends BroadcastReceiver {
 
     final AwsUtil.FileTransferCallback logUploadCallback = new AwsUtil.FileTransferCallback() {
         @SuppressLint("DefaultLocale")
+
         private String makeLogLine(final String name, final int id, final TransferState state) {
+            Log.d("LogUploadTask", "This is AWSBIT");
             return String.format("%s | ID: %d | State: %s", name, id, state.toString());
         }
 
@@ -75,6 +91,7 @@ public class LogUploadTask extends BroadcastReceiver {
         @Override
         public void onStart(int id, TransferState state) {
             Log.d(TAG, makeLogLine("Callback onStart()", id, state));
+
         }
 
         @Override

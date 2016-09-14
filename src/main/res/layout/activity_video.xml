@@ -67,17 +67,17 @@
             android:text="Record Video Diary"
             android:textColor="#33b5e5"/>
 
-        <Button
-            android:id="@+id/button3"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:onClick="onRecordVideo2"
-            android:text="Record Video Diary Second Camera"
-            android:textColor="#33b5e5"/>
+        <!--<Button-->
+            <!--android:id="@+id/button3"-->
+            <!--style="?android:attr/borderlessButtonStyle"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/button"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:onClick="onRecordVideo2"-->
+            <!--android:text="Record Video Diary Second Camera"-->
+            <!--android:textColor="#33b5e5"/>-->
 
     </LinearLayout>
 

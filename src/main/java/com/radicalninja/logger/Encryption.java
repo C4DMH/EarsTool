@@ -62,7 +62,8 @@ public class Encryption {
         CipherOutputStream cos = new CipherOutputStream(fos, cipher);
         // Write bytes
         int b;
-        byte[] d = new byte[8];
+        //byte[] d = new byte[8];
+        byte[] d = new byte[1024];
         while((b = fis.read(d)) != -1) {
             cos.write(d, 0, b);
         }
@@ -70,6 +71,7 @@ public class Encryption {
         cos.flush();
         cos.close();
         fis.close();
+        Log.d(TAG,"We are starting encrytopn 4 - FINISHED ENCRYTPTION!");
 
         return final_path;
     }

@@ -38,7 +38,10 @@ public class LogManager {
     private FileUploadLog fileUploadLog;
 
     public static void init(final Context context) {
+
+        Log.d("LogManager", "This is LogManager before init");
         if (instance == null) {
+            Log.d("LogManager", "This is LogManager in init");
             instance = new LogManager(context);
             LogUploadTask.registerTasks(context);
         }
