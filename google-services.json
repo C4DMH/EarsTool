@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "866142493426",
+    "project_id": "engaged-ground-143402"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866142493426:android:ccae450962c9371f",
+        "android_client_info": {
+          "package_name": "com.menny.android.anysoftkeyboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866142493426-ue4c8b9fa1e27bf46ng0cu21nul18ofv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.menny.android.anysoftkeyboard",
+            "certificate_hash": "E899B78CD39C199EFCE570FDB2345E217887AB01"
+          }
+        },
+        {
+          "client_id": "866142493426-2lh1etlb2m9c2n73vctb0j5r60kg92dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEALLHTRreSaR3ilwyudeNBHHBLL1-cF0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

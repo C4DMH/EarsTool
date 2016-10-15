@@ -7,6 +7,7 @@ abstract class Buffer extends LogFileController {
     Buffer() {
         super();
         LogManager.getInstance().registerBuffer(this);
+        Log.e("Log", "In Buffer constructor");
     }
 
     @Override

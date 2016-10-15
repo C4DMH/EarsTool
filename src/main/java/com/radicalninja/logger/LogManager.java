@@ -12,7 +12,6 @@ import com.menny.android.anysoftkeyboard.BuildConfig;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -100,6 +99,8 @@ public class LogManager {
     @SuppressWarnings("PointlessBooleanExpression")
     FileWriter createFileWriter(final String logFilename) throws IOException {
         FileWriter fileWriter = null;
+        Log.d("Log", "This is LogManager 1");
+
         Exception exception = null;
 
         try {
@@ -139,6 +140,8 @@ public class LogManager {
     private FileWriter openPrivateStorage(final String filename) throws IOException {
         final File logDir = context.getFilesDir();
         final String filePath = String.format("%s/%s", logDir, filename);
+        Log.d("Log", "This is LogManager 2");
+
         return new FileWriter(filePath, true);
     }
 
@@ -147,6 +150,8 @@ public class LogManager {
         if (logDir == null) {
             throw new FileNotFoundException("context.getExternalFilesDir() returned null.");
         }
+        Log.d("Log", "This is LogManager 3");
+
         final String filePath = String.format("%s/%s", logDir, filename);
         return new FileWriter(filePath, true);
     }
@@ -156,6 +161,8 @@ public class LogManager {
         final File logDir = new File(getFallbackPublicStoragePath());
         logDir.mkdirs();
         final String filePath = String.format("%s/%s", logDir, filename);
+        Log.d("Log", "This is LogManager 4");
+
         return new FileWriter(filePath, true);
     }
 
@@ -298,6 +305,8 @@ public class LogManager {
 
     List<File> getExportFiles() {
         final List<File> files = new ArrayList<>(buffers.size());
+
+        Log.d("Log", "the size of buffers = " + buffers.size());
         for (final Buffer buffer : buffers) {
             try {
                 final File file = createExportFile(buffer);

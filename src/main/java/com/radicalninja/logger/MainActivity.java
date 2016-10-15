@@ -22,8 +22,6 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.anysoftkeyboard.AnySoftKeyboard;
-import com.menny.android.anysoftkeyboard.LauncherSettingsActivity;
 import com.menny.android.anysoftkeyboard.R;
 
 import java.io.IOException;
@@ -62,6 +60,7 @@ public class MainActivity extends FragmentActivity {
 	public int timeHour;
 	public int timeMinute;
 	public static boolean gotLocation = false;
+	public GoogleFit googleFit;
 
 	public static boolean endRepeatingAlarm;
 
@@ -119,7 +118,7 @@ public class MainActivity extends FragmentActivity {
 
 		cal.setTimeInMillis(System.currentTimeMillis());
 		//cal.clear();
-		cal.set(Calendar.HOUR_OF_DAY, 12);
+		cal.set(Calendar.HOUR_OF_DAY, 18);
 		cal.set(Calendar.MINUTE, 30);
 
 		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -218,6 +217,7 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 
 		startAlarm();
+		googleFit = new GoogleFit();
 
 
 
@@ -250,34 +250,48 @@ public class MainActivity extends FragmentActivity {
 
 
 //		if(alarmIsSet == false)
+
 //		{
 //			startAlarm();
 //		}
 
 
 		Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+		//List<Address> address = null;
 		List<Address> address = null;
+
 		if(gotLocation == false)
 		{
 			gps = new GPSTracker(this);
 			latitude = gps.getLatitude();
 			longitude = gps.getLongitude();
-			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
+
+			Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
 
 
 			if (geoCoder != null) {
 				try {
 					address = geoCoder.getFromLocation(latitude, longitude, 1);
+					//Toast.makeText(this, "Address has been found" + address, Toast.LENGTH_LONG).show();
+
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				if (address.size() > 0) {
+				//if (address.size() > 0) {
+				if (address != null) {
 					postCode = address.get(0).getPostalCode();
+				}
+				else{
+					Toast.makeText(this, "Address was null, maybe no GPS reception?", Toast.LENGTH_LONG).show();
 				}
 			}
 			Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: POSTCODE	 = "+ postCode , Toast.LENGTH_LONG).show();
-			gotLocation = true;
+			if(postCode !=null){
+				gotLocation = true;
+
+			}
+
 
 		}
 
@@ -308,6 +322,18 @@ public class MainActivity extends FragmentActivity {
 		startActivity(new Intent(this, VideoActivity.class));
 
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		startActivity(new Intent(this, VideoActivity.class));
+		//Toast.makeText(this, "On Resume called!" , Toast.LENGTH_LONG).show();
+	}
+
+
+
+
+
 
 
 	public void setReminder() {

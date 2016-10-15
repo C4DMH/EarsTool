@@ -1,8 +1,5 @@
 package com.radicalninja.logger;
 
-import android.app.AlarmManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +24,7 @@ import android.widget.Toast;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.menny.android.anysoftkeyboard.R;
+import com.radicalninja.logger.ui.MapsActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -116,6 +114,11 @@ public class VideoActivity extends AppCompatActivity {
 
 
 
+	}
+
+	public void showDialog3(View v){
+		MyDialogFragment myDialogFragment = new MyDialogFragment();
+		myDialogFragment.show(getFragmentManager(),"INTO");
 	}
 
 
@@ -210,6 +213,8 @@ public class VideoActivity extends AppCompatActivity {
 
 		}
 	}
+
+
 
 	public class uploadAsyncTask extends AsyncTask<String, Void, Void>
 	{
@@ -317,6 +322,9 @@ public class VideoActivity extends AppCompatActivity {
 	Uri videoUri;
 	public void onRecordVideo(View v) {
 
+		//showDialog2();
+
+
 //		Intent i;
 //
 //		//isVideo=((CompoundButton)findViewById(R.id.is_video)).isChecked();
@@ -340,8 +348,17 @@ public class VideoActivity extends AppCompatActivity {
 			intent.putExtra("android.intent.extra.quickCapture", true);
 			createDirectory(directoryName);
 			File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  timeStamp + ".mp4");
+			String newPath = Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  timeStamp + ".mp4";
+			Log.d("VideoActivity","This the the Video Uri in the on RECROD VIEW method using the newPath Variable: " + newPath);
+			Log.d("VideoActivity","This the the Video Uri in the on RECROD VIEW method using the mediafile Variable: " + mediaFile);
+
 			videoUri = Uri.fromFile(mediaFile);
+			Log.d("VideoActivity","This the the Video Uri in the on RECROD VIEW method: " + videoUri);
+
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
+			//intent.putExtra(MediaStore.EXTRA_OUTPUT, newPath);
+			//intent.putExtra("STRING_I_NEED", newPath);
+
 			//intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
 			startActivityForResult(intent, VIDEO_CAPTURE);
 			//intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
@@ -363,12 +380,46 @@ public class VideoActivity extends AppCompatActivity {
 //				.commit();
 	}
 
+	public void openMaps(View v){
+		Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+		startActivity(i);
+	}
+
 
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == VIDEO_CAPTURE) {
 		  if (resultCode == RESULT_OK) {
+
+			  //THIS IS THE ONE THAT WORKS ON ALL PHONES BUT SD CARD PHONES
 			  String path = data.getData().getPath();
+
+			  // END
+			  //String newPath = data.getExtras().get("videoUri");
+
+
+			  // THIS IS WHAT PUTS IT IN VIDEO DIRECTORY 3/10/16
+			  //String path = videoUri.toString();
+
+
+
+//			  if(data.getExtras().getString("STRING_I_NEED") == null)
+//			  {
+//				  Log.d("VideoActivity", "String is null");
+//			  }
+
+				//String string = data.getExtras().get("STRING_I NEED");
+			  Log.d("VideoActivity", "The next attempt is: " + videoUri.toString());
+			  Log.d("VideoActivity", "The old method was: " + data.getData().getPath());
+			  //Log.d("VideoActivity", "The old method was: " + string);
+
+			  //Log.d("VideoActivity", "This the the getting extra info from intent method: " + data.getExtras().get("STRING_PATH"));
+			  //Log.d("VideoActivity", "This the the getting extra info from intent method 2 : " + data.getExtras().get("data"));
+
+
+			  Log.d("VideoActivity", "The path returned by the intent data obbject was: " + path);
+			  Log.d("VideoActivity", "The path returned by absolute path external storage was : " + Environment.getExternalStorageDirectory().getAbsolutePath());
+			  Log.d("VideoActivity", "The path returned by  external storage was : " + Environment.getExternalStorageDirectory());
 			  Uri path2 = data.getData();
 				  //VideoView mVideoView = (VideoView) findViewById(R.id.video_view);
 			  //mVideoView.setVideoURI(videoUri);

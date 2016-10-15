@@ -1,0 +1,21 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=E8:99:B7:8C:D3:9C:19:9E:FC:E5:70:FD:B2:34:5E:21:78:87:AB:01%3Bcom.radicalninja.logger.ui
+
+    You can also add your credentials to an existing key, using this line:
+    E8:99:B7:8C:D3:9C:19:9E:FC:E5:70:FD:B2:34:5E:21:78:87:AB:01;com.radicalninja.logger.ui
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyAGLf1-NT54QcRjaqLvuQNbetbDlbVUGus
+    </string>
+</resources>

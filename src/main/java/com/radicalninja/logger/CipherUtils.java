@@ -1,5 +1,7 @@
 package com.radicalninja.logger;
 
+import android.util.Log;
+
 import com.menny.android.anysoftkeyboard.BuildConfig;
 
 import java.io.BufferedReader;
@@ -33,7 +35,7 @@ public class CipherUtils {
     static InputStream readerEncryptedByteStream(File file) throws
             IOException, NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException, InvalidKeyException {
-
+        Log.d("LOG", "This is CipherUtils 1");
         FileInputStream fin = new FileInputStream(file);
         byte[] iv = new byte[16];
         byte[] headerBytes = new byte[HEADER_LENGTH];

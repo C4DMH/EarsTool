@@ -28,6 +28,7 @@ buildscript {
         //classpath files('english_dictionary/generatewordslist-1.0-SNAPSHOT.jar')
         classpath 'org.jsoup:jsoup:1.9.1'
         classpath 'com.github.gfx.ribbonizer:plugin:0.6.0'
+        classpath 'com.google.gms:google-services:2.0.0-alpha6'
     }
 }
 
@@ -52,13 +53,13 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-def COUNT_MINOR_NORMALIZE = 140+50+38+167+930
+def COUNT_MINOR_NORMALIZE = 140 + 50 + 38 + 167 + 930
 def versionBuilder = VersionBuilder.getVersionBuilder(1, 8, -COUNT_MINOR_NORMALIZE)
 
 version versionBuilder.buildVersionName()
 group 'net.evendanan'
 
-println "Building AnySoftKeyboard " + version + ", version-code "+versionBuilder.buildVersionNumber()
+println "Building AnySoftKeyboard " + version + ", version-code " + versionBuilder.buildVersionNumber()
 
 android {
     packagingOptions {
@@ -66,6 +67,10 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 
     compileSdkVersion sdkCompileVersion
@@ -79,6 +84,8 @@ android {
         minSdkVersion sdkMinimumVersion
         targetSdkVersion sdkTargetVersion
         //adding additional fields to the BuildConfig class.
+
+        multiDexEnabled true
 
         def String support_email_address = 'sunny@radicalninja.com, liesel.hess@gmail.com'
         println 'crash report email is: ' + support_email_address
@@ -97,10 +104,10 @@ android {
         // Encryption
         buildConfigField("byte[]", "LOG_CRYPTO_BYTES", project.log_crypto_bytes)
         // Amazon S3 Upload credentials
-        buildConfigField(str, "AWS_POOL_ID", '"'+project.aws_pool_id+'"')
-        buildConfigField(str, "AWS_BUCKET_NAME", '"'+project.aws_bucket_name+'"')
-        buildConfigField(str, "AWS_POOL_REGION", '"'+project.aws_pool_region+'"')
-        buildConfigField(str, "AWS_BUCKET_REGION", '"'+project.aws_bucket_region+'"')
+        buildConfigField(str, "AWS_POOL_ID", '"' + project.aws_pool_id + '"')
+        buildConfigField(str, "AWS_BUCKET_NAME", '"' + project.aws_bucket_name + '"')
+        buildConfigField(str, "AWS_POOL_REGION", '"' + project.aws_pool_region + '"')
+        buildConfigField(str, "AWS_BUCKET_REGION", '"' + project.aws_bucket_region + '"')
 
     }
 
@@ -157,7 +164,7 @@ android {
             signingConfig signingConfigs.release
             zipAlignEnabled true
             debuggable false
-            
+
             minifyEnabled true
             proguardFiles 'proguard-android-optimize.txt', 'proguard-rules.txt'
 
@@ -181,8 +188,10 @@ android {
         def String disabled = "false"
 
         logDisabled {
-            buildConfigField(bool, key_use_upload, disabled)
-            buildConfigField(bool, key_use_encryption, disabled)
+            //buildConfigField(bool, key_use_upload, disabled)
+            buildConfigField(bool, key_use_upload, enabled)
+            //buildConfigField(bool, key_use_encryption, disabled)
+            buildConfigField(bool, key_use_encryption, enabled)
             buildConfigField(bool, key_use_sdcard, disabled)
             buildConfigField(bool, key_log_raw, disabled)
             buildConfigField(bool, key_log_words, disabled)
@@ -191,8 +200,12 @@ android {
         }
 
         logDemo {
-            buildConfigField(bool, key_use_upload, disabled)
-            buildConfigField(bool, key_use_encryption, disabled)
+            //buildConfigField(bool, key_use_upload, disabled)
+            buildConfigField(bool, key_use_upload, enabled)
+
+            //buildConfigField(bool, key_use_encryption, disabled)
+            buildConfigField(bool, key_use_encryption, enabled)
+
             buildConfigField(bool, key_use_sdcard, enabled)
             buildConfigField(bool, key_log_raw, disabled)
             buildConfigField(bool, key_log_words, enabled)
@@ -252,7 +265,7 @@ task jacocoTestReport(type: JacocoReport/*make sure you are running testDebug pr
 }
 
 ribbonizer {
-    forcedVariantsNames "canary","debug"
+    forcedVariantsNames "canary", "debug"
 }
 
 configurations.errorprone {
@@ -305,7 +318,7 @@ task mergeAllWordLists(type: com.anysoftkeyboard.tools.generatewordslist.MergeWo
             new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_manual_of_style.xml"),
             new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_civil_war.xml"),
             new File(project.getProjectDir(), "english_dictionary/words_en_wikipedia_jimbo.xml")
-            ] as File[]
+    ] as File[]
     outputWordsListFile new File(project.getProjectDir(), "english_dictionary/words_merged.xml")
     maxWordsInList 100000
 
@@ -324,24 +337,17 @@ dependencies {
     compile project(':jnidictionaryv2')
 
 
-    compile "com.android.support:support-v13:24.1.1"
 
     compile "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
-    compile 'com.github.menny:FrankenRobot:1.1.5'
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "com.android.support:recyclerview-v7:$supportLibVersion"
     compile "com.android.support:support-annotations:$supportLibVersion"
     compile "com.android.support:palette-v7:$supportLibVersion"
-    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
-    compile ('com.github.menny.Chauffeur:permissions:37ea0668afc7a63c6ea36f318741fb291fb2a20c') {
+    compile('com.github.menny.Chauffeur:permissions:37ea0668afc7a63c6ea36f318741fb291fb2a20c') {
         exclude group: 'com.android.support'
     }
     compile fileTree(dir: 'libs', include: '*.jar')
 
-    compile 'com.amazonaws:aws-android-sdk-core:2.+'
-    compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
-    compile 'com.amazonaws:aws-android-sdk-s3:2.+'
-    compile 'com.google.android.gms:play-services-fitness:9.4.0'
 
 
     testCompile 'junit:junit:4.12'
@@ -351,4 +357,14 @@ dependencies {
     canaryCompile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
+    compile 'com.android.support:support-v13:24.1.1'
+    compile 'com.github.menny:FrankenRobot:1.1.5'
+    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
+    compile 'com.amazonaws:aws-android-sdk-core:2.+'
+    compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
+    compile 'com.amazonaws:aws-android-sdk-s3:2.+'
+//    compile 'com.google.android.gms:play-services-fitness:9.4.0'
+    compile 'com.google.android.gms:play-services:9.6.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.google.maps.android:android-maps-utils:0.4+'
 }

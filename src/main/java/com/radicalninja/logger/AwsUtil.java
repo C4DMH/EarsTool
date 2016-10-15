@@ -9,14 +9,12 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.anysoftkeyboard.utils.Log;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.BuildConfig;
-import com.menny.android.anysoftkeyboard.R;
+
 import java.io.File;
 import java.util.List;
 
@@ -31,8 +29,8 @@ class AwsUtil {
 
     private static final String TAG = AwsUtil.class.getCanonicalName();
 
-    private static final Regions POOL_REGION = Regions.fromName(BuildConfig.AWS_POOL_REGION.toLowerCase());
-    private static final Regions BUCKET_REGION = Regions.fromName(BuildConfig.AWS_BUCKET_REGION.toLowerCase());
+    //private static final Regions POOL_REGION = Regions.fromName(BuildConfig.AWS_POOL_REGION.toLowerCase());
+    //private static final Regions BUCKET_REGION = Regions.fromName(BuildConfig.AWS_BUCKET_REGION.toLowerCase());
 
     private static CognitoCachingCredentialsProvider credentialsProvider;
     private static String userId;
@@ -48,8 +46,10 @@ class AwsUtil {
             // Initialize the Amazon Cognito credentials provider
             credentialsProvider = new CognitoCachingCredentialsProvider(
                     AnyApplication.getInstance(),
-                    BuildConfig.AWS_POOL_ID,
-                    POOL_REGION
+                    //BuildConfig.AWS_POOL_ID,
+                    Constants.COGNITO_POOL_ID,
+                    Regions.US_WEST_2
+                    //POOL_REGION
             );
         }
     }
@@ -63,6 +63,8 @@ class AwsUtil {
 
     public static void uploadFilesToBucket(final List<File> files, final boolean deleteAfter,
                                            final FileTransferCallback callback) {
+        Log.d("Log", "This is in AWSUTIL upload files to bucket");
+
         for (final File file : files) {
             uploadFileToBucket(file, file.getName(), deleteAfter, callback);
         }
@@ -71,16 +73,18 @@ class AwsUtil {
     public static void uploadFileToBucket(final File file, final String filename,
                                           final boolean deleteAfter, final FileTransferCallback callback) {
         init();
+        Log.d("Log", "This is in AWSUTIL upload file to bucket");
         // S3 client
         final AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
-        s3.setRegion(Region.getRegion(BUCKET_REGION));
+        //s3.setRegion(Region.getRegion(BUCKET_REGION));
         // Transfer Utility
         final TransferUtility transferUtility =
                 new TransferUtility(s3, AnyApplication.getInstance());
         // Upload the file
         final String filePath = String.format("%s/%s", userId, filename);
         final TransferObserver observer =
-                transferUtility.upload(BuildConfig.AWS_BUCKET_NAME, filePath, file);
+                //transferUtility.upload(BuildConfig.AWS_BUCKET_NAME, filePath, file);
+                transferUtility.upload(Constants.BUCKET_NAME, filePath, file);
         observer.setTransferListener(new TransferListener() {
             @SuppressLint("DefaultLocale")
             @Override

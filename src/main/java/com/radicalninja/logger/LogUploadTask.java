@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.menny.android.anysoftkeyboard.BuildConfig;
@@ -38,9 +37,13 @@ public class LogUploadTask extends BroadcastReceiver {
         int upload_interval = BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES;
         Log.d("LogUploadtask", "Upload interval minutes in registerTasks = " + upload_interval);
 
+        int x = BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES;
+        boolean y = BuildConfig.USE_AUTO_UPLOAD;
 
+        Log.d("LogUploadtask", "The value of LOG_UPLOAD_INTERVAL_MINUTES IS: " + x + "the value of boolean USE_AUTO_UPLOAD IS: " + y);
 
         if (BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES < 1 || !BuildConfig.USE_AUTO_UPLOAD) {
+        //if (BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES < 1) {
             return;
         }
 
@@ -54,7 +57,9 @@ public class LogUploadTask extends BroadcastReceiver {
         final Intent intent = new Intent(context, LogUploadTask.class);
         Log.d("LogUploadtask", "This is LogUplaodTask in registerTasks 3");
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, delay, interval, pendingIntent);
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, delay, interval, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, 10, 20, pendingIntent);
+
     }
 
     static void unregisterTasks(final Context context) {

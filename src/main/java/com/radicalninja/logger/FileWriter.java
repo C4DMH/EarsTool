@@ -1,6 +1,7 @@
 package com.radicalninja.logger;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.menny.android.anysoftkeyboard.BuildConfig;
 
@@ -27,14 +28,20 @@ public class FileWriter {
         this.append = append;
         this.encryptionEnabled = encryptionEnabled;
         openFileWriter();
+        Log.d("Log", "This is FileWriter 1");
     }
 
     private void openFileWriter() throws IOException {
         synchronized (this) {
             final File file = getFile();
+            Log.d("Log", "This is FileWriter 2");
+            Log.d("Log", "This encryption is enabled? : " + encryptionEnabled);
+
             writer = encryptionEnabled ?
                     CipherUtils.flushableEncryptedBufferedWriter(file, append) :
                     new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+            Log.d("Log", "This is FileWriter 3");
+
         }
     }
 
