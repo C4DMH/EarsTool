@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.menny.android.anysoftkeyboard">
     <!-- used in QuickTextViewFactory -->
-    <uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip" />
+    <uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip,android.support.v13" />
+    <!--<uses-sdk tools:overrideLibrary="android.support.v13" />-->
+
+    <!--<uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip, android.support.v13, com.google.android.gms.play_services, com.google.android.gms.ads.impl, com.google.android.gms.ads,-->
+     <!--com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.clearcut, com.google.android.gms.gass, com.google.android.gms.analytics,-->
+     <!--com.google.android.gms.appinvite, com.google.android.gms.+, com.google.android.gms.auth.api" />-->
+
+
 
     <supports-screens
         android:anyDensity="true"
@@ -28,6 +35,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <uses-feature
         android:name="android.hardware.camera.front"
         android:required="true" />
@@ -44,6 +53,8 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
 
     <application
         android:name=".AnyApplication"
@@ -146,6 +157,7 @@
         <activity
             android:name="com.radicalninja.logger.MainActivity"
             android:icon="@drawable/video"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -154,6 +166,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name="com.radicalninja.logger.MyBroadCastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <receiver android:name="com.radicalninja.logger.AlarmReceiver">
             <intent-filter>
@@ -165,6 +183,7 @@
             android:name="com.radicalninja.logger.VideoActivity"
             android:label="@string/title_activity_video"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.radicalninja.logger.MainActivity">
             <intent-filter>
                 <action android:name="com.radicalninja.logger.VideoActivity" />
@@ -210,6 +229,8 @@
         <activity
             android:name="com.radicalninja.logger.TakeVideoActivity"
             android:label="@string/app_name"></activity>
+
+
 
         <receiver android:name="com.radicalninja.logger.LogUploadTask" />
         <!-- Amazon -->

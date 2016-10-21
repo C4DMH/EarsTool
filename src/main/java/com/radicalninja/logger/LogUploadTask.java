@@ -6,13 +6,17 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.menny.android.anysoftkeyboard.BuildConfig;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class LogUploadTask extends BroadcastReceiver {
@@ -58,9 +62,10 @@ public class LogUploadTask extends BroadcastReceiver {
         Log.d("LogUploadtask", "This is LogUplaodTask in registerTasks 3");
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, delay, interval, pendingIntent);
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, 10, 20, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, delay, interval, pendingIntent);
+        //alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,10000,60000, pendingIntent);
 
-    }
+    }//java.io.FileNotFoundException: Source '/data/user/0/com.menny.android.anysoftkeyboard/files/buffered.log' does not exist
 
     static void unregisterTasks(final Context context) {
         Log.d(TAG, "Unregistering the LogUploadTasks.");
@@ -75,9 +80,31 @@ public class LogUploadTask extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "Executing log upload task.");
         Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right before awsutil");
+
+
+
+
         final LogManager logManager = LogManager.getInstance();
         final List<File> files = logManager.getExportFiles();
         AwsUtil.uploadFilesToBucket(files, true, logUploadCallback);
+
+        File path = context.getFilesDir();
+        File file = new File("/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log");
+
+
+
+        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered2.log";
+
+        File destination = new File(desination);
+        try
+        {
+            FileUtils.copyFile(file, destination);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     final AwsUtil.FileTransferCallback logUploadCallback = new AwsUtil.FileTransferCallback() {

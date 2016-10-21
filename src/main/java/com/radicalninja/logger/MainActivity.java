@@ -12,7 +12,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -29,27 +29,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-//IMPORTANT
 
-// Need to combine with keyboard logger
-// Need to only set reminder and grab location once
-// AWS uploads and downloads - set up by deviceID - DONE I THINK<>>>>NEED TESTING
-// Use same diaglog fragement for start and end, make sure fragment is not shown twice
-// ENCRYPTION
-// Screen time? App time?
-// SECONDARY
-// HIPA complient
-// Language, and facial expression - literature shows important!
-
-
-
-// Need to use location data, ie download ses data and work out how to store in aws
-// Need to find and upload selfie photos
-// Need to grab voice data
-
-// GOOGLE FIT
-
-public class MainActivity extends FragmentActivity {
+//public class MainActivity extends FragmentActivity
+public class MainActivity extends AppCompatActivity {
 
 	private Button videoButton;
 	public Button nextOne;
@@ -60,9 +42,13 @@ public class MainActivity extends FragmentActivity {
 	public int timeHour;
 	public int timeMinute;
 	public static boolean gotLocation = false;
-	public GoogleFit googleFit;
+
+	public static MainActivity instace;
+
 
 	public static boolean endRepeatingAlarm;
+
+
 
 	GPSTracker gps;
 	double latitude;
@@ -173,18 +159,20 @@ public class MainActivity extends FragmentActivity {
 
 
 
+
+
 	public void startAlarm2(){
 		Calendar cal = Calendar.getInstance();
 
-		long when = cal.getTimeInMillis();
-		String timey = Long.toString(when);
+		long when1 = cal.getTimeInMillis();
+		String timey = Long.toString(when1);
 		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
 		theCurrentDate = theTime;
 		System.out.println("The time changed into nice format is: " + theTime);
 		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
 		int hour = 13;
 		int minute = 20;
-		Log.d("the time is: ", when+" ");
+		Log.d("the time is: ", when1+" ");
 		//Log.d(theTime);
 		cal.setTimeInMillis(System.currentTimeMillis());
 		//cal.clear();
@@ -210,6 +198,15 @@ public class MainActivity extends FragmentActivity {
 		return DateFormat.format(dateFormat, Long.parseLong(dateInMilliseconds)).toString();
 	}
 
+	@Override
+	public Context getApplicationContext() {
+		return super.getApplicationContext();
+	}
+
+	public static MainActivity getIntance() {
+		return instace;
+	}
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -217,7 +214,7 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 
 		startAlarm();
-		googleFit = new GoogleFit();
+		//googleFit = new GoogleFit();
 
 
 
@@ -266,7 +263,7 @@ public class MainActivity extends FragmentActivity {
 			latitude = gps.getLatitude();
 			longitude = gps.getLongitude();
 
-			Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
 
 
 			if (geoCoder != null) {
@@ -280,13 +277,18 @@ public class MainActivity extends FragmentActivity {
 				}
 				//if (address.size() > 0) {
 				if (address != null) {
-					postCode = address.get(0).getPostalCode();
+					try{
+						postCode = address.get(0).getPostalCode();
+					}
+					catch(IndexOutOfBoundsException e){
+						e.printStackTrace();
+					}
 				}
 				else{
 					Toast.makeText(this, "Address was null, maybe no GPS reception?", Toast.LENGTH_LONG).show();
 				}
 			}
-			Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: POSTCODE	 = "+ postCode , Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: POSTCODE	 = "+ postCode , Toast.LENGTH_LONG).show();
 			if(postCode !=null){
 				gotLocation = true;
 
@@ -318,6 +320,7 @@ public class MainActivity extends FragmentActivity {
 //				MainActivity.this.startActivity(myIntent);
 //			}
 //		});
+
 
 		startActivity(new Intent(this, VideoActivity.class));
 
