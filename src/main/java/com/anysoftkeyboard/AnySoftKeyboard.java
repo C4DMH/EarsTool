@@ -92,8 +92,6 @@ import com.anysoftkeyboard.theme.KeyboardThemeFactory;
 import com.anysoftkeyboard.ui.VoiceInputNotInstalledActivity;
 import com.anysoftkeyboard.ui.dev.DeveloperUtils;
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
-import com.anysoftkeyboard.base.utils.GCUtils;
-import com.anysoftkeyboard.base.utils.GCUtils.MemRelatedOperation;
 import com.anysoftkeyboard.utils.ChewbaccaOnTheDrums;
 import com.anysoftkeyboard.utils.Log;
 import com.anysoftkeyboard.utils.ModifierKeyState;
@@ -103,12 +101,9 @@ import com.menny.android.anysoftkeyboard.AnyApplication;
 import com.menny.android.anysoftkeyboard.BuildConfig;
 import com.menny.android.anysoftkeyboard.R;
 import com.radicalninja.logger.LogManager;
-import com.radicalninja.logger.MainActivity;
 import com.radicalninja.logger.RawCharacterBuffer;
-import com.radicalninja.logger.VideoActivity;
 import com.radicalninja.logger.WordBuffer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -274,9 +269,9 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardKeyboardSwitchedLis
 //        startActivity(intent);
 
         //startActivity(new Intent(this, VideoActivity.class));
-        Toast.makeText(this, "THIS IS AnySoftKeyBoard" +
-                        " onCreateView",
-                Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "THIS IS AnySoftKeyBoard" +
+//                        " onCreateView",
+//                Toast.LENGTH_LONG).show();
 //        Toast.makeText(this, "THIS IS AnySoftKeyBoard" +
 //                        " onCreateView",
 //                Toast.LENGTH_LONG).show();

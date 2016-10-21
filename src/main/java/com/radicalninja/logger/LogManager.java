@@ -28,7 +28,9 @@ public class LogManager {
 
     private static LogManager instance;
 
-    private final Context context;
+    //private final Context context;
+    public final Context context;
+
     private final PreferencesManager preferencesManager;
     private final List<Buffer> buffers = new ArrayList<>();
 
@@ -69,6 +71,7 @@ public class LogManager {
 
     static LogManager getInstance() throws LogManagerNotStartedException {
         if (instance == null) {
+            //init(context);
             throw new LogManagerNotStartedException();
         }
         return instance;
