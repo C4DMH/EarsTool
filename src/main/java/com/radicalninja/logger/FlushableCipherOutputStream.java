@@ -9,7 +9,10 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-import javax.crypto.*;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -47,6 +50,19 @@ public class FlushableCipherOutputStream extends OutputStream {
 
         if (! append)
             file.delete();
+
+
+//        try{
+//            seekableFile = new RandomAccessFile(file,"rwd");
+//        }catch (Exception e){
+//            Log.d("Cipher", "Caught the error");
+//        }
+
+
+
+
+
+
         seekableFile = new RandomAccessFile(file,"rw");
         flushGoesStraightToDisk = _flushGoesStraightToDisk;
         key = _key;

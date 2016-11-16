@@ -6,21 +6,19 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.menny.android.anysoftkeyboard.BuildConfig;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class LogUploadTask extends BroadcastReceiver {
 
+
+    //public static  int n = 1;
 
 
     private static final String TAG = LogUploadTask.class.getSimpleName();
@@ -63,7 +61,7 @@ public class LogUploadTask extends BroadcastReceiver {
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, delay, interval, pendingIntent);
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, delay, interval, pendingIntent);
-        //alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,10000,60000, pendingIntent);
+        //alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,10000,240000, pendingIntent);
 
     }//java.io.FileNotFoundException: Source '/data/user/0/com.menny.android.anysoftkeyboard/files/buffered.log' does not exist
 
@@ -81,29 +79,72 @@ public class LogUploadTask extends BroadcastReceiver {
         Log.d(TAG, "Executing log upload task.");
         Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right before awsutil");
 
+//        File file = new File("/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log");
+//
+//        String location = "/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log";
+//
+//
+//        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + n +".log";
+//        n++;
+//
+//        File destination = new File(desination);
+////        try
+////        {
+////            FileUtils.copyFile(file, destination);
+////            Log.d("LogUploadTask", "Copyting file to VideoDIARY");
+////
+////        }
+////        catch (IOException e)
+////        {
+////            e.printStackTrace();
+////        }
+
 
 
 
         final LogManager logManager = LogManager.getInstance();
         final List<File> files = logManager.getExportFiles();
+
+//        int length = files.size();
+//        if(length > 0){
+//
+//            try
+//            {
+//                FileUtils.copyFile(file, destination);
+//                Log.d("LogUploadTask", "Copyting file to VideoDIARY");
+//
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+//
+//        }
+
         AwsUtil.uploadFilesToBucket(files, true, logUploadCallback);
 
+       // Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right after awsutil and the number of files is: " + length);
+
         File path = context.getFilesDir();
-        File file = new File("/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log");
-
-
-
-        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered2.log";
-
-        File destination = new File(desination);
-        try
-        {
-            FileUtils.copyFile(file, destination);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+//        File file = new File("/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log");
+//
+//        String location = "/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log";
+//
+//
+//        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + n +".log";
+//        n++;
+//
+//        File destination = new File(desination);
+//        try
+//        {
+//            FileUtils.copyFile(file, destination);
+//            Log.d("LogUploadTask", "Copyting file to VideoDIARY");
+//
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
 
     }
 

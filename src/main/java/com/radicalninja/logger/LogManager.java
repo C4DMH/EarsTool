@@ -151,6 +151,8 @@ public class LogManager {
     private FileWriter openExternalPublicStorage(final String filename) throws IOException {
         final File logDir = context.getExternalFilesDir(null);
         if (logDir == null) {
+            Log.d("Log", "context.getExternalFilesDir() returned null");
+
             throw new FileNotFoundException("context.getExternalFilesDir() returned null.");
         }
         Log.d("Log", "This is LogManager 3");
@@ -230,6 +232,7 @@ public class LogManager {
     private void saveBuffers() {
         for (final Buffer buffer : buffers) {
             try {
+                Log.d("Log", "We are in saveBuffer line 235");
                 writeToFile(buffer);
             } catch (final IOException | NullPointerException e) {
                 final String msg = String.format(
@@ -246,10 +249,13 @@ public class LogManager {
      * @param logBuffer If the buffer is not empty, write the contents to the log before clearing.
      */
     private void clearBuffers(final boolean logBuffer) {
+        Log.d("Log", "clearBuffers 1");
         if (logBuffer) {
+            Log.d("Log", "clearBuffers 2");
             saveBuffers();
         }
         for (final Buffer buffer : buffers) {
+            Log.d("Log", "clearBuffers 3");
             buffer.clearBuffer();
         }
     }
@@ -277,6 +283,8 @@ public class LogManager {
     private void writeToFile(final Buffer buffer)
             throws IOException, NullPointerException {
         final String bufferContents = buffer.getBufferContents();
+
+        Log.d("Log", "this is in write to file, LogManager");
         if (TextUtils.isEmpty(bufferContents)) {
             return;
         }

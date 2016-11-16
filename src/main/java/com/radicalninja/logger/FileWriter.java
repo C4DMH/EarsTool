@@ -25,14 +25,29 @@ public class FileWriter {
     private FileWriter(final String filePath, final boolean append, final boolean encryptionEnabled)
             throws IOException {
         this.filePath = filePath;
+
+
+        File fileNew = new File(filePath);
+        try{
+            fileNew.delete();
+        }catch (Exception e){
+            Log.d("File", "Could not delete");
+        }
+
+
+
         this.append = append;
         this.encryptionEnabled = encryptionEnabled;
         openFileWriter();
-        Log.d("Log", "This is FileWriter 1");
+        Log.d("Log", "This is FileWriter 1 and file path is:" + filePath);
     }
 
     private void openFileWriter() throws IOException {
         synchronized (this) {
+
+//            File newFile = new File(filePath);
+//            newFile.clo
+            Log.d("Log", "2 This is FileWriter 1 and file path is:" + filePath);
             final File file = getFile();
             Log.d("Log", "This is FileWriter 2");
             Log.d("Log", "This encryption is enabled? : " + encryptionEnabled);
@@ -48,6 +63,20 @@ public class FileWriter {
     public File getFile() {
         return (!TextUtils.isEmpty(filePath)) ? new File(filePath) : null;
     }
+
+
+//    public File getFile() {
+//        if(!TextUtils.isEmpty(filePath)){
+//            Log.d("FileWriter", "1");
+//            return new File(filePath);
+//        }
+//        else{
+//            Log.d("FileWrite", "2");
+//            return new File(filePath);
+//        }
+//    }
+
+
 
     public void write(final String str) throws IOException {
         synchronized (this) {

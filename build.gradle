@@ -20,7 +20,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'io.fabric.tools:gradle:1.21.5'
         classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
         classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
@@ -153,7 +153,8 @@ android {
         debug {
             zipAlignEnabled true
             debuggable true
-            testCoverageEnabled true
+            //testCoverageEnabled true
+            //minifyEnabled true
 
             useLibrary 'org.apache.http.legacy'
 
@@ -204,14 +205,14 @@ android {
             //buildConfigField(bool, key_use_upload, disabled)
             buildConfigField(bool, key_use_upload, enabled)
 
-            buildConfigField(bool, key_use_encryption, disabled)
-            //buildConfigField(bool, key_use_encryption, enabled)
+            //buildConfigField(bool, key_use_encryption, disabled)
+            buildConfigField(bool, key_use_encryption, enabled)
 
             buildConfigField(bool, key_use_sdcard, enabled)
             buildConfigField(bool, key_log_raw, disabled)
             buildConfigField(bool, key_log_words, enabled)
-            buildConfigField(bool, key_log_debug_notifications, enabled)
-            buildConfigField(num, key_log_word_sample_interval, "1")
+            buildConfigField(bool, key_log_debug_notifications, disabled)
+            buildConfigField(num, key_log_word_sample_interval, "3")
         }
 
         logDemoEncrypted {
@@ -375,7 +376,7 @@ dependencies {
 //    compile 'com.google.android.gms:play-services-fitness:9.4.0'
     compile 'com.google.android.gms:play-services:9.6.1'
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.google.maps.android:android-maps-utils:0.4+'
+    //compile 'com.google.maps.android:android-maps-utils:0.4+'
 
     compile 'com.google.android.gms:play-services-fitness:9.6.1'
 }

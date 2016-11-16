@@ -1,6 +1,7 @@
 package com.radicalninja.logger;
 
 import android.annotation.SuppressLint;
+import android.os.Environment;
 import android.provider.Settings;
 import android.text.TextUtils;
 
@@ -15,10 +16,15 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.anysoftkeyboard.utils.Log;
 import com.menny.android.anysoftkeyboard.AnyApplication;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 class AwsUtil {
+
+
 
     public interface FileTransferCallback {
         void onStart(final int id, final TransferState state);
@@ -98,6 +104,27 @@ class AwsUtil {
                         callback.onStart(id, state);
                         break;
                     case COMPLETED:
+
+                        long unixTime = System.currentTimeMillis() / 1000L;
+                        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + unixTime +".log";
+
+
+                        File destination = new File(desination);
+                        try
+                        {
+                            FileUtils.copyFile(file, destination);
+                            Log.d("LogUploadTask", "Copyting file to VideoDIARY");
+
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+
+
+
+
                         Log.d(TAG, String.format("Transfer ID %d has completed", id));
                         callback.onComplete(id, state);
                         if (deleteAfter) {

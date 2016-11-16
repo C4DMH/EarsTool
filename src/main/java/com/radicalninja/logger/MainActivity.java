@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.menny.android.anysoftkeyboard.R;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 	public static MainActivity instace;
 
 	public boolean taskComplete;
+
 
 //	public int hour = 13;
 //	public int minute = 20;
@@ -247,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		instace = this;
 
+
 		startAlarm();
 		//googleFit = new GoogleFit();
 
@@ -298,35 +299,36 @@ public class MainActivity extends AppCompatActivity {
 			longitude = gps.getLongitude();
 
 			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
+			Log.d("GPS", "111 WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
 
 
-			if (geoCoder != null) {
-				try {
-					address = geoCoder.getFromLocation(latitude, longitude, 1);
-					//Toast.makeText(this, "Address has been found" + address, Toast.LENGTH_LONG).show():;
-
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				//if (address.size() > 0) {
-				if (address != null) {
-					try{
-						postCode = address.get(0).getPostalCode();
-					}
-					catch(IndexOutOfBoundsException e){
-						e.printStackTrace();
-					}
-				}
-				else{
-					Toast.makeText(this, "Address was null, maybe no GPS reception?", Toast.LENGTH_LONG).show();
-				}
-			}
-			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: POSTCODE	 = "+ postCode , Toast.LENGTH_LONG).show();
-			if(postCode !=null){
-				gotLocation = true;
-
-			}
+//			if (geoCoder != null) {
+//				try {
+//					address = geoCoder.getFromLocation(latitude, longitude, 1);
+//					//Toast.makeText(this, "Address has been found" + address, Toast.LENGTH_LONG).show():;
+//
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				//if (address.size() > 0) {
+//				if (address != null) {
+//					try{
+//						postCode = address.get(0).getPostalCode();
+//					}
+//					catch(IndexOutOfBoundsException e){
+//						e.printStackTrace();
+//					}
+//				}
+//				else{
+//					Toast.makeText(this, "Address was null, maybe no GPS reception?", Toast.LENGTH_LONG).show();
+//				}
+//			}
+//			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: POSTCODE	 = "+ postCode , Toast.LENGTH_LONG).show();
+//			if(postCode !=null){
+//				gotLocation = true;
+//
+//			}
 
 
 		}
