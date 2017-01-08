@@ -55,12 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
 	public static MainActivity instace;
 
-	public boolean taskComplete;
-
-
-//	public int hour = 13;
-//	public int minute = 20;
-
 
 	public String theCurrentDate;
 
@@ -74,17 +68,6 @@ public class MainActivity extends AppCompatActivity {
 	{
 		return theCurrentDate;
 	}
-
-	//public Intent intentReminder = new Intent(this, AlarmReceiver.class);
-
-	//public AlarmManager alarmMgr2;
-
-
-//	public void cancelRepeatingAlarm(){
-//		alarmMgr2.cancel(alarmIntent2);
-//	}
-
-
 
 
 
@@ -109,54 +92,11 @@ public class MainActivity extends AppCompatActivity {
 		cal.set(Calendar.MINUTE, 30);
 
 		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
 		Intent intent = new Intent(this, AlarmReceiver.class);
-		//Intent intent = new Intent(this, Notification_reciever.class);
 		alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		//PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		// cal.add(Calendar.SECOND, 5);
-		//alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
-		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
 		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, when, 1000 * 60 * 1, alarmIntent);
-		//Toast.makeText(this, "WE HAVE SET THE ALARM", Toast.LENGTH_LONG).show();
 		alarmIsSet = true;
 
-		//VideoActivity.encryptAsyncTask2()
-
-
-
-//		Calendar cal = Calendar.getInstance();
-//
-//		long when = cal.getTimeInMillis();
-//		String timey = Long.toString(when);
-//		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
-//		theCurrentDate = theTime;
-//		System.out.println("The time changed into nice format is: " + theTime);
-//		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
-//
-//		int hour = 11;
-//		int minute = 20;
-//		Log.d("the time is: ", when+" ");
-//		//Log.d(theTime);
-//		cal.setTimeInMillis(System.currentTimeMillis());
-//		//cal.clear();
-//		cal.set(Calendar.HOUR_OF_DAY, 11);
-//		cal.set(Calendar.MINUTE, 25);
-//		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-//
-//		Intent intent = new Intent(this, AlarmReceiver.class);
-//		//Intent intent = new Intent(this, Notification_reciever.class);
-//		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//
-//		//PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//		// cal.add(Calendar.SECOND, 5);
-//		//alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
-//		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
-//		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-//		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, when, 1000 * 60 * 1, alarmIntent);
-//		Toast.makeText(this, "WE HAVE SET THE ALARM", Toast.LENGTH_LONG).show();
-//		alarmIsSet = true;
 	}
 
 	public void startGoogleFit() {
@@ -214,14 +154,7 @@ public class MainActivity extends AppCompatActivity {
 		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(this, AlarmReceiver2.class);
 		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-
-		//PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		// cal.add(Calendar.SECOND, 5);
-		//alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
-		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
 		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, alarmIntent);
-
-		//alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, when, 1000 * 60 * 1, alarmIntent);
 		Toast.makeText(this, "WE HAVE SET THE ALARM REPEATING EVERY 15 MIN!!!!!!!!!!", Toast.LENGTH_LONG).show();
 
 	}
@@ -246,47 +179,16 @@ public class MainActivity extends AppCompatActivity {
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
 		setContentView(R.layout.activity_main);
 		instace = this;
-
-
 		startAlarm();
-		//googleFit = new GoogleFit();
-
-
-
-		//alarmMgr2 = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-
-
 		wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean alarmSet = wmbPreference.getBoolean("ALARMSET", true);
-		//Toast.makeText(this, "THIS IS MAIN ACTIVIY, BEFORE (isfirstRun)", Toast.LENGTH_LONG).show();
-		//Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
 		if (alarmSet)
 		{
-			//Toast.makeText(this, "THIS IS MAIN ACTIVIY, IN (isfirstRun)", Toast.LENGTH_LONG).show();
-			// Code to run once
-			//startActivity(new Intent(this, LauncherSettingsActivity.class));
-			//startAlarm();
 			SharedPreferences.Editor editor = wmbPreference.edit();
 			editor.putBoolean("ALARMSET", false);
-			//Toast.makeText(this, "ALARM SET IS CURRENTLY: " + alarmSet, Toast.LENGTH_LONG).show();
 			editor.commit();
-			//startAlarm();
-			//startAlarm2();
-			//finish();
+
 		}
-//		else{
-//			startActivity(new Intent(this, VideoActivity.class));
-//		}
-//		Toast.makeText(this, "THIS IS MAIN ACTIVIY, AFTER (isfirstRun)", Toast.LENGTH_LONG).show();
-
-
-//		if(alarmIsSet == false)
-
-//		{
-//			startAlarm();
-//		}
-
 
 		Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
 		//List<Address> address = null;
@@ -297,67 +199,12 @@ public class MainActivity extends AppCompatActivity {
 			gps = new GPSTracker(this);
 			latitude = gps.getLatitude();
 			longitude = gps.getLongitude();
-
-			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude, Toast.LENGTH_LONG).show();
 			Log.d("GPS", "111 WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
-
-
-//			if (geoCoder != null) {
-//				try {
-//					address = geoCoder.getFromLocation(latitude, longitude, 1);
-//					//Toast.makeText(this, "Address has been found" + address, Toast.LENGTH_LONG).show():;
-//
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//				//if (address.size() > 0) {
-//				if (address != null) {
-//					try{
-//						postCode = address.get(0).getPostalCode();
-//					}
-//					catch(IndexOutOfBoundsException e){
-//						e.printStackTrace();
-//					}
-//				}
-//				else{
-//					Toast.makeText(this, "Address was null, maybe no GPS reception?", Toast.LENGTH_LONG).show();
-//				}
-//			}
-//			//Toast.makeText(this, "WE HAVE GOT YOUR LOCATION: POSTCODE	 = "+ postCode , Toast.LENGTH_LONG).show();
-//			if(postCode !=null){
-//				gotLocation = true;
-//
-//			}
 
 
 		}
 
 
-
-		//videoButton = (Button) findViewById(R.id.videoButton);
-		//nextOne = (Button) findViewById(R.id.nextOne);
-//		nextOne.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(v.getContext(), VideoActivity.class));
-//			}
-//		});
-        //broadcastIntent();
-        //AlarmActivity alarmActivity = new AlarmActivity();
-        //startActivity(new Intent(this, AlarmActivity.class));
-
-
-//		videoButton.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				//startActivity(new Intent(MainActivity.this, VideoActivity.class));
-//				Intent myIntent = new Intent(MainActivity.this, VideoActivity.class);
-//				MainActivity.this.startActivity(myIntent);
-//			}
-//		});
-
-		//startGoogleFit();
 
 		startActivity(new Intent(this, VideoActivity.class));
 

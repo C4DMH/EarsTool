@@ -129,21 +129,7 @@ public class VideoActivity extends AppCompatActivity implements
 
 		MyDialogFragment myDialogFragment = new MyDialogFragment();
 		myDialogFragment.show(getFragmentManager(), "");
-//		mStackLevel++;
-//
-//		// DialogFragment.show() will take care of adding the fragment
-//		// in a transaction.  We also want to remove any currently showing
-//		// dialog, so make our own transaction and take care of that here.
-//		FragmentTransaction ft = getFragmentManager().beginTransaction();
-//		Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-//		if (prev != null) {
-//			ft.remove(prev);
-//		}
-//		ft.addToBackStack(null);
-//
-//		// Create and show the dialog.
-//		DialogFragment newFragment = MyDialogFragment.newInstance(mStackLevel);
-//		newFragment.show(ft, "dialog");
+
 	}
 
 	void showDialog2() {
@@ -156,11 +142,7 @@ public class VideoActivity extends AppCompatActivity implements
 
 	public void showDialog3(View v) {
 
-		//startActivity(new Intent(this, mGoogleFit.class));
-
-		//mGoogleFit mgf = new mGoogleFit();
 		File fileCheck = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/" + "CrashReport.txt");
-
 
 		if(fileCheck.exists()){
 
@@ -179,28 +161,6 @@ public class VideoActivity extends AppCompatActivity implements
 		myDialogFragment.show(getFragmentManager(), "INTO");
 	}
 
-
-//	public void credentialsProvider(){
-//		CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-//				getApplicationContext(),
-//				us-east-1:dbacd6aa-9393-475e-b687-xxxxxxxxx&quot;
-//		)
-//	}
-
-//	CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-//			getApplicationContext(),
-//			"us-west-2:41d228a6-292a-4ebb-9f37-cf96c33063a2", // Identity Pool ID
-//			Regions.US_WEST_2 // Region
-//	);
-//
-//	AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
-//	TransferUtility transferUtility = new TransferUtility(s3, getApplicationContext());
-
-//	TransferObserver observer = transferUtility.upload(
-//			MY_BUCKET,     /* The bucket to upload to */
-//			OBJECT_KEY,    /* The key for the uploaded object */
-//			MY_FILE        /* The file where the data to upload exists */
-//	);
 
 	private void beginUpload(String filePath) {
 
@@ -247,20 +207,6 @@ public class VideoActivity extends AppCompatActivity implements
 		}
 
 
-
-
-
-//		File file = new File(filePath);
-//		TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, newFilePath,
-//				file);
-        /*
-         * Note that usually we set the transfer listener after initializing the
-         * transfer. However it isn't required in this sample app. The flow is
-         * click upload button -> start an activity for image selection
-         * startActivityForResult -> onActivityResult -> beginUpload -> onResume
-         * -> set listeners to in progress transfers.
-         */
-		// observer.setTransferListener(new UploadListener());
 
 
 	private void beginUpload2(String filePath) {
@@ -382,12 +328,8 @@ public class VideoActivity extends AppCompatActivity implements
 		@Override
 		protected void onPostExecute(String path) {
 
-			//Toast.makeText(VideoActivity.this, "File is encrypting..... ", Toast.LENGTH_LONG).show();
-			//showDialog2();
-
 			new uploadAsyncTask2().execute(path);
-//			uploadAsynTask upload = new uploadAsynTask();
-//			upload.execute()
+
 
 		}
 	}
@@ -483,13 +425,6 @@ public class VideoActivity extends AppCompatActivity implements
 
 
 
-
-
-			// TRY NEW WAY OF GETTING PROGRESS BAR!!
-//			beginUpload(params[0]);
-//			return null;
-//		}
-
 		@Override
 		protected void onProgressUpdate(Integer... values) {
 			super.onProgressUpdate(values[0]);
@@ -502,19 +437,12 @@ public class VideoActivity extends AppCompatActivity implements
 		protected void onPostExecute(Void aVoid) {
 			//progressBar.setVisibility(View.GONE);
 			Toast.makeText(VideoActivity.this, "File is uploading..... ", Toast.LENGTH_LONG).show();
-			com.anysoftkeyboard.utils.Log.d("Video", "We have finished upload - In onPostExecute" +
-					" ");
+			com.anysoftkeyboard.utils.Log.d("Video", "We have finished upload - In onPostExecute" + " ");
 
 			//THIS CAN CRASH APP IF USER CLOSES APP BEFORE IT IS RUN!!
 			//showDialog2();
 	}
 
-		//		@Override
-//		protected void onPostExecute(Void... params){
-//			Toast.makeText(VideoActivity.this, "File has been sucessfully uploaded! ", Toast.LENGTH_LONG).show();
-//
-//
-//		}
 
 
 	}
@@ -535,14 +463,6 @@ public class VideoActivity extends AppCompatActivity implements
 			com.anysoftkeyboard.utils.Log.d(TAG, "Fit - We are starting encrytopn 5 - Upload finishedk" + " ");
 
 		}
-
-		//		@Override
-//		protected void onPostExecute(Void... params){
-//			Toast.makeText(VideoActivity.this, "File has been sucessfully uploaded! ", Toast.LENGTH_LONG).show();
-//
-//
-//		}
-
 
 	}
 
@@ -585,13 +505,6 @@ public class VideoActivity extends AppCompatActivity implements
 //
 		getSupportActionBar().setTitle("UO Video Diary App");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		//ProgressBar progressBar;
-
-		//progressBar = (ProgressBar) findViewById(R.id.progressBar);
-		//progressBar.setProgress(0);
-		//getSupportActionBar().setHomeButtonEnabled(false);
-
-
 		UserID = getSecureId(this);
 		setContentView(R.layout.activity_video);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -600,22 +513,10 @@ public class VideoActivity extends AppCompatActivity implements
 
 		gps = new GPSTracker(this);
 
-
-		//initiatePopupWindow();
-
 		setTheDate();
 
 		transferUtility = Util.getTransferUtility(this);
-		//showDialog();
 
-
-//		if(!dialogShown)
-//		{
-//			Toast.makeText(this, "User ID = " + UserID, Toast.LENGTH_LONG).show();
-//			showDialog2();
-//			dialogShown = true;
-//
-//		}
 
 		//showDialog2();
 		encryption = new Encryption();
@@ -625,55 +526,10 @@ public class VideoActivity extends AppCompatActivity implements
 				.addConnectionCallbacks(this)
 				.enableAutoManage(this, 0, this)
 				.build();
-//
-////        DailyTotalResult result = Fitness.HistoryApi.readDailyTotal( mGoogleApiClient, DataType.TYPE_STEP_COUNT_DELTA ).await(0, TimeUnit.MINUTES);
-////        showDataSet(result.getTotal());
-////        Toast.makeText(this, "THe steps for todays is: " + result, Toast.LENGTH_LONG).show();
-//
-//		new ViewWeekStepCountTask().execute();
-//		startGoogleFit();
 
 
 	}
 
-//	@Override
-//	protected void onPause() {
-//		super.onPause();
-//		// Clear transfer listeners to prevent memory leak, or
-//		// else this activity won't be garbage collected.
-//		if (observers != null && !observers.isEmpty()) {
-//			for (TransferObserver observer : observers) {
-//				observer.cleanTransferListener();
-//			}
-//		}
-//	}
-
-//	public void startGoogleFit() {
-//
-//		Calendar cal = Calendar.getInstance();
-//		long when = cal.getTimeInMillis();
-//		String timey = Long.toString(when);
-//		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
-//		theCurrentDate = theTime;
-//		System.out.println("The time changed into nice format is: " + theTime);
-//		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
-//
-//		Log.d("the time is: ", when + " ");
-//		//Log.d(theTime);
-//
-//		cal.setTimeInMillis(System.currentTimeMillis());
-//		//cal.clear();
-//		cal.set(Calendar.HOUR_OF_DAY, 18);
-//		cal.set(Calendar.MINUTE, 30);
-//
-//		AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//
-//		Intent intent = new Intent(this, GoogleFitUploadTask.class);
-//		fitIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, fitIntent);
-//
-//
-//	}
 
 	@Override
 	public void onConnectionSuspended(int i) {
@@ -725,11 +581,6 @@ public class VideoActivity extends AppCompatActivity implements
 		//cal.add(Calendar.HOUR_OF_DAY, -2);
 		cal.add(Calendar.DAY_OF_WEEK, -1);
 		long startTime = cal.getTimeInMillis();
-
-
-
-
-
 		String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
 		//String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + ".txt");
 
@@ -787,11 +638,6 @@ public class VideoActivity extends AppCompatActivity implements
 			writeToFile(file, "Zero fitness data returned! Either a connection could not be made to the google server, or the phone has logged no Google Fit data",this.getApplicationContext() );
 		}
 
-
-		//Log.e("Fit","uploading, using: " + newFilePath);
-//		File file2 = new File(uri);
-//		TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, newFilePath,file2);
-		//transferUtility = Util.getTransferUtility(this);
 		new encryptAsyncTask2().execute(uri);
 	}
 
@@ -802,15 +648,6 @@ public class VideoActivity extends AppCompatActivity implements
 		cal.setTime(now);
 		long endTime = cal.getTimeInMillis();
 
-		//String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-		//String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + ".txt");
-
-		//Log.e("History", "URI+ " + uri);
-		//File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-		//File file = new File(uri);
-		//FileOutputStream stream = null;
-		//Log.e("History", "Start showDataset");
-		//Log.e("History", "Data returned for Data type: " + dataSet.getDataType().getName());
 		java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
 		java.text.DateFormat timeFormat = java.text.DateFormat.getTimeInstance();
 
@@ -830,10 +667,6 @@ public class VideoActivity extends AppCompatActivity implements
 		try {
 			for (DataPoint dp : dataSet.getDataPoints()) {
 				Log.e("History", "Data point:");
-
-				//writeToFile(file, "Data point:\n",this.getApplicationContext() );
-
-
 				writeToFile(file, "\n\n" +
 						"Data point:\n",this.getApplicationContext() );
 				Log.e("History", "\tType: " + dp.getDataType().getName());
@@ -853,205 +686,13 @@ public class VideoActivity extends AppCompatActivity implements
 		{
 			e.printStackTrace();
 		}
-//		Log.d("History", "The  the start ");
-//
-//		if(dataSet.isEmpty())
-//		{
-//			Log.d("History", "The end");
-//		}
-//		Log.d("History", "Number of datapoints size: " +dataSet.getDataPoints().size());
-//		Log.d("History", "Number of datapoints size number 2: " +dataSet.getDataPoints().size());
-//		Log.d("History", "Number of datapoints NOT size: " +dataSet.getDataPoints());
-
-
-//		if(dataSet.getDataPoints().size() > 0)
-//		{
-//
-//			for (DataPoint dp : dataSet.getDataPoints()) {
-//				Log.e("History", "Data point:");
-//
-//				//writeToFile(file, "Data point:\n",this.getApplicationContext() );
-//
-//
-//				writeToFile(file, "\n\n" +
-//						"Data point:\n",this.getApplicationContext() );
-//				Log.e("History", "\tType: " + dp.getDataType().getName());
-//				Log.e("History", "\tStart: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//				writeToFile(file, "Start: "  + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-//				Log.e("History", "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//				writeToFile(file, "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-//				for(Field field : dp.getDataType().getFields()) {
-//					Log.e("History", "\tField: " + field.getName() +
-//							" Value: " + dp.getValue(field));
-//					writeToFile(file, "\n " + field.getName() +
-//							" Value: " +" " + dp.getValue(field), this.getApplicationContext());
-//				}
-//			}
-//
-//
-//		}
-
-
-
-//
-//
-//
-//		for (DataPoint dp : dataSet.getDataPoints()) {
-//			Log.e("History", "Data point:");
-//
-//			//writeToFile(file, "Data point:\n",this.getApplicationContext() );
-//
-//
-//			writeToFile(file, "\n\n" +
-//					"Data point:\n",this.getApplicationContext() );
-//			Log.e("History", "\tType: " + dp.getDataType().getName());
-//			Log.e("History", "\tStart: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//			writeToFile(file, "Start: "  + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-//			Log.e("History", "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//			writeToFile(file, "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-//			for(Field field : dp.getDataType().getFields()) {
-//				Log.e("History", "\tField: " + field.getName() +
-//						" Value: " + dp.getValue(field));
-//				writeToFile(file, "\n " + field.getName() +
-//						" Value: " +" " + dp.getValue(field), this.getApplicationContext());
-//			}
-//		}
-
-
-
-
-
 
 		Log.e("History", "End show data set");
 
-		//String newFilePath = UserID + "/" ;
-
-		//Toast.makeText(this, "The file is uploading, using the name: " + newFilePath,Toast.LENGTH_LONG).show();
-
-
-//		Log.e("Fit","uploading, using: " + newFilePath);
-////		File file2 = new File(uri);
-////		TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, newFilePath,file2);
-//		transferUtility = Util.getTransferUtility(this);
-//		new encryptAsyncTask2().execute(uri);
-		//new uploadAsyncTask2().execute(uri);
 
 	}
 
-//	public void displayLastWeeksData() {
-//		Calendar cal = Calendar.getInstance();
-//		Date now = new Date();
-//		cal.setTime(now);
-//		long endTime = cal.getTimeInMillis();
-//		//cal.add(Calendar.WEEK_OF_YEAR, -1);
-//		//cal.add(Calendar.HOUR_OF_DAY, -2);
-//		cal.add(Calendar.DAY_OF_WEEK, -1);
-//		long startTime = cal.getTimeInMillis();
-//
-//		java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
-//		Log.e("History", "Range Start: " + dateFormat.format(startTime));
-//		Log.e("History", "Range End: " + dateFormat.format(endTime));
-//
-//		//Check how many steps were walked and recorded in the last 7 days
-//		DataReadRequest readRequest = new DataReadRequest.Builder()
-//				//.aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
-//				.aggregate(DataType.TYPE_ACTIVITY_SEGMENT, DataType.AGGREGATE_ACTIVITY_SUMMARY)
-//				.bucketByTime(1, TimeUnit.DAYS)
-//				//.bucketByTime(2, TimeUnit.HOURS)
-//				.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-//				.build();
-//
-//		DataReadResult dataReadResult = Fitness.HistoryApi.readData(mGoogleApiClient, readRequest).await(1, TimeUnit.MINUTES);
-//		Log.d("History", "Number of buckets : " + dataReadResult.getBuckets().size());
-//
-//		//Used for aggregated data
-//		if (dataReadResult.getBuckets().size() > 0) {
-//			Log.e("History", "Number of buckets: " + dataReadResult.getBuckets().size());
-//			for (Bucket bucket : dataReadResult.getBuckets()) {
-//				Log.d("History", "1-----------------------------------------");
-//				Log.d("History", "Busket is: " + bucket);
-//				List<DataSet> dataSets = bucket.getDataSets();
-//				for (DataSet dataSet : dataSets) {
-//					Log.d("History", "2-------------------------------------");
-//					showDataSet(dataSet);
-//				}
-//			}
-//		}
-//		//Used for non-aggregated data
-//		else if (dataReadResult.getDataSets().size() > 0) {
-//			Log.e("History", "Number of returned DataSets: " + dataReadResult.getDataSets().size());
-//			for (DataSet dataSet : dataReadResult.getDataSets()) {
-//				showDataSet(dataSet);
-//			}
-//		}
-//	}
-//
-//	private void showDataSet(DataSet dataSet) {
-//
-//		Calendar cal = Calendar.getInstance();
-//		Date now = new Date();
-//		cal.setTime(now);
-//		long endTime = cal.getTimeInMillis();
-//
-//		String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-//		//String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + ".txt");
-//
-//		Log.e("History", "URI+ " + uri);
-//		//File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-//		File file = new File(uri);
-//		FileOutputStream stream = null;
-//		Log.e("History", "Start showDataset");
-//		Log.e("History", "Data returned for Data type: " + dataSet.getDataType().getName());
-//		java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
-//		java.text.DateFormat timeFormat = java.text.DateFormat.getTimeInstance();
-//
-//		//gps = new GPSTracker(this);
-//		latitude = gps.getLatitude();
-//		longitude = gps.getLongitude();
-//
-//		Log.d("GPS", "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
-//
-//		writeToFile(file, "\nLatitude is: " + latitude,this.getApplicationContext() );
-//		writeToFile(file, "\n Longitude is: " + longitude,this.getApplicationContext() );
-//
-//		Log.e("History", "Latitude is: " + latitude);
-//		Log.e("History", "Longitude is: " + longitude);
-//
-//		for (DataPoint dp : dataSet.getDataPoints()) {
-//			Log.e("History", "Data point:");
-//
-//			//writeToFile(file, "Data point:\n",this.getApplicationContext() );
-//
-//
-//			writeToFile(file, "\n" +
-//					" Data point:\n",this.getApplicationContext() );
-//			Log.e("History", "\tType: " + dp.getDataType().getName());
-//			Log.e("History", "\tStart: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//			writeToFile(file, "\tStart: "  + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-//			Log.e("History", "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//			writeToFile(file, "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-//			for(Field field : dp.getDataType().getFields()) {
-//				Log.e("History", "\tField: " + field.getName() +
-//						" Value: " + dp.getValue(field));
-//				writeToFile(file, "\n " + field.getName() +
-//						" Value: " +"\n " + dp.getValue(field), this.getApplicationContext());
-//			}
-//		}
-//		Log.e("History", "End show data set");
-//
-//		String newFilePath = UserID + "/" ;
-//
-//		//Toast.makeText(this, "The file is uploading, using the name: " + newFilePath,Toast.LENGTH_LONG).show();
-//
-//
-//		Log.e("Fit","uploading, using: " + newFilePath);
-////		File file2 = new File(uri);
-////		TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, newFilePath,file2);
-//		transferUtility = Util.getTransferUtility(this);
-//		new encryptAsyncTask2().execute(uri);
-//		//new uploadAsyncTask2().execute(uri);
-//
-//	}
+
 
 	private class ViewWeekStepCountTask extends AsyncTask<Void, Void, Void> {
 		protected Void doInBackground(Void... params) {
@@ -1064,15 +705,7 @@ public class VideoActivity extends AppCompatActivity implements
 	}
 
 	private void writeToFile(File file, String data, Context context) {
-//        Calendar cal = Calendar.getInstance();
-//        Date now = new Date();
-//        cal.setTime(now);
-//        long endTime = cal.getTimeInMillis();
-//        File path = context.getExternalFilesDir(null);
-//        File file = new File(path, "googleFit.txt");
 
-
-//        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
 		FileOutputStream stream = null;
 		//OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);
 		try {
@@ -1086,11 +719,7 @@ public class VideoActivity extends AppCompatActivity implements
 			e.printStackTrace();
 		}
 
-//        try {
-//            stream.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
 		try {
 
 			stream.close();
@@ -1107,26 +736,8 @@ public class VideoActivity extends AppCompatActivity implements
 
 	public void onRecordVideo(View v) {
 
-		//showDialog2();
-
 		Log.d("VideoActivity", "1");
-//		Intent i;
-//
-//		//isVideo=((CompoundButton)findViewById(R.id.is_video)).isChecked();
-//
-//
-//		Toast.makeText(this, "NUMBER 15", Toast.LENGTH_LONG).show();
-//		i=new VideoRecorderActivity.IntentBuilder(this)
-//				.facing(Facing.FRONT)
-//				.facingExactMatch()
-//				.to(new File(testRoot, "portrait-front.mp4"))
-//				.updateMediaStore()
-//				.durationLimit(10000)
-//				.debug()
-//				//.flashModes(FLASH_MODES)
-//				.build();
-//
-//		startActivityForResult(i, VIDEO_CAPTURE);
+
 		if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
 			Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 			Log.d("VideoActivity", "2");
@@ -1147,6 +758,7 @@ public class VideoActivity extends AppCompatActivity implements
 			videoUri = Uri.fromFile(mediaFile);
 			Log.d("VideoActivity", "This the the Video Uri in the on RECROD VIEW method: " + videoUri);
 
+
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
 			//intent.putExtra(MediaStore.EXTRA_OUTPUT, newPath);
 			//intent.putExtra("STRING_I_NEED", newPath);
@@ -1166,112 +778,17 @@ public class VideoActivity extends AppCompatActivity implements
 		Intent takeVideoActivity = new Intent(this, TakeVideoActivity.class);
 		startActivityForResult(takeVideoActivity, REQUEST_RESULT_VIDEO);
 
-
-//		getFragmentManager().beginTransaction()
-//				.replace(R.id.LinearLayout1, Camera2VideoFragment.newInstance())
-//				.commit();
 	}
-
-//	public void openMaps(View v) {
-//		Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-//		startActivity(i);
-//	}
 
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == VIDEO_CAPTURE) {
 			if (resultCode == RESULT_OK) {
 
-				//THIS IS THE ONE THAT WORKS ON ALL PHONES BUT SD CARD PHONES
-				//String path = data.getData().getPath();
-				//Log.d("Video", "the path variable is " + path);
-
-				// END
-				//String newPath = data.getExtras().get("videoUri");
-
-
-				// THIS IS WHAT PUTS IT IN VIDEO DIRECTORY 3/10/16
-				//String path = videoUri.toString();
-
-
-//			  if(data.getExtras().getString("STRING_I_NEED") == null)
-//			  {
-//				  Log.d("VideoActivity", "String is null");
-//			  }
-
-				//String string = data.getExtras().get("STRING_I NEED");
-				//Log.d("VideoActivity", "The next attempt is: " + videoUri.toString());
-				//Log.d("VideoActivity", "The old method was: " + data.getData().getPath());
-				//Log.d("VideoActivity", "The old method was: " + string);
-
-				//Log.d("VideoActivity", "This the the getting extra info from intent method: " + data.getExtras().get("STRING_PATH"));
-				//Log.d("VideoActivity", "This the the getting extra info from intent method 2 : " + data.getExtras().get("data"));
-
-
-				//Log.d("VideoActivity", "The path returned by the intent data obbject was: " + path);
-				//Log.d("VideoActivity", "The path returned by absolute path external storage was : " + Environment.getExternalStorageDirectory().getAbsolutePath());
-				//Log.d("VideoActivity", "The path returned by  external storage was : " + Environment.getExternalStorageDirectory());
-				//Uri path2 = data.getData();
-				//VideoView mVideoView = (VideoView) findViewById(R.id.video_view);
-				//mVideoView.setVideoURI(videoUri);
-				//Toast.makeText(this, "Video has been saved to:\n" + data.getData(), Toast.LENGTH_LONG).show();
-
-
-				//Toast.makeText(this, "Path used to find encrypted file is :\n" + path, Toast.LENGTH_LONG).show();
-
-
-				//TRY CANCEL PENDING INTENT HERE:
-
-				//AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-//			  Intent intentReminder = new Intent(this, AlarmReceiver2.class);
-//			  PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intentReminder, 0);
-//			  alarmIntent.cancel();
-//			  alarmMgr.cancel(alarmIntent);
-
-
-				// NEW TRY
-				//NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-				//notificationManager.cancel(1);
-
-				//Toast.makeText(this, "We have cancelled the repeating every 15 alarm!", Toast.LENGTH_LONG).show();
-
-				// END TRY CANCEL PENDING INTENT HERE!
-
-
-				//MainActivity.endRepeatingAlarm = true;
-
-
-				//mVideoView.setMediaController(new MediaController(this));
-				//mVideoView.requestFocus();
-				//mVideoView is the replay after video
-				//mVideoView.start();
-
-				// TURN OFF WHILE TESTING ENCRYPTION!!
-
-				//transferUtility = Util.getTransferUtility(this);
-				//new encryptAsyncTask().execute(path);
 				showDialog2();
-
-//				int[] arr = new int[10];
-//				Log.d("Crash", "This is a crash" + arr[11]);
+;
 				new encryptAsyncTask().execute(finalPath);
-//			  try {
-//				  encryption.encrypt(UserID, path);
-//				  Toast.makeText(this, "Encrypting.",  Toast.LENGTH_LONG).show();
-//			  } catch (IOException e) {
-//				  Toast.makeText(this, "Encrypting.1",  Toast.LENGTH_LONG).show();
-//				  e.printStackTrace();
-//			  } catch (NoSuchAlgorithmException e) {
-//				  Toast.makeText(this, "Encrypting.2",  Toast.LENGTH_LONG).show();
-//				  e.printStackTrace();
-//			  } catch (NoSuchPaddingException e) {
-//				  Toast.makeText(this, "Encrypting.3",  Toast.LENGTH_LONG).show();
-//				  e.printStackTrace();
-//			  } catch (InvalidKeyException e) {
-//				  Toast.makeText(this, "Encrypting.4",  Toast.LENGTH_LONG).show();
-//				  e.printStackTrace();
-//			  }
-				//beginUpload(path);
+
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Video recording cancelled.", Toast.LENGTH_LONG).show();
 			} else {
@@ -1307,200 +824,5 @@ public class VideoActivity extends AppCompatActivity implements
 	}
 
 
-//	public class mGoogleFit implements
-//			GoogleApiClient.ConnectionCallbacks,
-//			GoogleApiClient.OnConnectionFailedListener,
-//			View.OnClickListener {
-//
-//		private GoogleApiClient mGoogleApiClient;
-//		private Context context;
-//
-//
-//
-//
-//		public void mGoogleFit(){
-//
-//			Log.d("Fit", "In mGoogleFit Constrcutor");
-//
-//			//this.context = context;
-//			context = getApplicationContext();
-//
-//
-//			mGoogleApiClient = new GoogleApiClient.Builder(context)
-//				.addApi(Fitness.HISTORY_API)
-//				.addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
-//				.addConnectionCallbacks(this)
-//				.enableAutoManage((FragmentActivity) context, 0, this)
-//				.build();
-//
-//
-//
-//			new ViewWeekStepCountTask().execute();
-//		}
-//
-//
-//		@Override
-//		public void onConnectionSuspended(int i) {
-//			Log.e("HistoryAPI", "onConnectionSuspended");
-//	}
-//
-//		@Override
-//		public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-//			Log.e("HistoryAPI", "onConnectionFailed");
-//	}
-//
-//		public void onConnected(@Nullable Bundle bundle) {
-//			Log.e("HistoryAPI", "onConnected");
-//	}
-//
-//
-//		@Override
-//		public void onClick(View v) {
-//
-//	}
-//
-//	public void displayLastWeeksData() {
-//		Calendar cal = Calendar.getInstance();
-//		Date now = new Date();
-//		cal.setTime(now);
-//		long endTime = cal.getTimeInMillis();
-//		//cal.add(Calendar.WEEK_OF_YEAR, -1);
-//		//cal.add(Calendar.HOUR_OF_DAY, -2);
-//		cal.add(Calendar.DAY_OF_WEEK, -1);
-//		long startTime = cal.getTimeInMillis();
-//
-//		java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
-//		Log.e("History", "Range Start: " + dateFormat.format(startTime));
-//		Log.e("History", "Range End: " + dateFormat.format(endTime));
-//
-//		//Check how many steps were walked and recorded in the last 7 days
-//		DataReadRequest readRequest = new DataReadRequest.Builder()
-//				//.aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
-//				.aggregate(DataType.TYPE_ACTIVITY_SEGMENT, DataType.AGGREGATE_ACTIVITY_SUMMARY)
-//				.bucketByTime(1, TimeUnit.DAYS)
-//				//.bucketByTime(2, TimeUnit.HOURS)
-//				.setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-//				.build();
-//
-//		DataReadResult dataReadResult = Fitness.HistoryApi.readData(mGoogleApiClient, readRequest).await(1, TimeUnit.MINUTES);
-//		Log.d("History", "Number of buckets : " + dataReadResult.getBuckets().size());
-//
-//		//Used for aggregated data
-//		if (dataReadResult.getBuckets().size() > 0) {
-//			Log.e("History", "Number of buckets: " + dataReadResult.getBuckets().size());
-//			for (Bucket bucket : dataReadResult.getBuckets()) {
-//				List<DataSet> dataSets = bucket.getDataSets();
-//				for (DataSet dataSet : dataSets) {
-//					showDataSet(dataSet);
-//				}
-//			}
-//		}
-//		//Used for non-aggregated data
-//		else if (dataReadResult.getDataSets().size() > 0) {
-//			Log.e("History", "Number of returned DataSets: " + dataReadResult.getDataSets().size());
-//			for (DataSet dataSet : dataReadResult.getDataSets()) {
-//				showDataSet(dataSet);
-//			}
-//		}
-//	}
-//
-//	private String showDataSet(DataSet dataSet) {
-//
-//		Calendar cal = Calendar.getInstance();
-//		Date now = new Date();
-//		cal.setTime(now);
-//		long endTime = cal.getTimeInMillis();
-//
-//		String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-//
-//		//File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-//		File file = new File(uri);
-//		FileOutputStream stream = null;
-//		Log.e("History", "Start showDataset");
-//		Log.e("History", "Data returned for Data type: " + dataSet.getDataType().getName());
-//		java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
-//		java.text.DateFormat timeFormat = java.text.DateFormat.getTimeInstance();
-//
-//		gps = new GPSTracker(context);
-//		latitude = gps.getLatitude();
-//		longitude = gps.getLongitude();
-//
-//		writeToFile(file, "\nLatitude is: " + latitude,context );
-//		writeToFile(file, "\nLongitude is: " + longitude,context );
-//
-//		Log.e("History", "Latitude is: " + latitude);
-//		Log.e("History", "Longitude is: " + longitude);
-//
-//		for (DataPoint dp : dataSet.getDataPoints()) {
-//			Log.e("History", "Data point:");
-//
-//			//writeToFile(file, "Data point:\n",this.getApplicationContext() );
-//
-//
-//			writeToFile(file, "\n" +
-//					"Data point:\n",context );
-//			Log.e("History", "\tType: " + dp.getDataType().getName());
-//			Log.e("History", "\tStart: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//			writeToFile(file, "\tStart: "  + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), context);
-//			Log.e("History", "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//			writeToFile(file, "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), context);
-//			for(Field field : dp.getDataType().getFields()) {
-//				Log.e("History", "\tField: " + field.getName() +
-//						" Value: " + dp.getValue(field));
-//				writeToFile(file, "\n" + field.getName() +
-//						" Value: " +"\n" + dp.getValue(field), context);
-//			}
-//		}
-//		Log.e("History", "End show data set");
-//
-//		return uri;
-//
-//	}
-//
-//	private class ViewWeekStepCountTask extends AsyncTask<Void, Void, Void> {
-//		protected Void doInBackground(Void... params) {
-//			displayLastWeeksData();
-//			return null;
-//		}
-//	}
-//
-//	private void writeToFile(File file, String data, Context context) {
-////        Calendar cal = Calendar.getInstance();
-////        Date now = new Date();
-////        cal.setTime(now);
-////        long endTime = cal.getTimeInMillis();
-////        File path = context.getExternalFilesDir(null);
-////        File file = new File(path, "googleFit.txt");
-//
-//
-////        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-//		FileOutputStream stream = null;
-//		//OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);
-//		try {
-//			Log.e("History", "In try");
-//			stream = new FileOutputStream(file, true);
-//			stream.write(data.getBytes());
-//		} catch (FileNotFoundException e) {
-//			Log.e("History", "In catch");
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-////        try {
-////            stream.close();
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-//		try {
-//
-//			stream.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
-//
-//
-//	}
+
 }
