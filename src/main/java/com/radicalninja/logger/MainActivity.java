@@ -18,9 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.menny.android.anysoftkeyboard.R;
 
@@ -32,16 +30,16 @@ import java.util.Locale;
 //public class MainActivity extends FragmentActivity
 public class MainActivity extends AppCompatActivity {
 
-	private Button videoButton;
-	public Button nextOne;
-	private TimePicker timePicker1;
+	//private Button videoButton;
+	//public Button nextOne;
+	//private TimePicker timePicker1;
 	private PendingIntent alarmIntent;
 	//public PendingIntent alarmIntent2;
 	public static boolean alarmIsSet = false;
-	public int timeHour;
-	public int timeMinute;
+	//public int timeHour;
+	//public int timeMinute;
 	public static boolean gotLocation = false;
-	public GoogleFit googleFit;
+	//public GoogleFit googleFit;
 
 	public static boolean endRepeatingAlarm;
 
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 	GPSTracker gps;
 	double latitude;
 	double longitude;
-	String postCode;
+	//String postCode;
 	SharedPreferences wmbPreference;
 
 	public static MainActivity instace;
@@ -58,16 +56,16 @@ public class MainActivity extends AppCompatActivity {
 
 	public String theCurrentDate;
 
+//
+//	//public void  SetTheCurrentDate(String date, String time)
+//	{
+//		theCurrentDate = date + time;
+//	}
 
-	public void  SetTheCurrentDate(String date, String time)
-	{
-		theCurrentDate = date + time;
-	}
-
-	public String getTheCurrentDate()
-	{
-		return theCurrentDate;
-	}
+//	public String getTheCurrentDate()
+//	{
+//		return theCurrentDate;
+//	}
 
 
 
@@ -99,65 +97,65 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
-	public void startGoogleFit() {
-
-		Log.d("Fit", "Start of startGoogle FIt");
-
-		Calendar cal = Calendar.getInstance();
-		long when = cal.getTimeInMillis();
-		String timey = Long.toString(when);
-		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
-		theCurrentDate = theTime;
-		System.out.println("The time changed into nice format is: " + theTime);
-		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
-
-		Log.d("the time is: ", when + " ");
-		//Log.d(theTime);
-
-		cal.setTimeInMillis(System.currentTimeMillis());
-		//cal.clear();
-		cal.set(Calendar.HOUR_OF_DAY, 18);
-		cal.set(Calendar.MINUTE, 30);
-
-		AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-		Intent intent = new Intent(this, GoogleFitUploadTask.class);
-		fitIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, fitIntent);
-
-
-
-
-	}
-
-
+//	public void startGoogleFit() {
+//
+//		Log.d("Fit", "Start of startGoogle FIt");
+//
+//		Calendar cal = Calendar.getInstance();
+//		long when = cal.getTimeInMillis();
+//		String timey = Long.toString(when);
+//		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
+//		theCurrentDate = theTime;
+//		System.out.println("The time changed into nice format is: " + theTime);
+//		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
+//
+//		Log.d("the time is: ", when + " ");
+//		//Log.d(theTime);
+//
+//		cal.setTimeInMillis(System.currentTimeMillis());
+//		//cal.clear();
+//		cal.set(Calendar.HOUR_OF_DAY, 18);
+//		cal.set(Calendar.MINUTE, 30);
+//
+//		AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//
+//		Intent intent = new Intent(this, GoogleFitUploadTask.class);
+//		fitIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, fitIntent);
+//
+//
+//
+//
+//	}
 
 
-	public void startAlarm2(){
-		Calendar cal = Calendar.getInstance();
 
-		long when = cal.getTimeInMillis();
-		String timey = Long.toString(when);
-		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
-		theCurrentDate = theTime;
-		System.out.println("The time changed into nice format is: " + theTime);
-		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
-		int hour = 13;
-		int minute = 20;
-		Log.d("the time is: ", when+" ");
-		//Log.d(theTime);
-		cal.setTimeInMillis(System.currentTimeMillis());
-		//cal.clear();
-		cal.set(Calendar.HOUR_OF_DAY, 22);
-		cal.set(Calendar.MINUTE, 40);
-
-		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(this, AlarmReceiver2.class);
-		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, alarmIntent);
-		Toast.makeText(this, "WE HAVE SET THE ALARM REPEATING EVERY 15 MIN!!!!!!!!!!", Toast.LENGTH_LONG).show();
-
-	}
+//
+//	public void startAlarm2(){
+//		Calendar cal = Calendar.getInstance();
+//
+//		long when = cal.getTimeInMillis();
+//		String timey = Long.toString(when);
+//		String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
+//		theCurrentDate = theTime;
+//		System.out.println("The time changed into nice format is: " + theTime);
+//		//Log.d(convertDate(timey, "dd/MM/yyyy hh:mm:ss"));
+//		int hour = 13;
+//		int minute = 20;
+//		Log.d("the time is: ", when+" ");
+//		//Log.d(theTime);
+//		cal.setTimeInMillis(System.currentTimeMillis());
+//		//cal.clear();
+//		cal.set(Calendar.HOUR_OF_DAY, 22);
+//		cal.set(Calendar.MINUTE, 40);
+//
+//		AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//		Intent intent = new Intent(this, AlarmReceiver2.class);
+//		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, alarmIntent);
+//		Toast.makeText(this, "WE HAVE SET THE ALARM REPEATING EVERY 15 MIN!!!!!!!!!!", Toast.LENGTH_LONG).show();
+//
+//	}
 
 	public static String convertDate(String dateInMilliseconds, String dateFormat) {
 		return DateFormat.format(dateFormat, Long.parseLong(dateInMilliseconds)).toString();
@@ -223,9 +221,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-	public void setReminder() {
-        startActivity(new Intent(this, AlarmActivity.class));
-	}
+//	public void setReminder() {
+//        startActivity(new Intent(this, AlarmActivity.class));
+//	}
 
 	public void onVideo(View v) {
 		startActivity(new Intent(this, VideoActivity.class));

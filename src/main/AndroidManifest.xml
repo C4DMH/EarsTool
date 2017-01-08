@@ -224,12 +224,12 @@
         <activity
             android:name="com.radicalninja.logger.AlarmActivity"
             android:label="@string/title_activity_video" />
-        <activity
-            android:name="com.radicalninja.logger.CameraActivity"
-            android:label="CameraActivity" />
-        <activity
-            android:name="com.radicalninja.logger.TakeVideoActivity"
-            android:label="@string/app_name"></activity>
+        <!--<activity-->
+            <!--android:name="com.radicalninja.logger.CameraActivity"-->
+            <!--android:label="CameraActivity" />-->
+        <!--&lt;!&ndash;<activity&ndash;&gt;-->
+            <!--android:name="com.radicalninja.logger.TakeVideoActivity"-->
+            <!--android:label="@string/app_name"></activity>-->
 
 
 

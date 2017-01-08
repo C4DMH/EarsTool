@@ -247,18 +247,13 @@ public class VideoActivity extends AppCompatActivity implements
 			try {
 				com.anysoftkeyboard.utils.Log.d("Video", "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
 				path = encryption.encrypt(idAndDate, params[0]);
-				//Toast.makeText(VideoActivity.this, "Encrypting.",  Toast.LENGTH_LONG).show();
 			} catch (IOException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.1",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (NoSuchAlgorithmException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.2",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (NoSuchPaddingException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.3",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (InvalidKeyException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.4",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (InvalidAlgorithmParameterException e) {
 				e.printStackTrace();
@@ -280,10 +275,7 @@ public class VideoActivity extends AppCompatActivity implements
 			Toast.makeText(VideoActivity.this, "File is encrypting...... ", Toast.LENGTH_LONG).show();
 
 			new uploadAsyncTask().execute(path);
-			//showDialog2();
-//			uploadAsynTask upload = new uploadAsynTask();
-//			upload.execute()
-			//getApplicationContext().deleteFile(finalPath);
+
 			try {
 				VideoActivity.deleteF(finalPath);
 			} catch (IOException e) {
@@ -313,18 +305,13 @@ public class VideoActivity extends AppCompatActivity implements
 			try {
 				com.anysoftkeyboard.utils.Log.d(TAG, "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
 				path = encryption.encrypt(idAndDate, params[0]);
-				//Toast.makeText(VideoActivity.this, "Encrypting.",  Toast.LENGTH_LONG).show();
 			} catch (IOException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.1",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (NoSuchAlgorithmException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.2",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (NoSuchPaddingException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.3",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (InvalidKeyException e) {
-				//Toast.makeText(VideoActivity.this, "Encrypting.4",  Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 			} catch (InvalidAlgorithmParameterException e) {
 				e.printStackTrace();
@@ -342,8 +329,6 @@ public class VideoActivity extends AppCompatActivity implements
 		protected void onPostExecute(String path) {
 
 			new uploadAsyncTask2().execute(path);
-			//delete(finalPath);
-			//deleteFile(finalPath);
 
 		}
 	}
@@ -353,8 +338,6 @@ public class VideoActivity extends AppCompatActivity implements
 
 
 	public class uploadAsyncTask extends AsyncTask<String, Integer, Void> {
-
-		//private ProgressBar progressBar;
 
 		@Override
 		protected void onPreExecute() {
@@ -786,13 +769,13 @@ public class VideoActivity extends AppCompatActivity implements
 		}
 	}
 
-	public void onRecordVideo2(View v) {
-		//startActivity(new Intent(this, CameraActivity.class));
-
-		Intent takeVideoActivity = new Intent(this, TakeVideoActivity.class);
-		startActivityForResult(takeVideoActivity, REQUEST_RESULT_VIDEO);
-
-	}
+//	public void onRecordVideo2(View v) {
+//		//startActivity(new Intent(this, CameraActivity.class));
+//
+//		Intent takeVideoActivity = new Intent(this, TakeVideoActivity.class);
+//		startActivityForResult(takeVideoActivity, REQUEST_RESULT_VIDEO);
+//
+//	}
 
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

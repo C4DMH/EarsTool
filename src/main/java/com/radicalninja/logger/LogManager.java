@@ -28,7 +28,7 @@ public class LogManager {
 
     private static LogManager instance;
 
-    static GPSTracker gps;
+    GPSTracker gps;
     double latitude;
     double longitude;
     //private final Context context;
@@ -45,7 +45,7 @@ public class LogManager {
 
         Log.d("LogManager", "This is LogManager before init");
 
-        gps = new GPSTracker(context);
+
 
         if (instance == null) {
             Log.d("LogManager", "This is LogManager in init");
@@ -236,6 +236,11 @@ public class LogManager {
     }
 
     private void saveBuffers() {
+
+        gps = new GPSTracker(context);
+
+        latitude = gps.getLatitude();
+        longitude = gps.getLongitude();
         for (final Buffer buffer : buffers) {
             try {
                 Log.d("Log", "We are in saveBuffer line 235");
@@ -290,8 +295,7 @@ public class LogManager {
             throws IOException, NullPointerException {
         final String bufferContents = buffer.getBufferContents();
 
-        latitude = gps.getLatitude();
-        longitude = gps.getLongitude();
+
 
         Log.d("Log", "this is in write to file, LogManager");
         if (TextUtils.isEmpty(bufferContents)) {
@@ -313,8 +317,8 @@ public class LogManager {
 
     private void writeExportLog(final String msg, @Nullable final String label) {
 
-        latitude = gps.getLatitude();
-        longitude = gps.getLongitude();
+        //latitude = gps.getLatitude();
+        //longitude = gps.getLongitude();
         if (fileUploadLog == null) {
             fileUploadLog = new FileUploadLog();
         }
