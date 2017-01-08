@@ -197,39 +197,12 @@
                 android:value="com.radicalninja.logger.MainActivity" />
         </activity>
 
-        <!--<activity-->
-            <!--android:name="com.radicalninja.logger.ui.MapsActivity">-->
-
-        <!--</activity>-->
-
-
-        <!--<activity-->
-            <!--android:name="com.radicalninja.logger.ui.MapsActivity"-->
-            <!--android:label="@string/title_activity_maps"-->
-            <!--android:launchMode="singleTask"-->
-            <!--android:parentActivityName="com.radicalninja.logger.VideoActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.radicalninja.logger.ui.MapsActivity" />-->
-
-                <!--&lt;!&ndash; <category android:name="android.intent.category.DEFAULT" /> &ndash;&gt;-->
-            <!--</intent-filter>-->
-
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="com.radicalninja.logger.VideoActivity" />-->
-        <!--</activity>-->
-
 
 
         <activity
             android:name="com.radicalninja.logger.AlarmActivity"
             android:label="@string/title_activity_video" />
-        <!--<activity-->
-            <!--android:name="com.radicalninja.logger.CameraActivity"-->
-            <!--android:label="CameraActivity" />-->
-        <!--&lt;!&ndash;<activity&ndash;&gt;-->
-            <!--android:name="com.radicalninja.logger.TakeVideoActivity"-->
-            <!--android:label="@string/app_name"></activity>-->
+
 
 
 
@@ -250,9 +223,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name="com.radicalninja.logger.ui.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+
     </application>
 
 </manifest>

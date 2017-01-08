@@ -47,7 +47,6 @@ class FileUploadLog extends LogFileController {
     void writeLine(final String line) throws IOException {
 
 
-
         if (TextUtils.isEmpty(line)) {
             return;
         }

@@ -36,11 +36,13 @@ public class Util {
 
     public interface FileTransferCallback {
         void onStart(final int id, final TransferState state);
+
         void onComplete(final int id, final TransferState state);
+
         void onCancel(final int id, final TransferState state);
+
         void onError(final int id, final Exception e);
     }
-
 
 
     // We only need one instance of the clients and credentials provider
@@ -74,13 +76,13 @@ public class Util {
     }
 
 
-        /**
-         * Gets an instance of a S3 client which is constructed using the given
-         * Context.
-         *
-         * @param context An Context instance.
-         * @return A default S3 client.
-         */
+    /**
+     * Gets an instance of a S3 client which is constructed using the given
+     * Context.
+     *
+     * @param context An Context instance.
+     * @return A default S3 client.
+     */
     public static AmazonS3Client getS3Client(Context context) {
         if (sS3Client == null) {
             sS3Client = new AmazonS3Client(getCredProvider(context.getApplicationContext()));
@@ -111,11 +113,11 @@ public class Util {
      * @return A string that represents the bytes in a proper scale.
      */
     public static String getBytesString(long bytes) {
-        String[] quantifiers = new String[] {
+        String[] quantifiers = new String[]{
                 "KB", "MB", "GB", "TB"
         };
         double speedNum = bytes;
-        for (int i = 0;; i++) {
+        for (int i = 0; ; i++) {
             if (i >= quantifiers.length) {
                 return "";
             }
@@ -185,13 +187,6 @@ public class Util {
                                           final boolean deleteAfter, final Util.FileTransferCallback callback) {
         initUserId();
         Log.d("Log", "This is in AWSUTIL upload file to bucket");
-        // S3 client
-        //final AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
-        //s3.setRegion(Region.getRegion(BUCKET_REGION));
-        // Transfer Utility
-        //final TransferUtility transferUtility =
-                //new TransferUtility(s3, AnyApplication.getInstance());
-        // Upload the file
         final String filePath = String.format("%s/%s", userId, filename);
         final TransferObserver observer =
                 //transferUtility.upload(BuildConfig.AWS_BUCKET_NAME, filePath, file);
@@ -211,23 +206,17 @@ public class Util {
                     case COMPLETED:
 
                         long unixTime = System.currentTimeMillis() / 1000L;
-                        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + unixTime +".log";
+                        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + unixTime + ".log";
 
 
                         File destination = new File(desination);
-                        try
-                        {
+                        try {
                             FileUtils.copyFile(file, destination);
                             Log.d("LogUploadTask", "Copyting file to VideoDIARY");
 
-                        }
-                        catch (IOException e)
-                        {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-
-
 
 
                         Log.d(TAG, String.format("Transfer ID %d has completed", id));
@@ -248,7 +237,8 @@ public class Util {
             }
 
             @Override
-            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) { }
+            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+            }
 
             @SuppressLint("DefaultLocale")
             @Override

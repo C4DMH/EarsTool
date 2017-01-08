@@ -45,12 +45,12 @@ public class LogUploadTask extends BroadcastReceiver {
         Log.d("LogUploadtask", "The value of LOG_UPLOAD_INTERVAL_MINUTES IS: " + x + "the value of boolean USE_AUTO_UPLOAD IS: " + y);
 
         if (BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES < 1 || !BuildConfig.USE_AUTO_UPLOAD) {
-        //if (BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES < 1) {
+            //if (BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES < 1) {
             return;
         }
 
         Log.d(TAG, String.format("Registering repeating upload tasks. Runs every %d minutes.",
-                        BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES));
+                BuildConfig.LOG_UPLOAD_INTERVAL_MINUTES));
         Log.d("LogUploadtask", "This is LogUplaodTask in registerTasks 2");
         final long interval = getTaskInterval();
         final long delay = getFirstTaskDelay();
@@ -79,72 +79,17 @@ public class LogUploadTask extends BroadcastReceiver {
         Log.d(TAG, "Executing log upload task.");
         Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right before awsutil");
 
-//        File file = new File("/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log");
-//
-//        String location = "/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log";
-//
-//
-//        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + n +".log";
-//        n++;
-//
-//        File destination = new File(desination);
-////        try
-////        {
-////            FileUtils.copyFile(file, destination);
-////            Log.d("LogUploadTask", "Copyting file to VideoDIARY");
-////
-////        }
-////        catch (IOException e)
-////        {
-////            e.printStackTrace();
-////        }
-
-
-
 
         final LogManager logManager = LogManager.getInstance();
         final List<File> files = logManager.getExportFiles();
 
-//        int length = files.size();
-//        if(length > 0){
-//
-//            try
-//            {
-//                FileUtils.copyFile(file, destination);
-//                Log.d("LogUploadTask", "Copyting file to VideoDIARY");
-//
-//            }
-//            catch (IOException e)
-//            {
-//                e.printStackTrace();
-//            }
-//
-//        }
 
         Util.uploadFilesToBucket(files, true, logUploadCallback);
 
-       // Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right after awsutil and the number of files is: " + length);
+        // Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right after awsutil and the number of files is: " + length);
 
         File path = context.getFilesDir();
-//        File file = new File("/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log");
-//
-//        String location = "/storage/emulated/0/Android/data/com.menny.android.anysoftkeyboard/files/buffered.log";
-//
-//
-//        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + n +".log";
-//        n++;
-//
-//        File destination = new File(desination);
-//        try
-//        {
-//            FileUtils.copyFile(file, destination);
-//            Log.d("LogUploadTask", "Copyting file to VideoDIARY");
-//
-//        }
-//        catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        }
+
 
     }
 

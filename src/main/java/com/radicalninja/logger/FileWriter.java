@@ -65,17 +65,6 @@ public class FileWriter {
     }
 
 
-//    public File getFile() {
-//        if(!TextUtils.isEmpty(filePath)){
-//            Log.d("FileWriter", "1");
-//            return new File(filePath);
-//        }
-//        else{
-//            Log.d("FileWrite", "2");
-//            return new File(filePath);
-//        }
-//    }
-
 
 
     public void write(final String str) throws IOException {

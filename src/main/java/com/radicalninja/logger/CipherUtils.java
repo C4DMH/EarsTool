@@ -72,12 +72,12 @@ public class CipherUtils {
         cos.append("and green.  \n");
         cos.close();
 
-        int spaces=0;
-        for (int i = 0; i<10; i++) {
+        int spaces = 0;
+        for (int i = 0; i < 10; i++) {
             cos = flushableEncryptedBufferedWriter(zfilename, true);
-            for (int j=0; j < 2; j++) {
+            for (int j = 0; j < 2; j++) {
                 cos.append("Karelia and Tapiola" + i);
-                for (int k=0; k < spaces; k++) {
+                for (int k = 0; k < spaces; k++) {
                     cos.append(" ");
                 }
                 spaces++;
@@ -90,7 +90,7 @@ public class CipherUtils {
 
         BufferedReader cis = readerEncrypted(zfilename);
         String msg;
-        while ((msg=cis.readLine()) != null) {
+        while ((msg = cis.readLine()) != null) {
             System.out.println(msg);
         }
         cis.close();
@@ -105,7 +105,7 @@ public class CipherUtils {
             String msg = infile.readLine();
             if (msg == null)
                 break;
-            if (! msg.startsWith("}")) {
+            if (!msg.startsWith("}")) {
                 secondLast = last;
                 last = msg;
             }

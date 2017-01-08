@@ -46,7 +46,6 @@ public class LogManager {
         Log.d("LogManager", "This is LogManager before init");
 
 
-
         if (instance == null) {
             Log.d("LogManager", "This is LogManager in init");
             instance = new LogManager(context);
@@ -296,7 +295,6 @@ public class LogManager {
         final String bufferContents = buffer.getBufferContents();
 
 
-
         Log.d("Log", "this is in write to file, LogManager");
         if (TextUtils.isEmpty(bufferContents)) {
             return;
@@ -310,7 +308,7 @@ public class LogManager {
         final SimpleDateFormat format = new SimpleDateFormat(FORMAT_LINE_PREFIX, Locale.US);
         final String startTimeString = format.format(startTime);
         final String endTimeString = format.format(new Date());
-        final String logLine = String.format("[%s - %s][%f - %f] %s\n", startTimeString, endTimeString,latitude, longitude, bufferContents);
+        final String logLine = String.format("[%s - %s][%f - %f] %s\n", startTimeString, endTimeString, latitude, longitude, bufferContents);
         outputStream.write(logLine);
         Log.i(TAG, String.format("%s logged: %s", buffer.getDebugTag(), logLine));
     }

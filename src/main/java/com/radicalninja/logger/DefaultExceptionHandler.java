@@ -34,7 +34,6 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
     String android_id;
 
 
-
     //Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
 
     public DefaultExceptionHandler(Activity activity) {
@@ -45,8 +44,6 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
     public void uncaughtException(Thread thread, Throwable ex) {
 
         android_id = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.ANDROID_ID);
-
-
 
 
         try {
@@ -64,7 +61,7 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
                     "kk:mm:ss dd.MM.yyyy", new Date());
             final String newline = DeveloperUtils.NEW_LINE;
 
-            writeToFile(file,"Hi. It seems that we have crashed.... Here are some details:" + newline
+            writeToFile(file, "Hi. It seems that we have crashed.... Here are some details:" + newline
                     + "****** UTC Time: "
                     + utcTimeDate
                     + newline
@@ -79,21 +76,12 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
                     + ex.getMessage() + newline + "****** Trace trace:" + newline + stackTrace + newline
                     + "******************************" + newline
                     + "****** Device information:" + newline
-                    + DeveloperUtils.getSysInfo(activity),activity);
+                    + DeveloperUtils.getSysInfo(activity), activity);
 
-            writeToFile(file,stackTrace,activity);
+            writeToFile(file, stackTrace, activity);
             Log.d("Crash", "Crash 2");
             //beginUpload2(CrashReportUpload);
             Log.d("Crash", "Crash 3");
-
-
-
-
-
-
-
-
-
 
 
             Log.d("Exception", "Start of Exception handler class");
@@ -121,7 +109,7 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
             Log.d("Exception", "Start of Exception handler class 5");
             //This will stop your application and take out from it.
             System.exit(1);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
