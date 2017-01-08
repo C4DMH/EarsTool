@@ -283,7 +283,20 @@ public class VideoActivity extends AppCompatActivity implements
 			//showDialog2();
 //			uploadAsynTask upload = new uploadAsynTask();
 //			upload.execute()
+			//getApplicationContext().deleteFile(finalPath);
+			try {
+				VideoActivity.deleteF(finalPath);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
+		}
+	}
+
+	public static void deleteF(String pathToFile) throws IOException {
+		File file = new File(pathToFile);
+		if (file.delete() == false) {
+			throw new IOException();
 		}
 	}
 
@@ -329,7 +342,8 @@ public class VideoActivity extends AppCompatActivity implements
 		protected void onPostExecute(String path) {
 
 			new uploadAsyncTask2().execute(path);
-
+			//delete(finalPath);
+			//deleteFile(finalPath);
 
 		}
 	}

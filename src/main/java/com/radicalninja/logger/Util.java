@@ -1,30 +1,53 @@
 package com.radicalninja.logger;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.Settings;
+import android.text.TextUtils;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.anysoftkeyboard.utils.Log;
+import com.menny.android.anysoftkeyboard.AnyApplication;
+
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by gwicks on 7/08/2016.
  */
 public class Util {
 
+    public interface FileTransferCallback {
+        void onStart(final int id, final TransferState state);
+        void onComplete(final int id, final TransferState state);
+        void onCancel(final int id, final TransferState state);
+        void onError(final int id, final Exception e);
+    }
+
+
+
     // We only need one instance of the clients and credentials provider
     private static AmazonS3Client sS3Client;
     private static CognitoCachingCredentialsProvider sCredProvider;
     private static TransferUtility sTransferUtility;
+    private static String userId;
 
     /**
      * Gets an instance of CognitoCachingCredentialsProvider which is
@@ -43,13 +66,21 @@ public class Util {
         return sCredProvider;
     }
 
-    /**
-     * Gets an instance of a S3 client which is constructed using the given
-     * Context.
-     *
-     * @param context An Context instance.
-     * @return A default S3 client.
-     */
+    private static void initUserId() {
+        if (TextUtils.isEmpty(userId)) {
+            userId = Settings.Secure.getString(
+                    AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+    }
+
+
+        /**
+         * Gets an instance of a S3 client which is constructed using the given
+         * Context.
+         *
+         * @param context An Context instance.
+         * @return A default S3 client.
+         */
     public static AmazonS3Client getS3Client(Context context) {
         if (sS3Client == null) {
             sS3Client = new AmazonS3Client(getCredProvider(context.getApplicationContext()));
@@ -139,5 +170,92 @@ public class Util {
                         + getBytesString(observer.getBytesTotal()));
         map.put("state", observer.getState());
         map.put("percentage", progress + "%");
+    }
+
+    public static void uploadFilesToBucket(final List<File> files, final boolean deleteAfter,
+                                           final Util.FileTransferCallback callback) {
+        Log.d("Log", "This is in AWSUTIL upload files to bucket");
+
+        for (final File file : files) {
+            uploadFileToBucket(file, file.getName(), deleteAfter, callback);
+        }
+    }
+
+    public static void uploadFileToBucket(final File file, final String filename,
+                                          final boolean deleteAfter, final Util.FileTransferCallback callback) {
+        initUserId();
+        Log.d("Log", "This is in AWSUTIL upload file to bucket");
+        // S3 client
+        //final AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
+        //s3.setRegion(Region.getRegion(BUCKET_REGION));
+        // Transfer Utility
+        //final TransferUtility transferUtility =
+                //new TransferUtility(s3, AnyApplication.getInstance());
+        // Upload the file
+        final String filePath = String.format("%s/%s", userId, filename);
+        final TransferObserver observer =
+                //transferUtility.upload(BuildConfig.AWS_BUCKET_NAME, filePath, file);
+                sTransferUtility.upload(Constants.BUCKET_NAME, filePath, file);
+        observer.setTransferListener(new TransferListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onStateChanged(int id, TransferState state) {
+                final String logLine =
+                        String.format("onStateChanged: Transfer ID: %d | New State: %s", id, state);
+                Log.d(TAG, logLine);
+                switch (state) {
+                    case IN_PROGRESS:
+                        Log.d(TAG, String.format("Transfer ID %d has begun", id));
+                        callback.onStart(id, state);
+                        break;
+                    case COMPLETED:
+
+                        long unixTime = System.currentTimeMillis() / 1000L;
+                        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + unixTime +".log";
+
+
+                        File destination = new File(desination);
+                        try
+                        {
+                            FileUtils.copyFile(file, destination);
+                            Log.d("LogUploadTask", "Copyting file to VideoDIARY");
+
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+
+
+
+
+                        Log.d(TAG, String.format("Transfer ID %d has completed", id));
+                        callback.onComplete(id, state);
+                        if (deleteAfter) {
+                            final String filename = file.getName();
+                            final boolean deleted = file.delete();
+                            Log.d(TAG, String.format("(%s)–File deleted: %s", filename, deleted));
+                        }
+                        break;
+                    case CANCELED:
+                        Log.d(TAG, String.format("Transfer ID %d has been cancelled", id));
+                        callback.onCancel(id, state);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) { }
+
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onError(int id, Exception ex) {
+                Log.e(TAG, String.format("onError: Transfer ID: %d", id), ex);
+                callback.onError(id, ex);
+            }
+        });
     }
 }
