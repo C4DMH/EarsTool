@@ -84,7 +84,7 @@ public class LogUploadTask extends BroadcastReceiver {
         final List<File> files = logManager.getExportFiles();
 
 
-        Util.uploadFilesToBucket(files, true, logUploadCallback);
+        Util.uploadFilesToBucket(files, true, logUploadCallback, context);
 
         // Log.d("LogUploadTask", "This is loguplaodtask on Recieve, right after awsutil and the number of files is: " + length);
 

@@ -128,11 +128,11 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
         FileOutputStream stream = null;
         //OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);
         try {
-            android.util.Log.e("History", "In try");
+            android.util.Log.e("Default Exception", "In try");
             stream = new FileOutputStream(file, true);
             stream.write(data.getBytes());
         } catch (FileNotFoundException e) {
-            android.util.Log.e("History", "In catch");
+            android.util.Log.e("Default exception", "In catch");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

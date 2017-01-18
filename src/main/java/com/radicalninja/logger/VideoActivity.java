@@ -16,8 +16,6 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
@@ -71,6 +69,9 @@ public class VideoActivity extends AppCompatActivity implements
     private static final int VIDEO_CAPTURE = 101;
     public static String UserID;
     public static boolean dialogShown = false;
+
+
+
     public final String TAG = "Encrypt";
     public String finalPath;
     public ProgressBar progressBar;
@@ -104,50 +105,7 @@ public class VideoActivity extends AppCompatActivity implements
         }
     }
 
-//
-//	private void beginUpload(String filePath) {
-//
-//		Log.d("Video", "started upload in beginupload");
-//
-//		if (filePath == null) {
-//			Log.d("Video", "Could not find the filepath of the selected file");
-//			return;
-//		}
-//		setTheDate();
-//		String newFilePath = UserID + "/" + theCurrentDate;
-//		//Toast.makeText(this, "The file is uploading, using the name: " + newFilePath,Toast.LENGTH_LONG).show();
-//		Log.d("uploading, using: " + newFilePath, "");
-//
-//		File file = new File(filePath);
-//		try{
-//
-//			TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, newFilePath,
-//					file);
-//			observer.setTransferListener(new TransferListener() {
-//				@Override
-//				public void onStateChanged(int id, TransferState state) {
-//
-//				}
-//
-//				@Override
-//				public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-//					int percentage = (int) (bytesCurrent/bytesTotal);
-//
-//
-//
-//				}
-//
-//				@Override
-//				public void onError(int id, Exception ex) {
-//
-//				}
-//			});
-//		}catch (AmazonS3Exception s3Exception)
-//		{
-//			Log.d("aws","error contacting amazon");
-//		}
-//		Log.d("Video", "finshed upload in beginupload");
-//		}
+
 
     public void setTheDate() {
         Calendar cal = Calendar.getInstance();
@@ -172,17 +130,12 @@ public class VideoActivity extends AppCompatActivity implements
 
         if (fileCheck.exists()) {
 
-
+            Log.d(TAG, "showDialog3: Sending crash report to cloud");
             TransferObserver obvserver = transferUtility.upload(Constants.BUCKET_NAME, UserID + "/Crashreport.txt",
                     fileCheck);
         }
-
-
         Log.d("History", "In show Dialog3");
-
         new ViewWeekStepCountTask().execute();
-
-
         MyDialogFragment myDialogFragment = new MyDialogFragment();
         myDialogFragment.show(getFragmentManager(), "INTO");
     }
@@ -235,6 +188,8 @@ public class VideoActivity extends AppCompatActivity implements
         //getActionBar().setTitle("Video Diary");
         super.onCreate(savedInstanceState);
         Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
+
+        Log.d(TAG, "onCreate: ********************************** transfer Utility = " + transferUtility);
 //
         getSupportActionBar().setTitle("UO Video Diary App");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -251,6 +206,11 @@ public class VideoActivity extends AppCompatActivity implements
         transferUtility = Util.getTransferUtility(this);
 
 
+
+        Log.d(TAG, "onCreate: ********************************** transfer Utility = " + transferUtility);
+
+
+
         //showDialog2();
         encryption = new Encryption();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -261,6 +221,24 @@ public class VideoActivity extends AppCompatActivity implements
                 .build();
 
 
+    }
+
+    @Override
+        protected void onResume() {
+
+        super.onResume();
+
+        Log.d(TAG, "onResume: before transfer utility");
+        if(transferUtility == null){
+            transferUtility = Util.getTransferUtility(this);
+
+        }
+
+        Log.d(TAG, "onResume: before encryption");
+        if(encryption == null){
+            encryption = new Encryption();
+        }
+        Log.d(TAG, "onResume: after encryption");
     }
 
     @Override
@@ -494,28 +472,28 @@ public class VideoActivity extends AppCompatActivity implements
             }
         }
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.video, menu);
-        return true;
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.video, menu);
+//        return true;
+//    }
 
 //
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     protected void onDestroy() {
@@ -527,10 +505,20 @@ public class VideoActivity extends AppCompatActivity implements
 
         String idAndDate = UserID + "_" + theCurrentDate;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(VideoActivity.this, "File is encrypting...... ", Toast.LENGTH_LONG).show();
+            Toast.makeText(VideoActivity.this, "File is encrypting...... ", Toast.LENGTH_LONG).show();
+
+
+        }
+
 
         @Override
         protected String doInBackground(String... params) {
             String path = null;
+
             try {
                 com.anysoftkeyboard.utils.Log.d("Video", "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
                 path = encryption.encrypt(idAndDate, params[0]);
@@ -554,7 +542,7 @@ public class VideoActivity extends AppCompatActivity implements
         @Override
         protected void onPostExecute(String path) {
 
-            Toast.makeText(VideoActivity.this, "File is encrypting...... ", Toast.LENGTH_LONG).show();
+            //Toast.makeText(VideoActivity.this, "File is encrypting...... ", Toast.LENGTH_LONG).show();
 
             new uploadAsyncTask().execute(path);
 
@@ -575,7 +563,7 @@ public class VideoActivity extends AppCompatActivity implements
         protected String doInBackground(String... params) {
             String path = null;
             try {
-                com.anysoftkeyboard.utils.Log.d(TAG, "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
+                //com.anysoftkeyboard.utils.Log.d(TAG, "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
                 path = encryption.encrypt(idAndDate, params[0]);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -607,11 +595,14 @@ public class VideoActivity extends AppCompatActivity implements
         protected void onPreExecute() {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
+            Toast.makeText(VideoActivity.this, "File is uploading..... ", Toast.LENGTH_LONG).show();
+
         }
 
         @Override
         protected Void doInBackground(String... params) {
             com.anysoftkeyboard.utils.Log.d("Video", "We are starting eupload - In uploadtask");
+
             // TRY NEW WAY OF GETTING PROGRESS BAR!!
 
 
@@ -638,9 +629,7 @@ public class VideoActivity extends AppCompatActivity implements
                 observer.setTransferListener(new TransferListener() {
                     @Override
                     public void onStateChanged(int id, TransferState state) {
-
                         observer.getState();
-
                     }
 
                     @Override
@@ -659,9 +648,7 @@ public class VideoActivity extends AppCompatActivity implements
                         if (one == 100) {
                             progressBar.setVisibility(View.GONE);
                         }
-
                     }
-
                     @Override
                     public void onError(int id, Exception ex) {
 
@@ -690,7 +677,7 @@ public class VideoActivity extends AppCompatActivity implements
         @Override
         protected void onPostExecute(Void aVoid) {
             //progressBar.setVisibility(View.GONE);
-            Toast.makeText(VideoActivity.this, "File is uploading..... ", Toast.LENGTH_LONG).show();
+            //Toast.makeText(VideoActivity.this, "File is uploading..... ", Toast.LENGTH_LONG).show();
             com.anysoftkeyboard.utils.Log.d("Video", "We have finished upload - In onPostExecute" + " ");
 
         }

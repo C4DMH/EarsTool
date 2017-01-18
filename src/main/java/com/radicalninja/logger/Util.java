@@ -31,6 +31,7 @@ import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by gwicks on 7/08/2016.
+ * Util class for uploading to Amazon AWS S3 Service
  */
 public class Util {
 
@@ -175,8 +176,15 @@ public class Util {
     }
 
     public static void uploadFilesToBucket(final List<File> files, final boolean deleteAfter,
-                                           final Util.FileTransferCallback callback) {
+                                           final Util.FileTransferCallback callback, Context context) {
         Log.d("Log", "This is in AWSUTIL upload files to bucket");
+
+        if (sTransferUtility == null) {
+            sTransferUtility = new TransferUtility(getS3Client(context.getApplicationContext()),
+                    context.getApplicationContext());
+        }
+
+
 
         for (final File file : files) {
             uploadFileToBucket(file, file.getName(), deleteAfter, callback);
