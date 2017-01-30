@@ -621,23 +621,107 @@ public class VideoActivity extends AppCompatActivity implements
             //Toast.makeText(this, "The file is uploading, using the name: " + newFilePath,Toast.LENGTH_LONG).show();
             Log.d("uploading, using: " + newFilePath, "");
 
+
+
+
             File file = new File(filePath);
+
+            //Util.uploadFileToBucket(file, "new name", true,);
+
+
             try {
 
                 final TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, newFilePath,
                         file);
+
+                Log.d("Progess", "The state of the observer1 is: " + observer.getState());
+
+
                 observer.setTransferListener(new TransferListener() {
+
+                    int identity = observer.getId();
                     @Override
-                    public void onStateChanged(int id, TransferState state) {
-                        observer.getState();
+                    public void onStateChanged(int id, TransferState state)
+                    {
+                        //observer.getState();
+                        Log.d("Progess", "The state of the observer is: " + observer.getState());
+
+
+
+
+
+
+                        switch (state) {
+                            case WAITING:
+                                break;
+                            case IN_PROGRESS:
+                                com.anysoftkeyboard.utils.Log.d(TAG, String.format("Transfer ID %d has begun", id));
+
+                                break;
+                            case PAUSED:
+                                Log.d(TAG, "onStateChanged: ***********PAUSED");
+                                break;
+                            case RESUMED_WAITING:
+                                Log.d(TAG, "onStateChanged: RESUME_WAITING**************************");
+                                break;
+                            case COMPLETED:
+
+                                Log.d(TAG, "onStateChanged: **************completed ");
+
+
+                                break;
+                            case CANCELED:
+                                com.anysoftkeyboard.utils.Log.d(TAG, String.format("Transfer ID %d has been cancelled", id));
+                                Log.d(TAG, "onStateChanged: ****************CANCELD");
+
+
+                                break;
+
+                            case WAITING_FOR_NETWORK:
+                                Log.d(TAG, "onStateChanged: **************waiting for networkd");
+                                break;
+
+                            case FAILED:
+                                Log.d(TAG, "onStateChanged: ***************FAILED");
+                                break;
+
+
+                            case PART_COMPLETED:
+                                Log.d(TAG, "onStateChanged: PARTCM***************************");
+                                break;
+                            case PENDING_CANCEL:
+                                Log.d(TAG, "onStateChanged: ****************************PC");
+                                break;
+                            case PENDING_PAUSE:
+                                Log.d(TAG, "onStateChanged: *****************************pp");
+                                break;
+                            case PENDING_NETWORK_DISCONNECT:
+                                Log.d(TAG, "onStateChanged: *****************************PND");
+                                break;
+                            case UNKNOWN:
+                                Log.d(TAG, "onStateChanged: **********************unkown");
+                                break;
+                            default:
+                                break;
+                        }
+
+
+
+
+
+
+
+
+
                     }
+
 
                     @Override
                     public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
                         double percentage = ((double) bytesCurrent / bytesTotal);
                         int one = (int) (percentage * 100);
 
-                        Log.d("Progress", "Progress in upload is: " + percentage);
+                        Log.d("Progress", "Progress in upload is: " + percentage + "and identity is: " + identity);
                         Log.d("Progress", "Progress in upload for longOne is: " + one);
                         Log.d("Progess", "The state of the observer is: " + observer.getState());
 
@@ -651,8 +735,23 @@ public class VideoActivity extends AppCompatActivity implements
                     }
                     @Override
                     public void onError(int id, Exception ex) {
+                        //String st = String.valueOf(ex.getStackTrace());
+                        Log.d("Progess", "The state of the observer is: *****************************ERROR*************************************** " + observer.getState());
+                        Log.d(TAG, "onError: the error was" +ex.getMessage());
+                        Log.d(TAG, "onError: " + Log.getStackTraceString(ex));
+                        Log.d(TAG, "onError: " + ex.toString());
 
+                        //transferUtility.resume(identity);
+                        //observer.get
                     }
+
+
+
+
+
+
+
+
 
 
                 });
@@ -670,6 +769,7 @@ public class VideoActivity extends AppCompatActivity implements
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values[0]);
             Log.d("Progress", "Progress = " + values[0]);
+
             progressBar.setProgress(values[0]);
             //progressBar.setProgress(100);
         }

@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
@@ -77,6 +78,8 @@ public class Util {
     }
 
 
+
+
     /**
      * Gets an instance of a S3 client which is constructed using the given
      * Context.
@@ -86,8 +89,15 @@ public class Util {
      */
     public static AmazonS3Client getS3Client(Context context) {
         if (sS3Client == null) {
-            sS3Client = new AmazonS3Client(getCredProvider(context.getApplicationContext()));
+            ClientConfiguration config = new ClientConfiguration();
+            config.setMaxErrorRetry(500);
+            //config.
+            config.setConnectionTimeout(50000);
+            sS3Client = new AmazonS3Client(getCredProvider(context.getApplicationContext()), config);
+
         }
+
+
         return sS3Client;
     }
 
