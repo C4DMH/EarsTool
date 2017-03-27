@@ -376,6 +376,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardKeyboardSwitchedLis
         super.onFinishInputView(finishingInput);
         // Remove pending messages related to update suggestions
         abortCorrection(true, false);
+        android.util.Log.d(TAG, "onFinishInputView: ");
 
         // Starting a new log line
         LogManager.finishLine();
@@ -604,6 +605,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardKeyboardSwitchedLis
 
     @Override
     public void onFinishInput() {
+        android.util.Log.d(TAG, "onFinishInput: ");
         super.onFinishInput();
         //properly finished input. Next time we DO want to show the keyboard view
         mLastEditorIdPhysicalKeyboardWasUsed = 0;
@@ -2064,6 +2066,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardKeyboardSwitchedLis
             if (ic != null) ic.finishComposingText();
 
             clearSuggestions();
+            android.util.Log.d(TAG, "abortCorrection: ");
 
             TextEntryState.reset();
             mUndoCommitCursorPosition = UNDO_COMMIT_NONE;

@@ -30,6 +30,7 @@ import java.util.UUID;
 
 import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
+
 /**
  * Created by gwicks on 7/08/2016.
  * Util class for uploading to Amazon AWS S3 Service

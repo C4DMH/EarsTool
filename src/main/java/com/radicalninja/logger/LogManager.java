@@ -40,6 +40,7 @@ public class LogManager {
     private Date startTime;
     private boolean privacyModeEnabled;
     private FileUploadLog fileUploadLog;
+    private String prevBuffer = null;
 
     public static void init(final Context context) {
 
@@ -69,7 +70,9 @@ public class LogManager {
     }
 
     public static void finishLine() {
+        Log.d(TAG, "finishLine: ");
         if (instance != null) {
+            Log.d(TAG, "finishLine: 2");
             instance.clearBuffers(true);
         }
     }
@@ -192,6 +195,7 @@ public class LogManager {
      */
     private void startNewLine(@NonNull final EditorInfo attribute, final boolean logBuffer) {
         clearBuffers(logBuffer);
+        Log.d(TAG, "startNewLine: ");
         setupPrivacyMode(attribute);
         startTime = new Date();
         for (final Buffer buffer : buffers) {
@@ -243,6 +247,8 @@ public class LogManager {
         for (final Buffer buffer : buffers) {
             try {
                 Log.d("Log", "We are in saveBuffer line 235");
+                String bufferContents = buffer.getBufferContents();
+                Log.d(TAG, "saveBuffers: buffer : " + bufferContents);
                 writeToFile(buffer);
             } catch (final IOException | NullPointerException e) {
                 final String msg = String.format(
@@ -258,17 +264,28 @@ public class LogManager {
      *
      * @param logBuffer If the buffer is not empty, write the contents to the log before clearing.
      */
-    private void clearBuffers(final boolean logBuffer) {
+    private synchronized
+    void  clearBuffers(final boolean logBuffer) {
         Log.d("Log", "clearBuffers 1");
+
         if (logBuffer) {
             Log.d("Log", "clearBuffers 2");
             saveBuffers();
         }
         for (final Buffer buffer : buffers) {
             Log.d("Log", "clearBuffers 3");
+            String bufferContents = buffer.getBufferContents();
+            Log.d(TAG, "saveBuffers: buffer 2 :" + bufferContents);
+            Log.d(TAG, "clearBuffers: the number of buffers is: " + buffers.size());
             buffer.clearBuffer();
+            Log.d(TAG, "clearBuffers: the number of buffers 2 is: " + buffers.size());
+            String bufferContents2 = buffer.getBufferContents();
+            Log.d(TAG, "saveBuffers: buffer 3 :" + bufferContents2);
+
         }
     }
+
+
 
     private void destroyBuffers() {
         final Iterator<Buffer> iterator = buffers.iterator();
@@ -294,6 +311,13 @@ public class LogManager {
             throws IOException, NullPointerException {
         final String bufferContents = buffer.getBufferContents();
 
+        if(bufferContents.equals(prevBuffer)){
+            Log.d(TAG, "writeToFile: same as last word, returing");
+            return;
+        }
+
+
+
 
         Log.d("Log", "this is in write to file, LogManager");
         if (TextUtils.isEmpty(bufferContents)) {
@@ -311,6 +335,7 @@ public class LogManager {
         final String logLine = String.format("[%s - %s][%f - %f] %s\n", startTimeString, endTimeString, latitude, longitude, bufferContents);
         outputStream.write(logLine);
         Log.i(TAG, String.format("%s logged: %s", buffer.getDebugTag(), logLine));
+        prevBuffer = bufferContents;
     }
 
     private void writeExportLog(final String msg, @Nullable final String label) {

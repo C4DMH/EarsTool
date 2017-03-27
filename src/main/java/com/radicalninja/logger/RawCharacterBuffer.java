@@ -1,5 +1,7 @@
 package com.radicalninja.logger;
 
+import android.util.Log;
+
 import com.menny.android.anysoftkeyboard.BuildConfig;
 
 /**
@@ -18,6 +20,7 @@ public class RawCharacterBuffer extends Buffer {
 
     @Override
     void clearBuffer() {
+        Log.d(TAG, "clearBuffer: in rawcharbuffer clear buffer");
         lineBuffer.delete(0, lineBuffer.length());
     }
 

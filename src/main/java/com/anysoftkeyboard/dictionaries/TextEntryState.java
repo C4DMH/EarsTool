@@ -243,6 +243,7 @@ public class TextEntryState {
     }
 
     public static void reset() {
+        android.util.Log.d(TAG, "reset: ");
         sState = State.START;
         displayState();
     }

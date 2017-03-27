@@ -1,6 +1,7 @@
 package com.radicalninja.logger;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.anysoftkeyboard.base.dictionaries.WordComposer;
 import com.menny.android.anysoftkeyboard.BuildConfig;
@@ -48,6 +49,7 @@ public class WordBuffer extends Buffer {
         oldKeyboardCursorStart = oldKeyboardCursorEnd = 0;
         keyboardCursorStart = keyboardCursorEnd = 0;
         composingText = prevInput = "";
+        Log.d(TAG, "startNewLine: ");
     }
 
     @Override
@@ -61,16 +63,26 @@ public class WordBuffer extends Buffer {
     }
 
     public void clearBuffer() {
+        Log.d(TAG, "clearBuffer: in wordbuffer clear buffer");
+        Log.d(TAG, "clearBuffer: the length of linebuffer is: " + lineBuffer.length());
+        Log.d(TAG, "clearBuffer: linebuffer: " + lineBuffer);
         if (isLogEnabled() && (lineBuffer.length() > 0 || composingText.length() > 0)) {
             lineBuffer.delete(0, lineBuffer.length());
+            Log.d(TAG, "clearBuffer: after end of clear buffer");
+            Log.d(TAG, "clearBuffer: the length of linebuffer is: " + lineBuffer.length());
+            Log.d(TAG, "clearBuffer: linebuffer: " + lineBuffer);
+
+
         }
     }
 
     private String getLineBuffer() {
+        Log.d(TAG, "getLineBuffer: ");
         return String.format("%s%s", lineBuffer.toString(), composingText);
     }
 
     private String getWordSample() {
+        Log.d(TAG, "getWordSample: ");
         final String[] bufferWords = getLineBuffer().split("\\s+");
         final List<String> sample = new ArrayList<>();
         for (int i = 0; i < bufferWords.length; i++) {
@@ -82,10 +94,12 @@ public class WordBuffer extends Buffer {
     }
 
     public void setCursorPositions(final int cursorStart, final int cursorEnd) {
+        Log.d(TAG, "setCursorPositions: 1");
         if (!isLogEnabled() ||
                 (cursorStart == cursorPosition && diffOutOfRange(keyboardCursorStart, cursorStart, 1))) {
             return;
         }
+        Log.d(TAG, "setCursorPositions: 2");
         oldKeyboardCursorStart = keyboardCursorStart;
         //oldKeyboardCursorEnd = keyboardCursorEnd;
         keyboardCursorStart = cursorStart;
@@ -101,12 +115,14 @@ public class WordBuffer extends Buffer {
     }
 
     private void updateCursorPosition(final int newCursorPosition) {
+        Log.d(TAG, "updateCursorPosition: ");
         if (diffOutOfRange(oldKeyboardCursorStart, newCursorPosition, 1)) {
             cursorPosition = newCursorPosition;
         }
     }
 
     private void moveCursorToLeft(final int toLeft) {
+        Log.d(TAG, "moveCursorToLeft: ");
         cursorPosition -= toLeft;
         updateCursorPosition(cursorPosition);
     }
@@ -116,19 +132,23 @@ public class WordBuffer extends Buffer {
     }
 
     private void moveCursorToRight(final int toRight) {
+        Log.d(TAG, "moveCursorToRight: ");
         cursorPosition += toRight;
         updateCursorPosition(cursorPosition);
     }
 
     public void moveCursorToRight() {
+        Log.d(TAG, "moveCursorToRight: ");
         moveCursorToRight(1);
     }
 
     public void moveCursorToStart() {
+        Log.d(TAG, "moveCursorToStart: ");
         cursorPosition = oldKeyboardCursorStart = 0;
     }
 
     public void moveCursorToEnd() {
+        Log.d(TAG, "moveCursorToEnd: ");
         cursorPosition = oldKeyboardCursorStart = lineBuffer.length();
     }
 
@@ -142,6 +162,7 @@ public class WordBuffer extends Buffer {
     }
 
     public void insertText(final WordComposer word) {
+        Log.d(TAG, "insertText: ");
         if (!isLogEnabled()) {
             return;
         }
@@ -159,6 +180,7 @@ public class WordBuffer extends Buffer {
     }
 
     public void insertText(String input) {
+        Log.d(TAG, "insertText: ");
         if (!isLogEnabled()) {
             return;
         }
@@ -182,6 +204,7 @@ public class WordBuffer extends Buffer {
     }
 
     public void deleteSurroundingText(final int lengthBefore, final int lengthAfter) {
+        Log.d(TAG, "deleteSurroundingText: ");
         if (!isLogEnabled() || lengthBefore == lengthAfter) {
             return;
         }
@@ -197,6 +220,7 @@ public class WordBuffer extends Buffer {
     }
 
     public void revertLastCorrection() {
+        Log.d(TAG, "revertLastCorrection: ");
         if (!isLogEnabled()) {
             return;
         }
