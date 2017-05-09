@@ -814,4 +814,10 @@ public class VideoActivity extends AppCompatActivity implements
     }
 
 
+
+    // START OF UPLOAD APP USAGE STATISTICS
+
+
+
+
 }
