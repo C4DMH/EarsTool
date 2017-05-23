@@ -128,11 +128,16 @@ public class UStats {
         return usageStatsList;
     }
 
-    public static void printUsageStats(List<UsageStats> usageStatsList){
+    //public static void printUsageStats(List<UsageStats> usageStatsList){
+    public static String printUsageStats(List<UsageStats> usageStatsList){
 
         Log.d(TAG, "printUsageStats: in print");
 
         String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "AppUsage_" + time + ".txt");
+        //StatsJobService.setFielName(uri);
+        //StatsJobService.fileName = uri;
+
+        Log.d(TAG, "printUsageStats: The string URI for file is: " + uri);
 
 
         File file = new File(uri);
@@ -170,10 +175,15 @@ public class UStats {
 //                    + u.getTotalTimeInForeground()/1000 + " seconds " );// mDateFormat.format(u.getLastTimeUsed()) + " time last used") ;
         }
 
+        return uri;
+
+
+
+
     }
 
-    public static void printCurrentUsageStatus(Context context){
-        printUsageStats(getUsageStatsList(context));
+    public static String printCurrentUsageStatus(Context context){
+        return printUsageStats(getUsageStatsList(context));
     }
     @SuppressWarnings("ResourceType")
     private static UsageStatsManager getUsageStatsManager(Context context){
@@ -192,17 +202,22 @@ public class UStats {
     private static void writeToFile(File file, String data) {
 
         FileOutputStream stream = null;
+        System.out.println("The state of the media is: " + Environment.getExternalStorageState());
+
         //OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);
         try {
             Log.e("History", "In try");
             Log.d(TAG, "writeToFile: ");
             stream = new FileOutputStream(file, true);
+            Log.d(TAG, "writeToFile: 2");
             stream.write(data.getBytes());
+            Log.d(TAG, "writeToFile: 3");
         } catch (FileNotFoundException e) {
             Log.e("History", "In catch");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
 
 

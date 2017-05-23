@@ -1,21 +1,30 @@
 package com.radicalninja.logger;
 
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TimePicker;
 
 import com.menny.android.anysoftkeyboard.R;
@@ -28,9 +37,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private PendingIntent alarmIntent;
+    private PendingIntent statsIntent;
     public static boolean alarmIsSet = false;
     public static boolean gotLocation = false;
+    public static boolean statsAlarmIsSet = false;
 
     GPSTracker gps;
     double latitude;
@@ -38,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences wmbPreference;
 
-    public static MainActivity instace;
+    public static MainActivity instance;
     public String theCurrentDate;
 
     public void startAlarm() {
@@ -61,8 +74,11 @@ public class MainActivity extends AppCompatActivity {
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
         alarmIsSet = true;
+        //instace = this;
 
     }
+
+
 
 
     public static String convertDate(String dateInMilliseconds, String dateFormat) {
@@ -75,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static MainActivity getIntance() {
-        return instace;
+        return instance;
     }
 
 
@@ -84,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
         setContentView(R.layout.activity_main);
-        instace = this;
+        instance = this;
         startAlarm();
         wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
         boolean alarmSet = wmbPreference.getBoolean("ALARMSET", true);
@@ -92,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = wmbPreference.edit();
             editor.putBoolean("ALARMSET", false);
             editor.commit();
+
+        }
+
+        if (!isAccessGranted()) {
+            //Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+            //startActivity(intent);
+            showDialog();
 
         }
 
@@ -105,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             longitude = gps.getLongitude();
             Log.d("GPS", "111 WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
         }
+        startStatsAlarm();
 
         startActivity(new Intent(this, VideoActivity.class));
 
@@ -177,8 +201,80 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        instance = null;
         startService(new Intent(this, MainActivity.class));
     }
+
+    public void startStatsAlarm() {
+        Log.d(TAG, "startStatsAlarm: in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 17);
+        cal.set(Calendar.MINUTE, 05);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, StatsAlarmReceiver.class);
+        statsIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, statsIntent);
+        alarmIsSet = true;
+        //instace = this;
+
+    }
+
+    private boolean isAccessGranted() {
+        try {
+            PackageManager packageManager = getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(), 0);
+            AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+            int mode = 0;
+            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.KITKAT) {
+                mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                        applicationInfo.uid, applicationInfo.packageName);
+            }
+            return (mode == AppOpsManager.MODE_ALLOWED);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    public void showDialog()
+    {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("Usage Access")
+                .setMessage("App will not run without usage access permissions.")
+                .setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                        // intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$SecuritySettingsActivity"));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivityForResult(intent,0);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .create();
+
+        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        alertDialog.show();
+    }
+
 }
 
 

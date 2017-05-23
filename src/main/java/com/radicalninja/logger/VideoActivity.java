@@ -88,6 +88,9 @@ public class VideoActivity extends AppCompatActivity implements
     private PopupWindow popupWindow;
     private TransferUtility transferUtility;
     private File testRoot;
+    public static VideoActivity instance;
+
+    private static final int JOB_ID = 0x34;
 
     public static String getSecureId(Context context) {
         String android_id = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
@@ -182,6 +185,10 @@ public class VideoActivity extends AppCompatActivity implements
         }
     }
 
+    public static VideoActivity getIntance() {
+        return instance;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -198,6 +205,7 @@ public class VideoActivity extends AppCompatActivity implements
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(0);
         progressBar.setVisibility(View.GONE);
+        instance = this;
 
         gps = new GPSTracker(this);
 
@@ -219,6 +227,23 @@ public class VideoActivity extends AppCompatActivity implements
                 .addConnectionCallbacks(this)
                 .enableAutoManage(this, 0, this)
                 .build();
+
+
+
+
+//        final JobInfo job = new JobInfo.Builder(JOB_ID, new ComponentName(this, StatsJobService.class))
+//                //.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+//                //.setRequiresCharging(true)
+//                //.setMinimumLatency(10000)
+//                .setPeriodic(TimeUnit.DAYS.toMillis(1))
+//                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+//                .build();
+//        final JobScheduler jobScheduler =
+//                (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+////
+//        jobScheduler.schedule(job);
+//        Log.d(TAG, "onCreate: Job Scehduled");
+        
 
 
     }
@@ -498,6 +523,7 @@ public class VideoActivity extends AppCompatActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        instance = null;
         startService(new Intent(this, MainActivity.class));
     }
 
