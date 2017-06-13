@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.amazonaws.ClientConfiguration;
@@ -16,7 +15,6 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.AnyApplication;
 
 import org.apache.commons.io.FileUtils;
 
@@ -73,8 +71,9 @@ public class Util {
 
     private static void initUserId() {
         if (TextUtils.isEmpty(userId)) {
-            userId = Settings.Secure.getString(
-                    AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
+            userId = MainActivity.secureID;
+//            userId = Settings.Secure.getString(
+//                    AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
         }
     }
 

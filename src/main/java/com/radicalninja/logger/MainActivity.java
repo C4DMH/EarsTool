@@ -8,6 +8,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +19,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -27,12 +31,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TimePicker;
 
+import com.menny.android.anysoftkeyboard.AnyApplication;
 import com.menny.android.anysoftkeyboard.R;
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,9 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
     private PendingIntent alarmIntent;
     private PendingIntent statsIntent;
+    private PendingIntent GPSIntent;
+    private PendingIntent MicIntent;
     public static boolean alarmIsSet = false;
     public static boolean gotLocation = false;
     public static boolean statsAlarmIsSet = false;
+    public static final String secureID = Settings.Secure.getString(
+            AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
 
     GPSTracker gps;
     double latitude;
@@ -53,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
 
     public static MainActivity instance;
     public String theCurrentDate;
+
+
+
+//    private static void initUserId() {
+//        if (TextUtils.isEmpty(secureID)) {
+//            secureID = Settings.Secure.getString(
+//                    AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
+//        }
+//    }
 
     public void startAlarm() {
 
@@ -100,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
         setContentView(R.layout.activity_main);
+//        secureID = Settings.Secure.getString(
+//                AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
         instance = this;
         startAlarm();
         wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
@@ -129,6 +149,35 @@ public class MainActivity extends AppCompatActivity {
             Log.d("GPS", "111 WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
         }
         startStatsAlarm();
+        startMicUploadAlarm();
+        startGPSUploadAlarm();
+
+        AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+        String rate = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
+        String size = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER);
+        Log.d("Buffer Size and  rate", "Size :" + size + " & Rate: " + rate);
+
+
+
+
+        final JobInfo job = new JobInfo.Builder(1, new ComponentName(this, StatsJobService.class))
+                //.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                //.setRequiresCharging(true)
+                //.setMinimumLatency(10000)
+                .setPeriodic(TimeUnit.MINUTES.toMillis(15))
+                //.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .build();
+        final JobScheduler jobScheduler =
+                (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+//
+        jobScheduler.schedule(job);
+        Log.d(TAG, "onCreate: Job Scehduled");
+
+
+
+
+
+
 
         startActivity(new Intent(this, VideoActivity.class));
 
@@ -217,17 +266,74 @@ public class MainActivity extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 17);
-        cal.set(Calendar.MINUTE, 05);
+        cal.set(Calendar.HOUR_OF_DAY, 14);
+        cal.set(Calendar.MINUTE, 59);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, StatsAlarmReceiver.class);
-        statsIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        statsIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, statsIntent);
         alarmIsSet = true;
         //instace = this;
 
     }
+
+
+    public void startMicUploadAlarm() {
+        Log.d(TAG, "startStatsAlarm: in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 14);
+        cal.set(Calendar.MINUTE, 35);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, MicRecordUploadAlarm.class);
+        //statsIntent = PendingIntent.getBroadcast(this, 2, intent, 0);
+        MicIntent = PendingIntent.getBroadcast(this, 2, intent, 0);
+
+
+
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, MicIntent);
+        alarmIsSet = true;
+        //instace = this;
+
+    }
+
+    public void startGPSUploadAlarm() {
+        Log.d(TAG, "startGPSAlarm: in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 15);
+        cal.set(Calendar.MINUTE, 8);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, UploadGPSAlarmReceiver.class);
+        //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
+        GPSIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
+
+
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, GPSIntent);
+        alarmIsSet = true;
+        //instace = this;
+
+    }
+
 
     private boolean isAccessGranted() {
         try {

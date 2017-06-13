@@ -32,11 +32,11 @@ public class Encryption {
 
 
 
-    public String encrypt(String name, String path) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+    public String encrypt(String name, String path, String directoryName) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
         //Toast.makeText(this,"Beginning encryption",  Toast.LENGTH_LONG).show();
         // Here you read the cleartext.
 
-        String directoryName = "/videoDIARY/";
+        //String directoryName = "/videoDIARY/";
 
         byte[] iv = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 

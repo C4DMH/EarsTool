@@ -547,7 +547,7 @@ public class VideoActivity extends AppCompatActivity implements
 
             try {
                 com.anysoftkeyboard.utils.Log.d("Video", "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
-                path = encryption.encrypt(idAndDate, params[0]);
+                path = encryption.encrypt(idAndDate, params[0],"/videoDIARY/");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
@@ -590,7 +590,7 @@ public class VideoActivity extends AppCompatActivity implements
             String path = null;
             try {
                 //com.anysoftkeyboard.utils.Log.d(TAG, "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
-                path = encryption.encrypt(idAndDate, params[0]);
+                path = encryption.encrypt(idAndDate, params[0],"/videoDIARY/");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {

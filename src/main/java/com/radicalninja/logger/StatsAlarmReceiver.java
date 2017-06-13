@@ -29,12 +29,15 @@ public class StatsAlarmReceiver extends BroadcastReceiver {
     String encryptedUri;
     Encryption mEncryption;
     Context mContext;
+    String userID;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        mContext  = MainActivity.instance;
+        //mContext  = MainActivity.instance;
+        mContext = context;
         Log.d(TAG, "onReceive: we have started onrecieve");
+        userID = MainActivity.secureID;
         mEncryption = new Encryption();
         transferUtility = Util.getTransferUtility(mContext);
         Log.d(TAG, "onReceive: transfer utility = " + transferUtility);
@@ -62,7 +65,7 @@ public class StatsAlarmReceiver extends BroadcastReceiver {
         String path2 = null;
         try {
             //com.anysoftkeyboard.utils.Log.d(TAG, "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
-            path2 = mEncryption.encrypt(mFileName, mFilePath);
+            path2 = mEncryption.encrypt(mFileName, mFilePath, "/videoDIARY/");
             Log.d(TAG, "Encrypt: the path me get is: " + path2);
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +80,7 @@ public class StatsAlarmReceiver extends BroadcastReceiver {
         }
         Log.d(TAG, "Encrypt: 2");
         Log.d(TAG, "Encrypt: path2 is: " + path2);
-        beginUpload2("STATS", path2);
+        //beginUpload2("STATS", path2);
         return path2;
 
 
@@ -98,7 +101,7 @@ public class StatsAlarmReceiver extends BroadcastReceiver {
 
         File file = new File(filePath);
         //TransferObserver observer = transferUtility.upload(Constants.BUCKET_NAME, name,
-        transferUtility.upload(Constants.BUCKET_NAME, name,
+        transferUtility.upload(Constants.BUCKET_NAME,  userID + "/UsageStats/" + name,
                 file);
         Log.d(TAG, "beginUpload2: end");
 

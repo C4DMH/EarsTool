@@ -92,15 +92,26 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             Log.d("Exception", "Start of Exception handler class 2");
 
+            // Changed 7th June 2017
+
+//            PendingIntent pendingIntent = PendingIntent.getActivity(
+//                    MainActivity.getIntance().getBaseContext(), 0, intent, intent.getFlags());
+
             PendingIntent pendingIntent = PendingIntent.getActivity(
-                    MainActivity.getIntance().getBaseContext(), 0, intent, intent.getFlags());
+                    activity.getBaseContext(), 0, intent, intent.getFlags());
 
 //            PendingIntent pendingIntent = PendingIntent.getActivity(
 //                    MainActivity.getIntance().getApplicationContext(), 0, intent, intent.getFlags());
             Log.d("Exception", "Start of Exception handler class 3");
             //Following code will restart your application after 2 seconds
-            AlarmManager mgr = (AlarmManager) MainActivity.getIntance().getBaseContext()
+
+
+            // Changed 7th June 2017
+//            AlarmManager mgr = (AlarmManager) MainActivity.getIntance().getBaseContext()
+//                    .getSystemService(Context.ALARM_SERVICE);
+            AlarmManager mgr = (AlarmManager) activity.getBaseContext()
                     .getSystemService(Context.ALARM_SERVICE);
+
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 5000,
                     pendingIntent);
             Log.d("Exception", "Start of Exception handler class 4");
