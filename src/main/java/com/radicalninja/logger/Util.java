@@ -186,7 +186,7 @@ public class Util {
     }
 
     public static void uploadFilesToBucket(final List<File> files, final boolean deleteAfter,
-                                           final Util.FileTransferCallback callback, Context context) {
+                                            final Util.FileTransferCallback callback, Context context) {
         Log.d("Log", "This is in AWSUTIL upload files to bucket");
 
         if (sTransferUtility == null) {
@@ -198,6 +198,25 @@ public class Util {
 
         for (final File file : files) {
             uploadFileToBucket(file, file.getName(), deleteAfter, callback);
+        }
+    }
+
+
+    // Method overload attempt june 14th 2017
+
+    public static void uploadFilesToBucket(final List<File> files, final boolean deleteAfter,
+                                           final Util.FileTransferCallback callback, Context context, String folder) {
+        Log.d("Log", "This is in AWSUTIL upload files to bucket");
+
+        if (sTransferUtility == null) {
+            sTransferUtility = new TransferUtility(getS3Client(context.getApplicationContext()),
+                    context.getApplicationContext());
+        }
+
+
+
+        for (final File file : files) {
+            uploadFileToBucket(file, file.getName(), deleteAfter, callback, folder);
         }
     }
 
@@ -235,6 +254,73 @@ public class Util {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
+
+                        Log.d(TAG, String.format("Transfer ID %d has completed", id));
+                        callback.onComplete(id, state);
+                        if (deleteAfter) {
+                            final String filename = file.getName();
+                            final boolean deleted = file.delete();
+                            Log.d(TAG, String.format("(%s)–File deleted: %s", filename, deleted));
+                        }
+                        break;
+                    case CANCELED:
+                        Log.d(TAG, String.format("Transfer ID %d has been cancelled", id));
+                        callback.onCancel(id, state);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+            }
+
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onError(int id, Exception ex) {
+                Log.e(TAG, String.format("onError: Transfer ID: %d", id), ex);
+                callback.onError(id, ex);
+            }
+        });
+    }
+
+
+    public static void uploadFileToBucket(final File file, final String filename,
+                                          final boolean deleteAfter, final Util.FileTransferCallback callback, String folder) {
+        initUserId();
+        Log.d("Log", "This is in AWSUTIL upload file to bucket");
+        final String filePath = String.format("%s%s", userId + folder, filename);
+        final TransferObserver observer =
+                //transferUtility.upload(BuildConfig.AWS_BUCKET_NAME, filePath, file);
+                sTransferUtility.upload(Constants.BUCKET_NAME, filePath, file);
+        observer.setTransferListener(new TransferListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onStateChanged(int id, TransferState state) {
+                final String logLine =
+                        String.format("onStateChanged: Transfer ID: %d | New State: %s", id, state);
+                Log.d(TAG, logLine);
+                switch (state) {
+                    case IN_PROGRESS:
+                        Log.d(TAG, String.format("Transfer ID %d has begun", id));
+                        callback.onStart(id, state);
+                        break;
+                    case COMPLETED:
+
+//                        long unixTime = System.currentTimeMillis() / 1000L;
+//                        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + unixTime + ".log";
+//
+//
+//                        File destination = new File(desination);
+//                        try {
+//                            FileUtils.copyFile(file, destination);
+//                            Log.d("LogUploadTask", "Copyting file to VideoDIARY");
+//
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 
 
                         Log.d(TAG, String.format("Transfer ID %d has completed", id));

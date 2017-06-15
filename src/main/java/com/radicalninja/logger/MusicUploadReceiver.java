@@ -23,19 +23,19 @@ import java.util.Calendar;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * Created by gwicks on 23/05/2017.
+ * Created by gwicks on 14/06/2017.
  */
 
-public class MicRecordUploadAlarm extends BroadcastReceiver {
+public class MusicUploadReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "MicRecordUploadAlarm";
+
+    private static final String TAG = "MusicUploadReceiver";
 
     TransferUtility mTransferUtility;
     Encryption mEncryption;
     Context mContext;
     String encryptedPath;
-
-    static String folder = "/MicRecord/";
+    static String folder = "/Music/";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -53,7 +53,7 @@ public class MicRecordUploadAlarm extends BroadcastReceiver {
 
 
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/MicRecord/";
+        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Music/";
 
         File directory = new File(path);
 
@@ -110,7 +110,7 @@ public class MicRecordUploadAlarm extends BroadcastReceiver {
         String path2 = null;
         try {
             //com.anysoftkeyboard.utils.Log.d(TAG, "We are starting encrytopn 1 - in doInBackgound AsyncTask ENCRYTPTION!");
-            path2 = mEncryption.encrypt(mFileName, mFilePath, "/videoDIARY/MicRecord/");
+            path2 = mEncryption.encrypt(mFileName, mFilePath, "/videoDIARY/Music/");
             Log.d(TAG, "Encrypt: the path me get is: " + path2);
         } catch (IOException e) {
             e.printStackTrace();
@@ -182,5 +182,4 @@ public class MicRecordUploadAlarm extends BroadcastReceiver {
             Log.d(TAG, makeLogLine("Callback onError()", id, TransferState.FAILED), e);
         }
     };
-
 }

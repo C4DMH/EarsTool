@@ -34,6 +34,7 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
     Encryption mEncryption;
     Context mContext;
     String encryptedPath;
+    static String folder = "/GPS/";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -88,7 +89,7 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
         // END 9th JUne change
 
 
-        Util.uploadFilesToBucket(encryptedFiles, true,logUploadCallback, mContext);
+        Util.uploadFilesToBucket(encryptedFiles, true,logUploadCallback, mContext, folder);
 
         //DELETING FILE BEFORE UPLOAD COMPLETE!!!!
 

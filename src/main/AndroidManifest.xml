@@ -42,6 +42,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -208,6 +211,12 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name="com.radicalninja.logger.MusicUploadReceiver">
+            <intent-filter>
+                <action android:name="com.codepath.CUSTOM_INTENT"></action>
+            </intent-filter>
+        </receiver>
+
         <receiver android:name="com.radicalninja.logger.IncomingCallListener">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
@@ -251,6 +260,16 @@
         <service android:name="com.radicalninja.logger.StatsJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE"
                  android:exported="true"/>
+
+        <service android:name="com.radicalninja.logger.MusicNotificationListener"
+
+                 android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

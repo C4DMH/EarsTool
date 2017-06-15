@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private PendingIntent statsIntent;
     private PendingIntent GPSIntent;
     private PendingIntent MicIntent;
+    private PendingIntent musicIntent;
     public static boolean alarmIsSet = false;
     public static boolean gotLocation = false;
     public static boolean statsAlarmIsSet = false;
@@ -138,6 +139,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
+        if(!checkNotificationEnabled()){
+
+            showMusicDialog();
+
+        }
+
         Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         //List<Address> address = null;
         List<Address> address = null;
@@ -151,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         startStatsAlarm();
         startMicUploadAlarm();
         startGPSUploadAlarm();
+        startMusicUploadAlarm();
 
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         String rate = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
@@ -292,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
 
         cal.setTimeInMillis(System.currentTimeMillis());
         cal.set(Calendar.HOUR_OF_DAY, 14);
-        cal.set(Calendar.MINUTE, 35);
+        cal.set(Calendar.MINUTE, 59);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, MicRecordUploadAlarm.class);
@@ -319,8 +328,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 15);
-        cal.set(Calendar.MINUTE, 8);
+        cal.set(Calendar.HOUR_OF_DAY, 14);
+        cal.set(Calendar.MINUTE,59);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, UploadGPSAlarmReceiver.class);
@@ -330,6 +339,33 @@ public class MainActivity extends AppCompatActivity {
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, GPSIntent);
         alarmIsSet = true;
+        //instace = this;
+
+    }
+
+    public void startMusicUploadAlarm() {
+        Log.d(TAG, "startGPSAlarm: in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 14);
+        cal.set(Calendar.MINUTE, 59);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, MusicUploadReceiver.class);
+        //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
+        musicIntent = PendingIntent.getBroadcast(this, 4, intent, 0);
+
+
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, musicIntent);
+        //alarmIsSet = true;
         //instace = this;
 
     }
@@ -380,6 +416,60 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
     }
+
+
+    public boolean checkNotificationEnabled() {
+        try{
+            Log.d(TAG, "checkNotificationEnabled: in try");
+            if(Settings.Secure.getString(this.getContentResolver(),
+                    "enabled_notification_listeners").contains(this.getApplication().getPackageName()))
+            {
+                Log.d(TAG, "checkNotificationEnabled: in true");
+
+                Log.d(TAG, "checkNotificationEnabled: true");
+                return true;
+            } else {
+
+                Log.d(TAG, "checkNotificationEnabled: ruturn false");
+                return false;
+            }
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "checkNotificationEnabled: Did not get into settings?");
+        return false;
+    }
+
+    public void showMusicDialog()
+    {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("Music Listening Habits")
+                .setMessage("App will not run without usage access permissions. The app only collects information from installed music players, and ignores all other notifications.")
+                .setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .create();
+
+        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        alertDialog.show();
+    }
+
+
+
 
 }
 
