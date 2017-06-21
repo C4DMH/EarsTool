@@ -4,6 +4,7 @@
     package="com.menny.android.anysoftkeyboard">
     <!-- used in QuickTextViewFactory -->
     <uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip" />
+
     <!--<uses-sdk tools:overrideLibrary="android.support.v13" />-->
 
     <!--<uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip, android.support.v13, com.google.android.gms.play_services, com.google.android.gms.ads.impl, com.google.android.gms.ads,-->
@@ -212,6 +213,12 @@
         </receiver>
 
         <receiver android:name="com.radicalninja.logger.MusicUploadReceiver">
+            <intent-filter>
+                <action android:name="com.codepath.CUSTOM_INTENT"></action>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.radicalninja.logger.PhotoUploadReceiver">
             <intent-filter>
                 <action android:name="com.codepath.CUSTOM_INTENT"></action>
             </intent-filter>

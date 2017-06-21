@@ -44,6 +44,10 @@ public class StatsJobService extends JobService {
         String currentDate = df2.format(c.getTime());
 
         String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Location/";
+
+
+
+
         Log.d(TAG, "onStartJob: path is: " + path);
 
         File directory = new File(path);

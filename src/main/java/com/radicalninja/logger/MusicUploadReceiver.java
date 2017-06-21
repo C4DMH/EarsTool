@@ -57,6 +57,12 @@ public class MusicUploadReceiver extends BroadcastReceiver {
 
         File directory = new File(path);
 
+
+        if(!directory.exists()){
+            directory.mkdir();
+        }
+
+
         //String encryptedPath = Encrypt("MicRecord_" +formattedDate, path );
         //beginUpload2("MicRecord_" +formattedDate, encryptedPath);
 
@@ -67,7 +73,7 @@ public class MusicUploadReceiver extends BroadcastReceiver {
         for(File each : files){
 
             Log.d(TAG, "onReceive: path = " + each.getAbsolutePath());
-            Encrypt("MicRecord_ " + formattedDate + "_" + i, each.getAbsolutePath());
+            Encrypt(formattedDate + "_" + i, each.getAbsolutePath());
             i = i + 1;
             Log.d(TAG, "onReceive: i is: " + i);
             try{

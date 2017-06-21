@@ -22,6 +22,7 @@ import android.location.Geocoder;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import android.widget.TimePicker;
 import com.menny.android.anysoftkeyboard.AnyApplication;
 import com.menny.android.anysoftkeyboard.R;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private PendingIntent GPSIntent;
     private PendingIntent MicIntent;
     private PendingIntent musicIntent;
+    private PendingIntent photoIntent;
     public static boolean alarmIsSet = false;
     public static boolean gotLocation = false;
     public static boolean statsAlarmIsSet = false;
@@ -122,6 +125,17 @@ public class MainActivity extends AppCompatActivity {
 //        secureID = Settings.Secure.getString(
 //                AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
         instance = this;
+
+        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/";
+
+        File directory = new File(path);
+
+
+        if(!directory.exists()){
+            directory.mkdir();
+        }
+
+
         startAlarm();
         wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
         boolean alarmSet = wmbPreference.getBoolean("ALARMSET", true);
@@ -160,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         startMicUploadAlarm();
         startGPSUploadAlarm();
         startMusicUploadAlarm();
+        startPhotoUploadAlarm();
 
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         String rate = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
@@ -275,8 +290,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 14);
-        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 55);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, StatsAlarmReceiver.class);
@@ -300,8 +315,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 14);
-        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 56);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, MicRecordUploadAlarm.class);
@@ -328,8 +343,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 14);
-        cal.set(Calendar.MINUTE,59);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE,57);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, UploadGPSAlarmReceiver.class);
@@ -355,8 +370,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 14);
-        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 58);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, MusicUploadReceiver.class);
@@ -365,6 +380,33 @@ public class MainActivity extends AppCompatActivity {
 
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, musicIntent);
+        //alarmIsSet = true;
+        //instace = this;
+
+    }
+
+    public void startPhotoUploadAlarm() {
+        Log.d(TAG, "startGPSAlarm: in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 54);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, PhotoUploadReceiver.class);
+        //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
+        photoIntent = PendingIntent.getBroadcast(this, 4, intent, 0);
+
+
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, photoIntent);
         //alarmIsSet = true;
         //instace = this;
 

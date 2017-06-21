@@ -4,6 +4,7 @@ import android.os.Environment;
 
 import com.anysoftkeyboard.utils.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,6 +44,23 @@ public class Encryption {
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
 
         //File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  timeStamp + ".mp4");
+
+        File newFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName);
+
+        //boolean success = true;
+
+        if(!newFolder.exists()){
+            newFolder.mkdir();
+        }
+//        if(success == true){
+//            android.util.Log.d(TAG, "encrypt: ");
+//
+//        }else{
+//            android.util.Log.d(TAG, "encrypt: ");
+//            exit(0);
+//        }
+
+
 
         String final_path = Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  name + ".encrypted";
         Log.d(TAG,"We are starting encrytopn!");

@@ -1,5 +1,6 @@
 package com.radicalninja.logger;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,8 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings.Secure;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -27,18 +26,6 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.fitness.Fitness;
-import com.google.android.gms.fitness.data.Bucket;
-import com.google.android.gms.fitness.data.DataPoint;
-import com.google.android.gms.fitness.data.DataSet;
-import com.google.android.gms.fitness.data.DataType;
-import com.google.android.gms.fitness.data.Field;
-import com.google.android.gms.fitness.request.DataReadRequest;
-import com.google.android.gms.fitness.result.DataReadResult;
 import com.menny.android.anysoftkeyboard.R;
 
 import java.io.File;
@@ -49,19 +36,31 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.crypto.NoSuchPaddingException;
+
+//import com.google.android.gms.common.ConnectionResult;
+//import com.google.android.gms.common.Scopes;
+//import com.google.android.gms.common.api.GoogleApiClient;
+//import com.google.android.gms.common.api.Scope;
+//import com.google.android.gms.fitness.Fitness;
+//import com.google.android.gms.fitness.data.Bucket;
+//import com.google.android.gms.fitness.data.DataPoint;
+//import com.google.android.gms.fitness.data.DataSet;
+//import com.google.android.gms.fitness.data.DataType;
+//import com.google.android.gms.fitness.data.Field;
+//import com.google.android.gms.fitness.request.DataReadRequest;
+//import com.google.android.gms.fitness.result.DataReadResult;
 
 //import com.example.aishwarya.thirdapplication.R;
 //import com.example.aishwarya.thirdapplication.viewactivity.TakeImageActivity;
 
-public class VideoActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+//public class VideoActivity extends AppCompatActivity implements
+//        GoogleApiClient.ConnectionCallbacks,
+//        GoogleApiClient.OnConnectionFailedListener,
+//        View.OnClickListener {
+
+public class VideoActivity extends AppCompatActivity  {
 
 
     private final static int REQUEST_RESULT_IMAGE = 1;
@@ -84,7 +83,7 @@ public class VideoActivity extends AppCompatActivity implements
     double latitude;
     double longitude;
     Uri videoUri;
-    private GoogleApiClient mGoogleApiClient;
+   //private GoogleApiClient mGoogleApiClient;
     private PopupWindow popupWindow;
     private TransferUtility transferUtility;
     private File testRoot;
@@ -119,6 +118,8 @@ public class VideoActivity extends AppCompatActivity implements
         System.out.println("The time changed into nice format is: " + theTime);
     }
 
+    @TargetApi(19)
+
     void showDialog2() {
 
         MyDialogFragmentThree myDialogFragment = new MyDialogFragmentThree();
@@ -126,7 +127,7 @@ public class VideoActivity extends AppCompatActivity implements
 
 
     }
-
+    @TargetApi(19)
     public void showDialog3(View v) {
 
         File fileCheck = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/" + "CrashReport.txt");
@@ -138,7 +139,7 @@ public class VideoActivity extends AppCompatActivity implements
                     fileCheck);
         }
         Log.d("History", "In show Dialog3");
-        new ViewWeekStepCountTask().execute();
+        //new ViewWeekStepCountTask().execute();
         MyDialogFragment myDialogFragment = new MyDialogFragment();
         myDialogFragment.show(getFragmentManager(), "INTO");
     }
@@ -221,12 +222,12 @@ public class VideoActivity extends AppCompatActivity implements
 
         //showDialog2();
         encryption = new Encryption();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Fitness.HISTORY_API)
-                .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
-                .addConnectionCallbacks(this)
-                .enableAutoManage(this, 0, this)
-                .build();
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .addApi(Fitness.HISTORY_API)
+//                .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
+//                .addConnectionCallbacks(this)
+//                .enableAutoManage(this, 0, this)
+//                .build();
 
 
 
@@ -266,24 +267,24 @@ public class VideoActivity extends AppCompatActivity implements
         Log.d(TAG, "onResume: after encryption");
     }
 
-    @Override
-    public void onConnectionSuspended(int i) {
-        Log.e("HistoryAPI", "onConnectionSuspended");
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e("HistoryAPI", "onConnectionFailed");
-    }
-
-    public void onConnected(@Nullable Bundle bundle) {
-        Log.e("HistoryAPI", "onConnected");
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
+//    @Override
+//    public void onConnectionSuspended(int i) {
+//        Log.e("HistoryAPI", "onConnectionSuspended");
+//    }
+//
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//        Log.e("HistoryAPI", "onConnectionFailed");
+//    }
+//
+//    public void onConnected(@Nullable Bundle bundle) {
+//        Log.e("HistoryAPI", "onConnected");
+//    }
+//
+//    @Override
+//    public void onClick(View v) {
+//
+//    }
 
     public void handleUncaughtException(Thread thread, Throwable e) {
 
@@ -295,129 +296,129 @@ public class VideoActivity extends AppCompatActivity implements
         //System.exit(1); // kill off the crashed app
     }
 
-    public void displayLastWeeksData() {
+//    public void displayLastWeeksData() {
+//
+//        Log.d("History", "In displayLastWeekData");
+//
+//        int buckets = 0;
+//
+//
+//        Calendar cal = Calendar.getInstance();
+//        Date now = new Date();
+//        cal.setTime(now);
+//        long endTime = cal.getTimeInMillis();
+//        //cal.add(Calendar.WEEK_OF_YEAR, -1);
+//        //cal.add(Calendar.HOUR_OF_DAY, -2);
+//        cal.add(Calendar.DAY_OF_WEEK, -1);
+//        long startTime = cal.getTimeInMillis();
+//        String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
+//        //String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + ".txt");
+//
+//        Log.d("History", "URI+ " + uri);
+//        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
+//        File file = new File(uri);
+//        FileOutputStream stream = null;
+//
+//        java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
+//        Log.d("History", "Range Start: " + dateFormat.format(startTime));
+//        Log.d("History", "Range End: " + dateFormat.format(endTime));
+//
+//        //Check how many steps were walked and recorded in the last 7 days
+//        DataReadRequest readRequest = new DataReadRequest.Builder()
+//                //.aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
+//                .aggregate(DataType.TYPE_ACTIVITY_SEGMENT, DataType.AGGREGATE_ACTIVITY_SUMMARY)
+//                .bucketByTime(1, TimeUnit.DAYS)
+//                //.bucketByTime(2, TimeUnit.HOURS)
+//                .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+//                .build();
+//
+//        DataReadResult dataReadResult = Fitness.HistoryApi.readData(mGoogleApiClient, readRequest).await(1, TimeUnit.MINUTES);
+//        Log.d("History", "Number of buckets : " + dataReadResult.getBuckets().size());
+//
+//        Log.d("History", "Number of buckets 1 : " + dataReadResult.getBuckets().size());
+//        Log.d("History", "Number of buckets 2 : " + dataReadResult.getBuckets().size());
+//        //Used for aggregated data
+//        if (dataReadResult.getBuckets().size() > 0) {
+//            Log.d("History", "Number of buckets: " + dataReadResult.getBuckets().size());
+//            for (Bucket bucket : dataReadResult.getBuckets()) {
+//                writeToFile(file, "Bucket:" + buckets, this.getApplicationContext());
+//                buckets++;
+//                Log.d("History", "1-----------------------------------------");
+//                Log.d("History", "Busket is: " + bucket);
+//                List<DataSet> dataSets = bucket.getDataSets();
+//                for (DataSet dataSet : dataSets) {
+//                    Log.d("History", "2-------------------------------------");
+//
+//                    showDataSet(dataSet, file);
+//
+//
+//                }
+//
+//                writeToFile(file, "\n\n", this.getApplicationContext());
+//            }
+//        }
+//        //Used for non-aggregated data
+//        else if (dataReadResult.getDataSets().size() > 0) {
+//            Log.d("History", "Number of returned DataSets: " + dataReadResult.getDataSets().size());
+//            for (DataSet dataSet : dataReadResult.getDataSets()) {
+//                showDataSet(dataSet, file);
+//            }
+//        } else {
+//            writeToFile(file, "Zero fitness data returned! Either a connection could not be made to the google server, or the phone has logged no Google Fit data", this.getApplicationContext());
+//        }
+//
+//        new encryptAsyncTask2().execute(uri);
+//    }
 
-        Log.d("History", "In displayLastWeekData");
-
-        int buckets = 0;
-
-
-        Calendar cal = Calendar.getInstance();
-        Date now = new Date();
-        cal.setTime(now);
-        long endTime = cal.getTimeInMillis();
-        //cal.add(Calendar.WEEK_OF_YEAR, -1);
-        //cal.add(Calendar.HOUR_OF_DAY, -2);
-        cal.add(Calendar.DAY_OF_WEEK, -1);
-        long startTime = cal.getTimeInMillis();
-        String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-        //String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + ".txt");
-
-        Log.d("History", "URI+ " + uri);
-        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "GoogleFit_" + endTime + ".txt");
-        File file = new File(uri);
-        FileOutputStream stream = null;
-
-        java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
-        Log.d("History", "Range Start: " + dateFormat.format(startTime));
-        Log.d("History", "Range End: " + dateFormat.format(endTime));
-
-        //Check how many steps were walked and recorded in the last 7 days
-        DataReadRequest readRequest = new DataReadRequest.Builder()
-                //.aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
-                .aggregate(DataType.TYPE_ACTIVITY_SEGMENT, DataType.AGGREGATE_ACTIVITY_SUMMARY)
-                .bucketByTime(1, TimeUnit.DAYS)
-                //.bucketByTime(2, TimeUnit.HOURS)
-                .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-                .build();
-
-        DataReadResult dataReadResult = Fitness.HistoryApi.readData(mGoogleApiClient, readRequest).await(1, TimeUnit.MINUTES);
-        Log.d("History", "Number of buckets : " + dataReadResult.getBuckets().size());
-
-        Log.d("History", "Number of buckets 1 : " + dataReadResult.getBuckets().size());
-        Log.d("History", "Number of buckets 2 : " + dataReadResult.getBuckets().size());
-        //Used for aggregated data
-        if (dataReadResult.getBuckets().size() > 0) {
-            Log.d("History", "Number of buckets: " + dataReadResult.getBuckets().size());
-            for (Bucket bucket : dataReadResult.getBuckets()) {
-                writeToFile(file, "Bucket:" + buckets, this.getApplicationContext());
-                buckets++;
-                Log.d("History", "1-----------------------------------------");
-                Log.d("History", "Busket is: " + bucket);
-                List<DataSet> dataSets = bucket.getDataSets();
-                for (DataSet dataSet : dataSets) {
-                    Log.d("History", "2-------------------------------------");
-
-                    showDataSet(dataSet, file);
-
-
-                }
-
-                writeToFile(file, "\n\n", this.getApplicationContext());
-            }
-        }
-        //Used for non-aggregated data
-        else if (dataReadResult.getDataSets().size() > 0) {
-            Log.d("History", "Number of returned DataSets: " + dataReadResult.getDataSets().size());
-            for (DataSet dataSet : dataReadResult.getDataSets()) {
-                showDataSet(dataSet, file);
-            }
-        } else {
-            writeToFile(file, "Zero fitness data returned! Either a connection could not be made to the google server, or the phone has logged no Google Fit data", this.getApplicationContext());
-        }
-
-        new encryptAsyncTask2().execute(uri);
-    }
-
-    private void showDataSet(DataSet dataSet, File file) {
-
-        Calendar cal = Calendar.getInstance();
-        Date now = new Date();
-        cal.setTime(now);
-        long endTime = cal.getTimeInMillis();
-
-        java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
-        java.text.DateFormat timeFormat = java.text.DateFormat.getTimeInstance();
-
-        //gps = new GPSTracker(this);
-        latitude = gps.getLatitude();
-        longitude = gps.getLongitude();
-
-        Log.d("GPS", "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
-
-        writeToFile(file, "\n\nLatitude is: " + latitude, this.getApplicationContext());
-        writeToFile(file, "\nLongitude is: " + longitude, this.getApplicationContext());
-
-        Log.e("History", "Latitude is: " + latitude);
-        Log.e("History", "Longitude is: " + longitude);
-
-
-        try {
-            for (DataPoint dp : dataSet.getDataPoints()) {
-                Log.e("History", "Data point:");
-                writeToFile(file, "\n\n" +
-                        "Data point:\n", this.getApplicationContext());
-                Log.e("History", "\tType: " + dp.getDataType().getName());
-                Log.e("History", "\tStart: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-                writeToFile(file, "Start: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-                Log.e("History", "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
-                writeToFile(file, "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
-                for (Field field : dp.getDataType().getFields()) {
-                    Log.e("History", "\tField: " + field.getName() +
-                            " Value: " + dp.getValue(field));
-                    writeToFile(file, "\n " + field.getName() +
-                            " Value: " + " " + dp.getValue(field), this.getApplicationContext());
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Log.e("History", "End show data set");
-
-
-    }
+//    private void showDataSet(DataSet dataSet, File file) {
+//
+//        Calendar cal = Calendar.getInstance();
+//        Date now = new Date();
+//        cal.setTime(now);
+//        long endTime = cal.getTimeInMillis();
+//
+//        java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
+//        java.text.DateFormat timeFormat = java.text.DateFormat.getTimeInstance();
+//
+//        //gps = new GPSTracker(this);
+//        latitude = gps.getLatitude();
+//        longitude = gps.getLongitude();
+//
+//        Log.d("GPS", "WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
+//
+//        writeToFile(file, "\n\nLatitude is: " + latitude, this.getApplicationContext());
+//        writeToFile(file, "\nLongitude is: " + longitude, this.getApplicationContext());
+//
+//        Log.e("History", "Latitude is: " + latitude);
+//        Log.e("History", "Longitude is: " + longitude);
+//
+//
+//        try {
+//            for (DataPoint dp : dataSet.getDataPoints()) {
+//                Log.e("History", "Data point:");
+//                writeToFile(file, "\n\n" +
+//                        "Data point:\n", this.getApplicationContext());
+//                Log.e("History", "\tType: " + dp.getDataType().getName());
+//                Log.e("History", "\tStart: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
+//                writeToFile(file, "Start: " + dateFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
+//                Log.e("History", "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)));
+//                writeToFile(file, "\tEnd: " + dateFormat.format(dp.getEndTime(TimeUnit.MILLISECONDS)) + " " + timeFormat.format(dp.getStartTime(TimeUnit.MILLISECONDS)), this.getApplicationContext());
+//                for (Field field : dp.getDataType().getFields()) {
+//                    Log.e("History", "\tField: " + field.getName() +
+//                            " Value: " + dp.getValue(field));
+//                    writeToFile(file, "\n " + field.getName() +
+//                            " Value: " + " " + dp.getValue(field), this.getApplicationContext());
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        Log.e("History", "End show data set");
+//
+//
+//    }
 
     private void writeToFile(File file, String data, Context context) {
 
@@ -829,15 +830,15 @@ public class VideoActivity extends AppCompatActivity implements
 
     }
 
-    private class ViewWeekStepCountTask extends AsyncTask<Void, Void, Void> {
-        protected Void doInBackground(Void... params) {
-
-            Log.d("History", "In ViewWeekStepCount");
-
-            displayLastWeeksData();
-            return null;
-        }
-    }
+//    private class ViewWeekStepCountTask extends AsyncTask<Void, Void, Void> {
+//        protected Void doInBackground(Void... params) {
+//
+//            Log.d("History", "In ViewWeekStepCount");
+//
+//            displayLastWeeksData();
+//            return null;
+//        }
+//    }
 
 
 

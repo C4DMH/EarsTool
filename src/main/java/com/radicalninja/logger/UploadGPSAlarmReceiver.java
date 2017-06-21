@@ -58,6 +58,12 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
 
         File directory = new File(path);
 
+
+        if(!directory.exists()){
+            directory.mkdir();
+        }
+
+
         //String encryptedPath = Encrypt("MicRecord_" +formattedDate, path );
         //beginUpload2("MicRecord_" +formattedDate, encryptedPath);
 
