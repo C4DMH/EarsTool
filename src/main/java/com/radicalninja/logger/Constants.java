@@ -17,7 +17,9 @@ public class Constants {
      * the sample (https://console.aws.amazon.com/s3/). After creating a bucket,
      * put it's name in the field below.
      */
-    public static final String BUCKET_NAME = "adaptvideos";
+    //public static final String BUCKET_NAME = "adaptvideos";
+    public static final String BUCKET_NAME = "adaptvideostest";
+
 
 
 

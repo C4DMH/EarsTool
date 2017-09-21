@@ -385,6 +385,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+   // @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void startPhotoUploadAlarm() {
         Log.d(TAG, "startGPSAlarm: in start alarm");
 
@@ -404,9 +405,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PhotoUploadReceiver.class);
         //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
         photoIntent = PendingIntent.getBroadcast(this, 4, intent, 0);
+        //alarmMgr.setExact();
 
 
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, photoIntent);
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, photoIntent);
+
         //alarmIsSet = true;
         //instace = this;
 
