@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
@@ -53,13 +52,13 @@ public class MusicUploadReceiver extends BroadcastReceiver {
 
 
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Music/";
+        String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Music/";
 
         File directory = new File(path);
 
 
         if(!directory.exists()){
-            directory.mkdir();
+            directory.mkdirs();
         }
 
 

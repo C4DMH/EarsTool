@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -83,10 +82,10 @@ public class IncomingCallListener extends BroadcastReceiver
                     Log.d(TAG, "onCallStateChanged: onCall = " + onCall);
                     mediaRecorder = new MediaRecorder();
                     //String path = Environment.getExternalStorageDirectory() + "/" + mContext.getString(R.string.app_name);
-                    String path = Environment.getExternalStorageDirectory() + "/videoDIARY/MicRecord/";
+                    String path = mContext.getExternalFilesDir(null) + "/videoDIARY/MicRecord/";
                     dir = new File(path);
                     if (!dir.exists()) {
-                        dir.mkdir();
+                        dir.mkdirs();
                     }
 
                     try {

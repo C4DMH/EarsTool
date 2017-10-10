@@ -1,6 +1,6 @@
 package com.radicalninja.logger;
 
-import android.os.Environment;
+import android.content.Context;
 
 import com.anysoftkeyboard.utils.Log;
 
@@ -26,6 +26,8 @@ public class Encryption {
 
     public final String TAG = "Encrypt";
 
+    //Context mContext = MainActivity.getIntance();
+
 
 
 //  throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException
@@ -36,6 +38,7 @@ public class Encryption {
     public String encrypt(String name, String path, String directoryName) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
         //Toast.makeText(this,"Beginning encryption",  Toast.LENGTH_LONG).show();
         // Here you read the cleartext.
+        Context mContext = MainActivity.getIntance();
 
         //String directoryName = "/videoDIARY/";
 
@@ -45,12 +48,16 @@ public class Encryption {
 
         //File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  timeStamp + ".mp4");
 
-        File newFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName);
+        //File newFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName);
+        File newFolder = new File(mContext.getExternalFilesDir(null) + directoryName);
+
+
+        //String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Music/";
 
         //boolean success = true;
 
         if(!newFolder.exists()){
-            newFolder.mkdir();
+            newFolder.mkdirs();
         }
 //        if(success == true){
 //            android.util.Log.d(TAG, "encrypt: ");
@@ -62,7 +69,7 @@ public class Encryption {
 
 
 
-        String final_path = Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  name + ".encrypted";
+        String final_path = mContext.getExternalFilesDir(null) + directoryName +  name + ".encrypted";
         Log.d(TAG,"We are starting encrytopn!");
         //Toast.makeText(, "Encrypting.",  Toast.LENGTH_LONG).show();
         //File file = new File(path.getPath());
@@ -111,14 +118,14 @@ public class Encryption {
     }
 
 
-    public static void decrypt(String name, String path) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+    public void decrypt(String name, String path) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
 
 
 //        FileInputStream fis = new FileInputStream("data/encrypted");
 //
 //        FileOutputStream fos = new FileOutputStream("data/decrypted");
 
-
+        Context mContext = MainActivity.getIntance();
         String directoryName = "/videoDIARY/";
 
         byte[] iv = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -127,7 +134,7 @@ public class Encryption {
 
         //File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  timeStamp + ".mp4");
 
-        String final_path = Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName +  name + ".mp4";
+        String final_path = mContext.getExternalFilesDir(null) + directoryName +  name + ".mp4";
 
         FileInputStream fis = new FileInputStream(path);
 

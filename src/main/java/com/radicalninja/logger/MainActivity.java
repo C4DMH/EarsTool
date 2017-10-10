@@ -22,7 +22,6 @@ import android.location.Geocoder;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static MainActivity instance;
     public String theCurrentDate;
+
+    //public final String directory = Context.getExternalFilesDir(null);
 
 
 
@@ -126,13 +127,14 @@ public class MainActivity extends AppCompatActivity {
 //                AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
         instance = this;
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/";
+        //String path = Environment.getExternalStorageDirectory() + "/videoDIARY/";
+        String path = this.getExternalFilesDir(null) + "/videoDIARY/Music/";
 
         File directory = new File(path);
 
 
         if(!directory.exists()){
-            directory.mkdir();
+            directory.mkdirs();
         }
 
 

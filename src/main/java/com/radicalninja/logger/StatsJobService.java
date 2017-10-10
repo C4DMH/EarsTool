@@ -2,6 +2,7 @@ package com.radicalninja.logger;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
@@ -19,6 +20,12 @@ import java.util.Calendar;
 
 public class StatsJobService extends JobService {
 
+    //Context mContext = MainActivity.getIntance();
+    //Context con = this.getApplicationContext();
+    //Context con2 = this;
+
+    Context myContext;
+
 
 
 
@@ -31,11 +38,19 @@ public class StatsJobService extends JobService {
         GPSTracker mGPSTracker = new GPSTracker(this);
         Toast.makeText(this, "Job Starts", Toast.LENGTH_SHORT).show();
 
+
+        //Have not used, may fix problem
+        myContext = this.getApplication().getApplicationContext();
+
         //File directory;
         //File location;
 
         Calendar c = Calendar.getInstance();
         //System.out.println("Current time => " + c.getTime());
+
+        // 4/10/17 OR MAYBE TRY:
+
+        //context = this.getActivity().getApplicationContext
 
         SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
         String formattedDate = df.format(c.getTime());
@@ -43,7 +58,17 @@ public class StatsJobService extends JobService {
         SimpleDateFormat df2 = new SimpleDateFormat("yyyy:MM:dd");
         String currentDate = df2.format(c.getTime());
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Location/";
+        // 21st septemper 2017 crashing on creating file
+        //String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Location/";
+        //String path = con2.getExternalFilesDir(null) + "/videoDIARY/Location/";
+
+        String path = this.getExternalFilesDir(null) + "/videoDIARY/Location/";
+
+
+
+        //String path = getFilesDir() + "/videoDIARY/Location/";
+
+        Log.d(TAG, "onStartJob: the path is: " + path);
 
 
 
@@ -53,7 +78,8 @@ public class StatsJobService extends JobService {
         File directory = new File(path);
         if(!directory.exists()){
             Log.d(TAG, "onStartJob: making directory");
-            directory.mkdir();
+            directory.
+                    mkdirs();
         }
 
         // Changed 7th June 2017
@@ -97,7 +123,7 @@ public class StatsJobService extends JobService {
     private static void writeToFile(File file, String data) {
 
         FileOutputStream stream = null;
-        System.out.println("The state of the media is: " + Environment.getExternalStorageState());
+        Log.d(TAG, "The state of the media is: " + Environment.getExternalStorageState());
         Log.d(TAG, "writeToFile: file location is:" + file.getAbsolutePath());
 
         //OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);

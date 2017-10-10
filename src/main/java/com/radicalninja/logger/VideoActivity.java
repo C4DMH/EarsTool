@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings.Secure;
 import android.support.v7.app.AppCompatActivity;
@@ -130,7 +129,7 @@ public class VideoActivity extends AppCompatActivity  {
     @TargetApi(19)
     public void showDialog3(View v) {
 
-        File fileCheck = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/" + "CrashReport.txt");
+        File fileCheck = new File(instance.getExternalFilesDir(null) + "/videoDIARY/" + "CrashReport.txt");
 
         if (fileCheck.exists()) {
 
@@ -160,7 +159,7 @@ public class VideoActivity extends AppCompatActivity  {
     }
 
     public boolean createDirectory(String path) {
-        File mydir = new File(Environment.getExternalStorageDirectory().toString() + path);
+        File mydir = new File(instance.getExternalFilesDir(null).toString() + path);
         if (!mydir.exists()) {
             mydir.mkdirs();
         } else {
@@ -213,6 +212,10 @@ public class VideoActivity extends AppCompatActivity  {
         setTheDate();
 
         transferUtility = Util.getTransferUtility(this);
+
+        String secureId=  getSecureId(this);
+
+        Toast.makeText(this, "the secure id is: " + secureId,Toast.LENGTH_LONG).show();
 
 
 
@@ -457,9 +460,9 @@ public class VideoActivity extends AppCompatActivity  {
             Log.d("VideoActivity", "3");
             createDirectory(directoryName);
             Log.d("VideoActivity", "4");
-            File mediaFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + timeStamp + ".mp4");
+            File mediaFile = new File(instance.getExternalFilesDir(null) + directoryName + timeStamp + ".mp4");
             Log.d("VideoActivity", "5");
-            String newPath = Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + timeStamp + ".mp4";
+            String newPath = instance.getExternalFilesDir(null) + directoryName + timeStamp + ".mp4";
             Log.d("VideoActivity", "6");
             Log.d("VideoActivity", "This the the Video Uri in the on RECROD VIEW method using the newPath Variable: " + newPath);
             Log.d("VideoActivity", "This the the Video Uri in the on RECROD VIEW method using the mediafile Variable: " + mediaFile);

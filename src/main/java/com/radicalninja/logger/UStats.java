@@ -38,6 +38,8 @@ public class UStats {
     static String directoryName = "/videoDIARY/";
     static String time;
 
+    Context mContext = MainActivity.getIntance();
+
 
 
 //    @SuppressWarnings("ResourceType")
@@ -129,11 +131,11 @@ public class UStats {
     }
 
     //public static void printUsageStats(List<UsageStats> usageStatsList){
-    public static String printUsageStats(List<UsageStats> usageStatsList){
+    public static String printUsageStats(List<UsageStats> usageStatsList, Context context){
 
         Log.d(TAG, "printUsageStats: in print");
 
-        String uri = (Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName + "AppUsage_" + time + ".txt");
+        String uri = (context.getExternalFilesDir(null) + directoryName + "AppUsage_" + time + ".txt");
         //StatsJobService.setFielName(uri);
         //StatsJobService.fileName = uri;
 
@@ -183,7 +185,7 @@ public class UStats {
     }
 
     public static String printCurrentUsageStatus(Context context){
-        return printUsageStats(getUsageStatsList(context));
+        return printUsageStats(getUsageStatsList(context), context);
     }
     @SuppressWarnings("ResourceType")
     private static UsageStatsManager getUsageStatsManager(Context context){

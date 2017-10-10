@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
@@ -53,14 +52,14 @@ public class MicRecordUploadAlarm extends BroadcastReceiver {
 
 
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/MicRecord/";
+        String path = mContext.getExternalFilesDir(null) + "/videoDIARY/MicRecord/";
 
         File directory = new File(path);
 
 
 
         if(!directory.exists()){
-            directory.mkdir();
+            directory.mkdirs();
         }
 
         //String encryptedPath = Encrypt("MicRecord_" +formattedDate, path );

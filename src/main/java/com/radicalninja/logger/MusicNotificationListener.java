@@ -34,6 +34,7 @@ public class MusicNotificationListener extends NotificationListenerService {
         mContext = getApplicationContext();
     }
 
+
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         String pack = sbn.getPackageName();
@@ -63,13 +64,15 @@ public class MusicNotificationListener extends NotificationListenerService {
         String currentDate = df2.format(c.getTime());
         Log.d(TAG, "onNotificationPosted: current date is: " + currentDate);
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Music/";
+        //String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Music/";
+        String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Music/";
+
         Log.d(TAG, "onStartJob: path is: " + path);
 
         File directory = new File(path);
         if(!directory.exists()){
             Log.d(TAG, "onStartJob: making directory");
-            directory.mkdir();
+            directory.mkdirs();
         }
 
         File location = new File(directory, currentDate +".txt");

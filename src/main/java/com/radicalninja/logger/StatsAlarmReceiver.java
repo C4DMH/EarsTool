@@ -31,11 +31,14 @@ public class StatsAlarmReceiver extends BroadcastReceiver {
     Context mContext;
     String userID;
 
+    Context newContext;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
         //mContext  = MainActivity.instance;
         mContext = context;
+        newContext = context.getApplicationContext();
         Log.d(TAG, "onReceive: we have started onrecieve");
         userID = MainActivity.secureID;
         mEncryption = new Encryption();

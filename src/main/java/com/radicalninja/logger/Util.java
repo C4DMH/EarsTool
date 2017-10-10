@@ -3,7 +3,6 @@ package com.radicalninja.logger;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Environment;
 import android.text.TextUtils;
 
 import com.amazonaws.ClientConfiguration;
@@ -51,6 +50,7 @@ public class Util {
     private static CognitoCachingCredentialsProvider sCredProvider;
     private static TransferUtility sTransferUtility;
     private static String userId;
+    Context mContext = MainActivity.getIntance();
 
     /**
      * Gets an instance of CognitoCachingCredentialsProvider which is
@@ -197,7 +197,7 @@ public class Util {
 
 
         for (final File file : files) {
-            uploadFileToBucket(file, file.getName(), deleteAfter, callback);
+            uploadFileToBucket(file, file.getName(), deleteAfter, callback, context);
         }
     }
 
@@ -221,7 +221,7 @@ public class Util {
     }
 
     public static void uploadFileToBucket(final File file, final String filename,
-                                          final boolean deleteAfter, final Util.FileTransferCallback callback) {
+                                          final boolean deleteAfter, final Util.FileTransferCallback callback, final Context context) {
         initUserId();
         Log.d("Log", "This is in AWSUTIL upload file to bucket");
         final String filePath = String.format("%s/%s", userId, filename);
@@ -243,7 +243,7 @@ public class Util {
                     case COMPLETED:
 
                         long unixTime = System.currentTimeMillis() / 1000L;
-                        String desination = Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/buffered_" + unixTime + ".log";
+                        String desination = context.getExternalFilesDir(null) + "/videoDIARY/buffered_" + unixTime + ".log";
 
 
                         File destination = new File(desination);

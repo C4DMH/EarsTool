@@ -1,5 +1,6 @@
 package com.radicalninja.logger;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -42,9 +43,12 @@ public class LogManager {
     private FileUploadLog fileUploadLog;
     private String prevBuffer = null;
 
+
+
     public static void init(final Context context) {
 
         Log.d("LogManager", "This is LogManager before init");
+
 
 
         if (instance == null) {
@@ -77,13 +81,26 @@ public class LogManager {
         }
     }
 
+//    static LogManager getInstance() throws LogManagerNotStartedException {
+//        if (instance == null) {
+//            //init(context);
+//            throw new LogManagerNotStartedException();
+//        }
+//        return instance;
+//    }
+
+    // 6th 10th 2017, attemp to stop logmanagernotstartedexception
     static LogManager getInstance() throws LogManagerNotStartedException {
         if (instance == null) {
-            //init(context);
+            LogManager.init(AnyApplication.getAppContext());
+            //LogManager.init(this);
             throw new LogManagerNotStartedException();
         }
         return instance;
     }
+
+
+
 
     boolean isPrivacyModeEnabled() {
         return privacyModeEnabled;

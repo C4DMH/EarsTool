@@ -132,13 +132,13 @@ public class PhotoUploadReceiver extends BroadcastReceiver {
 
         }
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Photos/";
+        String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Photos/";
 
         File directory = new File(path);
 
 
         if(!directory.exists()){
-            directory.mkdir();
+            directory.mkdirs();
         }
 
 

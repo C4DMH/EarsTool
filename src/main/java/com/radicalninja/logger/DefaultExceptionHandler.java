@@ -49,7 +49,7 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
         try {
             Log.d("Crash", "Crash 2.5");
 
-            String CrashReportUpload = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/videoDIARY/" + "CrashReport.txt");
+            String CrashReportUpload = (activity.getExternalFilesDir(null) + "/videoDIARY/" + "CrashReport.txt");
             File file = new File(CrashReportUpload);
 
             String stackTrace = com.anysoftkeyboard.utils.Log.getStackTrace(ex);

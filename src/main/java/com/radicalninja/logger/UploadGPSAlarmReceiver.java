@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
@@ -36,6 +35,8 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
     String encryptedPath;
     static String folder = "/GPS/";
 
+    Context newContext;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -43,6 +44,7 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive: ");
 
         mContext = context;
+        newContext = context.getApplicationContext();
         mEncryption = new Encryption();
         mTransferUtility = Util.getTransferUtility(mContext);
 
@@ -54,13 +56,20 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
 
 
 
-        String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Location/";
+        //String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Location/";
+
+        //String path = newContext.getExternalFilesDir(null) + "/videoDIARY/Location/";
+
+        // 9th October 2017, couple of phones had crashed, trying new:
+
+        String path = AnyApplication.getAppContext().getExternalFilesDir(null) + "/videoDIARY/Location/";
+
 
         File directory = new File(path);
 
 
         if(!directory.exists()){
-            directory.mkdir();
+            directory.mkdirs();
         }
 
 
