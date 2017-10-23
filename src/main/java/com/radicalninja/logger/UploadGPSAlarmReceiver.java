@@ -44,7 +44,7 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive: ");
 
         mContext = context;
-        newContext = context.getApplicationContext();
+        //newContext = context.getApplicationContext();
         mEncryption = new Encryption();
         mTransferUtility = Util.getTransferUtility(mContext);
 
@@ -61,8 +61,13 @@ public class UploadGPSAlarmReceiver extends BroadcastReceiver {
         //String path = newContext.getExternalFilesDir(null) + "/videoDIARY/Location/";
 
         // 9th October 2017, couple of phones had crashed, trying new:
+        // 11th Ocotober: keeps crashing
 
-        String path = AnyApplication.getAppContext().getExternalFilesDir(null) + "/videoDIARY/Location/";
+        //String path = AnyApplication.getAppContext().getExternalFilesDir(null) + "/videoDIARY/Location/";
+
+        // 11th Oct, try try again!
+
+        String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Location/";
 
 
         File directory = new File(path);

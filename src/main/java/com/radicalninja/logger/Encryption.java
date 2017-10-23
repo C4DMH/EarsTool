@@ -24,9 +24,27 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class Encryption {
 
+    private Context mContext;
+
     public final String TAG = "Encrypt";
 
     //Context mContext = MainActivity.getIntance();
+
+    // Constructor added 17th October 17 - thinking maybe setting context in encrypt
+    // method is not early enough, so it crashes because it is still null when it hits the first
+    // mContext later in method!
+
+    public Encryption(){
+        android.util.Log.d(TAG, "Encryption: getting app context");
+        mContext = com.menny.android.anysoftkeyboard.AnyApplication.getInstance();
+
+        android.util.Log.d(TAG, "Encryption: we have app context");
+        if(mContext == null){
+            android.util.Log.d(TAG, "Encryption: NULL");
+        }else{
+            android.util.Log.d(TAG, "Encryption: NOT NULL");
+        }
+    }
 
 
 
@@ -38,7 +56,13 @@ public class Encryption {
     public String encrypt(String name, String path, String directoryName) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
         //Toast.makeText(this,"Beginning encryption",  Toast.LENGTH_LONG).show();
         // Here you read the cleartext.
-        Context mContext = MainActivity.getIntance();
+
+        android.util.Log.d(TAG, "encrypt: in Encrytpion.java");
+
+
+        // 16th October 2017 - only tried on big android
+        //Context mContext = AnyApplication.getAppContext();
+        //Context mContext = MainActivity.getIntance();
 
         //String directoryName = "/videoDIARY/";
 
@@ -50,6 +74,7 @@ public class Encryption {
 
         //File newFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + directoryName);
         File newFolder = new File(mContext.getExternalFilesDir(null) + directoryName);
+        android.util.Log.d(TAG, "encrypt: after new folder");
 
 
         //String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Music/";

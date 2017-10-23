@@ -292,6 +292,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
+        //cal.set(Calendar.HOUR_OF_DAY, 23);
+        //cal.set(Calendar.MINUTE, 55);
+
         cal.set(Calendar.HOUR_OF_DAY, 23);
         cal.set(Calendar.MINUTE, 55);
 
@@ -347,7 +350,8 @@ public class MainActivity extends AppCompatActivity {
         cal.setTimeInMillis(System.currentTimeMillis());
         cal.set(Calendar.HOUR_OF_DAY, 23);
         cal.set(Calendar.MINUTE,57);
-
+//        cal.set(Calendar.HOUR_OF_DAY, 12);
+//        cal.set(Calendar.MINUTE,54);
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, UploadGPSAlarmReceiver.class);
         //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
@@ -373,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
 
         cal.setTimeInMillis(System.currentTimeMillis());
         cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 58);
+        cal.set(Calendar.MINUTE, 55);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, MusicUploadReceiver.class);
@@ -402,6 +406,8 @@ public class MainActivity extends AppCompatActivity {
         cal.setTimeInMillis(System.currentTimeMillis());
         cal.set(Calendar.HOUR_OF_DAY, 23);
         cal.set(Calendar.MINUTE, 54);
+//        cal.set(Calendar.HOUR_OF_DAY, 12);
+//        cal.set(Calendar.MINUTE, 56);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, PhotoUploadReceiver.class);

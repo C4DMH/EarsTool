@@ -1,6 +1,5 @@
 package com.radicalninja.logger;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -9,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.menny.android.anysoftkeyboard.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -90,11 +89,13 @@ public class LogManager {
 //    }
 
     // 6th 10th 2017, attemp to stop logmanagernotstartedexception
-    static LogManager getInstance() throws LogManagerNotStartedException {
+    static LogManager getInstance(){//} throws LogManagerNotStartedException {
         if (instance == null) {
-            LogManager.init(AnyApplication.getAppContext());
+            //13th October 2017 - this is the wrong context?
+            //LogManager.init(context); // - try 16th oct 17
+            LogManager.init(com.menny.android.anysoftkeyboard.AnyApplication.getInstance()); // -This still fails 16th October 17
             //LogManager.init(this);
-            throw new LogManagerNotStartedException();
+            //throw new LogManagerNotStartedException();
         }
         return instance;
     }
@@ -106,11 +107,17 @@ public class LogManager {
         return privacyModeEnabled;
     }
 
+    // 13th October 2017 Think this is referencing a context that has never been set, new attempt:
     @SuppressWarnings("NewApi")
     private LogManager(final Context context) {
         this.context = context;
         preferencesManager = PreferencesManager.getInstance(context);
     }
+
+//    private LogManager(final Context context) {
+//        this.context = context;
+//        preferencesManager = PreferencesManager.getInstance(context);
+//    }
 
     boolean registerBuffer(final Buffer buffer) {
         try {
