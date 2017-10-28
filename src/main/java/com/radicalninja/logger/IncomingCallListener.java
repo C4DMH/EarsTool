@@ -1,3 +1,21 @@
+/*
+ * Copyright (C)EARSTool
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
 package com.radicalninja.logger;
 
 import android.content.BroadcastReceiver;
@@ -15,6 +33,10 @@ import java.io.IOException;
 
 /**
  * Created by gwicks on 23/05/2017.
+ * Class to record the user's MIC during a phone call
+ * ************* WARNING ************************
+ * Despite only recording the microphone and not the earpiece, the other party on the call
+ * can be heard faintly. This is illegal in many States, Countries and Jurisdictions
  */
 
 public class IncomingCallListener extends BroadcastReceiver
@@ -48,6 +70,12 @@ public class IncomingCallListener extends BroadcastReceiver
 
 
     }
+
+    /*
+    * Method starts recording to file if:
+     * a) User makes an outgoing call. Note this will record the ringing time before other party picks up
+     * b) User receives an incoming call,
+    */
     public class CustomPhoneStateListener extends PhoneStateListener
     {
         private static final String TAG = "CustomPhoneListener";
@@ -100,6 +128,8 @@ public class IncomingCallListener extends BroadcastReceiver
 
                     Log.d(TAG, "onCallStateChanged: setting up mediarecorder");
 
+                    // Various call recording options. Bitrate and Sample rate increasing will increase the quality of the call, but also
+                    // increase the size of the files significantly.
 
                     mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                     mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);

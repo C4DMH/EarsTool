@@ -198,7 +198,7 @@ public class VideoActivity extends AppCompatActivity  {
 
         Log.d(TAG, "onCreate: ********************************** transfer Utility = " + transferUtility);
 //
-        getSupportActionBar().setTitle("UO Video Diary App");
+        getSupportActionBar().setTitle("EASE TOOL");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         UserID = getSecureId(this);
         setContentView(R.layout.activity_video);
@@ -215,7 +215,7 @@ public class VideoActivity extends AppCompatActivity  {
 
         String secureId=  getSecureId(this);
 
-        Toast.makeText(this, "the secure id is: " + secureId,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "the secure id is: " + secureId,Toast.LENGTH_LONG).show();
 
 
 
@@ -447,6 +447,8 @@ public class VideoActivity extends AppCompatActivity  {
         }
 
     }
+    // this method is called from MyDialogFragment.
+    // It starts the recorder, from the Instructions Fragment
 
     public void onRecordVideo(View v) {
 

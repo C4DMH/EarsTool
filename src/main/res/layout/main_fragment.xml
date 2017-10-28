@@ -109,7 +109,7 @@
             android:drawableLeft="@drawable/video2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Go to Video Diary"
+            android:text="Finish"
             android:onClick="startVideoApp"/>
 
         <TextView
@@ -131,17 +131,17 @@
 
         <!-- this box will be should shown
          only if the build type is not release -->
-        <TextView
-            style="@style/Ask.Card"
-            android:id="@+id/beta_sign_up"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/ask_beta_link_promo"
-            android:textColor="?android:textColorSecondary"
-            android:autoLink="web"
-            android:layout_gravity="center_horizontal"/>
+        <!--<TextView-->
+            <!--style="@style/Ask.Card"-->
+            <!--android:id="@+id/beta_sign_up"-->
+            <!--android:layout_marginTop="12dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:text="@string/ask_beta_link_promo"-->
+            <!--android:textColor="?android:textColorSecondary"-->
+            <!--android:autoLink="web"-->
+            <!--android:layout_gravity="center_horizontal"/>-->
 
     </LinearLayout>
 </ScrollView>

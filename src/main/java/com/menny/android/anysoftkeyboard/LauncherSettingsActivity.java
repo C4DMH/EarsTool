@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
 import com.anysoftkeyboard.ui.settings.setup.SetUpKeyboardWizardFragment;
@@ -57,8 +56,7 @@ public class LauncherSettingsActivity extends Activity {
         wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
 //        Toast.makeText(this, "THIS IS MAIN ACTIVIY, BEFORE (isfirstRun)", Toast.LENGTH_LONG).show();
-        if (isFirstRun || mLaunched == false)
-        {
+        if (isFirstRun || mLaunched == false) {
 //            Toast.makeText(this, "THIS IS MAIN ACTIVIY, IN (isfirstRun)", Toast.LENGTH_LONG).show();
             // Code to run once
 //            Toast.makeText(this, "inside if else [] (mLaunced)" , Toast.LENGTH_LONG).show();
@@ -80,12 +78,10 @@ public class LauncherSettingsActivity extends Activity {
             editor.commit();
 
             //finish();
-        }
-        else{
+        } else {
             startActivity(new Intent(this, VideoActivity.class));
         }
 //        Toast.makeText(this, "THIS IS MAIN ACTIVIY, AFTER (isfirstRun)", Toast.LENGTH_LONG).show();
-
 
 
 //        if (mLaunched) {
@@ -120,4 +116,5 @@ public class LauncherSettingsActivity extends Activity {
         super.onRestoreInstanceState(savedInstanceState);
         mLaunched = savedInstanceState.getBoolean(LAUNCHED_KEY);
     }
+
 }

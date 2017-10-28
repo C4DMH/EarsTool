@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="6dp">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:orientation="vertical"
+              android:padding="6dp"
+              android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="188dp"
+        app:srcCompat="@drawable/cdmh"
+        android:layout_weight="0.60"/>
 
     <TextView
         style="@style/Ask.Text.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/setup_wizard_step_one_title"/>
+        android:text="@string/setup_wizard_step_one_title"
+
+        android:padding="10dp"/>
+
 
     <include android:id="@id/previous_step_not_complete"
-        layout="@layout/keyboard_setup_wizard_previous_step_not_complete_layout"
-        android:visibility="gone"/>
+             layout="@layout/keyboard_setup_wizard_previous_step_not_complete_layout"
+             android:visibility="gone"/>
 
 
     <LinearLayout
@@ -65,19 +78,19 @@
         android:layout_gravity="center">
 
         <TextView
-            style="@style/Ask.Text.Small"
+            style="@style/Ask.Text.Normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="4dp"
             android:text="@string/setup_wizard_step_small_sub_title"/>
 
-        <TextView
-            style="@style/Ask.Text.Normal"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/setup_wizard_step_one_details" />
+        <!--<TextView-->
+            <!--style="@style/Ask.Text.Normal"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/setup_wizard_step_one_details" />-->
 
         <View
             style="@style/Ask.Menu.Divider" />
@@ -91,6 +104,7 @@
             android:drawablePadding="6dp"
             android:drawableLeft="@drawable/ic_settings_language"
             android:text="@string/setup_wizard_step_one_action"
+            android:textColor="#0000FF"
             android:background="@drawable/transparent_click_feedback_background"/>
     </LinearLayout>
 </LinearLayout>

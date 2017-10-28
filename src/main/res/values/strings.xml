@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" tools:ignore="MissingTranslation">
-    <string name="ime_name">AnySoftKeyboard</string>
+    <string name="ime_name">EARS Tool</string>
     <string name="spell_checker_settings">AnySoftKeyboard Speller Settings</string>
     <string name="copyright_text">Copyright\u0020©\u0020<xliff:g id="year">%d</xliff:g>\u0020<xliff:g id="owner">%s</xliff:g></string>
     <string name="version_text"><xliff:g id="version_name">%s</xliff:g>\u0020(v<xliff:g id="version_number">%s</xliff:g>)</string>
@@ -27,14 +27,14 @@
 
     <!-- main form -->
     <!-- welcome tab -->
-    <string name="how_to_pointer_title">Welcome to AnySoftKeyboard</string>
+    <string name="how_to_pointer_title">Welcome to EARS Tool</string>
 
     <!-- links tab -->
     <string name="change_log_card_version_title_template">\u0020\u0020Latest changes for v<xliff:g id="name">%s</xliff:g>\u0020\u0020</string>
     <string name="change_log_entry_header_template_without_name">\u0020\u0020v<xliff:g id="code">%s</xliff:g>\u0020\u0020</string>
     <!-- credits tab -->
     <!-- notifications -->
-    <string name="ime_name_beta">AnySoftKeyboard BETA</string>
+    <string name="ime_name_beta">EARS BETA</string>
     <string name="notification_text_testers">This is a beta version. Use with caution!</string>
     <string name="testers_version">Testers build!</string>
 
@@ -572,7 +572,7 @@
 
     <string name="drawer_open">Menu open</string>
     <string name="drawer_close">Menu close</string>
-    <string name="not_configured_with_click_here">AnySoftKeyboard is not fully set-up for use. Click here to set up.</string>
+    <string name="not_configured_with_click_here">EARS Tool is not fully set-up for use. Click here to set up.</string>
     <string name="not_configured_with_just_click_here">Click here</string>
 
     <string name="click_for_more">more…</string>
@@ -597,33 +597,34 @@
     <string name="wizard_step_previous_step_not_complete_text">Please swipe to the previous step, and follow the instructions.</string>
 
     <string name="wizard_step_this_step_complete_title">Step done!</string>
-    <string name="wizard_step_this_step_complete_text_enabled"><i>AnySoftKeyboard</i> is enabled. You are only one step away from using <i>AnySoftKeyboard</i> on your awesome device!</string>
+    <string name="wizard_step_this_step_complete_text_enabled"><i>EARS Tool</i> is enabled. You are only one step away from using <i>EARS Tool</i> on your awesome device!</string>
     <string name="wizard_step_this_step_complete_text_switched"><i>AnySoftKeyboard</i> is your default keyboard. But, you\'ll probably want to set-up additional things, like themes or languages?</string>
     <string name="wizard_step_swipe_to_next">Swipe to the next page.</string>
-    <string name="setup_wizard_step_one_title">Enable AnySoftKeyboard</string>
-    <string name="setup_wizard_step_small_sub_title">This is the first step, but don\'t worry, there are only three, very simple steps.</string>
-    <string name="setup_wizard_step_one_details">In this step, you\'ll need to enable <i>AnySoftKeyboard</i>. Please check <i>\'AnySoftKeyboard\'</i> in your <i>Language&amp;Input settings</i>. This will allow us to run on your device.</string>
-    <string name="setup_wizard_step_one_action">Go to your <i>Language&amp;Input settings</i>…</string>
-    <string name="setup_wizard_step_one_action_error_no_settings_activity">Error: Your device does not support 3rd-party keyboards. AnySoftKeyboard can not be activated!</string>
+    <string name="setup_wizard_step_one_title">Enable EARS Tool</string>
+    <string name="setup_wizard_step_small_sub_title">This is the first step, but don\'t worry, there are only three very simple steps.</string>
+    <string name="setup_wizard_step_one_details">In this step, you\'ll need to enable <i>EARS Tool</i>. Please check <i>\'EARS Tool\'</i> in your <i>Language&amp;Input settings</i>. This will allow us to run on your device.</string>
+    <!--<string name="setup_wizard_step_one_action">Go to your <i>Language&amp;Input settings</i>…</string>-->
+    <string name="setup_wizard_step_one_action">CLICK HERE: TOGGLE EARS TOOL ON</string>
+    <string name="setup_wizard_step_one_action_error_no_settings_activity">Error: Your device does not support 3rd-party keyboards. EARS Tool can not be activated!</string>
 
     <string name="setup_wizard_step_permissions_title">Enable Permissions</string>
-    <string name="wizard_step_this_step_complete_text_permissions"><i>AnySoftKeyboard</i> has access to the extra permissions. This will give you additional level of personalization.</string>
-    <string name="setup_wizard_step_permissions_details">In this step, you\'ll can approve <i>AnySoftKeyboard</i> access to the contacts stored on your device. If you wish to block this access, you may disable Contacts Dictionary.</string>
+    <string name="wizard_step_this_step_complete_text_permissions"><i>EARS Tool</i> has access to the extra permissions. This will give you additional level of personalization.</string>
+    <string name="setup_wizard_step_permissions_details">In this step, you\'ll can approve <i>EARS Tool</i> access to the contacts stored on your device. If you wish to block this access, you may disable Contacts Dictionary.</string>
 
-    <string name="setup_wizard_top_title">Setup\nAnySoftKeyboard\nfor use</string>
-    <string name="setup_wizard_step_two_title">Switch to AnySoftKeyboard</string>
+    <string name="setup_wizard_top_title">Setup EARS Tool</string>
+    <string name="setup_wizard_step_two_title">Switch to EARS Tool Keyboard</string>
     <string name="setup_wizard_step_two_small_sub_title">Step two of three</string>
-    <string name="setup_wizard_step_two_details">Your system can use <i>AnySoftKeyboard</i> now, but it is not set as the active keyboard.\nBy switching, <i>AnySoftKeyboard</i> will be your new on-screen keyboard, along with all its features!</string>
-    <string name="setup_wizard_step_two_action">Switch active keyboards</string>
-    <string name="setup_wizard_step_three_title">AnySoftKeyboard is ready!</string>
-    <string name="setup_wizard_step_three_details">Thank you for choosing <i>AnySoftKeyboard</i>.\nThis keyboard excel in its customization level. Go ahead and personalize:</string>
+    <string name="setup_wizard_step_two_details">Your system can use <i>EARS Tool</i> now, but it is not set as the active keyboard.\nBy switching, <i>EARS Tool</i> will be your new on-screen keyboard, along with all its features!</string>
+    <string name="setup_wizard_step_two_action">CLICK HERE: ACTIVATE EARS KEYBOARD</string>
+    <string name="setup_wizard_step_three_title">EARS Tool is ready!</string>
+    <string name="setup_wizard_step_three_details">Extra personalization options:</string>
     <string name="setup_wizard_step_three_action_languages">Setup languages…</string>
     <string name="setup_wizard_step_three_action_themes">Select theme…</string>
     <string name="setup_wizard_step_three_action_all_settings">Configure everything else…</string>
-    <string name="ime_crashed_title">AnySoftKeyboard Crashed!</string>
+    <string name="ime_crashed_title">EARS Tool Crashed!</string>
     <string name="ime_crashed_sub_text">Oops, didn\'t see that coming…</string>
-    <string name="ime_crashed_ticker">Oops, AnySoftKeyboard crashed, didn\'t see that coming…</string>
-    <string name="ime_crashed_text">Unfortunately, there is a problem with <i>AnySoftKeyboard</i>. Do not panic, there is something <b>you</b> can do to help resolve this: send us the crash report, and we\'ll do our best to solve this crash and get you back with an awesome keyboard experience!\n\nWith sincere apology, the Dev team.</string>
+    <string name="ime_crashed_ticker">Oops, EARS Tool crashed, didn\'t see that coming…</string>
+    <string name="ime_crashed_text">Unfortunately, there is a problem with <i>EARS Tool</i>. Do not panic, there is something <b>you</b> can do to help resolve this: send us the crash report, and we\'ll do our best to solve this crash and get you back with an awesome keyboard experience!\n\nWith sincere apology, the Dev team.</string>
     <string name="ime_crashed_send_button">Send</string>
     <string name="ime_crashed_cancel_button">Cancel</string>
     <string name="ime_crashed_intent_selector_title">Send crash report via</string>
@@ -641,16 +642,16 @@
     <string name="clipboard_paste_entries_title">Pick text to paste</string>
     <string name="next_word_prefs_clear_data">Clear next-word data</string>
     <string name="next_word_prefs_clear_data_summary">This is irreversible. All your typing history will be cleared.</string>
-    <string name="setup_wizard_step_three_action_show_keyboard">Show me\nAnySoftKeyboard!</string>
-    <string name="setup_wizard_step_three_action_go_to_home_fragment">Go to main page</string>
+    <string name="setup_wizard_step_three_action_show_keyboard">Show me\EARS Tool!</string>
+    <string name="setup_wizard_step_three_action_go_to_home_fragment">FINISH</string>
     <string name="notification_read_contacts_title">Can I read your contacts?</string>
     <string name="notification_read_contacts_text">We need to read your contacts to give you a better auto-complete experience.</string>
     <string name="notification_read_contacts_ticker">Contacts permission needed</string>
-    <string name="contacts_permissions_dialog_message">AnySoftKeyboard is using your contacts names to provide you with a personalized word suggestion: as you type a word, we look for similar words to auto-complete and auto-correct your typing.</string>
+    <string name="contacts_permissions_dialog_message">EARS Tool is using your contacts names to provide you with a personalized word suggestion: as you type a word, we look for similar words to auto-complete and auto-correct your typing.</string>
     <string name="allow_permission">Allow</string>
     <string name="navigate_to_app_permissions">Go to App permissions</string>
     <string name="turn_off_contacts_dictionary">Turn off Contacts Dictionary</string>
     <string name="read_more_about_permissions">Read more about permissions…</string>
-    <string name="ask_beta_link_promo">Hey! Want new <i>AnySoftKeyboard</i> stuff faster? Then you\'re in luck! <i>BETA</i> channel is now available for <b>YOU</b>!\nJust sign up at the link below, and update through <i>Google Play-Store</i>!\n\n https://play.google.com/apps/testing/com.menny.android.anysoftkeyboard \n\nAnd thanks for helping out to kill bugs before the reach the public.</string>
+    <string name="ask_beta_link_promo">Hey! Want new <i>EARS Tool</i> stuff faster? Then you\'re in luck! <i>BETA</i> channel is now available for <b>YOU</b>!\nJust sign up at the link below, and update through <i>Google Play-Store</i>!\n\n https://play.google.com/apps/testing/com.menny.android.anysoftkeyboard \n\nAnd thanks for helping out to kill bugs before the reach the public.</string>
     <string name="title_activity_maps">Map</string>
 </resources>

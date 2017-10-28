@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
@@ -10,68 +11,194 @@
 
     <!-- note, since this page is always at incomplete state, we'll hide the step_complete nad step_not_complete views. -->
 
-    <include android:id="@id/previous_step_not_complete"
-             layout="@layout/keyboard_setup_wizard_previous_step_not_complete_layout"
-             android:visibility="gone"/>
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please click on each of theses green buttons to enable full application functionality. Once Android setting is changed, press back on your phone to return to this Application"/>
+        android:layout_weight=".37"
+        android:text="Please click on each of these three settings, one by one. Once each setting is toggled, continue pressing the back button until you return to this screen"/>
+
+    <include android:id="@id/previous_step_not_complete"
+             layout="@layout/keyboard_setup_wizard_previous_step_not_complete_layout"
+             android:visibility="gone"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/notificationSettings"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="56dp"-->
+        <!--android:gravity="center_vertical|right"-->
+        <!--android:drawableLeft="@drawable/ic_action_settings_light"-->
+        <!--android:drawablePadding="6dp"-->
+        <!--android:drawableStart="@drawable/ic_action_settings_light"-->
+        <!--android:text="Add Notification Settings"-->
+        <!--android:textAlignment="viewStart"-->
+        <!--android:background="@android:color/holo_green_light"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:padding="20dp"-->
+        <!--android:textSize="14sp"-->
+        <!--android:textStyle="bold"-->
+        <!--/>-->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
     <TextView
         android:id="@+id/notificationSettings"
         android:layout_width="wrap_content"
-        android:layout_height="94dp"
-        android:gravity="center_vertical|right"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/ic_action_settings_light"
         android:drawablePadding="6dp"
         android:drawableStart="@drawable/ic_action_settings_light"
+
+        android:gravity="center_vertical|right"
+        android:padding="10dp"
         android:text="Add Notification Settings"
         android:textAlignment="viewStart"
-        android:background="@android:color/holo_green_light"
-        android:layout_marginTop="10dp"
-        android:padding="20dp"
+        android:textColor="#33b5e5"
         android:textSize="14sp"
         android:textStyle="bold"
         />
 
     <View android:id="@id/this_step_complete" android:layout_width="1px" android:layout_height="1px" android:visibility="gone"/>
 
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="39dp"
+        android:layout_height="46dp"
+        />
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
     <TextView
         android:id="@+id/AppUsageSettings"
         android:layout_width="wrap_content"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/ic_action_settings_light"
         android:drawablePadding="6dp"
-        android:drawableStart="@drawable/ic_action_settings_light"
 
+        android:drawableStart="@drawable/ic_action_settings_light"
         android:gravity="center_vertical|right"
+        android:padding="10dp"
         android:text="App Usage Settings"
-        android:layout_marginTop="10dp"
         android:textAlignment="viewStart"
-        android:background="@android:color/holo_green_light"
-        android:padding="20dp"
+        android:textColor="#33b5e5"
         android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="39dp"
+            android:layout_height="46dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/AppUsageSettings"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="56dp"-->
+        <!--android:drawableLeft="@drawable/ic_action_settings_light"-->
+        <!--android:drawablePadding="6dp"-->
+        <!--android:drawableStart="@drawable/ic_action_settings_light"-->
+
+        <!--android:gravity="center_vertical|right"-->
+        <!--android:text="App Usage Settings"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:textAlignment="viewStart"-->
+        <!--android:background="@android:color/holo_green_light"-->
+        <!--android:padding="20dp"-->
+        <!--android:textStyle="bold"/>-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/TakeReferencePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_action_settings_light"
+        android:drawablePadding="6dp"
+
+        android:drawableStart="@drawable/ic_action_settings_light"
+        android:gravity="center_vertical|right"
+        android:padding="10dp"
+        android:text="Take Reference Picture"
+        android:textAlignment="viewStart"
+        android:textColor="#33b5e5"
+        android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="39dp"
+            android:layout_height="46dp"
+            />
+
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:id="@+id/TakeReferencePic"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="56dp"-->
+        <!--android:drawableLeft="@drawable/ic_action_settings_light"-->
+        <!--android:drawablePadding="6dp"-->
+        <!--android:drawableStart="@drawable/ic_action_settings_light"-->
+
+        <!--android:gravity="center_vertical|right"-->
+        <!--android:text="Take Reference Picture"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:textAlignment="viewStart"-->
+        <!--android:background="@android:color/holo_green_light"-->
+        <!--android:padding="20dp"-->
+        <!--android:textStyle="bold"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/go_to_home_fragment_action"-->
+
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="56dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@android:color/holo_green_light"-->
+        <!--android:drawableLeft="@drawable/ic_action_settings_light"-->
+        <!--android:drawablePadding="6dp"-->
+        <!--android:drawableStart="@drawable/ic_action_settings_light"-->
+
+        <!--android:gravity="center_vertical|right"-->
+
+        <!--android:text="@string/setup_wizard_step_three_action_go_to_home_fragment"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textStyle="bold"-->
+        <!--/>-->
 
     <TextView
         android:id="@+id/go_to_home_fragment_action"
 
         android:layout_width="wrap_content"
-        android:layout_height="94dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@android:color/holo_green_light"
-        android:drawableLeft="@drawable/ic_action_settings_light"
-        android:drawablePadding="6dp"
-        android:drawableStart="@drawable/ic_action_settings_light"
+
 
         android:gravity="center_vertical|right"
 
+        android:padding="10dp"
         android:text="@string/setup_wizard_step_three_action_go_to_home_fragment"
         android:textAlignment="center"
-        android:textStyle="bold"
-        />
+
+        android:textColor="#0000FF"
+        android:textStyle="bold"/>
 
 
     <LinearLayout

@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="6dp">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+
+              android:orientation="vertical"
+              android:padding="6dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        app:srcCompat="@drawable/cdmh_small"
+        />
 
     <TextView
         style="@style/Ask.Text.Title"
@@ -15,8 +23,8 @@
         android:text="@string/setup_wizard_step_two_title"/>
 
     <include android:id="@id/previous_step_not_complete"
-        layout="@layout/keyboard_setup_wizard_previous_step_not_complete_layout"
-        android:visibility="gone"/>
+             layout="@layout/keyboard_setup_wizard_previous_step_not_complete_layout"
+             android:visibility="gone"/>
 
 
     <LinearLayout
@@ -71,12 +79,12 @@
             android:layout_marginTop="4dp"
             android:text="@string/setup_wizard_step_two_small_sub_title"/>
 
-        <TextView
-            style="@style/Ask.Text.Normal"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/setup_wizard_step_two_details" />
+        <!--<TextView-->
+            <!--style="@style/Ask.Text.Normal"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/setup_wizard_step_two_details" />-->
 
         <View
             style="@style/Ask.Menu.Divider" />
@@ -88,8 +96,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="6dp"
-            android:drawableLeft="@drawable/ic_user_interface_category"
-            android:text="@string/setup_wizard_step_two_action"
+            android:drawableLeft="@drawable/ic_action_settings_light"
+
+
+            android:drawableStart="@drawable/ic_action_settings_light"            android:text="@string/setup_wizard_step_two_action"
+            android:textColor="#0000FF"
+            android:textSize="15dp"
             android:background="@drawable/transparent_click_feedback_background"/>
     </LinearLayout>
 </LinearLayout>
