@@ -50,7 +50,7 @@ public class Util {
     private static CognitoCachingCredentialsProvider sCredProvider;
     private static TransferUtility sTransferUtility;
     private static String userId;
-    Context mContext = MainActivity.getIntance();
+    //Context mContext = MainActivity.getIntance();
 
     /**
      * Gets an instance of CognitoCachingCredentialsProvider which is

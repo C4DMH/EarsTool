@@ -67,6 +67,7 @@ public class MusicNotificationListener extends NotificationListenerService {
         //String path = Environment.getExternalStorageDirectory() + "/videoDIARY/Music/";
         String path = mContext.getExternalFilesDir(null) + "/videoDIARY/Music/";
 
+
         Log.d(TAG, "onStartJob: path is: " + path);
 
         File directory = new File(path);

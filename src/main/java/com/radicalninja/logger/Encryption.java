@@ -114,7 +114,6 @@ public class Encryption {
     public void decrypt(String name, String path) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
 
 
-        Context mContext = MainActivity.getIntance();
         String directoryName = "/videoDIARY/";
 
         byte[] iv = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};

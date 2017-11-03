@@ -38,7 +38,7 @@ public class UStats {
     static String directoryName = "/videoDIARY/";
     static String time;
 
-    Context mContext = MainActivity.getIntance();
+    //Context mContext = MainActivity.getIntance();
 
 
 

@@ -35,8 +35,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,10 +50,7 @@ import android.widget.TimePicker;
 import com.menny.android.anysoftkeyboard.AnyApplication;
 import com.menny.android.anysoftkeyboard.R;
 
-import java.io.File;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 
@@ -70,30 +65,12 @@ public class MainActivity extends AppCompatActivity {
     private PendingIntent musicIntent;
     private PendingIntent photoIntent;
     public static boolean alarmIsSet = false;
-    public static boolean gotLocation = false;
     public static boolean statsAlarmIsSet = false;
     public static final String secureID = Settings.Secure.getString(
             AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
-
-    GPSTracker gps;
-    double latitude;
-    double longitude;
-
     SharedPreferences wmbPreference;
-
-    public static MainActivity instance;
     public String theCurrentDate;
 
-    //public final String directory = Context.getExternalFilesDir(null);
-
-
-
-//    private static void initUserId() {
-//        if (TextUtils.isEmpty(secureID)) {
-//            secureID = Settings.Secure.getString(
-//                    AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
-//        }
-//    }
 
     public void startAlarm() {
 
@@ -115,12 +92,8 @@ public class MainActivity extends AppCompatActivity {
         alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
         alarmIsSet = true;
-        //instace = this;
 
     }
-
-
-
 
     public static String convertDate(String dateInMilliseconds, String dateFormat) {
         return DateFormat.format(dateFormat, Long.parseLong(dateInMilliseconds)).toString();
@@ -131,30 +104,12 @@ public class MainActivity extends AppCompatActivity {
         return super.getApplicationContext();
     }
 
-    public static MainActivity getIntance() {
-        return instance;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
         setContentView(R.layout.activity_main);
-//        secureID = Settings.Secure.getString(
-//                AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
-        instance = this;
-
-        //String path = Environment.getExternalStorageDirectory() + "/videoDIARY/";
-        String path = this.getExternalFilesDir(null) + "/videoDIARY/Music/";
-
-        File directory = new File(path);
-
-
-        if(!directory.exists()){
-            directory.mkdirs();
-        }
-
 
         startAlarm();
         wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
@@ -163,33 +118,18 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = wmbPreference.edit();
             editor.putBoolean("ALARMSET", false);
             editor.commit();
-
         }
 
         if (!isAccessGranted()) {
             //Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
             //startActivity(intent);
             showDialog();
-
         }
-
 
         if(!checkNotificationEnabled()){
-
             showMusicDialog();
-
         }
 
-        Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-        //List<Address> address = null;
-        List<Address> address = null;
-
-        if (gotLocation == false) {
-            gps = new GPSTracker(this);
-            latitude = gps.getLatitude();
-            longitude = gps.getLongitude();
-            Log.d("GPS", "111 WE HAVE GOT YOUR LOCATION: LATITUDE = " + latitude + "LONGITUDE = " + longitude);
-        }
         startStatsAlarm();
         startMicUploadAlarm();
         startGPSUploadAlarm();
@@ -200,8 +140,6 @@ public class MainActivity extends AppCompatActivity {
         String rate = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
         String size = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER);
         Log.d("Buffer Size and  rate", "Size :" + size + " & Rate: " + rate);
-
-
 
 
         final JobInfo job = new JobInfo.Builder(1, new ComponentName(this, StatsJobService.class))
@@ -217,12 +155,7 @@ public class MainActivity extends AppCompatActivity {
         jobScheduler.schedule(job);
         Log.d(TAG, "onCreate: Job Scehduled");
 
-
-
-
-
-
-
+        // remove this intent 30th october 2017
         startActivity(new Intent(this, VideoActivity.class));
 
     }
@@ -230,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        startActivity(new Intent(this, VideoActivity.class));
+        //startActivity(new Intent(this, VideoActivity.class));
         //Toast.makeText(this, "On Resume called!" , Toast.LENGTH_LONG).show();
     }
 
@@ -244,32 +177,6 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            //AnySoftKeyboard.launchsettings();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    public void broadcastIntent() {
-        Intent intent = new Intent();
-        intent.setAction("com.codepath.CUSTOM_INTENT");
-        sendBroadcast(intent);
-    }
 
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
@@ -294,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        instance = null;
         startService(new Intent(this, MainActivity.class));
     }
 
@@ -320,8 +226,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, StatsAlarmReceiver.class);
         statsIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, statsIntent);
-        alarmIsSet = true;
-        //instace = this;
 
     }
 
@@ -349,8 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, MicIntent);
-        alarmIsSet = true;
-        //instace = this;
+
 
     }
 
@@ -374,11 +277,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, UploadGPSAlarmReceiver.class);
         //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
         GPSIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
-
-
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, GPSIntent);
-        alarmIsSet = true;
-        //instace = this;
 
     }
 
@@ -401,11 +300,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MusicUploadReceiver.class);
         //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
         musicIntent = PendingIntent.getBroadcast(this, 4, intent, 0);
-
-
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, musicIntent);
-        //alarmIsSet = true;
-        //instace = this;
 
     }
 
@@ -433,12 +328,7 @@ public class MainActivity extends AppCompatActivity {
         photoIntent = PendingIntent.getBroadcast(this, 4, intent, 0);
         //alarmMgr.setExact();
 
-
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, photoIntent);
-
-        //alarmIsSet = true;
-        //instace = this;
-
     }
 
 
@@ -514,7 +404,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void showMusicDialog()
     {
-
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle("Music Listening Habits")
                 .setMessage("App will not run without usage access permissions. The app only collects information from installed music players, and ignores all other notifications.")
@@ -538,9 +427,6 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
     }
-
-
-
 
 }
 

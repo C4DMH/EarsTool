@@ -95,6 +95,8 @@
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAILlrSpiqigog3iJt3BwYxzNXMUzqgGV_dJ1EPDQ" />
 
+        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="face"/>
+
         <!-- this is the IME with the pointer to the settings ui (xml/method) -->
         <service
             android:name=".SoftKeyboard"
@@ -118,6 +120,7 @@
             android:name=".LauncherSettingsActivity"
             android:label="@string/ime_name"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AskApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -131,6 +134,7 @@
             android:icon="@mipmap/ic_ask_launcher"
             android:label="@string/ime_name"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AskApp"
             android:windowSoftInputMode="adjustPan"></activity>
         <activity
@@ -138,11 +142,13 @@
             android:icon="@mipmap/ic_ask_launcher"
             android:label="@string/testers_version"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AskApp.Popup"></activity>
         <!-- ui when a crash happens -->
         <activity
             android:name="com.anysoftkeyboard.ui.SendBugReportUiActivity"
             android:icon="@mipmap/ic_ask_launcher"
+            android:screenOrientation="portrait"
             android:label="@string/ime_name"
             android:theme="@style/Theme.AskApp.NoTitle"></activity>
         <!-- for voice -->
@@ -153,6 +159,7 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:documentLaunchMode="never"
+            android:screenOrientation="portrait"
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true"
             android:launchMode="singleInstance"
@@ -161,12 +168,14 @@
         <activity
             android:name="com.anysoftkeyboard.ui.VoiceInputNotInstalledActivity"
             android:icon="@mipmap/ic_ask_launcher"
+            android:screenOrientation="portrait"
             android:label="@string/ime_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- Logger UI -->
         <activity
             android:name="com.radicalninja.logger.ui.LoggerInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- Logger upload task -->
 
@@ -258,7 +267,8 @@
             android:label="@string/title_activity_video" />
 
         <activity
-            android:name="com.anysoftkeyboard.ui.settings.setup.FaceDetect">
+            android:name="com.anysoftkeyboard.ui.settings.setup.FaceDetect"
+            android:screenOrientation="portrait">
         </activity>
 
 

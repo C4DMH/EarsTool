@@ -235,6 +235,9 @@ public class FaceDetect extends AppCompatActivity implements View.OnClickListene
             Log.d(TAG, "processCameraPicture: BITMAP IS NULL");
         }
 
+        Log.d(TAG, "processCameraPicture: " + detector.isOperational());
+        Log.d(TAG, "processCameraPicture:  " + bitmap.getByteCount());
+
         if (detector.isOperational() && bitmap != null) {
             editedBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap
                     .getHeight(), bitmap.getConfig());
