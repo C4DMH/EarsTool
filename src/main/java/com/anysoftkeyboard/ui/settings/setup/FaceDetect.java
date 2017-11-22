@@ -8,6 +8,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -61,6 +62,9 @@ public class FaceDetect extends AppCompatActivity implements View.OnClickListene
     TransferUtility mTransferUtility;
     Encryption mEncryption;
     static String folder = "/ReferencePic/";
+
+    public SharedPreferences photoTick;
+    public static final String TICK = "MyPrefFile";
 
 
 
@@ -161,11 +165,18 @@ public class FaceDetect extends AppCompatActivity implements View.OnClickListene
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult: this is resyult");
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Log.d(TAG, "onActivityResult: IMAGWURI = " + imageUri);
             launchMediaScanIntent();
             try {
                 processCameraPicture();
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Failed to load Image", Toast.LENGTH_SHORT).show();
+                
+                if(data == null){
+                    Log.d(TAG, "onActivityResult: NULLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+                }
+                Log.e(TAG, "onActivityResult: exception" + e.getMessage() );
+                Log.e(TAG, "onActivityResult: EXCEPTION: ",e );
             }
         }
     }
@@ -200,6 +211,7 @@ public class FaceDetect extends AppCompatActivity implements View.OnClickListene
             Log.e(TAG, "Could not create file.", e);
         }
         imageUri = Uri.fromFile(photo);
+        Log.d(TAG, "startCamera: image uri - " + imageUri);
         //Log.d(TAG, "startCamera: 4");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         //intent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
@@ -326,6 +338,21 @@ public class FaceDetect extends AppCompatActivity implements View.OnClickListene
 
                 Toast.makeText(this, "Face Detection Successful", Toast.LENGTH_LONG).show();
 
+                // 10th Nov fix the tick problem
+
+                photoTick = getApplicationContext().getSharedPreferences("photoTick", 0);
+                SharedPreferences.Editor edit = photoTick.edit();
+                edit.putInt("photoTicks", 1);
+                edit.commit();
+
+
+                SharedPreferences.Editor editor = getSharedPreferences(TICK, MODE_PRIVATE).edit();
+                editor.putInt("done", 1);
+                editor.apply();
+
+
+
+
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -371,15 +398,23 @@ public class FaceDetect extends AppCompatActivity implements View.OnClickListene
         Log.d(TAG, "decodeBitmapUri: ");
         //Toast.makeText(this, "1o" , Toast.LENGTH_LONG).show();
         Log.d(TAG, "initViews1: face detector is ============================ " + detector.isOperational());
+        Log.d(TAG, "decodeBitmapUri: the URI is: " + uri);
         int targetW = 300;
         int targetH = 300;
+        Log.d(TAG, "decodeBitmapUri: 1");
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Log.d(TAG, "decodeBitmapUri: 2");
         bmOptions.inJustDecodeBounds = true;
         bmOptions.inPreferredConfig=Bitmap.Config.RGB_565;
+        Log.d(TAG, "decodeBitmapUri: 3");
         BitmapFactory.decodeStream(ctx.getContentResolver().openInputStream(uri), null, bmOptions);
+        Log.d(TAG, "decodeBitmapUri: 4");
         android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+        Log.d(TAG, "decodeBitmapUri: 5");
         android.hardware.Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_FRONT, info);
+        Log.d(TAG, "decodeBitmapUri: 6");
         int rotation = this.getWindowManager().getDefaultDisplay().getRotation();
+        Log.d(TAG, "decodeBitmapUri: 7");
         int orientation = this.getResources().getConfiguration().orientation;
         Log.d(TAG, "decodeBitmapUri: OREINTATION is ==================== " + orientation);
 

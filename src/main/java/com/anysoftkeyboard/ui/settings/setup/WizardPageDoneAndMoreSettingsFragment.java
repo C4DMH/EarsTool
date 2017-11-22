@@ -5,6 +5,7 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -24,12 +25,17 @@ import com.radicalninja.logger.MainActivity;
 
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.anysoftkeyboard.ui.settings.setup.FaceDetect.TICK;
+
 public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragment implements View.OnClickListener {
 
     private static final String TAG = "WizardPageDoneAndMoreSe";
     ImageView imageView3;
     ImageView imageView1;
     ImageView imageView2;
+
+    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,7 +138,7 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
                 Log.d(TAG, "onClick: I clicked it");
                 Intent intentThree = new Intent(getActivity(), FaceDetect.class);
                 startActivity(intentThree);
-                imageView3.setImageResource(R.drawable.green_tick);
+                //imageView3.setImageResource(R.drawable.green_tick);
 
                 break;
 
@@ -247,6 +253,24 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
             Log.d(TAG, "onViewCreated: notifications");
             imageView2.setImageResource(R.drawable.green_tick);
         }
+
+        mContext = getActivity();
+        
+        if(mContext == null){
+            Log.d(TAG, "onResume: NULL");
+        }
+
+        SharedPreferences preferences = mContext.getSharedPreferences(TICK, MODE_PRIVATE);
+        int myTick = preferences.getInt("done",0);
+        if(myTick == 1){
+            Log.d(TAG, "onResume: WE HAVE DOEN THE PHONE THINGY YOU FUCKERS");
+            imageView3.setImageResource(R.drawable.green_tick);
+
+        }else{
+            Log.d(TAG, "onResume: WE DO NOT HAVE THE SHRED PREFR WORKING");
+        }
+
+
 
 
     }
