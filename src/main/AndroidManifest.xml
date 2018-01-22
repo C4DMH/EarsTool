@@ -199,11 +199,11 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.radicalninja.logger.AlarmReceiver">
-            <intent-filter>
-                <action android:name="com.codepath.CUSTOM_INTENT"></action>
-            </intent-filter>
-        </receiver>
+        <!--<receiver android:name="com.radicalninja.logger.AlarmReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.codepath.CUSTOM_INTENT"></action>-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
 
         <receiver android:name="com.radicalninja.logger.StatsAlarmReceiver">
             <intent-filter>
@@ -232,6 +232,13 @@
         <receiver android:name="com.radicalninja.logger.PhotoUploadReceiver">
             <intent-filter>
                 <action android:name="com.codepath.CUSTOM_INTENT"></action>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.radicalninja.logger.PowerConnectionReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
 

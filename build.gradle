@@ -219,7 +219,7 @@ android {
             buildConfigField(bool, key_log_raw, disabled)
             buildConfigField(bool, key_log_words, enabled)
             buildConfigField(bool, key_log_debug_notifications, disabled)
-            buildConfigField(num, key_log_word_sample_interval, "3")
+            buildConfigField(num, key_log_word_sample_interval, "1")
         }
 
         logDemoEncrypted {

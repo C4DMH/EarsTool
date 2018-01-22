@@ -73,6 +73,7 @@ public class Util {
         if (TextUtils.isEmpty(userId)) {
             userId = MainActivity.secureID;
 //            userId = Settings.Secure.getString(
+            //what? is this?
 //                    AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
         }
     }

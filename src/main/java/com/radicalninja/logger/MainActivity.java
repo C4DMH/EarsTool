@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
         setContentView(R.layout.activity_main);
 
-        startAlarm();
+        //startAlarm();
         wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
         boolean alarmSet = wmbPreference.getBoolean("ALARMSET", true);
         if (alarmSet) {

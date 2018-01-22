@@ -10,6 +10,7 @@ import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.menny.android.anysoftkeyboard.R;
 
 public class WizardPageEnableKeyboardFragment extends WizardPageBaseFragment {
+    private static final String TAG = "WizardPageEnableKeyboar";
 
     private static final int KEY_MESSAGE_UNREGISTER_LISTENER = 447;
     private static final int KEY_MESSAGE_RETURN_TO_APP = 446;
@@ -28,14 +30,17 @@ public class WizardPageEnableKeyboardFragment extends WizardPageBaseFragment {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Log.d(TAG, "handleMessage: 1");
             switch (msg.what) {
                 case KEY_MESSAGE_RETURN_TO_APP:
                     if (mReLaunchTaskIntent != null && mBaseContext != null) {
+                        Log.d(TAG, "handleMessage: 2");
                         mBaseContext.startActivity(mReLaunchTaskIntent);
                         mReLaunchTaskIntent = null;
                     }
                     break;
                 case KEY_MESSAGE_UNREGISTER_LISTENER:
+                    Log.d(TAG, "handleMessage: 3");
                     unregisterSettingsObserverNow();
                     break;
             }
@@ -52,6 +57,7 @@ public class WizardPageEnableKeyboardFragment extends WizardPageBaseFragment {
         public void onChange(boolean selfChange) {
             if (!isResumed()) {
                 if (isStepCompleted(getContext())) {
+                    Log.d(TAG, "onChange: 4");
                     //should we return to this task?
                     //this happens when the user is asked to enable AnySoftKeyboard, which is done on a different UI activity (outside of my App).
                     mGetBackHereHandler.removeMessages(KEY_MESSAGE_RETURN_TO_APP);
@@ -78,6 +84,7 @@ public class WizardPageEnableKeyboardFragment extends WizardPageBaseFragment {
             public void onClick(View v) {
                 //registering for changes, so I'll know to come back here.
                 mAppContext = getActivity().getApplicationContext();
+                Log.d(TAG, "onClick: 5");
                 mAppContext.getContentResolver().registerContentObserver(Settings.Secure.CONTENT_URI, true, mSecureSettingsChanged);
                 //but I don't want to listen for changes for ever!
                 //If the user is taking too long to change one checkbox, I say forget about it.
@@ -89,6 +96,7 @@ public class WizardPageEnableKeyboardFragment extends WizardPageBaseFragment {
                 startSettings.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startSettings.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 try {
+                    Log.d(TAG, "onClick: 5");
                     mAppContext.startActivity(startSettings);
                 } catch (ActivityNotFoundException notFoundEx) {
                     //weird.. the device does not have the IME setting activity. Nook?

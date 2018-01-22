@@ -45,7 +45,9 @@ public class MusicNotificationListener extends NotificationListenerService {
         Bundle extras = sbn.getNotification().extras;
         String title = "";
         try {
-            title = extras.getString("android.title");
+            //title = extras.getString("android.title");
+            title = extras.getCharSequence("android.title").toString();
+
         }
         catch(NullPointerException e){
             e.printStackTrace();

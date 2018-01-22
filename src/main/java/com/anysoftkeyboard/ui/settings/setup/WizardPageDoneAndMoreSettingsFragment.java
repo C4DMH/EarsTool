@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,6 +92,7 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
     @Override
     public void onClick(View v) {
         MainSettingsActivity activity = (MainSettingsActivity) getActivity();
+        Log.d(TAG, "the activity is: " + getActivity());
         switch (v.getId()) {
 //            case R.id.show_keyboard_view_action:
 //                InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -118,6 +122,8 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
 
             case R.id.notificationSettings:
                 Log.d(TAG, "onClick: 2");
+
+
                 showDialog3(v);
 //                Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
 //                //intent.putExtra("finishActivityOnSaveCompleted", true);
@@ -128,7 +134,51 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
 
             case R.id.AppUsageSettings:
                 Log.d(TAG, "onClick: 1");
-                Intent intentTwo = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+
+                //18th Jan 18 attempt at fix back button from stats app
+
+                final Handler handler = new Handler();
+
+                Runnable checkOverlaySetting = new Runnable() {
+
+                    @Override
+                    //@TargetApi(23)
+                    public void run() {
+                        Log.d(TAG, "run: 1");
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                            Log.d(TAG, "run: 2");
+                            return;
+                        }
+
+                        // 18th Jan 2018, below works, trying to stop using the intent ( ie try back button below).
+                        if (((MainSettingsActivity) getActivity()).isAccessGranted2()) {
+                            Log.d(TAG, "run: 3");
+                            //You have the permission, re-launch MainActivity
+                            //Intent i = new Intent(getActivity(), MainSettingsActivity.class);
+
+
+                            mBaseContext.startActivity(mReLaunchTaskIntent);
+                            mReLaunchTaskIntent = null;
+
+                            Log.d(TAG, "run: 4");
+                            //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            //startActivity(i);
+                            Log.d(TAG, "the activity is: " + getActivity());
+                            return;
+                        }
+
+                        handler.postDelayed(this, 200);
+                    }
+                };
+
+
+
+
+                Intent intentTwo = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                intentTwo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentTwo.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intentTwo.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                handler.postDelayed(checkOverlaySetting, 1000);
                 //intentTwo.putExtra("finishActivityOnSaveCompleted", true);
 
                 startActivity(intentTwo);
@@ -145,11 +195,47 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
         }
     }
 
+
+
 //
     public void showDialog3(View v) {
 
 
         Log.d("History", "In show Dialog3");
+
+
+        final Handler handler2 = new Handler();
+
+        Runnable checkOverlaySetting2 = new Runnable() {
+
+            @Override
+            //@TargetApi(23)
+            public void run() {
+                Log.d(TAG, "run: 1");
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    Log.d(TAG, "run: 2");
+                    return;
+                }
+
+                // 18th Jan 2018, below works, trying to stop using the intent ( ie try back button below).
+                if (checkNotificationEnabled()) {
+                    Log.d(TAG, "run: 41");
+                    Log.d(TAG, "run: Notificiation Enabled moterfucker");
+                    //You have the permission, re-launch MainActivity
+                    Intent i = new Intent(getActivity(), MainSettingsActivity.class);
+                    Log.d(TAG, "run: 42");
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                    Log.d(TAG, "the activity is: " + getActivity());
+                    return;
+                }
+
+                handler2.postDelayed(this, 200);
+            }
+        };
+
+
+
         //new ViewWeekStepCountTask().execute();
 //        DialogFragment dialog = (DialogFragment) DialogFragment.instantiate(getActivity(), "MyDialogFragment" );
 //        dialog.show(getFragmentManager(), "dialog");
@@ -168,14 +254,16 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
 
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                //Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
                 //intent.putExtra("finishActivityOnSaveCompleted", true);
                 // intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$SecuritySettingsActivity"));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
         ad.show();
+        handler2.postDelayed(checkOverlaySetting2, 1000);
     }
 
     public boolean isAccessGranted() {
@@ -216,6 +304,18 @@ public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragmen
         }
         Log.d(TAG, "checkNotificationEnabled: Did not get into settings?");
         return false;
+    }
+
+    private Context mBaseContext = null;
+    private Intent mReLaunchTaskIntent = null;
+    private Context mAppContext;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        FragmentActivity activity = getActivity();
+        mBaseContext = activity.getBaseContext();
+        mReLaunchTaskIntent = activity.getPackageManager().getLaunchIntentForPackage(activity.getPackageName());
     }
 
 //    @Override

@@ -17,9 +17,12 @@
 package com.anysoftkeyboard.ui.settings;
 
 import android.Manifest;
+import android.app.AppOpsManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -33,11 +36,11 @@ import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.anysoftkeyboard.PermissionsRequestCodes;
 import com.anysoftkeyboard.keyboards.KeyboardFactory;
@@ -54,6 +57,8 @@ import net.evendanan.chauffeur.lib.permissions.PermissionsRequest;
 import net.evendanan.pushingpixels.EdgeEffectHacker;
 
 public class MainSettingsActivity extends PermissionsFragmentChauffeurActivity {
+
+    private static final String TAG = "MainSettingsActivity";
 
     private DrawerLayout mDrawerRootLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -345,5 +350,27 @@ public class MainSettingsActivity extends PermissionsFragmentChauffeurActivity {
         startActivity(intent);
 
 
+    }
+
+    public boolean isAccessGranted2() {
+        try {
+            Log.d(TAG, "isAccessGranted2: the activity i am in is: " + this);
+            Log.d(TAG, "isAccessGranted: in is access granted");
+            PackageManager packageManager = getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(), 0);
+            AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+            int mode = 0;
+            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.KITKAT) {
+                Log.d(TAG, "isAccessGranted: in the if loop");
+                mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                        applicationInfo.uid, applicationInfo.packageName);
+                Log.d(TAG, "isAccessGranted2: mode: " + mode);
+            }
+            return (mode == AppOpsManager.MODE_ALLOWED);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.d(TAG, "isAccessGranted: returning false");
+            return false;
+        }
     }
 }
