@@ -1,0 +1,36 @@
+{
+  "buildFiles": [
+    "C:\\KeyLog5\\jnidictionaryv1\\Android.mk"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\gwicks\\AppData\\Local\\Android\\sdk23\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\KeyLog5\\jnidictionaryv1\\Android.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/KeyLog5/jnidictionaryv1/build/intermediates/ndkBuild/canary/obj NDK_LIBS_OUT\u003dC:\\KeyLog5\\jnidictionaryv1\\build\\intermediates\\ndkBuild\\canary\\lib clean"
+  ],
+  "libraries": {
+    "anysoftkey_jni-canary-arm64-v8a": {
+      "buildCommand": "C:\\Users\\gwicks\\AppData\\Local\\Android\\sdk23\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\KeyLog5\\jnidictionaryv1\\Android.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/KeyLog5/jnidictionaryv1/build/intermediates/ndkBuild/canary/obj NDK_LIBS_OUT\u003dC:\\KeyLog5\\jnidictionaryv1\\build\\intermediates\\ndkBuild\\canary\\lib C:/KeyLog5/jnidictionaryv1/build/intermediates/ndkBuild/canary/obj/local/arm64-v8a/libanysoftkey_jni.so",
+      "toolchain": "toolchain-arm64-v8a",
+      "abi": "arm64-v8a",
+      "artifactName": "anysoftkey_jni",
+      "files": [
+        {
+          "src": "C:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\\com_anysoftkeyboard_dictionaries_BinaryDictionary.cpp",
+          "flags": "\"-gcc-toolchain\" \"C:/Users/gwicks/AppData/Local/Android/sdk23/ndk-bundle/build//../toolchains/aarch64-linux-android-4.9/prebuilt/windows-x86_64\" \"-target\" \"aarch64-none-linux-android\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-fpic\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-g\" \"-fno-exceptions\" \"-fno-rtti\" \"-O2\" \"-DNDEBUG\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\debug\\jni\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\" \"-IC:/Users/gwicks/AppData/Local/Android/sdk23/ndk-bundle/build//../sources/cxx-stl/system/include\" \"-IC:/KeyLog5/jnidictionaryv1\" \"-DANDROID\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-isystem\" \"C:/Users/gwicks/AppData/Local/Android/sdk23/ndk-bundle/build//../platforms/android-21/arch-arm64/usr/include\""
+        },
+        {
+          "src": "C:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\\dictionary.cpp",
+          "flags": "\"-gcc-toolchain\" \"C:/Users/gwicks/AppData/Local/Android/sdk23/ndk-bundle/build//../toolchains/aarch64-linux-android-4.9/prebuilt/windows-x86_64\" \"-target\" \"aarch64-none-linux-android\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-fpic\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-g\" \"-fno-exceptions\" \"-fno-rtti\" \"-O2\" \"-DNDEBUG\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\debug\\jni\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\" \"-IC:/Users/gwicks/AppData/Local/Android/sdk23/ndk-bundle/build//../sources/cxx-stl/system/include\" \"-IC:/KeyLog5/jnidictionaryv1\" \"-DANDROID\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-isystem\" \"C:/Users/gwicks/AppData/Local/Android/sdk23/ndk-bundle/build//../platforms/android-21/arch-arm64/usr/include\""
+        }
+      ],
+      "output": "C:\\KeyLog5\\jnidictionaryv1\\build\\intermediates\\ndkBuild\\canary\\obj\\local\\arm64-v8a\\libanysoftkey_jni.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-arm64-v8a": {
+      "cppCompilerExecutable": "C:\\Users\\gwicks\\AppData\\Local\\Android\\sdk23\\ndk-bundle\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

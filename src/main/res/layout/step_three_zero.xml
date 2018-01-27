@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="221dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:textColor="#0a1c4a"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="First, let’s install the EARS keyboard."/>
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="20dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/determinateBar"
+        app:srcCompat="@drawable/ears_icon"/>
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="147dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:srcCompat="@drawable/install_ears_keyb_step_1_1"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="261dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:lineSpacingExtra="5sp"
+        android:textColor="#0a1c4a"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView15"
+        tools:text="Language and emoji choices tell us how you’re feeling."/>
+
+
+    <ScrollView
+        android:layout_width="310dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+
+        <TextView
+            android:id="@+id/imageView17"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:text="Automated computer software will analyze your text input (except passwords and credit card information).\n\nTap Install Keyboard below to go to the Android settings page and select the EARS Keyboard."
+            android:textSize="17sp"
+            />
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:contextClickable="true"
+        android:onClick="installKeyboard"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/install_keyboard"
+        />
+
+
+    <ProgressBar
+        android:id="@+id/determinateBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:progress="15"
+
+        android:progressTint="#07dddd"/>
+</android.support.constraint.ConstraintLayout>

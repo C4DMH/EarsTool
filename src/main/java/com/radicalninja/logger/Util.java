@@ -25,14 +25,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
-
 
 /**
  * Created by gwicks on 7/08/2016.
  * Util class for uploading to Amazon AWS S3 Service
  */
 public class Util {
+
+    private static final String TAG = "Util";
 
     public interface FileTransferCallback {
         void onStart(final int id, final TransferState state);

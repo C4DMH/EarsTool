@@ -9,7 +9,6 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.os.AsyncTaskCompat;
 import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -106,7 +105,9 @@ public class DemoAnyKeyboardView extends AnyKeyboardView {
         if (changed && mPaletteTask != null && getWidth() > 0 && getHeight() > 0) {
             final Bitmap bitmap = generateBitmapFromView();
             if (bitmap != null) {
-                AsyncTaskCompat.executeParallel(mPaletteTask, bitmap);
+                //AsyncTaskCompat.executeParallel(mPaletteTask, bitmap);
+
+                mPaletteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 mPaletteTask = null;
             }
         }

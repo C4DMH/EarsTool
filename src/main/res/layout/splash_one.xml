@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/splash_one_background">
+
+    <TextView
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:text="Our devices have a lot to say about mental health."
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+
+
+
+        android:layout_marginTop="29dp"
+        android:lineSpacingExtra="5sp"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:text=" Donating your digital data helps us\n study patterns in behavior. We’re\n studying data to learn how to predict\n a mental health crisis before it\n happens, so support can be sent in\n time. "
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/textView2"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="139dp"
+        android:layout_height="227dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/page_1"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.501"/>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+/**
+ * Created by gwicks on 20/01/2018.
+ */
 
 public class SetupSupport {
 
@@ -44,4 +47,6 @@ public class SetupSupport {
 
         return false;
     }
+
+
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/splash_one_background">
+
+    <TextView
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:text="We're committed to solve mental health challenges."
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+
+
+
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="29dp"
+        android:lineSpacingExtra="5sp"
+        android:text="The Center for Digital Mental Health is a research Center based at the University of Oregon. We research &amp; build digital tools to improve mental health, especially amongst underserved groups &amp; young people."
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+    <ImageView
+        android:id="@+id/imageView43"
+        android:layout_width="244dp"
+        android:layout_height="244dp"
+        android:layout_marginBottom="120dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.181"
+        app:srcCompat="@drawable/logo_c4mdh"/>
+
+
+</android.support.constraint.ConstraintLayout>

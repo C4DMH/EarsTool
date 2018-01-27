@@ -1,0 +1,36 @@
+{
+  "buildFiles": [
+    "C:\\KeyLog5\\jnidictionaryv1\\build\\intermediates\\ndk\\release\\Android.mk"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\gwicks\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\KeyLog5\\jnidictionaryv1\\build\\intermediates\\ndk\\release\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/KeyLog5/build/intermediates/ndkBuild/logDemo/release/obj NDK_LIBS_OUT\u003dC:\\KeyLog5\\build\\intermediates\\ndkBuild\\logDemo\\release\\lib clean"
+  ],
+  "libraries": {
+    "anysoftkey_jni-logDemoRelease-x86": {
+      "buildCommand": "C:\\Users\\gwicks\\AppData\\Local\\Android\\sdk\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\KeyLog5\\jnidictionaryv1\\build\\intermediates\\ndk\\release\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/KeyLog5/build/intermediates/ndkBuild/logDemo/release/obj NDK_LIBS_OUT\u003dC:\\KeyLog5\\build\\intermediates\\ndkBuild\\logDemo\\release\\lib C:/KeyLog5/build/intermediates/ndkBuild/logDemo/release/obj/local/x86/libanysoftkey_jni.so",
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "anysoftkey_jni",
+      "files": [
+        {
+          "src": "C:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\\com_anysoftkeyboard_dictionaries_BinaryDictionary.cpp",
+          "flags": "\"-gcc-toolchain\" \"C:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../toolchains/x86-4.9/prebuilt/windows-x86_64\" \"-target\" \"i686-none-linux-android\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-fPIC\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-g\" \"-fno-exceptions\" \"-fno-rtti\" \"-O2\" \"-DNDEBUG\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\release\\jni\" \"-IC:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../sources/cxx-stl/system/include\" \"-IC:/KeyLog5/jnidictionaryv1/build/intermediates/ndk/release\" \"-DANDROID\" \"-D__ANDROID_API__\u003d21\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-mstackrealign\" \"--sysroot\" \"C:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../sysroot\" \"-isystem\" \"C:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../sysroot/usr/include/i686-linux-android\""
+        },
+        {
+          "src": "C:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\\dictionary.cpp",
+          "flags": "\"-gcc-toolchain\" \"C:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../toolchains/x86-4.9/prebuilt/windows-x86_64\" \"-target\" \"i686-none-linux-android\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-fPIC\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-g\" \"-fno-exceptions\" \"-fno-rtti\" \"-O2\" \"-DNDEBUG\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\main\\jni\" \"-IC:\\KeyLog5\\jnidictionaryv1\\src\\release\\jni\" \"-IC:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../sources/cxx-stl/system/include\" \"-IC:/KeyLog5/jnidictionaryv1/build/intermediates/ndk/release\" \"-DANDROID\" \"-D__ANDROID_API__\u003d21\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-mstackrealign\" \"--sysroot\" \"C:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../sysroot\" \"-isystem\" \"C:/Users/gwicks/AppData/Local/Android/sdk/ndk-bundle/build//../sysroot/usr/include/i686-linux-android\""
+        }
+      ],
+      "output": "C:\\KeyLog5\\build\\intermediates\\ndkBuild\\logDemo\\release\\obj\\local\\x86\\libanysoftkey_jni.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-x86": {
+      "cppCompilerExecutable": "C:\\Users\\gwicks\\AppData\\Local\\Android\\sdk\\ndk-bundle\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

@@ -41,6 +41,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anysoftkeyboard.PermissionsRequestCodes;
 import com.anysoftkeyboard.keyboards.KeyboardFactory;
@@ -76,8 +77,8 @@ public class MainSettingsActivity extends PermissionsFragmentChauffeurActivity {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.main_ui);
-//        Toast.makeText(this, "MAIN Settings ACTIVITY STARTED" +
-//                "" , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "MAIN Settings ACTIVITY STARTED" +
+                "" , Toast.LENGTH_LONG).show();
 
         mTitle = mDrawerTitle = getTitle();
 

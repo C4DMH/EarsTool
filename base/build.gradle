@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion sdkCompileVersion
+
+        compileSdkVersion sdkCompileVersion
     buildToolsVersion androidBuildTools
 
     defaultConfig {
@@ -10,8 +11,29 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
+
+    buildTypes {
+        debug {}
+        release {}
+        canary{}
+
+    }
+//    compileSdkVersion sdkCompileVersion
+//    buildToolsVersion androidBuildTools
+//
+//    defaultConfig {
+//        minSdkVersion sdkMinimumVersion
+//        targetSdkVersion sdkTargetVersion
+//        versionCode 1
+//        versionName "1.0"
+//    }
+//    buildToolsVersion '26.0.2'
+
+
 }
+
+
 
 dependencies {
     compile 'com.getkeepsafe.relinker:relinker:1.2.1'

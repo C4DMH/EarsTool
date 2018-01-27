@@ -21,7 +21,15 @@ android {
             jni.srcDirs = []
         }
     }
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
+
+    buildTypes {
+        debug {}
+        release {}
+        canary{}
+
+    }
+
 }
 
 dependencies {

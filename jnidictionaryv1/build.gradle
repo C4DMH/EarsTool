@@ -9,11 +9,24 @@ android {
         targetSdkVersion sdkTargetVersion
         versionCode 1
         versionName "1.0"
-        ndk {
-            moduleName "anysoftkey_jni"
+//        ndk {
+//            moduleName "anysoftkey_jni"
         }
+
+        externalNativeBuild {
+            ndkBuild {
+                path 'Android.mk'
+            }
+        }
+
+    buildToolsVersion '26.0.2'
+
+    buildTypes {
+        debug {}
+        release {}
+        canary{}
+
     }
-    buildToolsVersion '25.0.0'
 }
 
 dependencies {

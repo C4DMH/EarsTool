@@ -3,7 +3,6 @@ package com.anysoftkeyboard.dictionaries;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.os.AsyncTaskCompat;
 
 import com.anysoftkeyboard.base.dictionaries.Dictionary;
 import com.anysoftkeyboard.utils.Log;
@@ -18,8 +17,15 @@ public final class DictionaryASyncLoader extends AsyncTask<Dictionary, Void, Dic
 
     public static DictionaryASyncLoader executeLoaderParallel(@Nullable Listener listener, @NonNull Dictionary dictionary) {
         final DictionaryASyncLoader task = new DictionaryASyncLoader(listener);
-        AsyncTaskCompat.executeParallel(task, dictionary);
+        //AsyncTaskCompat.executeParallel(task, dictionary);
+
+        task.execute(dictionary);
+
+
+        //task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
         return task;
+
     }
 
     private final WeakReference<Listener> mListener;

@@ -74,6 +74,14 @@
         <attr name="android:disableDependentsState" />
     </declare-styleable>
 
+    <!--Put in 22nd Jan 2018 to Match 7 cups look-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#07dddd</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="DefaultSwitchPreferenceStyle">
         <item name="android:title"/>
         <item name="android:disableDependentsState">false</item>

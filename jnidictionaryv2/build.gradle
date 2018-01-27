@@ -9,14 +9,63 @@ android {
         targetSdkVersion sdkTargetVersion
         versionCode 1
         versionName "1.0"
-        ndk {
-            moduleName "anysoftkey2_jni"
+//        ndk {
+//            moduleName "anysoftkey_jni"
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            path 'Android.mk'
         }
     }
-    buildToolsVersion '25.0.0'
+
+    buildToolsVersion '26.0.2'
+
+    buildTypes {
+        debug {}
+        release {}
+        canary{}
+
+    }
 }
 
 dependencies {
     compile "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
     compile project(':base')
 }
+
+
+//android {
+//    compileSdkVersion sdkCompileVersion
+//    buildToolsVersion androidBuildTools
+//
+//    defaultConfig {
+//        minSdkVersion sdkMinimumVersion
+//        targetSdkVersion sdkTargetVersion
+//        versionCode 1
+//        versionName "1.0"
+////        ndk {
+////            moduleName "anysoftkey2_jni"
+////        }
+//
+//        externalNativeBuild {
+//            ndkBuild {
+//                path 'Android.mk'
+//            }
+//        }
+//    }
+//    buildToolsVersion '26.0.2'
+//
+//    buildTypes {
+//        debug {}
+//        release {}
+//        canary{}
+//
+//    }
+//
+//}
+//
+//dependencies {
+//    compile "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
+//    compile project(':base')
+//}
