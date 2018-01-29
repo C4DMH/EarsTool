@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="First, let’s install the EARS keyboard."/>
+        android:text="First, let’s install the EARS keyboard."/>
 
     <ImageView
         android:id="@+id/imageView14"
