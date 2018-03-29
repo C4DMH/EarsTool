@@ -33,9 +33,11 @@ import com.anysoftkeyboard.PermissionsRequestCodes;
 import com.anysoftkeyboard.base.dictionaries.WordsCursor;
 import com.anysoftkeyboard.dictionaries.BTreeDictionary;
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.permissions.PermissionsFragmentChauffeurActivity;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 @TargetApi(7)
 public class ContactsDictionary extends BTreeDictionary {

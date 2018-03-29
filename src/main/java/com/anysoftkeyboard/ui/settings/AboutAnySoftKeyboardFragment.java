@@ -13,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.FragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
 
 import java.util.Calendar;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class AboutAnySoftKeyboardFragment extends Fragment {
 

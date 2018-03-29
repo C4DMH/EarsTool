@@ -24,10 +24,12 @@ import android.support.v4.preference.PreferenceFragment;
 import android.view.View;
 
 import com.anysoftkeyboard.quicktextkeys.ui.QuickKeysOrderedListFragment;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.FragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class QuickTextSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 

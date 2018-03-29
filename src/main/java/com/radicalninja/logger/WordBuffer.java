@@ -4,7 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.anysoftkeyboard.base.dictionaries.WordComposer;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.List;

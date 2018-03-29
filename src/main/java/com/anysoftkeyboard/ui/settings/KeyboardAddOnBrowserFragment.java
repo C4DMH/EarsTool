@@ -26,9 +26,11 @@ import com.anysoftkeyboard.keyboards.AnyKeyboard;
 import com.anysoftkeyboard.keyboards.KeyboardAddOnAndBuilder;
 import com.anysoftkeyboard.keyboards.KeyboardFactory;
 import com.anysoftkeyboard.keyboards.views.DemoAnyKeyboardView;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class KeyboardAddOnBrowserFragment extends AbstractKeyboardAddOnsBrowserFragment<KeyboardAddOnAndBuilder> {
 

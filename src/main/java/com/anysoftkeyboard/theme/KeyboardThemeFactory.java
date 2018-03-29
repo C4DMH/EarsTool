@@ -24,10 +24,12 @@ import android.util.AttributeSet;
 
 import com.anysoftkeyboard.addons.AddOnsFactory;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.List;
 import java.util.Locale;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class KeyboardThemeFactory extends AddOnsFactory<KeyboardTheme> {
 

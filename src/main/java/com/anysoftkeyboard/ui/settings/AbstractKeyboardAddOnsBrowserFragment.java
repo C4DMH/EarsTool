@@ -38,10 +38,12 @@ import com.anysoftkeyboard.addons.AddOn;
 import com.anysoftkeyboard.keyboards.views.DemoAnyKeyboardView;
 import com.anysoftkeyboard.ui.settings.widget.AddOnStoreSearchView;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public abstract class AbstractKeyboardAddOnsBrowserFragment<E extends AddOn> extends Fragment {
 

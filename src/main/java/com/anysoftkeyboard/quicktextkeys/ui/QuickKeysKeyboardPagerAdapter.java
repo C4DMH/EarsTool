@@ -15,9 +15,11 @@ import com.anysoftkeyboard.keyboards.views.OnKeyboardActionListener;
 import com.anysoftkeyboard.keyboards.views.QuickKeysKeyboardView;
 import com.anysoftkeyboard.quicktextkeys.HistoryQuickTextKey;
 import com.anysoftkeyboard.quicktextkeys.QuickTextKey;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class QuickKeysKeyboardPagerAdapter extends PagerAdapter {
 

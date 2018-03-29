@@ -20,7 +20,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.support.annotation.NonNull;
 
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.util.ArrayList;
 

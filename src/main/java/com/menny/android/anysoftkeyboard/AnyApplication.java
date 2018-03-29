@@ -37,8 +37,9 @@ import com.anysoftkeyboard.devicespecific.DeviceSpecific_V3;
 import com.anysoftkeyboard.devicespecific.DeviceSpecific_V7;
 import com.anysoftkeyboard.devicespecific.DeviceSpecific_V8;
 import com.anysoftkeyboard.devicespecific.StrictModeAble;
-import com.anysoftkeyboard.ui.tutorials.TutorialsProvider;
 import com.anysoftkeyboard.utils.Log;
+import com.sevencupsoftea.ears.BuildConfig;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.frankenrobot.FrankenRobot;
 import net.evendanan.frankenrobot.Lab;
@@ -63,6 +64,8 @@ public class AnyApplication extends Application implements OnSharedPreferenceCha
         setupCrashHandler();
         Log.d(TAG, "** Starting application in DEBUG mode.");
         msFrank = Lab.build(getApplicationContext(), R.array.frankenrobot_interfaces_mapping);
+
+
         if (BuildConfig.DEBUG) {
             StrictModeAble strictMode = msFrank.embody(StrictModeAble.class);
             if (strictMode != null)//it should be created only in the API18.
@@ -80,7 +83,9 @@ public class AnyApplication extends Application implements OnSharedPreferenceCha
 
         msCloudBackupRequester = msFrank.embody(new CloudBackupRequesterDiagram(getApplicationContext()));
 
-        TutorialsProvider.showDragonsIfNeeded(getApplicationContext());
+        // removed the warning 30th Jan 2017
+
+        //TutorialsProvider.showDragonsIfNeeded(getApplicationContext());
     }
 
     private DeviceSpecific createDeviceSpecificImplementation() {

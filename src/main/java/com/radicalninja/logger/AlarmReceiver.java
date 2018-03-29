@@ -32,10 +32,12 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 
 

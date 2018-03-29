@@ -20,7 +20,9 @@ package com.anysoftkeyboard.ui.settings;
 import android.os.Bundle;
 import android.support.v4.preference.PreferenceFragment;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class LanguageTweaksFragment extends PreferenceFragment {
 

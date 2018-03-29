@@ -21,11 +21,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
 import com.anysoftkeyboard.AskPrefs.AnimationsLevel;
 import com.anysoftkeyboard.api.KeyCodes;
 import com.anysoftkeyboard.keyboards.views.AnyKeyboardView;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+//import com.menny.android.anysoftkeyboard.R;
 
 public class LayoutSwitchAnimationListener implements
         android.view.animation.Animation.AnimationListener, OnSharedPreferenceChangeListener {

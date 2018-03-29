@@ -17,9 +17,11 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Created by gwicks on 20/01/2018.

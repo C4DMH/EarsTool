@@ -20,11 +20,13 @@ import android.content.Context;
 
 import com.anysoftkeyboard.api.KeyCodes;
 import com.anysoftkeyboard.keyboards.Keyboard.Key;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class KeyboardCondenser {
 

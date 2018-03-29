@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+//import com.menny.android.anysoftkeyboard.R;
 
 public class LoggerInfoActivity extends Activity {
 

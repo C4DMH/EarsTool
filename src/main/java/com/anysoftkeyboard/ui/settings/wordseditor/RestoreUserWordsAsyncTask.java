@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.anysoftkeyboard.dictionaries.UserDictionary;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -35,6 +35,8 @@ import java.io.FileInputStream;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 final class RestoreUserWordsAsyncTask extends UserWordsEditorAsyncTask {
     protected static final String TAG = "ASK RestoreUDict";

@@ -30,10 +30,12 @@ import android.support.annotation.Nullable;
 
 import com.anysoftkeyboard.utils.Log;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.io.File;
 import java.io.IOException;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class DeveloperUtils {
 

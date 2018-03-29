@@ -21,9 +21,11 @@ import android.app.Dialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.lang.ref.WeakReference;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public abstract class AsyncTaskWithProgressWindow<Params, Progress, Result, A extends AsyncTaskWithProgressWindow.AsyncTaskOwner>
         extends AsyncTask<Params, Progress, Result> {

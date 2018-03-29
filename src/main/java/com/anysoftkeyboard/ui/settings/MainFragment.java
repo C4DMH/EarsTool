@@ -29,11 +29,13 @@ import com.anysoftkeyboard.ui.settings.setup.SetUpKeyboardWizardFragment;
 import com.anysoftkeyboard.ui.settings.setup.SetupSupport;
 import com.anysoftkeyboard.ui.tutorials.ChangeLogFragment;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.BuildConfig;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.FragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class MainFragment extends Fragment {
 

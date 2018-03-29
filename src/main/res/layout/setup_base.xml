@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
 
+        android:layout_marginBottom="200dp"
         android:paddingBottom="50dp"
         app:tabBackground="@drawable/tab_selector"
         app:tabGravity="center"
@@ -43,8 +44,20 @@
         android:layout_height="wrap_content"
 
         android:layout_alignParentBottom="true"
-        app:srcCompat="@drawable/large"
+        app:srcCompat="@drawable/rectangle_copy"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textViewButton"
+        android:text="Continue"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_alignTop="@id/startButton"
+        android:layout_alignBottom="@id/startButton"
+        android:layout_alignLeft="@id/startButton"
+        android:layout_alignRight="@id/startButton" />
 
 
 </RelativeLayout>

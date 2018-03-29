@@ -27,7 +27,7 @@ import com.anysoftkeyboard.dictionaries.sqlite.AbbreviationsDictionary;
 import com.anysoftkeyboard.base.utils.CompatUtils;
 import com.anysoftkeyboard.utils.IMEUtil;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;

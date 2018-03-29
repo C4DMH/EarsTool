@@ -23,8 +23,9 @@ import android.widget.Toast;
 
 import com.anysoftkeyboard.ui.dev.DeveloperUtils;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+import com.sevencupsoftea.ears.BuildConfig;
+//import com.menny.android.anysoftkeyboard.R;
 
 public abstract class AnySoftKeyboardBase extends InputMethodService {
     protected final static String TAG = "ASK";

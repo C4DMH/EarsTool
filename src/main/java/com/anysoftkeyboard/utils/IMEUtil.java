@@ -21,9 +21,8 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 
-import com.anysoftkeyboard.AnySoftKeyboard;
 import com.anysoftkeyboard.api.KeyCodes;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.util.ArrayList;
 

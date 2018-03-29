@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class EditorWordsAdapter extends RecyclerView.Adapter<EditorWordsAdapter.EditorWordViewHolder> {
 

@@ -55,8 +55,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.501"/>
 
-
-
+    <!--<Button-->
+        <!--android:id="@+id/button_continue1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="47dp"-->
+        <!--android:onClick="next"-->
+        <!--android:background="#0479cb"-->
+        <!--android:text="Continue"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="18sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"/>-->
 
 
 </android.support.constraint.ConstraintLayout>

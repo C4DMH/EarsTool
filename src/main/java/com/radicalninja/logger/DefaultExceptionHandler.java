@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -20,7 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import static com.menny.android.anysoftkeyboard.R.attr.appName;
+import static com.sevencupsoftea.ears.R.attr.appName;
 
 /**
  * Created by gwicks on 20/10/2016.

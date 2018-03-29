@@ -27,10 +27,12 @@ import com.anysoftkeyboard.base.dictionaries.WordsCursor;
 import com.anysoftkeyboard.dictionaries.UserDictionary;
 import com.anysoftkeyboard.utils.Log;
 import com.anysoftkeyboard.utils.XmlWriter;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.io.File;
 import java.util.ArrayList;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 final class BackupUserWordsAsyncTask extends UserWordsEditorAsyncTask {
     private static final String TAG = "ASK BackupUDict";

@@ -21,14 +21,17 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
 import com.anysoftkeyboard.addons.AddOn;
 import com.anysoftkeyboard.addons.AddOnsFactory;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.BuildConfig;
+import com.sevencupsoftea.ears.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 
 public class KeyboardFactory extends AddOnsFactory<KeyboardAddOnAndBuilder> {

@@ -23,7 +23,7 @@ package com.radicalninja.logger;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

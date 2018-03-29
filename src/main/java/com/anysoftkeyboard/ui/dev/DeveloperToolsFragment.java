@@ -32,13 +32,15 @@ import android.widget.Toast;
 
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.FragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
 import net.evendanan.pushingpixels.AsyncTaskWithProgressWindow;
 
 import java.io.File;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 @SuppressLint("SetTextI18n")
 public class DeveloperToolsFragment extends Fragment implements AsyncTaskWithProgressWindow.AsyncTaskOwner, View.OnClickListener {

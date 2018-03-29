@@ -20,7 +20,7 @@ import android.view.MotionEvent;
 
 import com.anysoftkeyboard.devicespecific.AskOnGestureListener;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 final class AskGestureEventsListener implements
         AskOnGestureListener {

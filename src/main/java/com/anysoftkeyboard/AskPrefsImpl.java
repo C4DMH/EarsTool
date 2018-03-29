@@ -27,11 +27,13 @@ import android.view.Gravity;
 
 import com.anysoftkeyboard.api.KeyCodes;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 import com.menny.android.anysoftkeyboard.FeaturesSet;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.LinkedList;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class AskPrefsImpl implements AskPrefs, OnSharedPreferenceChangeListener {
     static final String TAG = "ASK_Cfg";
@@ -106,15 +108,15 @@ public class AskPrefsImpl implements AskPrefs, OnSharedPreferenceChangeListener 
     public AskPrefsImpl(Context context) {
         mContext = context;
 
-        Log.i(TAG, "** Version: " + BuildConfig.VERSION_NAME);
-        Log.i(TAG, "** Release code: " + BuildConfig.VERSION_CODE);
+        //Log.i(TAG, "** Version: " + BuildConfig.VERSION_NAME);
+        //Log.i(TAG, "** Release code: " + BuildConfig.VERSION_CODE);
         Log.i(TAG, "** BUILD_TYPE: " + BuildConfig.BUILD_TYPE);
         Log.i(TAG, "** DEBUG: " + BuildConfig.DEBUG);
         Log.i(TAG, "** TESTING_BUILD: " + BuildConfig.TESTING_BUILD);
         Log.i(TAG, "** CUTTING_EDGE: " + FeaturesSet.CUTTING_EDGE);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         //setting some statistics
-        updateStatistics(sp, mContext);
+        //updateStatistics(sp, mContext);
 
         customizeSettingValues(mContext.getApplicationContext(), sp);
         upgradeSettingsValues(sp);

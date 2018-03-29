@@ -32,11 +32,13 @@ import android.text.format.DateFormat;
 import com.anysoftkeyboard.ui.SendBugReportUiActivity;
 import com.anysoftkeyboard.ui.dev.DeveloperUtils;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.BuildConfig;
+import com.sevencupsoftea.ears.R;
 
 import java.io.File;
 import java.util.Date;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Created by gwicks

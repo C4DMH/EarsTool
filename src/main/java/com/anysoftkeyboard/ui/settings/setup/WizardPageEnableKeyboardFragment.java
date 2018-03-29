@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class WizardPageEnableKeyboardFragment extends WizardPageBaseFragment {
     private static final String TAG = "WizardPageEnableKeyboar";

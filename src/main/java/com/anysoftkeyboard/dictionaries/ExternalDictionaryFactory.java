@@ -20,14 +20,17 @@ import android.content.Context;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
 import com.anysoftkeyboard.addons.AddOn;
 import com.anysoftkeyboard.addons.AddOnsFactory;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class ExternalDictionaryFactory extends AddOnsFactory<DictionaryAddOnAndBuilder> {
 

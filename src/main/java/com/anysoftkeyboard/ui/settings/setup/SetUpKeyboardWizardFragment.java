@@ -21,9 +21,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.lang.ref.WeakReference;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * This fragment will guide the user through the process of enabling, switch to and configuring AnySoftKeyboard.

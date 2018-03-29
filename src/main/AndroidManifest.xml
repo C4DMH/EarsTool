@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.menny.android.anysoftkeyboard">
+    package="com.sevencupsoftea.ears"
+          android:versionCode="4"
+          android:versionName="1.0.4" >
     <!-- used in QuickTextViewFactory -->
     <uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip" />
 
@@ -10,7 +12,7 @@
     <!--<uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip, android.support.v13, com.google.android.gms.play_services, com.google.android.gms.ads.impl, com.google.android.gms.ads,-->
      <!--com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.clearcut, com.google.android.gms.gass, com.google.android.gms.analytics,-->
      <!--com.google.android.gms.appinvite, com.google.android.gms.+, com.google.android.gms.auth.api" />-->
-
+    <!--package="com.sevencupsoftea.ears"-->
 
 
     <supports-screens
@@ -31,7 +33,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- ADDED FROM VIDEO DIARY -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!--<uses-permission android:name="android.permission.RECORD_AUDIO" />-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -41,7 +43,7 @@
     <!-- Added for Mic Record -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--<uses-permission android:name="android.permission.CALL_PHONE" />-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
 
     <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
 
@@ -70,7 +72,7 @@
 
 
     <application
-        android:name=".AnyApplication"
+        android:name="com.menny.android.anysoftkeyboard.AnyApplication"
 
 
         android:persistent="true"
@@ -79,7 +81,7 @@
         android:backupAgent="com.anysoftkeyboard.backup.AnyBackupAgent"
         android:fullBackupContent="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/ic_launcher_ease"
+        android:icon="@mipmap/icon_round"
         android:installLocation="internalOnly"
         android:label="@string/ime_name"
         android:restoreAnyVersion="true"
@@ -99,7 +101,7 @@
 
         <!-- this is the IME with the pointer to the settings ui (xml/method) -->
         <service
-            android:name=".SoftKeyboard"
+            android:name="com.menny.android.anysoftkeyboard.SoftKeyboard"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
@@ -117,7 +119,7 @@
         I use this, so I can 'disable' this activity at runtime, and so remove ASK from the launcher's icons
         -->
         <activity
-            android:name=".LauncherSettingsActivity"
+            android:name="com.menny.android.anysoftkeyboard.LauncherSettingsActivity"
             android:label="@string/ime_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

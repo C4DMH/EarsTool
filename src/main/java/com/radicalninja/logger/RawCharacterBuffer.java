@@ -2,7 +2,7 @@ package com.radicalninja.logger;
 
 import android.util.Log;
 
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 /**
  * RawCharacterBuffer keeps a buffer of the user's current typing line.

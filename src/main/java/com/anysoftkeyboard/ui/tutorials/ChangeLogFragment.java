@@ -27,10 +27,12 @@ import android.widget.TextView;
 
 import com.anysoftkeyboard.ui.settings.MainFragment;
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.FragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class ChangeLogFragment extends Fragment {
 

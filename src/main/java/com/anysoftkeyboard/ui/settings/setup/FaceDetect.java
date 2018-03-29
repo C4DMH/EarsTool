@@ -23,15 +23,17 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static com.menny.android.anysoftkeyboard.R.id.imageView39;
-import static com.menny.android.anysoftkeyboard.R.id.imageView40;
-import static com.menny.android.anysoftkeyboard.R.id.profile_image;
+//import static com.menny.android.anysoftkeyboard.R.id.imageView39;
+//import static com.menny.android.anysoftkeyboard.R.id.imageView40;
+//import static com.menny.android.anysoftkeyboard.R.id.profile_image;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 //import static gwicks.com.a7cupstest.R.id.imageView39;
 //import static gwicks.com.a7cupstest.R.id.imageView40;
@@ -339,9 +341,9 @@ private static final String TAG = "MainActivity";
         abovePic = (TextView)findViewById(R.id.aboveImage);
 
 
-        button = (ImageView)findViewById(imageView40);
-        button2 = (ImageView)findViewById(profile_image);
-        belowPic = (ImageView)findViewById(imageView39);
+        button = (ImageView)findViewById(R.id.imageView40);
+        button2 = (ImageView)findViewById(R.id.profile_image);
+        belowPic = (ImageView)findViewById(R.id.imageView39);
         //belowPic = (TextView)findViewById(imageView39);
 
 

@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 
-import com.menny.android.anysoftkeyboard.*;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.io.File;
 import java.io.FileNotFoundException;

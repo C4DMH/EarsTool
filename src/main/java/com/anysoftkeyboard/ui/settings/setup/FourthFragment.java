@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Created by gwicks on 20/01/2018.
@@ -17,11 +19,14 @@ public class FourthFragment extends Fragment {
 
     private static final String TAG = "FourthFragment";
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.splash_three, container, false);
         ((SetupStepOne)getActivity()).updateStatusBarColor("#0075e1", this);
         Log.d(TAG, "onCreateView: update coulour in : 4");
+
+
 
 
 //

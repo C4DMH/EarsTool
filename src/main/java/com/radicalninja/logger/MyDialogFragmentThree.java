@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Created by gwicks on 7/09/2016.

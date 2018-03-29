@@ -13,9 +13,11 @@ import android.widget.TextView;
 import com.anysoftkeyboard.base.dictionaries.EditableDictionary;
 import com.anysoftkeyboard.dictionaries.sqlite.AbbreviationsDictionary;
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class AbbreviationDictionaryEditorFragment extends UserDictionaryEditorFragment {
 

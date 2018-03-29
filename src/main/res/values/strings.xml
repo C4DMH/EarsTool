@@ -654,4 +654,34 @@
     <string name="read_more_about_permissions">Read more about permissions…</string>
     <string name="ask_beta_link_promo">Hey! Want new <i>EARS Tool</i> stuff faster? Then you\'re in luck! <i>BETA</i> channel is now available for <b>YOU</b>!\nJust sign up at the link below, and update through <i>Google Play-Store</i>!\n\n https://play.google.com/apps/testing/com.menny.android.anysoftkeyboard \n\nAnd thanks for helping out to kill bugs before the reach the public.</string>
     <string name="title_activity_maps">Map</string>
+    <string name="informed_consent">
+        <![CDATA[
+
+
+•	The app will work in the background, and you will not have to interact with it until/unless you wish to uninstall it. We will collect several types of data from your phone. The data is encrypted before it is then sent to a secure server where it is encrypted again. EARS can only collect data that is already measured and logged by the device. EARS does not change or extend the functional capabilities of your device.  The types of data sent to us include the following:<br><br>\t\t\t\t
+a.	<u>Keyboard Logger.</u> This keyboard logger collects text input across all applications on the mobile phone. The logger will install a specialized keyboard on the phone, which collects every word that you type into your phone, including SMS, social media, searches, and emails (although NOT passwords or credit card numbers).<br><br>\t\t\t\t
+b.	<u>Image Capture.</u> Designed to collect facial expression data the EARS tool is designed to collect, encrypt, and upload any pictures that you take with your camera. Our research projects are focused on people who directly consent therefore in most cases data will only be analyzed after photos that contain other people are removed using an automated facial recognition tool.<br><br>\t\t\t\t
+c.	<u>Geolocation.</u> EARS will collect the location data from your device.<br><br>\t\t\t\t
+d.	<u>Device Usage Patterns.</u> We will also collect other aspects of mobile device usage depending on what your device collects. Including but not limited to application usage time, music (artist, track, time listened), and motion sensing data. We will collect the frequency and duration of each application usage, as well as the total time that your screen is on.<br><br>\t\t\t\t
+e.  <u>Spoken Communication.</u> . To collect acoustic voice data, the EARS tool uses an application designed to collect, encrypt, and upload input into the microphone whenever a telephonic or VoIP (Voice over Internet Protocol) communication is initiated. We will use an automated procedure to remove any speech captured from the receiver (speaker) on the phone. This will ensure privacy to those who have not consented to take part in our research.<br><br>
+<b>Confidentiality:</b><br>\t\t
+•	We make a significant effort to project your identity. Easily identifiable information like names or addresses are removed and replaced with a randomly generated ID when possible. Access to the raw data is limited to specific persons at 7 Cups, Qntfy, and the Center for Digital Mental Health will have access to this data. Data collected from you during this study may eventually be shared with other researchers for scientific purposes only; however, this data will not contain identifying information that would allow others to easily associate the data with you. If a researcher needs access to any identity data they must first obtain ethics approval from their institution as well as meeting stringent requirements.  When the results of this research are published or presented in any public forum, absolutely no information will be included that might reveal your identity.
+
+<br><br><b>Getting Help:</b><br>\t\t
+•	We will never be looking at your data in real time, so we will not know if you are experiencing a crisis or need help. DO NOT RELY ON THIS APP AS A METHOD FOR SEEKING HELP. If you are experiencing a crisis or need help please contact a crisis help service (800-273-TALK is free in the US and confidential), health care provider, or go to your nearest Hospital Emergency Room.
+
+<br><br><b>Voluntary Participation/Withdrawal:</b><br>\t\t
+•	Using this app is voluntary. After you install it, you can remove it any time and no more data will be collected.<br>\t\t
+•	You can always use the 7 Cups platform even without installing this app.<br><br>
+
+<b>Notifications:</b><br>\t\t
+•	We reserve the right to electronically notify you of life events based upon our current lines of research. These will be unmonitored automated notifications.
+
+
+
+
+
+
+        ]]>
+    </string>
 </resources>

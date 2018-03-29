@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Created by gwicks on 21/01/2018.
@@ -48,7 +50,7 @@ public class StepSeven extends AppCompatActivity {
                 Intent intent = new Intent(StepSeven.this, FinishInstallScreen.class);
                 StepSeven.this.startActivity(intent);
             }
-        }, 6000);
+        }, 4000);
 
     }
 }

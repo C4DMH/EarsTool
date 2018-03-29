@@ -28,7 +28,8 @@ import com.anysoftkeyboard.base.dictionaries.WordComposer;
 import com.anysoftkeyboard.base.dictionaries.WordsCursor;
 import com.anysoftkeyboard.utils.Log;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+//import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 public abstract class BTreeDictionary extends EditableDictionary {
 

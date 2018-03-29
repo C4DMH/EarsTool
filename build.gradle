@@ -67,6 +67,14 @@ println "Building AnySoftKeyboard " + version + ", version-code " + versionBuild
 
 android {
 
+    //added 30th Jan for release built
+
+    lintOptions {
+
+        checkReleaseBuilds false
+
+    }
+
     flavorDimensions "tier"
 
 
@@ -90,9 +98,12 @@ android {
     buildToolsVersion androidBuildTools
 
     defaultConfig {
-        applicationId 'com.menny.android.anysoftkeyboard'
-        versionCode versionBuilder.buildVersionNumber()
-        versionName project.version
+        //applicationId 'com.menny.android.anysoftkeyboard'
+        applicationId 'com.sevencupsoftea.ears'
+        //31st Jan two below added back in?
+
+        //versionCode versionBuilder.buildVersionNumber()
+        //versionName project.version
 
         minSdkVersion sdkMinimumVersion
         targetSdkVersion sdkTargetVersion
@@ -153,7 +164,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
             zipAlignEnabled true
             debuggable false
 
@@ -378,11 +389,22 @@ dependencies {
     //    compile project(path: ':jnidictionaryv1', configuration: 'default')
 
     //    compile project(path: ':jnidictionaryv2', configuration: 'default')
+
+    // error dialogcornerradius on 7th march 2018
+
     implementation "com.github.AnySoftKeyboard:AnySoftKeyboard-API:$AnySoftKeyboardApiVersion"
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
-    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
+//    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+//    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
+//    implementation "com.android.support:support-annotations:$supportLibVersion"
+//    implementation "com.android.support:palette-v7:$supportLibVersion"
+
+
+    implementation "com.android.support:appcompat-v7:26.0.2"
+    implementation "com.android.support:recyclerview-v7:26.0.2"
     implementation "com.android.support:support-annotations:$supportLibVersion"
     implementation "com.android.support:palette-v7:$supportLibVersion"
+
+
     implementation('com.github.menny.Chauffeur:permissions:37ea0668afc7a63c6ea36f318741fb291fb2a20c') {
         exclude group: 'com.android.support'
     }
@@ -431,6 +453,6 @@ dependencies {
     //compile 'com.google.android.gms:play-services-vision:11.0.4'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     //implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta4'
-    implementation 'com.android.support:design:+'
+    implementation 'com.android.support:design:27.1.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

@@ -32,6 +32,7 @@ public class MusicNotificationListener extends NotificationListenerService {
     public void onCreate(){
         super.onCreate();
         mContext = getApplicationContext();
+        Log.d(TAG, "onCreate: THIS SHOULD NEVER BE SEEN!!!!!!!!!!!!!!!!!!");
     }
 
 

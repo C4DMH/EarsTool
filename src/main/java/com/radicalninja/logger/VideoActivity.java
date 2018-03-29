@@ -45,7 +45,7 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +55,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
 import javax.crypto.NoSuchPaddingException;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 
 /* Class for the recording and uploading of the Video Diary. No longer used in the main tool

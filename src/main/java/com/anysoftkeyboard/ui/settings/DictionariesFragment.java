@@ -26,9 +26,11 @@ import android.view.View;
 
 import com.anysoftkeyboard.ui.settings.wordseditor.AbbreviationDictionaryEditorFragment;
 import com.anysoftkeyboard.ui.settings.wordseditor.UserDictionaryEditorFragment;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class DictionariesFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 

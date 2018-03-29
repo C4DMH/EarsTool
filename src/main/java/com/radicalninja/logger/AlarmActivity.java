@@ -11,9 +11,11 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.Calendar;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class AlarmActivity extends Activity {
 
@@ -55,7 +57,9 @@ public class AlarmActivity extends Activity {
         // cal.add(Calendar.SECOND, 5);
         //alarmMgr.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
         //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,when, AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        if (alarmMgr != null) {
+            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        }
         //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, when, 1000 * 60 * 1, alarmIntent);
         Toast.makeText(this, "WE HAVE SET THE ALARM _ in arlarm activity class", Toast.LENGTH_LONG).show();
         alarmIsSet = true;

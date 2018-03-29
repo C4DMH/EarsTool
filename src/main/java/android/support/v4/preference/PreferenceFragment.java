@@ -33,9 +33,11 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.lang.ref.WeakReference;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Taken from https://github.com/kolavar/android-support-v4-preferencefragment

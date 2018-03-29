@@ -15,10 +15,12 @@ import com.anysoftkeyboard.quicktextkeys.HistoryQuickTextKey;
 import com.anysoftkeyboard.quicktextkeys.QuickTextKey;
 import com.anysoftkeyboard.quicktextkeys.QuickTextKeyFactory;
 import com.astuetz.PagerSlidingTabStrip;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class QuickTextViewFactory {
 

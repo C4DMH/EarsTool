@@ -30,6 +30,8 @@ import android.text.format.DateFormat;
 import com.anysoftkeyboard.ui.SendBugReportUiActivity;
 import com.anysoftkeyboard.ui.dev.DeveloperUtils;
 import com.anysoftkeyboard.utils.Log;
+import com.sevencupsoftea.ears.BuildConfig;
+import com.sevencupsoftea.ears.R;
 
 import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;

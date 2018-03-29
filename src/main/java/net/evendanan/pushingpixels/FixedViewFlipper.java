@@ -19,7 +19,9 @@ package net.evendanan.pushingpixels;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ViewFlipper;
-import com.menny.android.anysoftkeyboard.R;
+
+import com.sevencupsoftea.ears.R;
+//import com.menny.android.anysoftkeyboard.R;
 
 /*
  * http://daniel-codes.blogspot.com/2010/05/viewflipper-receiver-not-registered.html

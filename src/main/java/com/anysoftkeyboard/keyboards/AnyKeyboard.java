@@ -39,13 +39,15 @@ import com.anysoftkeyboard.quicktextkeys.QuickTextKeyFactory;
 import com.anysoftkeyboard.utils.Log;
 import com.anysoftkeyboard.utils.Workarounds;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public abstract class AnyKeyboard extends Keyboard {
     private final static String TAG = "ASK - AK";

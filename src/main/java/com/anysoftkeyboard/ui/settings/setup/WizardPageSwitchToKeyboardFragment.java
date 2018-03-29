@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class WizardPageSwitchToKeyboardFragment extends WizardPageBaseFragment {
     private static final String TAG = "WizardPageSwitchToKeybo";

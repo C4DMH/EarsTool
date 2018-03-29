@@ -13,6 +13,7 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.anysoftkeyboard.ui.settings.setup.FinishInstallScreen;
 import com.anysoftkeyboard.utils.Log;
 
 import org.apache.commons.io.FileUtils;
@@ -71,7 +72,7 @@ public class Util {
 
     private static void initUserId() {
         if (TextUtils.isEmpty(userId)) {
-            userId = MainActivity.secureID;
+            userId = FinishInstallScreen.secureID;
 //            userId = Settings.Secure.getString(
             //what? is this?
 //                    AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);

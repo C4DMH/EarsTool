@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.anysoftkeyboard.ui.settings.setup.FinishInstallScreen;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class StatsAlarmReceiver extends BroadcastReceiver {
         mContext = context;
         newContext = context.getApplicationContext();
         Log.d(TAG, "onReceive: we have started onrecieve");
-        userID = MainActivity.secureID;
+        userID = FinishInstallScreen.secureID;
         mEncryption = new Encryption();
         transferUtility = Util.getTransferUtility(mContext);
         Log.d(TAG, "onReceive: transfer utility = " + transferUtility);

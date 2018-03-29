@@ -18,7 +18,9 @@ package com.anysoftkeyboard.ui.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import com.menny.android.anysoftkeyboard.R;
+
+import com.sevencupsoftea.ears.R;
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Spell checker preference screen.

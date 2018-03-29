@@ -10,7 +10,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.io.File;
 import java.util.List;

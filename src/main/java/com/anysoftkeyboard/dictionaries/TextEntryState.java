@@ -21,7 +21,7 @@ import android.text.format.DateFormat;
 
 import com.anysoftkeyboard.keyboards.Keyboard.Key;
 import com.anysoftkeyboard.utils.Log;
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

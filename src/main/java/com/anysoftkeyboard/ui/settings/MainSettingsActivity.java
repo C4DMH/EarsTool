@@ -48,14 +48,16 @@ import com.anysoftkeyboard.keyboards.KeyboardFactory;
 import com.anysoftkeyboard.theme.KeyboardTheme;
 import com.anysoftkeyboard.theme.KeyboardThemeFactory;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.R;
 import com.radicalninja.logger.MainActivity;
 import com.radicalninja.logger.ui.LoggerInfoActivity;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
 import net.evendanan.chauffeur.lib.permissions.PermissionsFragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.permissions.PermissionsRequest;
 import net.evendanan.pushingpixels.EdgeEffectHacker;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class MainSettingsActivity extends PermissionsFragmentChauffeurActivity {
 

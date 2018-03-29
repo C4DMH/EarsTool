@@ -19,7 +19,7 @@ package com.radicalninja.logger;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.TextureView;
-import com.menny.android.anysoftkeyboard.R;
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * A {@link TextureView} that can be adjusted to a specified aspect ratio.

@@ -28,13 +28,15 @@ import com.anysoftkeyboard.keyboards.KeyboardFactory;
 import com.anysoftkeyboard.keyboards.views.DemoAnyKeyboardView;
 import com.anysoftkeyboard.theme.KeyboardTheme;
 import com.anysoftkeyboard.theme.KeyboardThemeFactory;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.FragmentChauffeurActivity;
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
 
 import java.util.Collections;
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class KeyboardThemeSelectorFragment extends AbstractKeyboardAddOnsBrowserFragment<KeyboardTheme> {
 

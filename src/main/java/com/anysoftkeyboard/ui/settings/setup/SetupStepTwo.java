@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Created by gwicks on 20/01/2018.

@@ -21,7 +21,7 @@ package com.radicalninja.logger;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.menny.android.anysoftkeyboard.BuildConfig;
+import com.sevencupsoftea.ears.BuildConfig;
 
 import java.io.BufferedWriter;
 import java.io.File;

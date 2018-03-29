@@ -15,6 +15,7 @@
  */
 
 package com.menny.android.anysoftkeyboard;
+import com.sevencupsoftea.ears.BuildConfig;
 
 
 public class FeaturesSet {

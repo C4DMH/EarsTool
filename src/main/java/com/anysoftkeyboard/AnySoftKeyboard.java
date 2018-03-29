@@ -98,14 +98,16 @@ import com.anysoftkeyboard.utils.ModifierKeyState;
 import com.anysoftkeyboard.utils.Workarounds;
 import com.google.android.voiceime.VoiceRecognitionTrigger;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.BuildConfig;
-import com.menny.android.anysoftkeyboard.R;
+//import com.menny.android.anysoftkeyboard.BuildConfig;
 import com.radicalninja.logger.LogManager;
 import com.radicalninja.logger.RawCharacterBuffer;
 import com.radicalninja.logger.WordBuffer;
-
+import com.sevencupsoftea.ears.R;
+import com.sevencupsoftea.ears.BuildConfig;
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * Input method implementation for QWERTY-ish keyboard.

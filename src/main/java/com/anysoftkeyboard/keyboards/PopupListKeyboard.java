@@ -4,7 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.anysoftkeyboard.addons.AddOn;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+//import com.menny.android.anysoftkeyboard.R;
 
 public class PopupListKeyboard extends AnyPopupKeyboard {
 	private final int mAdditionalWidth;

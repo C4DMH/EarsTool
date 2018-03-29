@@ -48,10 +48,12 @@ import android.view.WindowManager;
 import android.widget.TimePicker;
 
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
         setContentView(R.layout.activity_main);
+
+        Log.d(TAG, "onCreate: WE ARE IN MAINACTIVITY..... WE SHOULD NOT BE HERE!");
 
         //startAlarm();
         wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);

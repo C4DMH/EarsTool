@@ -4,9 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.Toast;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public abstract class WizardPageBaseFragment extends Fragment {
 

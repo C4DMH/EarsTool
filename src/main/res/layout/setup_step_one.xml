@@ -33,7 +33,7 @@
         android:id="@+id/imageView"
         android:layout_width="181dp"
         android:layout_height="252dp"
-        app:srcCompat="@drawable/intro_branding"
+        app:srcCompat="@drawable/intro_branding_new"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

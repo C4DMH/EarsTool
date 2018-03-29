@@ -21,9 +21,11 @@ import android.support.annotation.NonNull;
 
 import com.anysoftkeyboard.addons.AddOn;
 import com.anysoftkeyboard.keyboardextensions.KeyboardExtension;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class AnyPopupKeyboard extends AnyKeyboard {
 

@@ -17,11 +17,13 @@ import com.anysoftkeyboard.quicktextkeys.QuickTextKeyFactory;
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
 import com.anysoftkeyboard.utils.Log;
 import com.emtronics.dragsortrecycler.DragSortRecycler;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class QuickKeysOrderedListFragment extends Fragment {
     private static final String TAG = "QuickKeysOrderedListFragment";

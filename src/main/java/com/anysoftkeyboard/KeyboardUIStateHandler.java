@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputConnection;
-import com.menny.android.anysoftkeyboard.R;
+
+import com.sevencupsoftea.ears.R;
 
 import java.lang.ref.WeakReference;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 /**
  * handles all kind of UI thread related operations.

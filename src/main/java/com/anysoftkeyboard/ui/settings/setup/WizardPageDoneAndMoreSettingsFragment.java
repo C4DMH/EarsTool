@@ -23,13 +23,15 @@ import android.widget.ImageView;
 import com.anysoftkeyboard.ui.settings.KeyboardAddOnBrowserFragment;
 import com.anysoftkeyboard.ui.settings.KeyboardThemeSelectorFragment;
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
-import com.menny.android.anysoftkeyboard.R;
 import com.radicalninja.logger.MainActivity;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.experiences.TransitionExperiences;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.anysoftkeyboard.ui.settings.setup.FaceDetect.TICK;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class WizardPageDoneAndMoreSettingsFragment extends WizardPageBaseFragment implements View.OnClickListener {
 

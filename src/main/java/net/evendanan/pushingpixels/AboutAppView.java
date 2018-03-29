@@ -36,9 +36,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.Calendar;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 
 public class AboutAppView extends FrameLayout {

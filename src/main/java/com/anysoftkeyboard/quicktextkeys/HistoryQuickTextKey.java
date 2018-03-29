@@ -8,9 +8,11 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.anysoftkeyboard.addons.AddOn;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import java.util.LinkedHashSet;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class HistoryQuickTextKey extends QuickTextKey {
 

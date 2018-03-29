@@ -20,9 +20,11 @@ import com.anysoftkeyboard.PermissionsRequestCodes;
 import com.anysoftkeyboard.ui.settings.MainSettingsActivity;
 import com.anysoftkeyboard.utils.Log;
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.menny.android.anysoftkeyboard.R;
+import com.sevencupsoftea.ears.R;
 
 import net.evendanan.chauffeur.lib.permissions.PermissionsRequest;
+
+//import com.menny.android.anysoftkeyboard.R;
 
 public class WizardPermissionsFragment extends WizardPageBaseFragment implements View.OnClickListener {
 
