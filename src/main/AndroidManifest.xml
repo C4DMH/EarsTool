@@ -44,6 +44,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--<uses-permission android:name="android.permission.CALL_PHONE" />-->
     <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
 
@@ -221,7 +222,7 @@
 
         <receiver android:name="com.radicalninja.logger.MicRecordUploadAlarm">
             <intent-filter>
-                <action android:name="com.codepath.CUSTOM_INTENT"></action>
+                <action android:name="com.codepath.CUSTOM_INTENT"/>
             </intent-filter>
         </receiver>
 

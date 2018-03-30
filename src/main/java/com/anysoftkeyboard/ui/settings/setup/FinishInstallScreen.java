@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.menny.android.anysoftkeyboard.AnyApplication;
+import com.radicalninja.logger.AccelGyroLight;
 import com.radicalninja.logger.MicRecordUploadAlarm;
 import com.radicalninja.logger.MusicUploadReceiver;
 import com.radicalninja.logger.PhotoUploadReceiver;
@@ -77,6 +78,8 @@ public class FinishInstallScreen extends AppCompatActivity {
             AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
     SharedPreferences wmbPreference;
     public String theCurrentDate;
+
+    AccelGyroLight accelGyroLight;
 
 
     @Override
@@ -186,6 +189,8 @@ public class FinishInstallScreen extends AppCompatActivity {
         if(!checkNotificationEnabled()){
             showMusicDialog();
         }
+
+        accelGyroLight = new AccelGyroLight(this);
 
         startStatsAlarm();
         startMicUploadAlarm();
@@ -514,6 +519,7 @@ public class FinishInstallScreen extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        accelGyroLight.unregister();
         startService(new Intent(this, FinishInstallScreen.class));
     }
 

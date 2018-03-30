@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             AnyApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
     SharedPreferences wmbPreference;
     public String theCurrentDate;
+    AccelGyroLight accelGyroLight;
 
 
     public void startAlarm() {
@@ -140,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
         startMusicUploadAlarm();
         startPhotoUploadAlarm();
 
+        accelGyroLight = new AccelGyroLight(this);
+
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         String rate = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
         String size = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER);
@@ -205,6 +208,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        accelGyroLight.unregister();
+
         startService(new Intent(this, MainActivity.class));
     }
 
