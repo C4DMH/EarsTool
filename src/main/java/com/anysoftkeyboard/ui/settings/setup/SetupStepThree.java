@@ -128,4 +128,9 @@ public class SetupStepThree extends AppCompatActivity {
 
         return SetupSupport.isThisKeyboardEnabled(context);
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

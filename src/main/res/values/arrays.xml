@@ -80,4 +80,14 @@
         <item>@string/swipe_action_name_compact_layout_to_left</item>
         <item>@string/swipe_action_name_utility_keyboard</item>
     </string-array>
+
+    <string-array name="time_spent">
+        <item>Alone</item>
+        <item>Friends</item>
+        <item>Family</item>
+        <item>Spouse/Partner</item>
+        <item>Co-workers</item>
+        <item>Co-students</item>
+
+    </string-array>
 </resources>

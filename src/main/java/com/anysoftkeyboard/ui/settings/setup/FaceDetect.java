@@ -304,7 +304,7 @@ public class FaceDetect extends AppCompatActivity {
 //
 //
 //}
-private static final String TAG = "MainActivity";
+private static final String TAG = "FaceDetect";
 
 
 
@@ -333,17 +333,42 @@ private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.setup_six);
         updateStatusBarColor("#1281e8");
-
-        Log.d(TAG, "onCreate: before set click");
-
-        abovePic = (TextView)findViewById(R.id.aboveImage);
-
-
         button = (ImageView)findViewById(R.id.imageView40);
         button2 = (ImageView)findViewById(R.id.profile_image);
         belowPic = (ImageView)findViewById(R.id.imageView39);
+        abovePic = (TextView)findViewById(R.id.aboveImage);
+        if(savedInstanceState != null){
+            String stringImageUri = savedInstanceState.getString(SAVED_INSTANCE_URI);
+            imageUri = Uri.parse(stringImageUri);
+            Log.d(TAG, "onCreate: in savedInstance state the reloaded imageURI is: " + imageUri);
+            Bitmap newBitmap = savedInstanceState.getParcelable(SAVED_INSTANCE_BITMAP);
+
+            button.setImageResource(R.drawable.complete_install);
+//            button2.setImageURI(null);
+//            button2.setImageURI(imageUri);
+
+            abovePic.setText("Great! Are you good with your picture?");
+            belowPic.setImageResource(R.drawable.take_a_different_pic);
+            //belowPic.setText("Take another PIC?");
+            button2.setImageBitmap(newBitmap);
+            secondScreen = true;
+            //startActivityFor
+
+        }
+//        updateStatusBarColor("#1281e8");
+
+        Log.d(TAG, "onCreate: before set click");
+
+//        abovePic = (TextView)findViewById(R.id.aboveImage);
+
+
+//        button = (ImageView)findViewById(R.id.imageView40);
+//        button2 = (ImageView)findViewById(R.id.profile_image);
+//        belowPic = (ImageView)findViewById(R.id.imageView39);
         //belowPic = (TextView)findViewById(imageView39);
 
 
@@ -409,6 +434,8 @@ private static final String TAG = "MainActivity";
         Log.d(TAG, "goToFinish: go to finish");
         Intent intent = new Intent(FaceDetect.this, StepSeven.class);
         FaceDetect.this.startActivity(intent);
+        //
+        // finish();
     }
 
     private void initViews() {
@@ -473,6 +500,7 @@ private static final String TAG = "MainActivity";
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            editedBitmap = bitmap;
             abovePic.setText("Great! Are you good with your picture?");
             belowPic.setImageResource(R.drawable.take_a_different_pic);
             //belowPic.setText("Take another PIC?");
@@ -502,7 +530,7 @@ private static final String TAG = "MainActivity";
     }
 
     private Bitmap decodeBitmapUri(Context ctx, Uri uri) throws FileNotFoundException {
-        Log.d(TAG, "decodeBitmapUri: ");
+        Log.d(TAG, "decodeBitmapUri: " + uri);
         //Toast.makeText(this, "1o" , Toast.LENGTH_LONG).show();
         //Log.d(TAG, "initViews1: face detector is ============================ " + detector.isOperational());
         int targetW = 300;
@@ -608,10 +636,16 @@ private static final String TAG = "MainActivity";
             Log.d(TAG, "onSaveInstanceState: 2");
             outState.putString(SAVED_INSTANCE_URI, imageUri.toString());
             Log.d(TAG, "onSaveInstanceState: 3");
+            Log.d(TAG, "onSaveInstanceState: the image uri saved is: " + imageUri + " also the outstate = " + outState.getString(SAVED_INSTANCE_URI));
         }
         Log.d(TAG, "onSaveInstanceState: 4");
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState: 5");
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 

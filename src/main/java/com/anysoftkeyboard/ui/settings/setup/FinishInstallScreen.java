@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
+import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -19,6 +20,8 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
@@ -31,18 +34,26 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.menny.android.anysoftkeyboard.AnyApplication;
-import com.radicalninja.logger.AccelGyroLight;
+import com.radicalninja.logger.AccGryLgt;
+import com.radicalninja.logger.EMAAlarmReceiver;
+import com.radicalninja.logger.EMAUploadReceiver;
 import com.radicalninja.logger.MicRecordUploadAlarm;
 import com.radicalninja.logger.MusicUploadReceiver;
 import com.radicalninja.logger.PhotoUploadReceiver;
+import com.radicalninja.logger.SensorUploadReceiver;
 import com.radicalninja.logger.StatsAlarmReceiver;
 import com.radicalninja.logger.StatsJobService;
 import com.radicalninja.logger.UploadGPSAlarmReceiver;
+import com.radicalninja.logger.ui.EmailSecureDeviceID;
 import com.sevencupsoftea.ears.R;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
@@ -62,6 +73,8 @@ public class FinishInstallScreen extends AppCompatActivity {
     ImageView moodCheck;
     ImageView preferences;
     TextView prefText;
+    File destroyEvents;
+    //TextView  textViewEmail;
 
 
     // Main Activity variables added 8th Feb 2018
@@ -72,6 +85,9 @@ public class FinishInstallScreen extends AppCompatActivity {
     private PendingIntent MicIntent;
     private PendingIntent musicIntent;
     private PendingIntent photoIntent;
+    private PendingIntent startEMAIntent;
+    private PendingIntent EMAIntent;
+    private PendingIntent sensorIntent;
     public static boolean alarmIsSet = false;
     public static boolean statsAlarmIsSet = false;
     public static final String secureID = Settings.Secure.getString(
@@ -79,18 +95,38 @@ public class FinishInstallScreen extends AppCompatActivity {
     SharedPreferences wmbPreference;
     public String theCurrentDate;
 
-    AccelGyroLight accelGyroLight;
+    //AccelGyroLight accelGyroLight;
+
+    //public static NotificationManager notificationManager;
+
+    public static boolean alarmStarted = false;
+    int numberOfInstances = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.completed_base);
+
+        if(savedInstanceState != null) {
+            Log.d(TAG, "onCreate: the activity is being recreated!");
+        }
+        
         updateStatusBarColor("#1281e8");
+
+
 
 
         //needToTalkOpen = (ImageView)findViewById(R.id.gr)
 
+        //Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
+
+        if(isAlreadySet(this) == false){
+            Log.d(TAG, "onCreate: already done email upload skipping");
+            launchSendEmailDialog();
+        }
+
+        numberOfInstances++;
 
         moodCheck = (ImageView) findViewById(R.id.imageView41);
         needToTalkClosed = (ImageView) findViewById(R.id.imageView6);
@@ -109,6 +145,10 @@ public class FinishInstallScreen extends AppCompatActivity {
         mood.setTag(1);
         mood.setVisibility(View.GONE);
 
+        //textViewEmail = (TextView)findViewById(R.id.textViewEmail);
+
+
+
 
         SpannableString ss = new SpannableString("Get free, anonymous and confidential support at 7 Cups. Listeners available 24/7 to help you feel better\n\nGet the App");
         ClickableSpan clickableSpan = new ClickableSpan() {
@@ -122,6 +162,15 @@ public class FinishInstallScreen extends AppCompatActivity {
         ss.setSpan(clickableSpan, 106, 117, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         talkText.setText(ss);
         talkText.setMovementMethod(LinkMovementMethod.getInstance());
+
+//        textViewEmail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: in lauchem email button");
+//                launchSendEmailDialog();
+//
+//            }
+//        });
 
 
         needToTalkClosed.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +228,7 @@ public class FinishInstallScreen extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "THE SECURE DEVICE ID IS: " + secureID, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "THE SECURE DEVICE ID IS: " + secureID, Toast.LENGTH_LONG).show();
         if (!isAccessGranted()) {
             //Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
             //startActivity(intent);
@@ -190,13 +239,50 @@ public class FinishInstallScreen extends AppCompatActivity {
             showMusicDialog();
         }
 
-        accelGyroLight = new AccelGyroLight(this);
+//        if(notificationManager == null){
+//            Log.d(TAG, "onCreate: EMA loading the notificataion manager");
+//            notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+//            Log.d(TAG, "onCreate: noti manager should be loaded");
+//        }
+//        Log.d(TAG, "onCreate: just past noti manager");
+
+
+        String path2 = (this.getExternalFilesDir(null) + "/DestroyFIS");
+        File directory2 = new File(path2);
+
+        if(!directory2.exists()){
+            Log.d(TAG, "onCreate: making directory");
+            directory2.mkdir();
+        }
+
+        destroyEvents = new File(directory2,  "DestroyEvents.txt");
+
+
+
+        //accelGyroLight = new AccelGyroLight(this);
+
+        Intent sensors = new Intent(this, AccGryLgt.class);
+        startService(sensors);
 
         startStatsAlarm();
         startMicUploadAlarm();
         startGPSUploadAlarm();
         startMusicUploadAlarm();
         startPhotoUploadAlarm();
+        startSensorUploadAlarm();
+        Log.d(TAG, "onCreate: alarmstarted = " + alarmStarted);
+        if(alarmStarted != true){
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    Log.d(TAG, "run: in handler, waiting for 10 min");
+                    startEMAAlarm();
+                }
+            }, 1000*60*3);
+
+        }
+
+        startEMAUploadAlarm();
 
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         String rate = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
@@ -216,9 +302,12 @@ public class FinishInstallScreen extends AppCompatActivity {
 //
         jobScheduler.schedule(job);
         Log.d(TAG, "onCreate: Job Scehduled");
+        //throw new RuntimeException("This is a crash");
 
         // remove this intent 30th october 2017
         //startActivity(new Intent(this, VideoActivity.class));
+
+        setSettingsDone(this);
 
 
     }
@@ -226,6 +315,13 @@ public class FinishInstallScreen extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: in on Resume, number of instances  = " + numberOfInstances);
+
+//        if(notificationManager == null){
+//            Log.d(TAG, "onResume: EMA loading the notificataion manager");
+//            notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+//            Log.d(TAG, "onResume: noti manager should be loaded");
+//        }
 
         // This is all added from MainActivity
         // 8th Feb 2018
@@ -392,6 +488,53 @@ public class FinishInstallScreen extends AppCompatActivity {
 
     }
 
+    public void startSensorUploadAlarm() {
+        Log.d(TAG, "sensor upload in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 53);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, SensorUploadReceiver.class);
+        //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
+        sensorIntent = PendingIntent.getBroadcast(this, 7, intent, 0);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sensorIntent);
+
+    }
+
+    public void startEMAUploadAlarm() {
+        Log.d(TAG, "EMA upload in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 22);
+        cal.set(Calendar.MINUTE, 25);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, EMAUploadReceiver.class);
+        //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
+        EMAIntent = PendingIntent.getBroadcast(this, 8, intent, 0);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, EMAIntent);
+
+
+    }
+
     // @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void startPhotoUploadAlarm() {
         Log.d(TAG, "startGPSAlarm: in start alarm");
@@ -419,6 +562,27 @@ public class FinishInstallScreen extends AppCompatActivity {
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, photoIntent);
     }
 
+    public void startEMAAlarm(){
+        Log.d(TAG, "startEMAAlarm: in start ema alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 8);
+        cal.set(Calendar.MINUTE, 30);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, EMAAlarmReceiver.class);
+        intent.putExtra("EMA", "EMA1");
+        startEMAIntent = PendingIntent.getBroadcast(this, 9, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000 * 60 * 60, startEMAIntent);
+        Log.d(TAG, "startEMAAlarm: alarm shjould be set");
+        alarmStarted = true;
+
+
+    }
+
 
     private boolean isAccessGranted() {
         try {
@@ -430,6 +594,8 @@ public class FinishInstallScreen extends AppCompatActivity {
                 mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
                         applicationInfo.uid, applicationInfo.packageName);
             }
+            Log.d(TAG, "isAccessGranted: mode = " + mode);
+            Log.d(TAG, "isAccessGranted: mode : " + mode + "appopsmanager = " + AppOpsManager.MODE_ALLOWED);
             return (mode == AppOpsManager.MODE_ALLOWED);
 
         } catch (PackageManager.NameNotFoundException e) {
@@ -515,13 +681,118 @@ public class FinishInstallScreen extends AppCompatActivity {
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
     }
+    
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        Log.d(TAG, "onPause: in on pause");
+    }
+    
+    @Override
+    protected void onStop() {
+        Log.d(TAG, "onStop: on stiop");
+
+        super.onStop();
+    }
 
     @Override
     protected void onDestroy() {
+        Log.d(TAG, "onDestroy: Finish install screen OnDestroy Called, why?");
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy_HHmmssSSS");
+
+        String theTime = df.format(cal.getTime());
+//        String path2 = (this.getExternalFilesDir(null) + "/DestroyFIS");
+//        File directory2 = new File(path2);
+//
+//        if(!directory2.exists()){
+//            Log.d(TAG, "onCreate: making directory");
+//            directory2.mkdir();
+//        }
+//
+//        File destroyEvents = new File(directory2,  "DestroyEvents.txt");
+
+
+        writeToFile(destroyEvents, "The Activity was destroyed at: " + theTime );
+
+        //accelGyroLight.unregister();
+        //startService(new Intent(this, FinishInstallScreen.class));
         super.onDestroy();
-        accelGyroLight.unregister();
-        startService(new Intent(this, FinishInstallScreen.class));
+//        accelGyroLight.unregister();
+//        startService(new Intent(this, FinishInstallScreen.class));
     }
+
+    private static void writeToFile(File file, String data) {
+
+        FileOutputStream stream = null;
+        System.out.println("The state of the media is: " + Environment.getExternalStorageState());
+        Log.d(TAG, "writeToFile: file location is:" + file.getAbsolutePath());
+
+        //OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);
+        try {
+            Log.e("History", "In try");
+            Log.d(TAG, "writeToFile: ");
+            stream = new FileOutputStream(file, true);
+            Log.d(TAG, "writeToFile: 2");
+            stream.write(data.getBytes());
+            Log.d(TAG, "writeToFile: 3");
+        } catch (FileNotFoundException e) {
+            Log.e("History", "In catch");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void launchSendEmailDialog(){
+        DialogFragment newFragment = new EmailSecureDeviceID();
+        newFragment.show(getFragmentManager(), "email");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "onSaveInstanceState: ");
+        
+        outState.putString("SAVED", "YES");
+//        if (imageUri != null) {
+//            Log.d(TAG, "onSaveInstanceState: 1");
+//            outState.putParcelable(SAVED_INSTANCE_BITMAP, editedBitmap);
+//            Log.d(TAG, "onSaveInstanceState: 2");
+//            outState.putString(SAVED_INSTANCE_URI, imageUri.toString());
+//            Log.d(TAG, "onSaveInstanceState: 3");
+//            Log.d(TAG, "onSaveInstanceState: the image uri saved is: " + imageUri + " also the outstate = " + outState.getString(SAVED_INSTANCE_URI));
+//        }
+//        Log.d(TAG, "onSaveInstanceState: 4");
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState: 5");
+    }
+    public static void setSettingsDone(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences("YourPref", 0);
+        final SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("AlreadySetPref", true);
+        editor.commit();
+    }
+
+    public static boolean isAlreadySet(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences("YourPref", 0);
+        return prefs.getBoolean("AlreadySetPref", false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+
 
 
 }

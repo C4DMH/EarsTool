@@ -5,7 +5,6 @@ import android.app.job.JobService;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,7 +35,7 @@ public class StatsJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
         GPSTracker mGPSTracker = new GPSTracker(this);
-        Toast.makeText(this, "Job Starts", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Job Starts", Toast.LENGTH_SHORT).show();
 
 
         //Have not used, may fix problem

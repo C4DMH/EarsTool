@@ -132,4 +132,9 @@ public class SetupStepFour extends AppCompatActivity {
             Log.d(TAG, "checkNotificationEnabled: Did not get into settings?");
             return false;
         }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

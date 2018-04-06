@@ -48,9 +48,15 @@ public class StepSeven extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(StepSeven.this, FinishInstallScreen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 StepSeven.this.startActivity(intent);
             }
         }, 4000);
 
     }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
 }

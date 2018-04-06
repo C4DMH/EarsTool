@@ -1,21 +1,3 @@
-/*
- * Copyright (C)EARSTool
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-
-
 package com.radicalninja.logger;
 
 import android.content.BroadcastReceiver;
@@ -32,58 +14,52 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by gwicks on 23/05/2017.
- * Class to record the user's MIC during a phone call
- * ************* WARNING ************************
- * Despite only recording the microphone and not the earpiece, the other party on the call
- * can be heard faintly. This is illegal in many States, Countries and Jurisdictions
+ * Created by gwicks on 2/04/2018.
  */
 
-public class IncomingCallListener extends BroadcastReceiver
-{
-    private Context mContext;
-    static Boolean onCall = false;
-    static MediaRecorder mediaRecorder;
-    private static final String TAG = "CustomBroadcastReceiver";
-    TelephonyManager telephony;
-    CustomPhoneStateListener customPhoneListener ;
-    //Context mContext;
-    @Override
-    public void onReceive(Context context, Intent intent)
-    {
+public class OutgoingCallListener extends BroadcastReceiver {
 
-        Log.d(TAG, "onReceive: Incoming call listener1");
+    private static final String TAG = "OutgoingCallListener";
+    private static Boolean onCall = false;
+    static MediaRecorder mediaRecorder;
+    private Context mContext;
+    TelephonyManager telephony;
+    CustomPhoneStateListener customPhoneListener;
+    
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
         mContext = context;
+        
+        if(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)){
+            Log.d(TAG, "onReceive: this is after checking ACTION");
+        }
+
         Bundle extras = intent.getExtras();
         if (extras != null) {
             String state = extras.getString(TelephonyManager.EXTRA_STATE);
-            Log.w("DEBUG", state);
-
-            telephony = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-            customPhoneListener = new   CustomPhoneStateListener();
-            telephony.listen(customPhoneListener,   PhoneStateListener.LISTEN_CALL_STATE);
-            Bundle bundle = intent.getExtras();
-            String phoneNr= bundle.getString("incoming_number");
-            Log.d(TAG, "onReceive: incoming number is: " + phoneNr);
-
-
-
+            Log.d(TAG, "onReceive: the state is : " + state);
+            for (String key : extras.keySet()) {
+                Object value = extras.get(key);
+                Log.d(TAG, String.format("%s %s (%s)", key,
+                        value.toString(), value.getClass().getName()));
+            }
         }
+        telephony = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        customPhoneListener = new CustomPhoneStateListener();
+        telephony.listen(customPhoneListener,   PhoneStateListener.LISTEN_CALL_STATE);
 
-
+        Log.d(TAG, "onReceive: We have detected an outgoing call!");
+        
     }
 
-    /*
-    * Method starts recording to file if:
-     * a) User makes an outgoing call. Note this will record the ringing time before other party picks up
-     * b) User receives an incoming call,
-    */
     public class CustomPhoneStateListener extends PhoneStateListener
     {
-        private static final String TAG = "CustomPhoneListener";
+        private static final String TAG = "CustomPhoneListener2";
         Handler handler=new Handler();
 
 
+       
 
         File dir;
         File f1;
@@ -94,22 +70,26 @@ public class IncomingCallListener extends BroadcastReceiver
         @Override
         public void onCallStateChanged(int state, String incomingNumber)
         {
+            Log.d(TAG, "onCallStateChanged: entering on call state changed in customPhoneStateListener");
             Log.d(TAG, "onCallStateChanged: onCall = " + onCall);
+            Log.d(TAG, "onCallStateChanged: the state is: " + state);
             switch (state)
             {
                 case TelephonyManager.CALL_STATE_RINGING:
+                    Log.d(TAG, "onCallStateChanged: call state ringing");
                     if(!incomingNumber.equalsIgnoreCase(""))
                     {
                         //YOUR CODE HERE
-                        Log.d(TAG, "onCallStateChanged1: ringing");
+                        Log.d(TAG, "onCallStateChanged: ringing");
 
                     }
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK:
+                    Log.d(TAG, "onCallStateChanged: call state offhook");
                     //YOUR CODE HERE
-                    Log.d(TAG, "onCallStateChanged1: on call");
+                    Log.d(TAG, "onCallStateChanged: on call");
                     onCall = true;
-                    Log.d(TAG, "onCallStateChanged1: onCall = " + onCall);
+                    Log.d(TAG, "onCallStateChanged: onCall = " + onCall);
                     mediaRecorder = new MediaRecorder();
                     //String path = Environment.getExternalStorageDirectory() + "/" + mContext.getString(R.string.app_name);
                     String path = mContext.getExternalFilesDir(null) + "/videoDIARY/MicRecord/";
@@ -128,7 +108,7 @@ public class IncomingCallListener extends BroadcastReceiver
                         e1.printStackTrace();
                     }
 
-                    Log.d(TAG, "onCallStateChanged1: setting up mediarecorder");
+                    Log.d(TAG, "onCallStateChanged: setting up mediarecorder");
 
                     // Various call recording options. Bitrate and Sample rate increasing will increase the quality of the call, but also
                     // increase the size of the files significantly.
@@ -142,7 +122,7 @@ public class IncomingCallListener extends BroadcastReceiver
                     //mediaRecorder.s
                     mediaRecorder.setOutputFile(f1.getAbsolutePath());
                     try {
-                        Log.d(TAG, "onCallStateChanged1: in try to prepare media recorder");
+                        Log.d(TAG, "onCallStateChanged: in try to prepare media recorder");
                         mediaRecorder.prepare();
                     } catch (IllegalStateException e) {
                         // TODO Auto-generated catch block
@@ -155,7 +135,7 @@ public class IncomingCallListener extends BroadcastReceiver
 
 
                     try {
-                        Log.d(TAG, "onCallStateChanged1: in try to start media recorder");
+                        Log.d(TAG, "onCallStateChanged: in try to start media recorder");
                         mediaRecorder.start();
                     } catch (Exception e) {
                         System.out.println("The stack trace is: ");
@@ -166,19 +146,20 @@ public class IncomingCallListener extends BroadcastReceiver
 
                     break;
                 case TelephonyManager.CALL_STATE_IDLE:
+                    Log.d(TAG, "onCallStateChanged: call state idle");
                     //YOUR CODE HERE
-                    Log.d(TAG, "onCallStateChanged1: onCall = " + onCall);
-                    Log.d(TAG, "onCallStateChanged1: IDle");
+                    Log.d(TAG, "onCallStateChanged2: onCall = " + onCall);
+                    Log.d(TAG, "onCallStateChanged: IDle");
                     if(onCall == true){
-                        Log.d(TAG, "onCallStateChanged1: oncall is true, recorder should be stopping!");
+                        Log.d(TAG, "onCallStateChanged: oncall is true, recorder should be stopping!");
 
                         try{
-                            Log.d(TAG, "onCallStateChanged1: stopping recorder!");
+                            Log.d(TAG, "onCallStateChanged: stopping recorder!");
                             mediaRecorder.stop();
                         }catch(RuntimeException e){
                             Log.d(TAG, "onReceive: could not stop recorder!");
                         }finally {
-                            Log.d(TAG, "onCallStateChanged1: in finally");
+                            Log.d(TAG, "onCallStateChanged: in finally");
                             mediaRecorder.reset();
                             mediaRecorder.release();
                             mediaRecorder = null;
@@ -190,7 +171,9 @@ public class IncomingCallListener extends BroadcastReceiver
 
 
                     break;
+                
                 default:
+                    Log.d(TAG, "onCallStateChanged: in default");
                     break;
             }
             super.onCallStateChanged(state, incomingNumber);
@@ -199,4 +182,7 @@ public class IncomingCallListener extends BroadcastReceiver
 
 
     }
+
+
+
 }

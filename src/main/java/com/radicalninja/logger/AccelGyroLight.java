@@ -28,6 +28,7 @@ public class AccelGyroLight implements SensorEventListener {
     private Sensor mLight;
     String path;
     String path2;
+    int i = 0;
 
     private static long LAST_TS_ACC = 0;
     private static long LAST_TS_GYRO = 0;
@@ -51,6 +52,7 @@ public class AccelGyroLight implements SensorEventListener {
     private static Float[] LAST_VALUES_GRYO = null;
 
     double THRESHOLD = 0.01;
+    double ACCEL_THRESHOLD = 0.05;
 
 
 
@@ -63,8 +65,10 @@ public class AccelGyroLight implements SensorEventListener {
     File LightFile;
 
     public void unregister(){
-        sensorManager.unregisterListener(this);
-        wakeLock.release();
+
+        //TODO: temp turn off the unregister, onDestroy is being called in FinishInstall Screen, not sure why?
+        //sensorManager.unregisterListener(this);
+        //wakeLock.release();
         Log.d(TAG, "unregister: Unregister sensors called");
         
     }
@@ -80,7 +84,7 @@ public class AccelGyroLight implements SensorEventListener {
         mLight = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
         PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
+        wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "AccelGryoLight");
         wakeLock.acquire();
 
         path = Environment.getExternalStorageDirectory() +"/VIDEODIARY";
@@ -98,7 +102,7 @@ public class AccelGyroLight implements SensorEventListener {
 
         if(!directory2.exists()){
             Log.d(TAG, "onCreate: making directory");
-            directory.mkdir();
+            directory2.mkdir();
         }
 
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
@@ -120,7 +124,13 @@ public class AccelGyroLight implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
+//        Log.d(TAG, "onSensorChanged: sensor event changed");
+
+//        int i = 0;
+
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+
+
 
 
         long TS = System.currentTimeMillis();
@@ -128,13 +138,13 @@ public class AccelGyroLight implements SensorEventListener {
 
         // Filter to remove readings that come too often
         if (TS < LAST_TS_ACC + 100) {
-            Log.d(TAG, "onSensorChanged: skipping");
+            //Log.d(TAG, "onSensorChanged: skipping");
             return;
         }
 
-        if(LAST_VALUES_ACC != null && Math.abs(event.values[0] - LAST_VALUES_ACC[0]) < THRESHOLD
-                && Math.abs(event.values[1] - LAST_VALUES_ACC[1]) < THRESHOLD
-                && Math.abs(event.values[2] - LAST_VALUES_ACC[2]) < THRESHOLD) {
+        if(LAST_VALUES_ACC != null && Math.abs(event.values[0] - LAST_VALUES_ACC[0]) < ACCEL_THRESHOLD
+                && Math.abs(event.values[1] - LAST_VALUES_ACC[1]) < ACCEL_THRESHOLD
+                && Math.abs(event.values[2] - LAST_VALUES_ACC[2]) < ACCEL_THRESHOLD) {
             return;
         }
 
@@ -175,11 +185,20 @@ public class AccelGyroLight implements SensorEventListener {
     }
 
     else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE){
+            //Log.d(TAG, "onSensorChanged: gyro");
         //Log.d(TAG, "onSensorChanged: 2");
+
+            if(i % 100 == 0){
+                Log.d(TAG, "onSensorChanged: we are in the 100th gyro sensor event");
+                Log.d(TAG, "onSensorChanged: i = " + i);
+                i++;
+            }
+
+
 
         long TS = System.currentTimeMillis();
         if (TS < LAST_TS_GYRO + 100) {
-            Log.d(TAG, "onSensorChanged: skipping");
+            //Log.d(TAG, "onSensorChanged: skipping");
             return;
         }
         // Filter to remove readings that have too small a change from previous reading.
@@ -230,6 +249,8 @@ public class AccelGyroLight implements SensorEventListener {
     }
 
     else if(event.sensor.getType() == Sensor.TYPE_LIGHT){
+
+            //Log.d(TAG, "onSensorChanged: light");
         long lightTime = System.currentTimeMillis();
 
         lightReading = event.values[0];
@@ -242,7 +263,7 @@ public class AccelGyroLight implements SensorEventListener {
         }
 
 
-        if((lightBuffer.length() > 5000) && (writingLightToFile == false) ){
+        if((lightBuffer.length() > 50000) && (writingLightToFile == false) ){
 
             timeStampLight = System.currentTimeMillis();
             LightFile = new File(path2 +"/Light/"  + timeStampLight +".txt");
@@ -272,6 +293,8 @@ public class AccelGyroLight implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
+
 
     private void writeStringBuilderToFile(File file, StringBuilder builder){
         Log.d(TAG, "writeStringBuilderToFile: in stringbuilder to file");

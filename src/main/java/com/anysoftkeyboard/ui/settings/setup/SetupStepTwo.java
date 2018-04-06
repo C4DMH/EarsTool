@@ -41,7 +41,9 @@ public class SetupStepTwo extends AppCompatActivity {
     {
 
         Intent installIntent = new Intent(SetupStepTwo.this, SetupStepThree.class);
+        installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         SetupStepTwo.this.startActivity(installIntent);
+        finish();
 
     }
 
@@ -52,6 +54,11 @@ public class SetupStepTwo extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor(color));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 }

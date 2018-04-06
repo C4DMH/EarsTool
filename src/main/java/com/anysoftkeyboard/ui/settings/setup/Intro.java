@@ -61,12 +61,15 @@ public class Intro extends AppCompatActivity {
 
 
 
+        String deviceMan = Build.MANUFACTURER;
 
+        Log.d(TAG, "onResume: deviceMan = " + deviceMan);
 
-
-
-
-        if(isAccessGranted()) {
+        if(deviceMan.equals("LGE")){
+            Log.d(TAG, "onResume: LG Device, fucking shit");
+            moveToNextStep();
+        }
+        else if(isAccessGranted()) {
             Log.d(TAG, "onResume: 1");
             moveToFinalStep();
         }else {
@@ -82,7 +85,9 @@ public class Intro extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(Intro.this, SetupStepOne.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 Intro.this.startActivity(intent);
+                finish();
             }
         }, 6000);
 
@@ -111,15 +116,19 @@ public class Intro extends AppCompatActivity {
     public boolean isAccessGranted() {
         try {
             Log.d(TAG, "isAccessGranted: in isaccessgranted");
+
             PackageManager packageManager = this.getPackageManager();
             ApplicationInfo applicationInfo = packageManager.getApplicationInfo(this.getPackageName(), 0);
             AppOpsManager appOpsManager = (AppOpsManager) this.getSystemService(Context.APP_OPS_SERVICE);
-            int mode = 0;
+            int mode = 1;
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                Log.d(TAG, "isAccessGranted: usage stats = " + AppOpsManager.MODE_ALLOWED );
                 Log.d(TAG, "isAccessGranted: ??");
                 mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
                         applicationInfo.uid, applicationInfo.packageName);
             }
+            Log.d(TAG, "isAccessGranted: mode = " + mode);
+            Log.d(TAG, "isAccessGranted: mode : " + mode + "appopsmanager = " + AppOpsManager.MODE_ALLOWED);
             return (mode == AppOpsManager.MODE_ALLOWED);
 
         } catch (PackageManager.NameNotFoundException e) {

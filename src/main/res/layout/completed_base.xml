@@ -46,6 +46,21 @@
         app:srcCompat="@drawable/page_1"
         />
 
+    <!--<TextView-->
+        <!--android:id="@+id/textViewEmail"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="24dp"-->
+        <!--android:layout_marginBottom="24dp"-->
+        <!--android:text="Please link phone to email"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textColor="@color/seekBar"-->
+        <!--app:layout_constraintHorizontal_bias="0.503"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/imageView2"-->
+        <!--app:srcCompat="@drawable/group_4"/>-->
+
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
@@ -108,8 +123,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView1"
-        app:srcCompat="@drawable/group_2"
-        tools:layout_editor_absoluteY="526dp"/>
+        app:srcCompat="@drawable/group_2"/>
 
     <TextView
         android:id="@+id/textView2"

@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        accelGyroLight.unregister();
+        //accelGyroLight.unregister();
 
         startService(new Intent(this, MainActivity.class));
     }

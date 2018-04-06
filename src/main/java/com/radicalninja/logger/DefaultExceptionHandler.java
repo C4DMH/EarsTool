@@ -12,6 +12,7 @@ import android.util.Log;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.anysoftkeyboard.ui.dev.DeveloperUtils;
+import com.anysoftkeyboard.ui.settings.setup.FinishInstallScreen;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -85,7 +86,9 @@ public class DefaultExceptionHandler implements Thread.UncaughtExceptionHandler 
 
             Log.d("Exception", "Start of Exception handler class");
 
-            Intent intent = new Intent(activity, MainActivity.class);
+            //Intent intent = new Intent(activity, MainActivity.class);
+            Intent intent = new Intent(activity, FinishInstallScreen.class);
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);

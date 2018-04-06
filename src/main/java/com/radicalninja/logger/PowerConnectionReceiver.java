@@ -40,7 +40,7 @@ public class PowerConnectionReceiver extends BroadcastReceiver {
 //        String timey = Long.toString(when);
 //        String theTime = convertDate(timey, "dd/MM/yyyy hh:mm:ss");
 
-        String path = context.getExternalFilesDir(null) + "/videoDIARY/CHARGING/";
+        String path = context.getExternalFilesDir(null) + "/Sensors/CHARGING/";
         File directory = new File(path);
         if(!directory.exists()){
             Log.d(TAG, "onStartJob: making directory");

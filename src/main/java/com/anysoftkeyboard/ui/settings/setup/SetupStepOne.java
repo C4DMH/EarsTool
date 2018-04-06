@@ -146,6 +146,7 @@ public class SetupStepOne extends AppCompatActivity {
         Log.d(TAG, "startInstall: ");
         Intent installIntent = new Intent(SetupStepOne.this, SetupStepTwo.class);
         SetupStepOne.this.startActivity(installIntent);
+        finish();
 
     }
 
@@ -192,4 +193,9 @@ public class SetupStepOne extends AppCompatActivity {
             return 3;
         }
     }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
 }

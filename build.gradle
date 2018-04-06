@@ -423,10 +423,23 @@ dependencies {
     implementation 'com.android.support:support-v4:21.0.0'
     implementation 'com.github.menny:FrankenRobot:1.1.5'
     implementation 'com.jpardogo.materialtabstrip:library:1.1.0'
-    implementation 'com.amazonaws:aws-android-sdk-core:2.3.8'
-    implementation 'com.amazonaws:aws-android-sdk-s3:2.3.8'
-    implementation 'com.amazonaws:aws-android-sdk-ddb:2.3.8'
-    implementation 'com.amazonaws:aws-android-sdk-cognito:2.3.8'
+
+    //Changing the AWS sdk, 4/4/2018 to latest.
+    //OLD
+//    implementation 'com.amazonaws:aws-android-sdk-core:2.3.8'
+//    implementation 'com.amazonaws:aws-android-sdk-s3:2.3.8'
+//    implementation 'com.amazonaws:aws-android-sdk-ddb:2.3.8'
+//    implementation 'com.amazonaws:aws-android-sdk-cognito:2.3.8'
+    //NEW
+
+    implementation 'com.amazonaws:aws-android-sdk-core:2.6.18'
+    implementation 'com.amazonaws:aws-android-sdk-s3:2.6.18'
+    implementation 'com.amazonaws:aws-android-sdk-ddb:2.6.18'
+    //implementation 'aws-android-sdk-cognito:2.6.18'
+
+    // END NEW
+
+
     implementation 'commons-io:commons-io:2.4'
 
     //    compile 'com.amazonaws:aws-android-sdk-core:2.+'

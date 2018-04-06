@@ -54,6 +54,11 @@ public class SetupStepThreeThree extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
 
 
 }
