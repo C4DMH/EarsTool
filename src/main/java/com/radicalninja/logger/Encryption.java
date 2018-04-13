@@ -73,6 +73,7 @@ public class Encryption {
 
         String final_path = mContext.getExternalFilesDir(null) + directoryName +  name + ".encrypted";
         Log.d(TAG,"We are starting encrytopn!");
+        android.util.Log.d(TAG, "encrypt: final_path = " + final_path);
         FileInputStream fis = new FileInputStream(path);
         Log.d(TAG,"We are starting encrytopn 2!");
         // This stream write the encrypted text. This stream will be wrapped by another stream.

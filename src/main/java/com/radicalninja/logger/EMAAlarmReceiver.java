@@ -63,8 +63,8 @@ public class EMAAlarmReceiver extends BroadcastReceiver {
 
         Log.d(TAG, "onReceive: IN FIRST 1 FUCKER");
         String dateFormat = "HH:mm:ss";
-        String endTime= "20:00:00";
-        String startTime = "09:00:00";
+        String endTime= "23:30:00";
+        String startTime = "08:00:00";
         String currentTime = new SimpleDateFormat(dateFormat).format(new Date());
 
         Calendar cStart = setTimeToCalendar(dateFormat, startTime, false);
@@ -139,9 +139,9 @@ public class EMAAlarmReceiver extends BroadcastReceiver {
             Notification mBuilder =
                     new NotificationCompat.Builder(context, CHANNEL_DI)
                             .setSmallIcon(R.drawable.noti_icon)
-                            .setContentTitle("EMA")
+                            .setContentTitle("Quick Survey")
                             .setAutoCancel(true)
-                            .setContentText("Time for another EMA :)")
+                            .setContentText("Time for another quick survey :)")
                             .setOngoing(true)
                             .setChannelId(CHANNEL_DI)
                             .setSound(uri)
@@ -202,9 +202,9 @@ public class EMAAlarmReceiver extends BroadcastReceiver {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context, CHANNEL_DI)
                             .setSmallIcon(R.drawable.noti_icon)
-                            .setContentTitle("EMA")
+                            .setContentTitle("Quick Survey")
                             .setAutoCancel(true)
-                            .setContentText("Time for another EMA - First EMA")
+                            .setContentText("Time for another quick survey")
                             .setOngoing(true)
                             .setContentIntent(resultPendingIntent)
                             .addAction(action)

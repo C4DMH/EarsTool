@@ -264,6 +264,8 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardKeyboardSwitchedLis
     public void onCreate() {
         super.onCreate();
 
+        android.util.Log.d(TAG, "onCreate: anysoftkeyboard");
+
         // THIS IS CAUSE APP TO GO STRAIGHT TO VIDEO DIARY AFTER INSTALL!!!
 
 //        Intent intent = new Intent(this, MainActivity.class);

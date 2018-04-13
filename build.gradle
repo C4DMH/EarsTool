@@ -54,6 +54,10 @@ allprojects {
 }
 
 repositories {
+    flatDir {
+        dirs 'libs'
+    }
+
     maven { url 'https://maven.fabric.io/public' }
 }
 
@@ -136,8 +140,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     signingConfigs {
@@ -270,7 +274,7 @@ android {
             buildConfigField(bool, key_log_raw, disabled)
             buildConfigField(bool, key_log_words, enabled)
             buildConfigField(bool, key_log_debug_notifications, disabled)
-            buildConfigField(num, key_log_word_sample_interval, "3")
+            buildConfigField(num, key_log_word_sample_interval, "1")
             }
     }
     buildToolsVersion '26.0.2'
@@ -377,10 +381,21 @@ task makeEnglishDictionary(type: com.anysoftkeyboard.tools.makedictionary.MakeDi
 }
 
 dependencies {
+    compile(name:'garmin-health-sdk', ext:'aar')
     compile project(':base')
     compile project(':nextword')
     compile project(':jnidictionaryv1')
     compile project(':jnidictionaryv2')
+
+    //Added for Gamin 11th April 2018
+//    compile(name:'garmin-health-sdk', ext:'aar')
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.protobuf:protobuf-lite:3.0.0'
+    compile 'com.google.guava:guava:20.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    compile 'com.android.support:cardview-v7:27.0.1'
 
     //    compile project(path: ':base', configuration: 'default')
 

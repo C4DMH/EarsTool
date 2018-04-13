@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,16 +49,16 @@ public class PowerConnectionReceiver extends BroadcastReceiver {
         File location = new File(directory, theDate +".txt");
 
 
-        Toast.makeText(context, "The time is nice format is: " + theTime, Toast.LENGTH_LONG ).show();
+        //Toast.makeText(context, "The time is nice format is: " + theTime, Toast.LENGTH_LONG ).show();
 
         if(action.equals(Intent.ACTION_POWER_CONNECTED)) {
             // Do something when power connected
-            Toast.makeText(context, "CONNECTED", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "CONNECTED", Toast.LENGTH_LONG).show();
             writeToFile(location, "TIME," + theTime + ",CHARGING STATUS, Charging\n");
         }
         else if(action.equals(Intent.ACTION_POWER_DISCONNECTED)) {
             // Do something when power disconnected
-            Toast.makeText(context, "Diconnected", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Diconnected", Toast.LENGTH_LONG).show();
             writeToFile(location, "TIME," + theTime + ",CHARGING STATUS, Disconnected\n");
 
         }

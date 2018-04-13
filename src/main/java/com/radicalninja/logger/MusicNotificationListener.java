@@ -1,8 +1,6 @@
 package com.radicalninja.logger;
 
-import android.app.Notification;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.service.notification.NotificationListenerService;
@@ -91,13 +89,13 @@ public class MusicNotificationListener extends NotificationListenerService {
             e.printStackTrace();
         }
 
-        int id1 = extras.getInt(Notification.EXTRA_SMALL_ICON);
-        Bitmap id = sbn.getNotification().largeIcon;
+        //int id1 = extras.getInt(Notification.EXTRA_SMALL_ICON);
+        //Bitmap id = sbn.getNotification().largeIcon;
 
         Log.d(TAG, "onNotificationPosted: Package: " + pack);
-        Log.d(TAG, "onNotificationPosted: Ticker" + ticker  );
-        Log.d(TAG, "onNotificationPosted: Title " + title);
-        Log.d(TAG, "onNotificationPosted: text: " + text);
+        //Log.d(TAG, "onNotificationPosted: Ticker" + ticker  );
+        //Log.d(TAG, "onNotificationPosted: Title " + title);
+        //Log.d(TAG, "onNotificationPosted: text: " + text);
 
         currentTitle = title;
 
@@ -109,7 +107,7 @@ public class MusicNotificationListener extends NotificationListenerService {
             Log.d(TAG, "onNotificationPosted:  CURRENT = " + currentTitle);
 
 
-            Log.d(TAG, "onNotificationPosted: " + pack + " is a music package!!!!!!!!");
+            //Log.d(TAG, "onNotificationPosted: " + pack + " is a music package!!!!!!!!");
             //File location = new File(directory, currentDate +".txt");
             writeToFile(location, "Time: " + formattedTime + "\nPackage: " + pack + "\nTitle: " + title + "\nText: " + text + "\n\n");
             prevTitle = currentTitle;
@@ -150,12 +148,12 @@ public class MusicNotificationListener extends NotificationListenerService {
 
         //OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);
         try {
-            Log.e("History", "In try");
-            Log.d(TAG, "writeToFile: ");
+            //Log.e("History", "In try");
+            //Log.d(TAG, "writeToFile: ");
             stream = new FileOutputStream(file, true);
-            Log.d(TAG, "writeToFile: 2");
+            //Log.d(TAG, "writeToFile: 2");
             stream.write(data.getBytes());
-            Log.d(TAG, "writeToFile: 3");
+            //Log.d(TAG, "writeToFile: 3");
         } catch (FileNotFoundException e) {
             Log.e("History", "In catch");
             e.printStackTrace();

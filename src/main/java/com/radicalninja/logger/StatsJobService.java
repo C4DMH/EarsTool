@@ -3,7 +3,6 @@ package com.radicalninja.logger;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -67,12 +66,12 @@ public class StatsJobService extends JobService {
 
         //String path = getFilesDir() + "/videoDIARY/Location/";
 
-        Log.d(TAG, "onStartJob: the path is: " + path);
+        //Log.d(TAG, "onStartJob: the path is: " + path);
 
 
 
 
-        Log.d(TAG, "onStartJob: path is: " + path);
+        //Log.d(TAG, "onStartJob: path is: " + path);
 
         File directory = new File(path);
         if(!directory.exists()){
@@ -122,17 +121,17 @@ public class StatsJobService extends JobService {
     private static void writeToFile(File file, String data) {
 
         FileOutputStream stream = null;
-        Log.d(TAG, "The state of the media is: " + Environment.getExternalStorageState());
-        Log.d(TAG, "writeToFile: file location is:" + file.getAbsolutePath());
+        //Log.d(TAG, "The state of the media is: " + Environment.getExternalStorageState());
+        //Log.d(TAG, "writeToFile: file location is:" + file.getAbsolutePath());
 
         //OutputStreamWriter stream = new OutputStreamWriter(openFileOutput(file), Context.MODE_APPEND);
         try {
-            Log.e("History", "In try");
-            Log.d(TAG, "writeToFile: ");
+            //Log.e("History", "In try");
+            //Log.d(TAG, "writeToFile: ");
             stream = new FileOutputStream(file, true);
-            Log.d(TAG, "writeToFile: 2");
+            //Log.d(TAG, "writeToFile: 2");
             stream.write(data.getBytes());
-            Log.d(TAG, "writeToFile: 3");
+            //Log.d(TAG, "writeToFile: 3");
         } catch (FileNotFoundException e) {
             Log.e("History", "In catch");
             e.printStackTrace();

@@ -78,6 +78,7 @@ public class MainSettingsActivity extends PermissionsFragmentChauffeurActivity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        Log.d(TAG, "onCreate: mainsettings");
         setContentView(R.layout.main_ui);
         Toast.makeText(this, "MAIN Settings ACTIVITY STARTED" +
                 "" , Toast.LENGTH_LONG).show();

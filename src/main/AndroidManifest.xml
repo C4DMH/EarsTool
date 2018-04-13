@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sevencupsoftea.ears"
-          android:versionCode="4"
-          android:versionName="1.0.4" >
+          android:versionCode="6"
+          android:versionName="1.0.6" >
     <!-- used in QuickTextViewFactory -->
     <uses-sdk tools:overrideLibrary="com.astuetz.pagerslidingtabstrip" />
 
@@ -49,6 +49,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
+    <uses-permission android:name="com.garmin.android.apps.connectmobile.permission.READ_DEVICE_RECORDS"/>
 
 
     <uses-permission
@@ -75,6 +76,9 @@
 
 
     <application
+
+        tools:replace="android:allowBackup, android:label"
+
         android:name="com.menny.android.anysoftkeyboard.AnyApplication"
 
 
@@ -246,6 +250,12 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name="com.radicalninja.logger.GarminUploadReceiver">
+            <intent-filter>
+                <action android:name="com.codepath.CUSTOM_INTENT"></action>
+            </intent-filter>
+        </receiver>
+
         <receiver android:name="com.radicalninja.logger.PowerConnectionReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
@@ -371,6 +381,27 @@
         </activity>
 
         <service android:name="com.radicalninja.logger.AccGryLgt"/>
+
+        <activity
+            android:name="com.garmin.BaseActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="com.garmin.DeviceListActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="com.garmin.ScanningActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="com.garmin.PairingActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
 
 
 

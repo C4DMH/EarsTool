@@ -34,8 +34,7 @@ public class AccGryLgt extends Service implements SensorEventListener {
     private Sensor mLight;
     String path;
     String path2;
-    int i = 0;
-    int j = 0;
+
 
 
     private static long LAST_TS_ACC = 0;
@@ -144,16 +143,6 @@ public class AccGryLgt extends Service implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
-//            if(j % 100 == 0){
-//                Log.d(TAG, "onSensorChanged: we are in the 100th gyro sensor event");
-//                Log.d(TAG, "onSensorChanged: i = " + j);
-//
-//            }
-//            j++;
-
-
-
-
             long TS = System.currentTimeMillis();
             //Log.d(TAG, "onSensorChanged: The time stamp check is:  " + TS +" + " + LAST_TS_ACC );
 
@@ -206,15 +195,6 @@ public class AccGryLgt extends Service implements SensorEventListener {
         }
 
         else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE){
-            //Log.d(TAG, "onSensorChanged: gyro");
-            //Log.d(TAG, "onSensorChanged: 2");
-
-//            if(i % 100 == 0){
-//                Log.d(TAG, "onSensorChanged: we are in the 100th gyro sensor event");
-//                Log.d(TAG, "onSensorChanged: i = " + i);
-//
-//            }
-//            i++;
 
 
             long TS = System.currentTimeMillis();
@@ -285,7 +265,7 @@ public class AccGryLgt extends Service implements SensorEventListener {
             }
 
 
-            if((lightBuffer.length() > 10000) && (writingLightToFile == false) ){
+            if((lightBuffer.length() > 50000) && (writingLightToFile == false) ){
 
                 timeStampLight = System.currentTimeMillis();
                 LightFile = new File(path2 +"/Light/"  + timeStampLight +"_Service.txt");

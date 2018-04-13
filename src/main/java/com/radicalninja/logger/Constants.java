@@ -36,7 +36,8 @@ public class Constants {
      * put it's name in the field below.
      */
     //public static final String BUCKET_NAME = "adaptvideos";
-    public static final String BUCKET_NAME = "adaptvideostest";
+    public static final String BUCKET_NAME = "earsnorman";
+    //public static final String BUCKET_NAME = "sevencups";
 
 
 

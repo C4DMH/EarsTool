@@ -177,7 +177,10 @@ public class EMA extends Activity implements SeekBar.OnSeekBarChangeListener, Ti
                 String uri = (getExternalFilesDir(null) + "/EMA/"+ formattedDate + ".txt");
                 File file = new File(uri);
                 Log.d(TAG, "onClick: the file url is : " + uri);
+                long TS = System.currentTimeMillis();
+                String timeStampString = String.valueOf(TS);
 
+                writeToFile(file, timeStampString + "\n");
                 writeToFile(file, "Question,Value\n");
                 writeToFile(file, t1.getText().toString() +"," + Integer.toString(answer1) + "\n");
                 writeToFile(file, t2.getText().toString() +"," + Integer.toString(answer2) + "\n");
@@ -200,7 +203,7 @@ public class EMA extends Activity implements SeekBar.OnSeekBarChangeListener, Ti
 //                Log.d(TAG, "onClick: 3");
 
 
-                Toast.makeText(getBaseContext(), "Thank you for completing the questionaire, the next one will be in roughly two hours  :)", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Thank you for completing the questionnaire, they will appear roughly every two hours between 8am and midnight  :)", Toast.LENGTH_LONG).show();
                 Intent returnToFinish = new Intent(EMA.this, FinishInstallScreen.class);
 
                 startActivity(returnToFinish);

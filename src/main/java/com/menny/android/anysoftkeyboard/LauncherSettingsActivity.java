@@ -24,7 +24,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.anysoftkeyboard.ui.settings.setup.Intro;
-import com.radicalninja.logger.VideoActivity;
 
 /*
  * Why is this class exists?
@@ -85,7 +84,7 @@ public class LauncherSettingsActivity extends Activity {
             }
         else {
             Log.d(TAG, "onResume: not first time you fuckers");
-            startActivity(new Intent(this, VideoActivity.class));
+            startActivity(new Intent(this, Intro.class));
         }
         //Toast.makeText(this, "THIS IS MAIN ACTIVIY, AFTER (isfirstRun)", Toast.LENGTH_LONG).show();
 
@@ -123,6 +122,17 @@ public class LauncherSettingsActivity extends Activity {
         mLaunched = savedInstanceState.getBoolean(LAUNCHED_KEY);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: paused");
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy: on Destroy");
+        super.onDestroy();
+    }
 }
 
 //

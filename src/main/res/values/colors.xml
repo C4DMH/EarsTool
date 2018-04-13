@@ -82,4 +82,5 @@
     <color name="seekBarProgress">#07DDDD</color>
     <color name="seekBarBackground">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
+    <color name="light_grey">#fafafa</color>
 </resources>

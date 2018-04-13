@@ -65,6 +65,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Toast.makeText(getContext(), "THIS IS MainFragment onCreateView",
                 Toast.LENGTH_LONG).show();
+        android.util.Log.d(TAG, "onCreateView: In MAINFRAGMENT....why?");
 //       Toast.makeText(getContext(), "THIS IS MainFragment onCreateView",
 //                Toast.LENGTH_LONG).show();
         return inflater.inflate(R.layout.main_fragment, container, false);
@@ -177,9 +178,12 @@ public class MainFragment extends Fragment {
         defaultKeyboard.loadKeyboard(mDemoAnyKeyboardView.getThemedKeyboardDimens());
         mDemoAnyKeyboardView.setKeyboard(defaultKeyboard);
 
+        //Comented below out 8th April 2018, causes crashes - reinstaed because it was failing on params, but I added in demoanykeyboardview
+
         mPaletteTask = new AsyncTask<Bitmap, Void, Palette.Swatch>() {
             @Override
             protected Palette.Swatch doInBackground(Bitmap... params) {
+
                 Bitmap bitmap = params[0];
                 Palette p = Palette.from(bitmap).generate();
                 Palette.Swatch highestSwatch = null;

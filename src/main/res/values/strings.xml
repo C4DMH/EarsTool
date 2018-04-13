@@ -655,6 +655,54 @@
     <string name="ask_beta_link_promo">Hey! Want new <i>EARS Tool</i> stuff faster? Then you\'re in luck! <i>BETA</i> channel is now available for <b>YOU</b>!\nJust sign up at the link below, and update through <i>Google Play-Store</i>!\n\n https://play.google.com/apps/testing/com.menny.android.anysoftkeyboard \n\nAnd thanks for helping out to kill bugs before the reach the public.</string>
     <string name="title_activity_maps">Map</string>
     <string name="time_prompt">Over the last few hours, who have you spent the most time with?</string>
+
+
+    <string name="alert_error_title">Error</string>
+    <string name="alert_ok_button">OK</string>
+
+    <string name="init_failed_title">SDK initialization failed.</string>
+    <string name="init_failed_message">Garmin Health SDK failed to initialize. Check your license.</string>
+    <string name="init_failed_generic_message">Garmin Health SDK failed to initialize because of unexpected exception.</string>
+
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_scanning">Scanning</string>
+    <string name="title_pairing_device">Pairing Device</string>
+    <string name="title_real_time">Real Time Data</string>
+
+    <string name="scan_start">Start</string>
+    <string name="scan_stop">Stop</string>
+
+    <string name="enter_passkey">Enter passkey</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="reset_device">Reset Device?</string>
+    <string name="pair_screen_device_disconnected">Device %s disconnected.</string>
+    <string name="pair_screen_device_connection_failed">Device %s failed to connect.</string>
+    <string name="pair_screen_device_pairing_failed">Device failed to pair.</string>
+
+    <string name="error_failed_to_connect_to_device" formatted="false">Failed to connect to device {%s}Reason: %s</string>
+
+    <string name="device_uid">UnitId: %s</string>
+    <string name="device_address">Address: %s</string>
+
+    <string name="connected_forget_device_message">Do you want to forget this device?</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+
+    <string name="real_time_steps">Steps\nCurrent: %1$s\nGoal: %2$s</string>
+    <string name="real_time_hrv">Heart Rate Variability\n%s</string>
+    <string name="real_time_calories">Calories\nTotal: %1$s</string>
+    <string name="real_time_floors">Floors\nCurrent: %1$s</string>
+    <string name="real_time_intensity">Intensity Minutes\nDaily Total: %1$s</string>
+    <string name="real_time_heart_rate">Heart Rate\nCurrent Rate: %1$s</string>
+    <string name="real_time_stress">Stress\nScore: %s</string>
+    <string name="real_time_accel">Accelerometer\n%1$s</string>
+
+
+
+
+
+
     <string name="informed_consent">
         <![CDATA[
 

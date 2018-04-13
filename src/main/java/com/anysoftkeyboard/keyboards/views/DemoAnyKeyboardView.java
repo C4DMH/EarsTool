@@ -107,7 +107,7 @@ public class DemoAnyKeyboardView extends AnyKeyboardView {
             if (bitmap != null) {
                 //AsyncTaskCompat.executeParallel(mPaletteTask, bitmap);
 
-                mPaletteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                mPaletteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, bitmap);
                 mPaletteTask = null;
             }
         }

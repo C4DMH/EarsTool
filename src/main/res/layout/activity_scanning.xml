@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  android:id="@+id/activity_scanning"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+  <ProgressBar
+    android:id="@+id/scanned_progress_bar"
+    android:layout_width="match_parent"
+    android:layout_height="6dp"
+    android:indeterminate="true"
+    android:visibility="invisible"
+    style="?android:attr/progressBarStyleHorizontal"/>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/scanned_list"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+</LinearLayout>

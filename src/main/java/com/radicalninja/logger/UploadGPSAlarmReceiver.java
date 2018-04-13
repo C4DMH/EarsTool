@@ -27,7 +27,7 @@ import javax.crypto.NoSuchPaddingException;
 
 public class UploadGPSAlarmReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "MicRecordUploadAlarm";
+    private static final String TAG = "GPSUploadAlarm";
 
     TransferUtility mTransferUtility;
     Encryption mEncryption;

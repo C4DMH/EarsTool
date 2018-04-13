@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+  <LinearLayout
+    android:id="@+id/activity_real_time"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+      android:id="@+id/button_start_log"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:onClick="startCsvLogging"
+      android:text="Start HRV File Logging"
+      android:visibility="gone" />
+
+    <Button
+      android:id="@+id/button_stop_log"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:onClick="stopCsvLogging"
+      android:text="Stop HRV File Logging"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/steps_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/heart_rate_variability_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/stress_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/calories_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/floors_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/intensity_minutes_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/heart_rate_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/accel_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="start"
+      android:padding="10dp"
+      android:visibility="gone" />
+
+  </LinearLayout>
+</ScrollView>

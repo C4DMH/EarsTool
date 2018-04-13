@@ -66,24 +66,27 @@ public class EmailSecureDeviceID extends DialogFragment {
 
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        //Toast.makeText(getActivity(), "HelloHello", Toast.LENGTH_LONG).show();
-                        //mListener.onDialogNegativeClick(EmailSecureDeviceID.this);
-                        dismiss();
-                    }
-                });
 
+                // Not sure we want a cancel button, so going to comment this out 10th April 2018
+//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        //Toast.makeText(getActivity(), "HelloHello", Toast.LENGTH_LONG).show();
+//                        //mListener.onDialogNegativeClick(EmailSecureDeviceID.this);
+//                        dismiss();
+//                    }
+//                });
+
+        ;
         return builder.create();
 
     }
 
     public void sendEmailDeviceID() {
-        String[] recipient = new String[]{"geordiewicks@gmail.com"};
+        String[] recipient = new String[]{"adaptlab@uoregon.edu"};
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                "mailto","geordiewicks@gmail.com", null));
+                "mailto","adaptlab@uoregon.edu", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, secureDeviceID);
         emailIntent.putExtra(Intent.EXTRA_TEXT, "No Need to put anything here, just press send :)");
         startActivity(Intent.createChooser(emailIntent, "Select your most used email provider"));

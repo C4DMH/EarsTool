@@ -3,7 +3,6 @@ package com.radicalninja.logger;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -71,9 +70,9 @@ public class EMASleepTwoReceiver extends BroadcastReceiver {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context, CHANNEL_DI)
                             .setSmallIcon(R.drawable.noti_icon)
-                            .setContentTitle("EMA - 3rd Notfication")
+                            .setContentTitle("Survey 2nd Reminder")
                             .setAutoCancel(true)
-                            .setContentText("Time for another EMA 3:)")
+                            .setContentText("Quick survey 2nd reminder")
                             //.setOngoing(true)
                             .setChannelId(CHANNEL_DI)
 
@@ -103,10 +102,11 @@ public class EMASleepTwoReceiver extends BroadcastReceiver {
                             .setSound(uri);
 
             Intent resultIntent = new Intent(context, EMA.class);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            //TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
             //stackBuilder.addParentStack(AlarmActivity.class);
-            stackBuilder.addNextIntent(resultIntent);
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            //stackBuilder.addNextIntent(resultIntent);
+            //PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(resultPendingIntent);
 
             //NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

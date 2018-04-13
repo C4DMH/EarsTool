@@ -46,15 +46,25 @@
         app:srcCompat="@drawable/page_1"
         />
 
-    <!--<TextView-->
-        <!--android:id="@+id/textViewEmail"-->
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Connect Garmin Wearable"
+        android:textColor="@color/seekBar"
+        android:textSize="20dp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/group_4"/>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView6"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="24dp"-->
-        <!--android:layout_marginBottom="24dp"-->
-        <!--android:text="Please link phone to email"-->
-        <!--android:textSize="20dp"-->
-        <!--android:textColor="@color/seekBar"-->
+        <!--android:layout_marginTop="0dp"-->
         <!--app:layout_constraintHorizontal_bias="0.503"-->
         <!--app:layout_constraintLeft_toLeftOf="parent"-->
         <!--app:layout_constraintRight_toRightOf="parent"-->
@@ -65,12 +75,13 @@
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
         app:srcCompat="@drawable/group_4"/>
+
 
 
     <TextView

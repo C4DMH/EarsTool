@@ -35,10 +35,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.garmin.DeviceListActivity;
 import com.menny.android.anysoftkeyboard.AnyApplication;
 import com.radicalninja.logger.AccGryLgt;
 import com.radicalninja.logger.EMAAlarmReceiver;
 import com.radicalninja.logger.EMAUploadReceiver;
+import com.radicalninja.logger.GarminUploadReceiver;
 import com.radicalninja.logger.MicRecordUploadAlarm;
 import com.radicalninja.logger.MusicUploadReceiver;
 import com.radicalninja.logger.PhotoUploadReceiver;
@@ -75,6 +77,7 @@ public class FinishInstallScreen extends AppCompatActivity {
     TextView prefText;
     File destroyEvents;
     //TextView  textViewEmail;
+    TextView garminConnect;
 
 
     // Main Activity variables added 8th Feb 2018
@@ -88,6 +91,7 @@ public class FinishInstallScreen extends AppCompatActivity {
     private PendingIntent startEMAIntent;
     private PendingIntent EMAIntent;
     private PendingIntent sensorIntent;
+    private PendingIntent garminIntent;
     public static boolean alarmIsSet = false;
     public static boolean statsAlarmIsSet = false;
     public static final String secureID = Settings.Secure.getString(
@@ -113,6 +117,8 @@ public class FinishInstallScreen extends AppCompatActivity {
         }
         
         updateStatusBarColor("#1281e8");
+
+        //Toast.makeText(this,"the secure id of this phone is: " + secureID, Toast.LENGTH_LONG).show();
 
 
 
@@ -147,6 +153,8 @@ public class FinishInstallScreen extends AppCompatActivity {
 
         //textViewEmail = (TextView)findViewById(R.id.textViewEmail);
 
+        garminConnect = (TextView)findViewById(R.id.textViewEmail);
+
 
 
 
@@ -163,14 +171,17 @@ public class FinishInstallScreen extends AppCompatActivity {
         talkText.setText(ss);
         talkText.setMovementMethod(LinkMovementMethod.getInstance());
 
-//        textViewEmail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d(TAG, "onClick: in lauchem email button");
-//                launchSendEmailDialog();
-//
-//            }
-//        });
+        garminConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: in lauched garmin connect button");
+                //launchSendEmailDialog();
+                Intent myIntent = new Intent(FinishInstallScreen.this, DeviceListActivity.class);
+
+                startActivity(myIntent);
+
+            }
+        });
 
 
         needToTalkClosed.setOnClickListener(new View.OnClickListener() {
@@ -270,7 +281,10 @@ public class FinishInstallScreen extends AppCompatActivity {
         startMusicUploadAlarm();
         startPhotoUploadAlarm();
         startSensorUploadAlarm();
+        startGarminUploadAlarm();
         Log.d(TAG, "onCreate: alarmstarted = " + alarmStarted);
+
+        // Comment this out to remove the EMA component
         if(alarmStarted != true){
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -283,6 +297,8 @@ public class FinishInstallScreen extends AppCompatActivity {
         }
 
         startEMAUploadAlarm();
+
+        //Finish Comment out
 
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         String rate = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
@@ -523,14 +539,38 @@ public class FinishInstallScreen extends AppCompatActivity {
         Log.d("the time is: ", when + " ");
 
         cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 22);
-        cal.set(Calendar.MINUTE, 25);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 50);
 
         AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, EMAUploadReceiver.class);
         //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
         EMAIntent = PendingIntent.getBroadcast(this, 8, intent, 0);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, EMAIntent);
+
+
+    }
+
+    public void startGarminUploadAlarm() {
+        Log.d(TAG, "EMA upload in start alarm");
+
+        Calendar cal = Calendar.getInstance();
+        long when = cal.getTimeInMillis();
+        String timey = Long.toString(when);
+
+        //System.out.println("The time changed into nice format is: " + theTime);
+
+        Log.d("the time is: ", when + " ");
+
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 15);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, GarminUploadReceiver.class);
+        //statsIntent = PendingIntent.getBroadcast(this, 3, intent, 0);
+        garminIntent = PendingIntent.getBroadcast(this, 11, intent, 0);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, garminIntent);
 
 
     }
@@ -576,7 +616,7 @@ public class FinishInstallScreen extends AppCompatActivity {
         Intent intent = new Intent(this, EMAAlarmReceiver.class);
         intent.putExtra("EMA", "EMA1");
         startEMAIntent = PendingIntent.getBroadcast(this, 9, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000 * 60 * 60, startEMAIntent);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000 * 60 * 120, startEMAIntent);
         Log.d(TAG, "startEMAAlarm: alarm shjould be set");
         alarmStarted = true;
 
@@ -755,6 +795,8 @@ public class FinishInstallScreen extends AppCompatActivity {
 
     public void launchSendEmailDialog(){
         DialogFragment newFragment = new EmailSecureDeviceID();
+        newFragment.setCancelable(false);
+
         newFragment.show(getFragmentManager(), "email");
     }
 

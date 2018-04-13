@@ -63,21 +63,21 @@ public class WordBuffer extends Buffer {
     }
 
     public void clearBuffer() {
-        Log.d(TAG, "clearBuffer: in wordbuffer clear buffer");
-        Log.d(TAG, "clearBuffer: the length of linebuffer is: " + lineBuffer.length());
-        Log.d(TAG, "clearBuffer: linebuffer: " + lineBuffer);
+        //Log.d(TAG, "clearBuffer: in wordbuffer clear buffer");
+        //Log.d(TAG, "clearBuffer: the length of linebuffer is: " + lineBuffer.length());
+        //Log.d(TAG, "clearBuffer: linebuffer: " + lineBuffer);
         if (isLogEnabled() && (lineBuffer.length() > 0 || composingText.length() > 0)) {
             lineBuffer.delete(0, lineBuffer.length());
-            Log.d(TAG, "clearBuffer: after end of clear buffer");
-            Log.d(TAG, "clearBuffer: the length of linebuffer is: " + lineBuffer.length());
-            Log.d(TAG, "clearBuffer: linebuffer: " + lineBuffer);
+            //Log.d(TAG, "clearBuffer: after end of clear buffer");
+            //Log.d(TAG, "clearBuffer: the length of linebuffer is: " + lineBuffer.length());
+            //Log.d(TAG, "clearBuffer: linebuffer: " + lineBuffer);
 
 
         }
     }
 
     private String getLineBuffer() {
-        Log.d(TAG, "getLineBuffer: ");
+        //Log.d(TAG, "getLineBuffer: ");
         return String.format("%s%s", lineBuffer.toString(), composingText);
     }
 
