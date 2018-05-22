@@ -2,9 +2,11 @@ package com.garmin;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -13,6 +15,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.garmin.health.ConnectionState;
 import com.garmin.health.Device;
@@ -57,6 +61,8 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
     private Device mDevice;
 
     private String mAddress;
+    private Context mContext;
+    private TextView statusText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,8 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
         if (!initializeGarminHealth()) {
             return;
         }
+
+        mContext = this;
 
         Log.d(TAG, "onCreate: mAddress is: " + mAddress);
 
@@ -86,6 +94,7 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
         setTitle(R.string.title_paired_devices);
 
         findViewById(R.id.add_device_button).setOnClickListener(this);
+        statusText = (TextView)findViewById(R.id.connectstatus);
 
         //Will need location service for ble scanning
         requestLocationPermission();
@@ -98,6 +107,7 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
         }
 
         initPairedDeviceList();
+        statusText.setTextColor(Color.RED);
 
     }
 
@@ -193,6 +203,7 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onConnectionClick(Device device)
                     {
+                        Log.d(TAG, "onConnectionClick: 12");
                         if(device.connectionState() == ConnectionState.CONNECTED)
                         {
                             mDeviceManager.stopCommunication(device.address());
@@ -220,6 +231,10 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
                         // mDeviceManager.getRealTimeDataManager().enableRealTimeData(device, EnumSet.allOf(RealTimeDataType.class));
                         Log.d(TAG, "onItemClick: 3");
                         initRealTimeData();
+                        //mConnectedAdapter.onBindViewHolder().;
+                        Toast.makeText(mContext, "YOU ARE NOW CONNECTED, THANK YOU", Toast.LENGTH_LONG).show();
+                        statusText.setText("CONNECTED");
+                        statusText.setTextColor(Color.GREEN);
                     }
                 });
 
@@ -289,7 +304,13 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onDeviceConnectionFailed(Device device, FailureCode failure) {
         Log.d(TAG, "onDeviceConnectionFailed: device connection failed");
-        showErrorDialog(getString(R.string.error_failed_to_connect_to_device, device.address(), failure.name()));
+        try{
+            showErrorDialog(getString(R.string.error_failed_to_connect_to_device, device.address(), failure.name()));
+
+        }catch(Exception e){
+            Log.e(TAG, "onDeviceConnectionFailed: " + e);
+        }
+        //showErrorDialog(getString(R.string.error_failed_to_connect_to_device, device.address(), failure.name()));
         mConnectedAdapter.refreshDevice(device);
     }
 

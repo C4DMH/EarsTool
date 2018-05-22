@@ -38,6 +38,7 @@ public class Constants {
     //public static final String BUCKET_NAME = "adaptvideos";
     public static final String BUCKET_NAME = "earsnorman";
     //public static final String BUCKET_NAME = "sevencups";
+    //public static final String BUCKET_NAME = "katemills";
 
 
 

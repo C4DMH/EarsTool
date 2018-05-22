@@ -95,7 +95,8 @@ public class SetupStepOne extends AppCompatActivity {
                 if(mImageViewPager.getCurrentItem() == 2){
 
                     AlertDialog alertDialog = new AlertDialog.Builder(SetupStepOne.this).create();
-                    alertDialog.setTitle("7 Cups EARS: Informed Consent & Terms of Service Agreement");
+                    //alertDialog.setTitle("7 Cups EARS: Informed Consent & Terms of Service Agreement");
+                    alertDialog.setTitle("EARS: Informed Consent & Terms of Service Agreement");
                     alertDialog.setMessage(Html.fromHtml(informedConsent));
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "I Disagree",
                             new DialogInterface.OnClickListener() {

@@ -83,7 +83,7 @@ public class EmailSecureDeviceID extends DialogFragment {
     }
 
     public void sendEmailDeviceID() {
-        String[] recipient = new String[]{"adaptlab@uoregon.edu"};
+        String[] recipient = new String[]{"klmills@uoregon.edu"};
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto","adaptlab@uoregon.edu", null));

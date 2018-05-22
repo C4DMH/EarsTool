@@ -114,7 +114,7 @@ public class EMAAlarmReceiver extends BroadcastReceiver {
             int importance = NotificationManager.IMPORTANCE_HIGH;
             String name = "Oreo_Notificaitons";
             NotificationChannel mChannel = mNotificationManager.getNotificationChannel(CHANNEL_DI);
-            if(mChannel == null){
+            if (mChannel == null) {
                 mChannel = new NotificationChannel(CHANNEL_DI, name, importance);
                 mChannel.setDescription("blah_1");
                 mChannel.enableVibration(true);
@@ -122,123 +122,39 @@ public class EMAAlarmReceiver extends BroadcastReceiver {
                 mNotificationManager.createNotificationChannel(mChannel);
 
             }
-
-            Intent snoozeIntent = new Intent(context, EMASleepReceiver.class);
-            snoozeIntent.setAction("SNOOZE");
-            snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-            PendingIntent snoozePendingIntent =
-                    PendingIntent.getBroadcast(context, 0, snoozeIntent, 0);
-
-
-            Intent resultIntent = new Intent(context, EMA.class);
-            //resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, resultIntent, 0);
-
-            NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.cdmh_small, "SNOOZE", snoozePendingIntent).build();
-
-            Notification mBuilder =
-                    new NotificationCompat.Builder(context, CHANNEL_DI)
-                            .setSmallIcon(R.drawable.noti_icon)
-                            .setContentTitle("Quick Survey")
-                            .setAutoCancel(true)
-                            .setContentText("Time for another quick survey :)")
-                            .setOngoing(true)
-                            .setChannelId(CHANNEL_DI)
-                            .setSound(uri)
-                            .setContentIntent(pendingIntent)
-                            .addAction(action)
-                            .build();
-
-
-            //TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            //stackBuilder.addParentStack(AlarmActivity.class);
-            //stackBuilder.addNextIntent(resultIntent);
-            //PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-            //mBuilder.setContentIntent(resultPendingIntent);
-
-            //NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify("first",1, mBuilder);
-            Log.d(TAG, "onReceive OREO: should be notification built now");
-
-        }else{
-            Log.d(TAG, "onReceive: non oreo, reight before building pending intent");
-
-            Intent resultIntent = new Intent(context, EMA.class);
-//            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-//            //stackBuilder.addParentStack(AlarmActivity.class);
-//            stackBuilder.addNextIntent(resultIntent);
-//            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-//            //mBuilder.setContentIntent(resultPendingIntent);
-
-//
-//            Log.d(TAG, "onReceive: before snooze intent");
-//            Intent snoozeIntent = new Intent(context, EMASleepReceiver.class);
-//            snoozeIntent.setAction("SNOOZE");
-//            snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-//            PendingIntent snoozePendingIntent =
-//                    PendingIntent.getBroadcast(context, 0, snoozeIntent, 0);
-//            NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.cdmh_small, "SNOOZE", snoozePendingIntent).build();
-
-            //6/4/18 - maybe the stackbuilder is causing me problems?
-
-            //TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            //stackBuilder.addParentStack(AlarmActivity.class);
-            //stackBuilder.addNextIntent(resultIntent);
-            //PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-            PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-            //mBuilder.setContentIntent(resultPendingIntent);
-
-
-            Log.d(TAG, "onReceive: before snooze intent");
-            Intent snoozeIntent = new Intent(context, EMASleepReceiver.class);
-            snoozeIntent.setAction("SNOOZE");
-            snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
-            PendingIntent snoozePendingIntent =
-                    PendingIntent.getBroadcast(context, 0, snoozeIntent, 0);
-            NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.cdmh_small, "SNOOZE", snoozePendingIntent).build();
-
-
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context, CHANNEL_DI)
-                            .setSmallIcon(R.drawable.noti_icon)
-                            .setContentTitle("Quick Survey")
-                            .setAutoCancel(true)
-                            .setContentText("Time for another quick survey")
-                            .setOngoing(true)
-                            .setContentIntent(resultPendingIntent)
-                            .addAction(action)
-                            .setSound(uri);
-
-
-
-            //NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify("first",1, mBuilder.build());
-            Log.d(TAG, "onReceive not ored: should be notification built now");
-
         }
 
+        Intent snoozeIntent = new Intent(context, EMASleepReceiver.class);
+        snoozeIntent.setAction("SNOOZE");
+        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+        PendingIntent snoozePendingIntent =
+                PendingIntent.getBroadcast(context, 0, snoozeIntent, 0);
 
 
+        Intent resultIntent = new Intent(context, EMA.class);
+        //resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, resultIntent, 0);
 
-//
-//                        .setSmallIcon(R.drawable.cdmh_small)
-//                        .setContentTitle("EMA")
-//                        .setAutoCancel(true)
-//                        .setContentText("Time for another EMA :)")
-//                        .setOngoing(true)
-//                        .setSound(uri);
-//
-//        Intent resultIntent = new Intent(context, MainActivity.class);
-//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-//        //stackBuilder.addParentStack(AlarmActivity.class);
-//        stackBuilder.addNextIntent(resultIntent);
-//        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-//        mBuilder.setContentIntent(resultPendingIntent);
-//
-//        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//        mNotificationManager.notify(1, mBuilder.build());
-//        Log.d(TAG, "onReceive: should be notification built now");
+        NotificationCompat.Action action = new NotificationCompat.Action.Builder(0, "SNOOZE", snoozePendingIntent).build();
+
+        Notification mBuilder =
+                new NotificationCompat.Builder(context, CHANNEL_DI)
+                        .setSmallIcon(R.drawable.noti_icon)
+                        .setContentTitle("Quick Survey")
+                        .setAutoCancel(true)
+                        .setContentText("Time for another quick survey :)")
+                        .setOngoing(true)
+                        .setChannelId(CHANNEL_DI)
+                        .setSound(uri)
+                        .setContentIntent(pendingIntent)
+                        .addAction(action)
+                        .build();
+
+
+        mNotificationManager.notify("first",1, mBuilder);
+        Log.d(TAG, "onReceive OREO: should be notification built now");
+
+
 
     }
 

@@ -193,7 +193,7 @@ public class RealTimeDataHandler implements RealTimeDataListener {
                 throw new IllegalStateException("Couldn't create directory: " + parent);
             }
 
-            //Try threading to take of UI thread
+            //Try threading to take off UI thread
 
             new Thread(new Runnable() {
                 @Override

@@ -24,6 +24,10 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -55,13 +59,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-//import com.menny.android.anysoftkeyboard.R;
-
 /**
- * Created by gwicks on 21/01/2018.
+ * Created by gwicks on 17/05/2018.
  */
 
-public class FinishInstallScreen extends AppCompatActivity {
+public class FinishInstallScreenGarmin extends AppCompatActivity {
 
     private static final String TAG = "FinishInstallScreen";
 
@@ -111,7 +113,7 @@ public class FinishInstallScreen extends AppCompatActivity {
         if(savedInstanceState != null) {
             Log.d(TAG, "onCreate: the activity is being recreated!");
         }
-        
+
         updateStatusBarColor("#1281e8");
 
         //Toast.makeText(this,"the secure id of this phone is: " + secureID, Toast.LENGTH_LONG).show();
@@ -152,25 +154,25 @@ public class FinishInstallScreen extends AppCompatActivity {
 
 
 
-//        SpannableString ss = new SpannableString("Get free, anonymous and confidential support at 7 Cups. Listeners available 24/7 to help you feel better\n\nGet the App");
-//        ClickableSpan clickableSpan = new ClickableSpan() {
-//            @Override
-//            public void onClick(View textView) {
-//                launch7cups();
-//            }
-//
-//        };
-//        //ss.setSpan(clickableSpan, 48, 55, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ss.setSpan(clickableSpan, 106, 117, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        talkText.setText(ss);
-//        talkText.setMovementMethod(LinkMovementMethod.getInstance());
+        SpannableString ss = new SpannableString("Get free, anonymous and confidential support at 7 Cups. Listeners available 24/7 to help you feel better\n\nGet the App");
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                launch7cups();
+            }
+
+        };
+        //ss.setSpan(clickableSpan, 48, 55, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(clickableSpan, 106, 117, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        talkText.setText(ss);
+        talkText.setMovementMethod(LinkMovementMethod.getInstance());
 
         garminConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: in lauched garmin connect button");
                 //launchSendEmailDialog();
-                Intent myIntent = new Intent(FinishInstallScreen.this, DeviceListActivity.class);
+                Intent myIntent = new Intent(FinishInstallScreenGarmin.this, DeviceListActivity.class);
 
                 startActivity(myIntent);
 
@@ -194,7 +196,7 @@ public class FinishInstallScreen extends AppCompatActivity {
 //                }
 //            }
 //        });
-//
+
 //        preferences.setOnClickListener(new View.OnClickListener() {
 //
 //            @Override
@@ -213,7 +215,7 @@ public class FinishInstallScreen extends AppCompatActivity {
 //                }
 //            }
 //        });
-//
+
 //        moodCheck.setOnClickListener(new View.OnClickListener() {
 //
 //            @Override
@@ -715,14 +717,14 @@ public class FinishInstallScreen extends AppCompatActivity {
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
     }
-    
+
     @Override
     protected void onPause() {
 
         super.onPause();
         Log.d(TAG, "onPause: in on pause");
     }
-    
+
     @Override
     protected void onStop() {
         Log.d(TAG, "onStop: on stiop");
@@ -797,7 +799,7 @@ public class FinishInstallScreen extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         Log.d(TAG, "onSaveInstanceState: ");
-        
+
         outState.putString("SAVED", "YES");
 //        if (imageUri != null) {
 //            Log.d(TAG, "onSaveInstanceState: 1");

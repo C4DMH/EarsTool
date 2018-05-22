@@ -5,13 +5,16 @@ package com.garmin;
  */
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.garmin.health.ConnectionState;
 import com.garmin.health.Device;
@@ -23,12 +26,16 @@ import java.util.List;
 
 /* package */ class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
 
+    private static final String TAG = "DeviceAdapter";
+
     private final static String IMAGE_URL = "https://static.garmincdn.com/com.garmin.connect/content/images/device-images/%s.png";
 
     private LayoutInflater mLayoutInflater;
     private List<ConnectedDevice> mDevices;
 
     private OnItemClickListener mOnItemClickListener;
+    Context mContext;
+    TextView t1;
 
     DeviceAdapter(Context context, List<Device> data, OnItemClickListener onItemClickListener)
     {
@@ -45,7 +52,10 @@ import java.util.List;
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View root = mLayoutInflater.inflate(R.layout.connected_device_item, parent, false);
+        mContext = parent.getContext();
+
         return new ViewHolder(root);
+
     }
 
     @Override
@@ -56,9 +66,13 @@ import java.util.List;
         holder.mFriendlyName.setText(connectedDevice.device.friendlyName());
         holder.showAddress(connectedDevice.device.address());
         holder.showUnitId(connectedDevice.device.unitId());
+        holder.connectStatus.setText("STATUS: NOT CONNECTED");
+        holder.connectStatus.setTextColor(Color.RED);
+        //t1 =  holder. findViewById(R.id.status);
 
         holder.setConnectivityStatus(connectedDevice.isConnected());
         //holder.showDeviceIcon(connectedDevice.device);
+
 
         holder.mForgetDevice.setOnClickListener(new OnClickListener() {
             @Override
@@ -70,7 +84,12 @@ import java.util.List;
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "onClick: in Device Adaptor itemVIew click");
                 mOnItemClickListener.onItemClick(connectedDevice.device);
+                Toast.makeText(mContext, "You have clicked itemview onclicklistener",Toast.LENGTH_LONG).show();
+                //t1.setText("Thanks, if the text below says CONNECTED, YOU CAN EXIT TO HOME SCREEN");
+                holder.connectStatus.setText("Thanks, if the text below says CONNECTED, YOU CAN EXIT TO HOME SCREEN");
+
             }
         });
 
@@ -79,6 +98,7 @@ import java.util.List;
             public void onClick(View view) {
                 mOnItemClickListener.onConnectionClick(connectedDevice.device);
                 notifyDataSetChanged();
+                Toast.makeText(mContext, "You have clicked deviceconnectedstatus onclicklistener",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -128,6 +148,7 @@ import java.util.List;
         ImageView mDeviceConnectedStatus;
         ImageView mDeviceIcon;
         TextView mUid;
+        TextView connectStatus;
 
         ViewHolder(View view) {
             super(view);
@@ -137,12 +158,20 @@ import java.util.List;
             mDeviceConnectedStatus = (ImageView)view.findViewById(R.id.device_connected_status);
             mDeviceIcon = (ImageView)view.findViewById(R.id.device_image);
             mUid = (TextView)view.findViewById(R.id.device_uid);
+            connectStatus = view.findViewById(R.id.status);
         }
 
         void setConnectivityStatus(boolean isDeviceConnected) {
 
             float alpha = isDeviceConnected ? 1.0f : .25f;
             mDeviceConnectedStatus.setAlpha(alpha);
+            if(isDeviceConnected){
+                connectStatus.setText("DEVICE STATUS: READY, PLEASE PRESS BIG BLUE RECTANGLE");
+                connectStatus.setTextColor(Color.GREEN);
+
+
+            }
+
         }
 
         void showUnitId(long unitId) {
