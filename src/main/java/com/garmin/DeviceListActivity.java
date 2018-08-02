@@ -52,7 +52,7 @@ public class DeviceListActivity extends BaseActivity implements View.OnClickList
     private static final String GCM_PERMISSION = "com.garmin.android.apps.connectmobile.permission.READ_DEVICE_RECORDS";
     private static final int REQUEST = 0;
 
-    private String licence = "EoACI91yQOpEmv/3AP5w51bv3AgCIy4XdTJo+vUezZ5cxq8ldHIz81BRVTGQxJb7smCdb3sW3Xq2Pap7E6TY+bOIRoO7XB2Xa1E2ccqpZGGU48BppZpQG/GBIz8ANgeSnoq+F9os4MCBPZPviIEu0Usu6iNGqYyRFyk7HmCvTaSXCnZVRkFkWjWIb2iiL+oJIPeEhKLP5Ue3WtK+e2aoKCZAvkT751BnxPkx+JoPCqevedU2fjDkT4D16BarD+ZpgysdRqt7FMRyQb6MaksekbCp37cr6Vtp6OJVagO2LcWEuto56XxY/mVvnqnIA7MIsPPv58CF+Qm3+k8j71pNzWeYtBiAuKWsyiwiCAECAwQFBgcI";
+    private String licence;
 
     private static final int REQUEST_COURSE_LOCATION = 0;
 
