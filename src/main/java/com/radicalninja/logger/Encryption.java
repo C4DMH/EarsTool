@@ -45,6 +45,7 @@ public class Encryption {
 
     private Context mContext;
     public final String TAG = "Encrypt";
+    private String password = BuildConfig.Password;
 
     // Constructor added 17th October 17 - thinking maybe setting context in encrypt
     // method is not early enough, so it crashes because it is still null when it hits the first
@@ -82,7 +83,7 @@ public class Encryption {
 
         // Length is 16 byte
         // Careful when taking user input!!! http://stackoverflow.com/a/3452620/1188357
-        SecretKeySpec sks = new SecretKeySpec("MyDifficultPassw".getBytes("UTF-8"), "AES");
+        SecretKeySpec sks = new SecretKeySpec(password.getBytes("UTF-8"), "AES");
 
         // Create cipher
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
